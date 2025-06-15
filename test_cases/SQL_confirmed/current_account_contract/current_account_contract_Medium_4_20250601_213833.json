@@ -1,0 +1,7 @@
+{
+    "difficulty": "Medium",
+    "input": "Can you find out how many current account contracts have a usage note that includes the word 'savings'?",
+    "output": {
+        "sql": "SELECT COUNT(*) FROM CurrentAccountContract WHERE UsageNote LIKE '%savings%';"
+    }
+}

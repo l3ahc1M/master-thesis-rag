@@ -1,0 +1,7 @@
+{
+    "difficulty": "Medium",
+    "input": "Can you provide me with the names of the events along with their IDs for all the requests related to locking bank card contracts?",
+    "output": {
+        "sql": "SELECT ID, EventName FROM BankCardContractLockRequest;"
+    }
+}

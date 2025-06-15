@@ -1,0 +1,20 @@
+{
+    "difficulty": "Easy",
+    "input": "I want to put together a batch request to lock the bank account contract that has the ID 105 and the UUID 01234567-89ab-cdef-0123-456789abcdef.",
+    "output": {
+        "method": "POST",
+        "endpoint": "/$batch",
+        "body": {
+            "requests": [
+                {
+                    "method": "POST",
+                    "url": "/BankAccountContractLockRequests",
+                    "body": {
+                        "ID": "105",
+                        "BankAccountContractUUID": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ]
+        }
+    }
+}

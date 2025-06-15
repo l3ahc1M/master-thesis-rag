@@ -1,58 +1,53 @@
 """
-ingest_docs_full.py
--------------------
+ingest_docs_full.py 
 
-Enhanced ingestion pipeline covering:
-1. Unit-of-retrieval chunking
-2. $ref inlining & abbreviation expansion
-3. Rich metadata (service_group, visibility)
-4. Identifier normalization & synonyms
-5. Versioning & soft-delete flags
-6. Raw-text store beside vectors
-7. Encryption-ready ChromaDB configuration
-8. Observability & drift (logging, hash)
-9. Test harness for dev-style queries
+This script ingests system documentation and database schema files into a ChromaDB vector database.
+It performs the following steps:
+- Loads and chunks documentation and schema files (OpenAPI, DB schema, and text docs)
+- Expands abbreviations and normalizes text
+- Stores raw chunks for traceability
+- Computes and stores metadata (hashes, timestamps, synonyms)
+- Embeds and upserts data into ChromaDB with robust retry logic
+
 """
-
-import hashlib            # for computing hashes to detect drift
-import json               # for reading JSON docs
-import logging            # for observability
-import os                 # for env vars
-import re                 # for regex-based splitting & normalization
-import uuid               # for unique chunk IDs
-from datetime import datetime, timezone  # for timestamping
-from pathlib import Path  # filesystem paths
+# Import necessary libraries for the script
+import hashlib
+import json
+import logging
+import os
+import re
+import uuid
+from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any, Dict, List, Tuple, Iterator
+
+# Load environment variables from .env file
 from dotenv import load_dotenv
-
-
 import chromadb
 import chromadb.utils.embedding_functions as embedding_functions
-from tiktoken import encoding_for_model  # token count
-from tqdm import tqdm                   # progress bars
+from tiktoken import encoding_for_model
 
+# retry/backoff for handling errors and retrying operations
+from tenacity import retry, wait_exponential, stop_after_attempt, RetryError
 
-
-# ──────────────────────────── ENVIRONMENT SETUP ────────────────────────────────────────
+# ─────────────────────────────────── CONFIG ──────────────────────────────────────────
+# Load environment variables
 load_dotenv()
-openai_api_key = os.getenv("openai_api_key")
+OPENAI_API_KEY = os.getenv("openai_api_key")
 
-
-# ────────────────────────────────────── CONFIG ─────────────────────────────────────────
-DOC_ROOT        = Path("system_documentation")
-PERSIST_DIR     = Path("chromadb_data")
-RAW_STORE       = PERSIST_DIR / "raw_chunks"  # store raw chunk text for quoting
-COLLECTION_NAME = "system_docs_v1"            # include version for namespacing
-OPENAI_MODEL    = "text-embedding-3-small"     # code-aware embedding model
-MAX_TOKENS      = 300                            # chunk size limit
-SERVICE_GROUP   = os.getenv("SERVICE_GROUP", "DEFAULT_SERVICE")
-VISIBILITY      = os.getenv("DEFAULT_VISIBILITY", "internal")
-
-
-# Ensure raw store directory exists
+# Set up important paths and constants
+DOC_ROOT        = Path("system_documentation")  # Root directory for documentation
+PERSIST_DIR     = Path("chromadb_data")         # Directory for ChromaDB persistence
+RAW_STORE       = PERSIST_DIR / "raw_chunks"    # Directory for storing raw text chunks
+COLLECTION_NAME = "system_documentation"        # ChromaDB collection name
+OPENAI_MODEL    = "text-embedding-3-small"      # OpenAI embedding model
+MAX_TOKENS      = 300                           # Max tokens per chunk
+BATCH_SIZE      = 64                            # Batch size for upserts
 RAW_STORE.mkdir(parents=True, exist_ok=True)
 
-# Set up logging to file for ingestion operations
+# ─────────────────────────────────── LOGGING ─────────────────────────────────────────
+# Set up logging to a file for debugging and tracking
+PERSIST_DIR.mkdir(parents=True, exist_ok=True)
 logging.basicConfig(
     filename=str(PERSIST_DIR / "ingest.log"),
     level=logging.INFO,
@@ -60,56 +55,87 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Initialize tokenizer for counting tokens
+# ───────────────────────────────── TOKENIZER & HELPERS ────────────────────────────────
+# Set up the tokenizer for the OpenAI model
 _tok = encoding_for_model(OPENAI_MODEL)
 
-# Abbreviations to expand for better semantic matching
+# Dictionary to expand common abbreviations in text
 ABBREV_MAP = {
     r"\bID\b": "identifier",
     r"\bUUID\b": "universal unique identifier",
+    r"\bUSD\b": "United States Dollar",
+    r"\bEUR\b": "Euro",
+    r"\bJPY\b": "Japanese Yen",
+    r"\bGBP\b": "British Pound Sterling",
+    r"\bAUD\b": "Australian Dollar",
+    r"\bCAD\b": "Canadian Dollar",
+    r"\bCHF\b": "Swiss Franc",
+    r"\bCNY\b": "Chinese Yuan",
+    r"\bHKD\b": "Hong Kong Dollar",
+    r"\bNZD\b": "New Zealand Dollar",
+    r"\bSEK\b": "Swedish Krona",
+    r"\bKRW\b": "South Korean Won",
+    r"\bSGD\b": "Singapore Dollar",
+    r"\bNOK\b": "Norwegian Krone",
+    r"\bMXN\b": "Mexican Peso",
+    r"\bINR\b": "Indian Rupee",
+    r"\bRUB\b": "Russian Ruble",
+    r"\bZAR\b": "South African Rand",
+    r"\bTRY\b": "Turkish Lira",
+    r"\bBRL\b": "Brazilian Real",
+    r"\bTWD\b": "New Taiwan Dollar",
+    r"\bDKK\b": "Danish Krone",
+    r"\bPLN\b": "Polish Zloty",
+    r"\bTHB\b": "Thai Baht",
+    r"\bIDR\b": "Indonesian Rupiah",
+    r"\bHUF\b": "Hungarian Forint",
+    r"\bCZK\b": "Czech Koruna",
+    r"\bILS\b": "Israeli New Shekel",
+    r"\bCLP\b": "Chilean Peso",
+    r"\bPHP\b": "Philippine Peso",
+    r"\bAED\b": "United Arab Emirates Dirham",
+    r"\bCOP\b": "Colombian Peso",
+    r"\bSAR\b": "Saudi Riyal",
+    r"\bMYR\b": "Malaysian Ringgit",
+    r"\bRON\b": "Romanian Leu",
 }
 
-# ────────────────────────── TOKEN & NORMALIZATION UTILITIES ────────────────────────────
-
+# Tokenize a string into a list of token IDs
 def tokenize(text: str) -> List[int]:
-    """Return a list of token IDs for the given text."""
     return _tok.encode(text)
 
-
+# Count the number of tokens in a string
 def count_tokens(text: str) -> int:
-    """Count tokens using the embedding model's tokenizer."""
     return len(tokenize(text))
 
-
+# Replace abbreviations in text with their full forms
 def expand_abbrev(text: str) -> str:
-    """Replace known abbreviations with full forms for clarity."""
-    for pattern, full in ABBREV_MAP.items():
-        text = re.sub(pattern, full, text)
+    for pat, full in ABBREV_MAP.items():
+        text = re.sub(pat, full, text)
     return text
 
-
+# Convert a string to snake_case (lowercase with underscores)
 def snake_case(name: str) -> str:
-    """Convert CamelCase or kebab-case identifiers into snake_case."""
     s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
     s2 = re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1)
     return s2.replace('-', '_').lower()
 
-
+# Create a SHA-256 hash of a string
 def hash_text(text: str) -> str:
-    """Compute SHA256 hash for change detection (drift)."""
     return hashlib.sha256(text.encode('utf-8')).hexdigest()
 
-# ────────────────────────────────── CHUNKING FUNCTION ───────────────────────────────────
-
+# Split text into chunks, each with at most max_tokens tokens
 def chunk_text(text: str, max_tokens: int = MAX_TOKENS) -> List[str]:
-    """Split text into sentence-based chunks within the token budget."""
+    """
+    Split text into chunks, each with at most max_tokens tokens.
+    Chunks are split on sentence boundaries for semantic coherence.
+    """
     sentences = re.split(r"(?<=[.!?])\s+", text.strip())
     chunks: List[str] = []
     current: List[str] = []
     for sentence in sentences:
-        candidate = " ".join(current + [sentence])
-        # If adding this sentence exceeds budget, flush current chunk
-        if current and count_tokens(candidate) > max_tokens:
+        cand = " ".join(current + [sentence])
+        if current and count_tokens(cand) > max_tokens:
             chunks.append(" ".join(current))
             current = [sentence]
         else:
@@ -118,30 +144,34 @@ def chunk_text(text: str, max_tokens: int = MAX_TOKENS) -> List[str]:
         chunks.append(" ".join(current))
     return chunks
 
-# ────────────────────────────────── SCHEMA & API CHUNKERS ─────────────────────────────────
-
-def _inline_ref(ref: str, components: Dict[str, Any]) -> Any:
-    """Inline internal JSON `$ref` pointers in OpenAPI specs."""
+# ───────────────────────────────── DB / API CHUNKERS ─────────────────────────────────
+def _inline_ref(ref: str, comps: Dict[str, Any]) -> Any:
+    """
+    Helper to resolve $ref references in OpenAPI specs.
+    Returns the referenced object or a dict with $ref if not found.
+    """
     if not ref.startswith("#/"):
         return {"$ref": ref}
-    node = components
+    node = comps
     for part in ref.lstrip("#/components/").split("/"):
         node = node.get(part, {})
     return node
 
-
 def _api_chunks(api: Dict[str, Any], bo: str, fname: str) -> Iterator[Dict[str, Any]]:
-    """Yield endpoint-verb chunks with inlined `$ref` and metadata."""
+    """
+    Create text chunks from OpenAPI JSON files for ingestion.
+    Each chunk contains HTTP method, path, summary, parameters, and responses.
+    """
     meta_base: Dict[str, Any] = {
-        'source_type': 'openapi', 'business_object': bo, 'file_name': fname,
-        'api_version': api.get('info', {}).get('version')
+        'source_type':'openapi','business_object':bo,'file_name':fname,
+        'api_version': api.get('info',{}).get('version')
     }
-    comps = api.get('components', {})
-    for path, verbs in api.get('paths', {}).items():
-        for verb, spec_untyped in verbs.items():
-            if not isinstance(spec_untyped, dict):
-                continue
-            spec: Dict[str, Any] = spec_untyped  # type: ignore
+    comps = api.get('components',{})
+    for path, verbs in api.get('paths',{}).items():
+        for verb, spec_raw in verbs.items():
+            if not isinstance(spec_raw, dict): continue
+            from typing import cast
+            spec = cast(Dict[str, Any], spec_raw)  # explicit type cast for type checker
             params = verbs.get('parameters', [])
             for p in params:
                 if '$ref' in p:
@@ -159,79 +189,150 @@ def _api_chunks(api: Dict[str, Any], bo: str, fname: str) -> Iterator[Dict[str, 
                     'meta': {**meta_base, 'http_method': verb.upper(), 'path': path}
                 }
 
-
+# Create chunks from database schema JSON files
 def _db_chunks(schema: Dict[str, Any], bo: str, fname: str) -> Iterator[Dict[str, Any]]:
-    """Yield table- and column-level chunks from a DB schema."""
-    base = {'source_type': 'db_schema', 'business_object': bo, 'file_name': fname}
-    for table in schema.get('tables', []):
+    """
+    Create text chunks from database schema JSON files for ingestion.
+    Each chunk contains table and column information.
+    """
+    base = {'source_type':'db_schema','business_object':bo,'file_name':fname}
+    for table in schema.get('tables',[]):
         tid = str(uuid.uuid4())
-        yield {'id': tid, 'text': f"Table {table['name']} {table.get('description','')}", 'meta': {**base, 'table_name': table['name'], 'deprecated': table.get('deprecated', False)}}
-        for col in table.get('columns', []):
+        yield {
+            'id': tid,
+            'text': f"Table {table['name']} {table.get('description','')}",
+            'meta': {**base, 'table_name':table['name'], 'deprecated':table.get('deprecated', False)}
+        }
+        for col in table.get('columns',[]):
             cid = str(uuid.uuid4())
-            yield {'id': cid, 'text': f"Column {col['name']} type {col.get('format')} desc {col.get('description','')}", 'meta': {**base, 'table_name': table['name'], 'column_name': col['name']}}
+            yield {
+                'id': cid,
+                'text': f"Column {col['name']} type {col.get('format')} desc {col.get('description','')}",
+                'meta': {**base, 'table_name': table['name'], 'column_name': col['name']}
+            }
 
-# ────────────────────────────────── INGESTION PIPELINE ─────────────────────────────────
+# ─────────────────────────────────── RETRYING UPSERT ─────────────────────────────────
+@retry(
+    wait=wait_exponential(multiplier=1, min=4, max=60),
+    stop=stop_after_attempt(5),
+    reraise=True
+)
+def safe_upsert(collection: Any, batch: List[Tuple[str,str,Dict[str,Any]]]) -> None:
+    """
+    Upsert a batch of documents into the ChromaDB collection with retry and exponential backoff.
+    Logs success or failure for each batch.
+    """
+    ids, docs, metas = zip(*batch)
+    collection.upsert(ids=list(ids), documents=list(docs), metadatas=list(metas))
+    logger.debug(f"Successfully upserted batch of {len(batch)} docs.")
 
+# ────────────────────────────────────── INGEST ────────────────────────────────────────
 def ingest() -> None:
-    """Main ingestion workflow: scan, chunk, embed, and persist."""
-    # Initialize embedder
-    
-    embedder = embedding_functions.OpenAIEmbeddingFunction( # type: ignore
-                    api_key=openai_api_key,
-                    model_name=OPENAI_MODEL
-                )
-    # Configure ChromaDB
+    """
+    Main function to ingest all documentation and schema files into ChromaDB.
+    Handles chunking, metadata enrichment, raw storage, and robust upsert.
+    """
+    logger.info("Starting ingestion workflow.")
+    # Connect to the ChromaDB database
     client = chromadb.PersistentClient(path=str(PERSIST_DIR))
-    collection = client.get_or_create_collection(name=COLLECTION_NAME, embedding_function=embedder)  # type: ignore
+    # Set up the OpenAI embedding function for ChromaDB
+    embedder = embedding_functions.OpenAIEmbeddingFunction(
+        api_key=OPENAI_API_KEY,
+        model_name=OPENAI_MODEL
+    )
+    collection = client.get_or_create_collection(
+        name=COLLECTION_NAME,
+        embedding_function=embedder # type: ignore
+    )
+    docs: List[Tuple[str,str,Dict[str,Any]]] = []
 
-    docs: List[Tuple[str, str, Dict[str, Any]]] = []
-
-    def process_chunk(text: str, meta: Dict[str, Any]) -> None:
-        """Normalize text, enrich metadata, store raw, and queue for embedding."""
+    def process_chunk(text: str, meta: Dict[str,Any]) -> None:
+        """
+        Process a single text chunk:
+        - Expand abbreviations
+        - Add metadata (hash, timestamp, synonym)
+        - Store raw chunk to disk
+        - Append to docs list for upsert
+        """
         expanded = expand_abbrev(text)
         if 'column_name' in meta:
             meta['synonym'] = snake_case(meta['column_name'])
-        meta['drift_hash'] = hash_text(expanded)
-        meta.update({'service_group': SERVICE_GROUP,  'visibility': VISIBILITY, 'timestamp': datetime.now(timezone.utc).isoformat()})
-        Path(RAW_STORE / f"{meta['id']}.txt").write_text(text)
-        logger.info(f"Processed chunk {meta['id']} tokens={count_tokens(expanded)}")
+        meta.update({
+            'drift_hash': hash_text(expanded),
+            'timestamp': datetime.now(timezone.utc).isoformat()
+        })
+        # ensure ID is in meta and is a string
+        if not meta.get('id'):
+            meta['id'] = str(uuid.uuid4())
+        else:
+            meta['id'] = str(meta['id'])
+        # write raw
+        try:
+            Path(RAW_STORE / f"{meta['id']}.txt").write_text(text)
+        except Exception as e:
+            logger.error(f"Failed to write raw chunk {meta['id']}: {e}")
         docs.append((meta['id'], expanded, meta))
+        logger.info(f"Queued chunk {meta['id']} tokens={count_tokens(expanded)}")
 
-    # Combined schema
+    # --- load & chunk combined schema ---
     cp = DOC_ROOT / 'combined_db.json'
     if cp.exists():
         schema = json.loads(cp.read_text())
         for entry in _db_chunks(schema, '__all__', 'combined_db.json'):
-            # ensure meta contains the chunk ID
-            entry['meta']['id'] = entry['id']
             process_chunk(entry['text'], entry['meta'])
 
-    # Per-object directories
+    # --- per-business-object dir ---
     for obj in DOC_ROOT.iterdir():
         if not obj.is_dir(): continue
         bo = obj.name
+        # DB_*.json
         for f in obj.glob('DB_*.json'):
-            for entry in _db_chunks(json.loads(f.read_text()), bo, f.name):
-                entry['meta']['id'] = entry['id']
+            schema = json.loads(f.read_text())
+            for entry in _db_chunks(schema, bo, f.name):
                 process_chunk(entry['text'], entry['meta'])
+        # API_*.json
         for f in obj.glob('API_*.json'):
-            for entry in _api_chunks(json.loads(f.read_text()), bo, f.name):
-                # ensure meta contains the chunk ID
-                entry['meta']['id'] = entry['id']
+            api = json.loads(f.read_text())
+            for entry in _api_chunks(api, bo, f.name):
                 process_chunk(entry['text'], entry['meta'])
+        # *.txt docs
         for f in obj.glob('*.txt'):
             txt = f.read_text()
-            for chunk in chunk_text(txt):
-                process_chunk(chunk, {'id': str(uuid.uuid4()), 'source_type': 'semantic_doc', 'business_object': bo, 'file_name': f.name})
+            # If the text fits within MAX_TOKENS, keep as one chunk; otherwise, split
+            if count_tokens(txt) <= MAX_TOKENS:
+                process_chunk(txt, {
+                    'id': str(uuid.uuid4()),
+                    'source_type':'semantic_doc',
+                    'business_object':bo,
+                    'file_name':f.name
+                })
+            else:
+                for chunk in chunk_text(txt):
+                    process_chunk(chunk, {
+                        'id': str(uuid.uuid4()),
+                        'source_type':'semantic_doc',
+                        'business_object':bo,
+                        'file_name':f.name
+                    })
 
-    # Batch upsert
-    for i in tqdm(range(0, len(docs), 2), desc='Embedding batches'):
-        batch = docs[i:i+2]
-        ids, texts, metas = zip(*batch)
-        collection.upsert(ids=list(ids), documents=list(texts), metadatas=list(metas))
+    # --- upsert in batches with retry ---
+    total = len(docs)
+    num_batches = (total + BATCH_SIZE - 1) // BATCH_SIZE
+    logger.info(f"Upserting {total} chunks in {num_batches} batches (size={BATCH_SIZE})")
 
+    for i in range(num_batches):
+        batch = docs[i*BATCH_SIZE : (i+1)*BATCH_SIZE]
+        try:
+            safe_upsert(collection, batch)
+        except RetryError as e:
+            logger.critical(f"Batch {i+1} failed after retries: {e}")
+            raise
 
-    logger.info(f"Ingested {len(docs)} chunks into {COLLECTION_NAME}")
+    # --- final sanity check ---
+    stored = collection.count()
+    logger.info(f"Ingestion complete: {stored}/{total} embeddings stored in “{COLLECTION_NAME}”")
+    print(f"=> Stored {stored} of {total} chunks in collection “{COLLECTION_NAME}”")
 
+# If this script is run directly, start the ingestion process
 if __name__ == '__main__':
     ingest()

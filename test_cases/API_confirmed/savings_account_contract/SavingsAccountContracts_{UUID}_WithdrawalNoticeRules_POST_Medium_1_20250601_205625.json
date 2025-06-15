@@ -1,0 +1,14 @@
+{
+    "difficulty": "Medium",
+    "input": "Can you set up a withdrawal notice rule for the savings account contract with the ID 321e0987-e34b-12d3-a456-426614174003? I want it to require a notice period of 3 days, and for any withdrawals over 1000 euros, I need to get prior approval.",
+    "output": {
+        "method": "POST",
+        "endpoint": "/SavingsAccountContracts/321e0987-e34b-12d3-a456-426614174003/WithdrawalNoticeRules",
+        "body": {
+            "NoticePeriod": "P3D",
+            "ApprovalRequired": true,
+            "ThresholdAmount": 1000,
+            "CurrencyCode": "EUR"
+        }
+    }
+}

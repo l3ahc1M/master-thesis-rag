@@ -1,0 +1,15 @@
+{
+  "difficulty": "Extra Hard",
+  "input": "I want to disburse a loan. The total amount I'm asking for is $30,000, but I need to set aside $8,000 for fees and $2,000 for installments. The activation charge is waived, and funds are available starting on November 1, 2024.",
+  "output": {
+    "method": "POST",
+    "endpoint": "/ProposeLoanDisbursementRequest",
+    "body": {
+      "LoanContractUUID": "01234567-89ab-cdef-0123-456789abcdef",
+      "GrossAmount": "30000",
+      "ItemsWithheldAmount": "10000",
+      "ActivationChargeWaiverRequestedIndicator": true,
+      "ValueDate": "2024-11-01"
+    }
+  }
+}

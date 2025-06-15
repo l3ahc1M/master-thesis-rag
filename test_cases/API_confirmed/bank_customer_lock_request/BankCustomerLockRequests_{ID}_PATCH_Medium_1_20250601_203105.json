@@ -1,0 +1,11 @@
+{
+    "difficulty": "Medium",
+    "input": "Could you update the note for the lock request of the customer with the ID 202 to say that their account is currently under review?",
+    "output": {
+        "method": "PATCH",
+        "endpoint": "/BankCustomerLockRequests/202",
+        "body": {
+            "Note": "Account is under review."
+        }
+    }
+}

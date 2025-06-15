@@ -1,0 +1,22 @@
+{
+    "difficulty": "Easy",
+    "input": "I want to set up a direct debit mandate for the account with the ID TEST5678 using the following details: Debtor Party: Alice Johnson, Creditor Party: Internet Service Provider, Creditor Party ID: DE123456789012345, Debtor Bank Account: DE89370400440532013001, Signature Date: 2023-10-05, Signature City Name: Munich, Validity Period: 2024-10-05, Direct Debit Scheme Code: 1, Direct Debit Scheme Name: SEPA Core, Direct Debit Collection SEPA Sequence Type Code: RCUR, Direct Debit Collection SEPA Sequence Type Name: Recurring.",
+    "output": {
+        "method": "POST",
+        "endpoint": "/DirectDebitMandates",
+        "body": {
+            "ID": "TEST5678",
+            "DebtorParty": "Alice Johnson",
+            "CreditorParty": "Internet Service Provider",
+            "CreditorPartyID": "DE123456789012345",
+            "DebtorBankAccount": "DE89370400440532013001",
+            "SignatureDate": "2023-10-05",
+            "SignatureCityName": "Munich",
+            "ValidityPeriod": "2024-10-05",
+            "DirectDebitSchemeCode": "1",
+            "DirectDebitSchemeName": "SEPA Core",
+            "DirectDebitCollectionSEPASequenceTypeCode": "RCUR",
+            "DirectDebitCollectionSEPASequenceTypeName": "Recurring"
+        }
+    }
+}

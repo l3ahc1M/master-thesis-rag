@@ -1,0 +1,7 @@
+{
+    "difficulty": "Medium",
+    "input": "How many loan contracts are there for a specific borrower that are currently being disbursed?",
+    "output": {
+        "sql": "SELECT COUNT(*) FROM LoanContract AS T1 JOIN LoanDisbursementRequest AS T2 ON T1.UUID = T2.LoanContractUUID WHERE T1.BorrowerPartyIdentifyingElements = 'John Doe' AND T2.LifeCycleStatusCode = '1';"
+    }
+}

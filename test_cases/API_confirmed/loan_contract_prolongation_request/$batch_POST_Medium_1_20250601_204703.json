@@ -1,0 +1,21 @@
+{
+    "difficulty": "Medium",
+    "input": "Can you please extend the loan contract with the ID of 71 until December 31, 2025, and also waive the activation charge?",
+    "output": {
+        "method": "POST",
+        "endpoint": "/$batch",
+        "body": {
+            "requests": [
+                {
+                    "method": "POST",
+                    "url": "/LoanContractProlongationRequest",
+                    "body": {
+                        "ID": "71",
+                        "LoanContractProlongationTermValidityEndDate": "2025-12-31",
+                        "ActivationChargeWaiverRequestedIndicator": true
+                    }
+                }
+            ]
+        }
+    }
+}

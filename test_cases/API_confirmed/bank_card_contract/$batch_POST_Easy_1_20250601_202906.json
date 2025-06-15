@@ -1,0 +1,12 @@
+{
+    "difficulty": "Easy",
+    "input": "I want to set up a bank card agreement for a debit card, and I’d like the currency to be in US dollars.",
+    "output": {
+        "method": "POST",
+        "endpoint": "/BankCardContracts",
+        "body": {
+            "PaymentCardTypeCode": "0010",
+            "CurrencyCode": "USD"
+        }
+    }
+}

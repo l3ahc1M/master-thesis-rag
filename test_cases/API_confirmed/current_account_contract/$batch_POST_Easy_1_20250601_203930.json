@@ -1,0 +1,28 @@
+{
+  "difficulty": "Easy",
+  "input": "I want to create a batch request to open multiple current accounts in euros. For each of the account holders with the IDs 12345 and 67890 an account shall be created",
+  "output": {
+    "method": "POST",
+    "endpoint": "/$batch",
+    "body": {
+      "requests": [
+        {
+          "method": "POST",
+          "url": "/CurrentAccountContracts",
+          "body": {
+            "CurrencyCode": "EUR",
+            "AccountHolderPartyIdentifyingElements": "12345"
+          }
+        },
+        {
+          "method": "POST",
+          "url": "/CurrentAccountContracts",
+          "body": {
+            "CurrencyCode": "EUR",
+            "AccountHolderPartyIdentifyingElements": "67890"
+          }
+        }
+      ]
+    }
+  }
+}

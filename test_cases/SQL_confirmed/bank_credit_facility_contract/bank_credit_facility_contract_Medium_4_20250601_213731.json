@@ -1,0 +1,7 @@
+{
+    "difficulty": "Medium",
+    "input": "Can you tell me the total number of bank credit facility contracts that are categorized as 'Savings'?",
+    "output": {
+        "sql": "SELECT COUNT(*) FROM BankCreditFacilityContract WHERE Product = 'Savings';"
+    }
+}

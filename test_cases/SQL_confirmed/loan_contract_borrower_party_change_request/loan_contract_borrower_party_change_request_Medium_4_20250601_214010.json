@@ -1,0 +1,7 @@
+{
+    "difficulty": "Medium",
+    "input": "Can you give me the IDs of the requests to change the borrower party on loan contracts that have a reason code of 5?",
+    "output": {
+        "sql": "SELECT ID FROM LoanContractBorrowerPartyChangeRequest WHERE ReasonCode = '5';"
+    }
+}
