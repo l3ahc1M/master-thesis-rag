@@ -1,0 +1,110 @@
+{
+    "tables": [
+        {
+            "name": "BankAccountContractPaymentTransactionOrderRequest",
+            "description": "Request for a payment transaction for a order bank account contract.",
+            "columns": [
+                {
+                    "name": "UUID",
+                    "description": "Universally unique identifier for a bank account contract payment transaction order request. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "ID",
+                    "description": "An indentifier for a bank account contract payment transaction order request. Example: 0001-123456",
+                    "format": "string"
+                },
+                {
+                    "name": "BankAccountUUID",
+                    "description": "A UUID is an universal unique identifier of a bank account. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "RequesterBACPaymentTransactionOrderRequestID",
+                    "description": "An identifier for a bank account contract payment transaction order request issued by the requester of the BankAccountContractPaymentTransactionOrderRequest. Example: Xample-RequestID",
+                    "format": "string"
+                },
+                {
+                    "name": "PaymentTransactionReferenceID",
+                    "description": "A reference number for a transaction in payment transactions. Example: Xample-ReferenceID",
+                    "format": "string"
+                },
+                {
+                    "name": "ChangeStateID",
+                    "description": "An identifier for a change status. Example: 20210126091744.5563510",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusCode",
+                    "description": "Coded representation of the life cycle status of a BankAccountContractPaymentTransactionOrderRequest. Example: 1",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusName",
+                    "description": "Name of a life cycle status. Example: Active",
+                    "format": "string"
+                },
+                {
+                    "name": "BankAccountPostingDate",
+                    "description": "Specifies the date when the sender item is posted to the corresponding bank account. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "PlannedExecutionDate",
+                    "description": "Date on which a bank account contract payment transaction order request is planned to be executed. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "BankAccountValueDate",
+                    "description": "Specifies the date on which a posted sender item is relevant for interest calculation. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "TransactionCurrencyAmount",
+                    "description": "Amount in the transaction currency of a business transaction.",
+                    "format": "string"
+                },
+                {
+                    "name": "BankAccountCurrencyAmount",
+                    "description": "Amount in the currency of a bank account.",
+                    "format": "string"
+                },
+                {
+                    "name": "SenderItem",
+                    "description": "Represents the sending side of the payment transaction.",
+                    "format": "string"
+                },
+                {
+                    "name": "RecipientItem",
+                    "description": "Represents the receiving side of the payment transaction.",
+                    "format": "string"
+                },
+                {
+                    "name": "MaterialChecksDeactivationRequestedIndicator",
+                    "description": "Indicates whether deactivation of the all material checks is requested for processing the bank account payment entries  on the sender and the recipient account of the bank account contract payment transaction order request.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "PostOrCancelRequestedIndicator",
+                    "description": "Indicates whether it is requested that the payment transaction order request shall only be accepted by the system if the bank account payment entries for the sender and recipient account can be posted. Otherwise, the payment transaction order request shall be rejected.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "MoreRecipientsAvailableIndicator",
+                    "description": "Indicates that the payment transaction order requests has more than one recipient.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "BusinessProcessChainAssignment",
+                    "description": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                    "format": "string"
+                },
+                {
+                    "name": "PaymentNotes",
+                    "description": "",
+                    "format": "array"
+                }
+            ]
+        }
+    ]
+}

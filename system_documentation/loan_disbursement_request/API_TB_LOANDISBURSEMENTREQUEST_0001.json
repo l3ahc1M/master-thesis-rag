@@ -1,0 +1,2048 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Loan Disbursement Request",
+        "version": "1.0.0",
+        "description": "\n\nA request from a borrower to a lender (credit institute) to transfer money from the loan contract to a receiving account at a specific time. The borrower or a loan officer can decide to withhold money from the gross disbursement amount to pay due or expected items. Items can consist of installments or fees.\n\nYou can use this API to create, query, read, or cancel a full disbursement, as well as a progressive disbursement for a particular loan contract. When you create a loan disbursement request you can use the propose operation to read default values and additional data.\n\nNote:\nThe entity data model for loan disbursement request contains a subset of the attributes of the business object of loan disbursement request.\n\nRemark:\nThe service Loan Disbursement Request is assigned to service group Transactional Banking. \n\nUse:\nLoan Disbursement Request can be used in scenarios where both Full disbursement as well as Progressive disbursement for a particular loan account shall be displayed. The propose loan disbursement request can be used to read default values and additional data for the creation loan disbursement request."
+    },
+    "externalDocs": {
+        "description": "Business Documentation",
+        "url": "https://help.sap.com/docs/TRBK_S4HANA/d2151b51aacc4d82ad2861e007337fa2/d53c70bcf8fa4cfa930e0e692bc9d1d1.html"
+    },
+    "x-sap-api-type": "ODATAV4",
+    "x-sap-shortText": "Manage loan disbursement requests using this synchronous inbound service",
+    "x-sap-software-min-version": "1.0",
+    "x-sap-ext-overview": [
+        {
+            "name": "Authentication Methods",
+            "values": [
+                {
+                    "text": "x509",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Service Group Name",
+            "values": [
+                {
+                    "text": "TRANSACTIONALBANKING",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Business Object",
+            "values": [
+                {
+                    "text": "Loan Disbursement Request",
+                    "format": "plain"
+                }
+            ]
+        }
+    ],
+    "security": [
+        {
+            "basicAuthentication": []
+        }
+    ],
+    "servers": [
+        {
+            "url": "https://{host}:{port}/sap/opu/odata4/sap/transactionalbanking/default/sap/loandisbursementrequest/0001",
+            "variables": {
+                "host": {
+                    "default": ""
+                },
+                "port": {
+                    "default": ""
+                }
+            }
+        }
+    ],
+    "x-sap-extensible": {
+        "supported": "no"
+    },
+    "tags": [
+        {
+            "name": "Basic Data Loan Disbursement Requests"
+        },
+        {
+            "name": "Loan Disbursement Requests"
+        }
+    ],
+    "paths": {
+        "/BasicDataLoanDisbursementRequests": {
+            "get": {
+                "summary": "Query Basic Data Loan Disbursement Requests",
+                "description": "Is a request to query Basic Data Loan Disbursement Requests",
+                "tags": [
+                    "Basic Data Loan Disbursement Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "UUID",
+                                    "ID",
+                                    "LoanContractUUID",
+                                    "LifeCycleStatusCode",
+                                    "LifeCycleStatusName",
+                                    "NetAmount",
+                                    "GrossAmount",
+                                    "ValueDate",
+                                    "PlannedPaymentDate"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of BasicDataLoanDisbursementRequest",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.BasicDataLoanDisbursementRequest"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BasicDataLoanDisbursementRequests/{UUID}/LoanContractDisbursementRequest": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "Is a universal unique identifier of a Loan Disbursement Request.  \nGDT:NOSC_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Read Related Loan Contract Disbursement Request",
+                "description": "Is a request to read a related Loan Contract Disbursement Request",
+                "tags": [
+                    "Basic Data Loan Disbursement Requests",
+                    "Loan Disbursement Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "UUID",
+                                    "ID",
+                                    "LoanContractUUID",
+                                    "BusinessProcessChainAssignment",
+                                    "ChangeStateID",
+                                    "LifeCycleStatusCode",
+                                    "LifeCycleStatusName",
+                                    "ReasonCode",
+                                    "ReasonName",
+                                    "CancellationReasonCode",
+                                    "CancellationReasonName",
+                                    "NetAmount",
+                                    "GrossAmount",
+                                    "BillingItemsWithheldAmount",
+                                    "ItemsWithheldAmount",
+                                    "ActivationChargeAmount",
+                                    "ValueDate",
+                                    "PlannedPaymentDate",
+                                    "ActivationChargeWaiverRequestedIndicator",
+                                    "PaymentTransactionInstructionItems"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "WithholdLoanPaymentPlanItems"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.LoanDisbursementRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/LoanDisbursementRequests": {
+            "post": {
+                "summary": "Create Loan Disbursement Request",
+                "description": "Is a request to create a Loan Contract Disbursement Request",
+                "tags": [
+                    "Loan Disbursement Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "LoanDisbursementRequest",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.LoanDisbursementRequest-create"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.LoanDisbursementRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/LoanDisbursementRequests/{UUID}": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "Is a universal unique identifier of a Loan Disbursement Request.  \nGDT:NOSC_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Read Loan Disbursement Request by UUID",
+                "description": "Is a request to read a Loan Contract Disbursement Request",
+                "tags": [
+                    "Loan Disbursement Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "UUID",
+                                    "ID",
+                                    "LoanContractUUID",
+                                    "BusinessProcessChainAssignment",
+                                    "ChangeStateID",
+                                    "LifeCycleStatusCode",
+                                    "LifeCycleStatusName",
+                                    "ReasonCode",
+                                    "ReasonName",
+                                    "CancellationReasonCode",
+                                    "CancellationReasonName",
+                                    "NetAmount",
+                                    "GrossAmount",
+                                    "BillingItemsWithheldAmount",
+                                    "ItemsWithheldAmount",
+                                    "ActivationChargeAmount",
+                                    "ValueDate",
+                                    "PlannedPaymentDate",
+                                    "ActivationChargeWaiverRequestedIndicator",
+                                    "PaymentTransactionInstructionItems"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "WithholdLoanPaymentPlanItems"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.LoanDisbursementRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/LoanDisbursementRequests/{UUID}/SAP__self.CancelLoanDisbursementRequest": {
+            "post": {
+                "summary": "Cancel Loan Disbursement Request",
+                "description": "Is a request to cancel an individual LoanDisbursementRequest.CancelLoanDisbursementRequest action is bound to LoanDisbursementRequest entity.This action allows to cancel an existing full or partial loan contract disbursement request. Note: The fields marked as nullable can be passed with blank value. But the field name has to be passed always.",
+                "tags": [
+                    "Loan Disbursement Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "UUID",
+                        "in": "path",
+                        "required": true,
+                        "description": "Is a universal unique identifier of a Loan Disbursement Request.  \nGDT:NOSC_UUID",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "01234567-89ab-cdef-0123-456789abcdef"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Action parameters",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "BusinessProcessChainAssignment": {
+                                        "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.BusinessProcessChainAssignment"
+                                    },
+                                    "CancellationReasonCode": {
+                                        "type": "string",
+                                        "maxLength": 4
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.LoanDisbursementRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/ProposeLoanDisbursementRequest": {
+            "post": {
+                "summary": "Propose Loan Disbursement Request.",
+                "description": "Is an inquiry to get the proposal with default values of parameters required for a LoanDisbursementRequest.",
+                "tags": [
+                    "Loan Disbursement Requests"
+                ],
+                "requestBody": {
+                    "description": "Action parameters",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "LoanContractUUID": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                                        "title": " A globally unique identifier for a LoanContract.",
+                                        "description": "GDT: NOSC_UUID"
+                                    },
+                                    "GrossAmount": {
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount"
+                                            }
+                                        ],
+                                        "title": "GrossAmount is the gross amount of the disbursement.",
+                                        "description": "GDT:Amount"
+                                    },
+                                    "ValueDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2017-04-13",
+                                        "title": "ValueDate is the value date of the disbursement .",
+                                        "description": "GDT: Date"
+                                    },
+                                    "PlannedPaymentDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2017-04-13",
+                                        "title": "PlannedPaymentDate is the planned payment date of the disbursement.",
+                                        "description": "GDT: Date"
+                                    },
+                                    "EligibleWithholdingLoanPaymentPlanItemSelectionEndDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2017-04-13",
+                                        "title": "The date at which the selection of eligible withholding loan payment plan item proposal end.",
+                                        "description": "GDT: Date"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.ProposedLoanDisbursementRequest"
+                                        }
+                                    ],
+                                    "title": "Proposed Loan Disbursement Request",
+                                    "description": "ProposedLoanDisbursementRequest is the return for the ProposeLoanDisbursementRequest action. This will hold default values  and additional data which can be used for creation of a full or partial disbursement request. Remark: Expand to EligibleWithholdingItems returns the entity WithholdLoanPaymentPlanItem."
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/$batch": {
+            "post": {
+                "summary": "Send a group of requests",
+                "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).\n\n*Please note that \"Try it out\" is not supported for this request.*",
+                "tags": [
+                    "Batch Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Batch request",
+                    "content": {
+                        "multipart/mixed;boundary=request-separator": {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET BasicDataLoanDisbursementRequests HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Batch response",
+                        "content": {
+                            "multipart/mixed": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "basicAuthentication": {
+                "type": "http",
+                "scheme": "basic"
+            }
+        },
+        "schemas": {
+            "com.sap.gateway.default.loandisbursementrequest.v0001.BasicDataLoanDisbursementRequest": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "Is a universal unique identifier of a Loan Disbursement Request.",
+                        "description": "GDT:NOSC_UUID"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "47938",
+                        "title": "Identifier of the LoanDisbursementRequest.",
+                        "description": "ID is a semantic key which uniquely identifies loan disbursement request.GDT: LoanDisbursementRequestID"
+                    },
+                    "LoanContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A globally unique identifier for a LoanContract.",
+                        "description": "Constraint: Filter: Only 'Eq' is supported as logical operatorGDT: NOSC_UUID"
+                    },
+                    "LifeCycleStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "LifeCycleStatusCode is the coded representation of the life cycle status of a LoanDisbursementRequest.",
+                        "description": "Constraint:Filter: Only 'Eq' is supported as logical operator\nGDT: LoanDisbursementRequestLifeCycleStatusCode"
+                    },
+                    "LifeCycleStatusName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "In Preparation",
+                        "title": "Name of LifeCycleStatusCode",
+                        "description": "GDT: MEDIUM_Name "
+                    },
+                    "NetAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "NetAmount is the net amount of the disbursement.",
+                        "description": "GDT: Amount It specifies the gross disbursement amount minus the amounts withheld."
+                    },
+                    "GrossAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "GrossAmount is the gross amount of the disbursement.",
+                        "description": "GDT: Amount"
+                    },
+                    "ValueDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "ValueDate is the value date of the disbursement.",
+                        "description": "GDT: Date"
+                    },
+                    "PlannedPaymentDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "PlannedPaymentDate is the planned payment date of the disbursement.",
+                        "description": "GDT: Date"
+                    },
+                    "LoanContractDisbursementRequest": {
+                        "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.LoanDisbursementRequest"
+                    }
+                },
+                "title": "BasicDataLoanDisbursementRequest",
+                "description": "BasicDataLoanDisbursementRequest is a view of a loan disbursement request.It is a request from a borrower to a lender (financial institution) to transfer money from the loan contract to a receiving account at a specific time.The basic data view contains a subset of properties of LoanDisbursementRequest. Note: Navigation using key is allowed to LoanDisbursementRequest i.e BasicDataLoanDisbursementRequest(UUID)/LoanContractDisbursementRequest.Integrity Condition :Any one of the following filter is allowed:ID,LoanContractUUID,LoanContractUUID and LifeCycleStatusCode. "
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.BasicDataLoanDisbursementRequest-create": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "Is a universal unique identifier of a Loan Disbursement Request.",
+                        "description": "GDT:NOSC_UUID"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "47938",
+                        "title": "Identifier of the LoanDisbursementRequest.",
+                        "description": "ID is a semantic key which uniquely identifies loan disbursement request.GDT: LoanDisbursementRequestID"
+                    },
+                    "LoanContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A globally unique identifier for a LoanContract.",
+                        "description": "Constraint: Filter: Only 'Eq' is supported as logical operatorGDT: NOSC_UUID"
+                    },
+                    "LifeCycleStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "LifeCycleStatusCode is the coded representation of the life cycle status of a LoanDisbursementRequest.",
+                        "description": "Constraint:Filter: Only 'Eq' is supported as logical operator\nGDT: LoanDisbursementRequestLifeCycleStatusCode"
+                    },
+                    "LifeCycleStatusName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "In Preparation",
+                        "title": "Name of LifeCycleStatusCode",
+                        "description": "GDT: MEDIUM_Name "
+                    },
+                    "NetAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "NetAmount is the net amount of the disbursement.",
+                        "description": "GDT: Amount It specifies the gross disbursement amount minus the amounts withheld."
+                    },
+                    "GrossAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "GrossAmount is the gross amount of the disbursement.",
+                        "description": "GDT: Amount"
+                    },
+                    "ValueDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "ValueDate is the value date of the disbursement.",
+                        "description": "GDT: Date"
+                    },
+                    "PlannedPaymentDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "PlannedPaymentDate is the planned payment date of the disbursement.",
+                        "description": "GDT: Date"
+                    },
+                    "LoanContractDisbursementRequest": {
+                        "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.LoanDisbursementRequest-create"
+                    }
+                },
+                "required": [
+                    "UUID"
+                ],
+                "title": "BasicDataLoanDisbursementRequest (for create)",
+                "description": "BasicDataLoanDisbursementRequest is a view of a loan disbursement request.It is a request from a borrower to a lender (financial institution) to transfer money from the loan contract to a receiving account at a specific time.The basic data view contains a subset of properties of LoanDisbursementRequest. Note: Navigation using key is allowed to LoanDisbursementRequest i.e BasicDataLoanDisbursementRequest(UUID)/LoanContractDisbursementRequest.Integrity Condition :Any one of the following filter is allowed:ID,LoanContractUUID,LoanContractUUID and LifeCycleStatusCode. "
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.BasicDataLoanDisbursementRequest-update": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "47938",
+                        "title": "Identifier of the LoanDisbursementRequest.",
+                        "description": "ID is a semantic key which uniquely identifies loan disbursement request.GDT: LoanDisbursementRequestID"
+                    },
+                    "LoanContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A globally unique identifier for a LoanContract.",
+                        "description": "Constraint: Filter: Only 'Eq' is supported as logical operatorGDT: NOSC_UUID"
+                    },
+                    "LifeCycleStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "LifeCycleStatusCode is the coded representation of the life cycle status of a LoanDisbursementRequest.",
+                        "description": "Constraint:Filter: Only 'Eq' is supported as logical operator\nGDT: LoanDisbursementRequestLifeCycleStatusCode"
+                    },
+                    "LifeCycleStatusName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "In Preparation",
+                        "title": "Name of LifeCycleStatusCode",
+                        "description": "GDT: MEDIUM_Name "
+                    },
+                    "NetAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "NetAmount is the net amount of the disbursement.",
+                        "description": "GDT: Amount It specifies the gross disbursement amount minus the amounts withheld."
+                    },
+                    "GrossAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "GrossAmount is the gross amount of the disbursement.",
+                        "description": "GDT: Amount"
+                    },
+                    "ValueDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "ValueDate is the value date of the disbursement.",
+                        "description": "GDT: Date"
+                    },
+                    "PlannedPaymentDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "PlannedPaymentDate is the planned payment date of the disbursement.",
+                        "description": "GDT: Date"
+                    }
+                },
+                "title": "BasicDataLoanDisbursementRequest (for update)",
+                "description": "BasicDataLoanDisbursementRequest is a view of a loan disbursement request.It is a request from a borrower to a lender (financial institution) to transfer money from the loan contract to a receiving account at a specific time.The basic data view contains a subset of properties of LoanDisbursementRequest. Note: Navigation using key is allowed to LoanDisbursementRequest i.e BasicDataLoanDisbursementRequest(UUID)/LoanContractDisbursementRequest.Integrity Condition :Any one of the following filter is allowed:ID,LoanContractUUID,LoanContractUUID and LifeCycleStatusCode. "
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.LoanDisbursementRequest": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "Is a universal unique identifier of a Loan Disbursement Request.",
+                        "description": "GDT:NOSC_UUID"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "47938",
+                        "title": "Identifier of the LoanDisbursementRequest.",
+                        "description": "ID is a semantic key which uniquely identifies loan disbursement request.\nGDT: LoanDisbursementRequestID"
+                    },
+                    "LoanContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A globally unique identifier for a LoanContract.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.BusinessProcessChainAssignment"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "BusinessProcessChain is a chain of business processes carried out in a business scenarioBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "ChangeStateID": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "20200220054415.0000000",
+                        "title": "Identifies a change state.",
+                        "description": "Remark:  1) Property is required for subsequent update operation. 2) Property is used as ETag. GDT: ChangeStateID"
+                    },
+                    "LifeCycleStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "LifeCycleStatusCode is the coded representation of the life cycle status of a LoanDisbursementRequest.",
+                        "description": "BOCT: LoanDisbursementRequestLifeCycleStatusCode"
+                    },
+                    "LifeCycleStatusName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "In Preparation",
+                        "title": "Name of LifeCycleStatusCode",
+                        "description": "GDT: MEDIUM_Name "
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "ReasonCode is the coded representation of the reason for the LoanDisbursementRequest.",
+                        "description": "GDT: LoanDisbursementRequestReasonCode"
+                    },
+                    "ReasonName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Customer Request",
+                        "title": "Name of ReasonCode.",
+                        "description": "GDT: LoanDisbursementRequestReasonCode Note: This will be filled as null if ReasonCode is null."
+                    },
+                    "CancellationReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "CancellationReasonCode is the coded representation of the reason for the cancellation of the LoanDisbursementRequest",
+                        "description": "Note: This will be filled only when LifeCycleStatusCode is 'Canceled'GDT: LoanDisbursementRequestCancellationReasonCode"
+                    },
+                    "CancellationReasonName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Error processing",
+                        "title": "Name of CancellationReasonCode",
+                        "description": "GDT: MEDIUM_Name Note: This will be filled as null if CancellationReasonCode is null."
+                    },
+                    "NetAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "NetAmount is the net amount of the disbursement.",
+                        "description": "GDT:Amount It specifies the gross disbursement amount minus the amounts withheld."
+                    },
+                    "GrossAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "GrossAmount is the gross amount of the disbursement.",
+                        "description": "GDT: Amount"
+                    },
+                    "BillingItemsWithheldAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "BillingItemsWithheldAmount is the sum of due amount of billing items withheld from the disbursement GrossAmount.",
+                        "description": "GDT: Amount"
+                    },
+                    "ItemsWithheldAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "ItemsWithheldAmount is the sum of planned amount of items withheld from the disbursement GrossAmount",
+                        "description": "GDT: Amount"
+                    },
+                    "ActivationChargeAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "An ActivationChargeAmount is the charge amount for activation.",
+                        "description": "Note: Will be filled when ActivationChargeWaiverRequestedIndicator is false.GDT: Amount"
+                    },
+                    "ValueDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "ValueDate is the value date of the disbursement.",
+                        "description": "GDT: Date"
+                    },
+                    "PlannedPaymentDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "PlannedPaymentDate is the planned payment date of the disbursement.",
+                        "description": "GDT: Date"
+                    },
+                    "ActivationChargeWaiverRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether charges for activation of the loan disbursement request are requested to be waived.",
+                        "description": "GDT: Indicator"
+                    },
+                    "PaymentTransactionInstructionItems": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.PaymentTransactionInstructionItems"
+                        },
+                        "title": "An item describes a single element of a BankContractPaymentTransactionInstruction.",
+                        "description": "Remark: It is a Complex type defined as a collection\nNote: It only holds data for 'Disbursement Payment' process result type. (15 - DisbursementPayment\nBDT: BankingBusinessTransactionProcessingResultPaymentTypeCodeNote: During Create the below are the default values used:BankingBusinessTransactionTypeCode = 200008 - Loan Contract Utilization (Disbursement),BankingBusinessTransactionProcessingResultPaymentTypeCode = 15 - DisbursementPayment,DebitCreditCode = 2 - Credit."
+                    },
+                    "WithholdLoanPaymentPlanItems": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.WithholdLoanPaymentPlanItem"
+                        }
+                    }
+                },
+                "title": "LoanDisbursementRequest",
+                "description": "A LoanDisbursementRequest is a request from a borrower to a lender (credit institute) to transfer money from the loan contract to areceiving account at a specific time. The borrower or a loan officer can decide to withhold money from the gross disbursement amount topay due or expected items. Items can consist of installments or fees. Note :The sum of withhold items is returned during read of LoanDisbursementRequest "
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.LoanDisbursementRequest-create": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "Is a universal unique identifier of a Loan Disbursement Request.",
+                        "description": "GDT:NOSC_UUID"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "47938",
+                        "title": "Identifier of the LoanDisbursementRequest.",
+                        "description": "ID is a semantic key which uniquely identifies loan disbursement request.\nGDT: LoanDisbursementRequestID"
+                    },
+                    "LoanContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A globally unique identifier for a LoanContract.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.BusinessProcessChainAssignment-create"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "BusinessProcessChain is a chain of business processes carried out in a business scenarioBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "LifeCycleStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "LifeCycleStatusCode is the coded representation of the life cycle status of a LoanDisbursementRequest.",
+                        "description": "BOCT: LoanDisbursementRequestLifeCycleStatusCode"
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "ReasonCode is the coded representation of the reason for the LoanDisbursementRequest.",
+                        "description": "GDT: LoanDisbursementRequestReasonCode"
+                    },
+                    "CancellationReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "CancellationReasonCode is the coded representation of the reason for the cancellation of the LoanDisbursementRequest",
+                        "description": "Note: This will be filled only when LifeCycleStatusCode is 'Canceled'GDT: LoanDisbursementRequestCancellationReasonCode"
+                    },
+                    "GrossAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "GrossAmount is the gross amount of the disbursement.",
+                        "description": "GDT: Amount"
+                    },
+                    "ValueDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "ValueDate is the value date of the disbursement.",
+                        "description": "GDT: Date"
+                    },
+                    "PlannedPaymentDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "PlannedPaymentDate is the planned payment date of the disbursement.",
+                        "description": "GDT: Date"
+                    },
+                    "ActivationChargeWaiverRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether charges for activation of the loan disbursement request are requested to be waived.",
+                        "description": "GDT: Indicator"
+                    },
+                    "PaymentTransactionInstructionItems": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.PaymentTransactionInstructionItems-create"
+                        },
+                        "title": "An item describes a single element of a BankContractPaymentTransactionInstruction.",
+                        "description": "Remark: It is a Complex type defined as a collection\nNote: It only holds data for 'Disbursement Payment' process result type. (15 - DisbursementPayment\nBDT: BankingBusinessTransactionProcessingResultPaymentTypeCodeNote: During Create the below are the default values used:BankingBusinessTransactionTypeCode = 200008 - Loan Contract Utilization (Disbursement),BankingBusinessTransactionProcessingResultPaymentTypeCode = 15 - DisbursementPayment,DebitCreditCode = 2 - Credit."
+                    },
+                    "WithholdLoanPaymentPlanItems": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.WithholdLoanPaymentPlanItem-create"
+                        }
+                    }
+                },
+                "required": [
+                    "UUID"
+                ],
+                "title": "LoanDisbursementRequest (for create)",
+                "description": "A LoanDisbursementRequest is a request from a borrower to a lender (credit institute) to transfer money from the loan contract to areceiving account at a specific time. The borrower or a loan officer can decide to withhold money from the gross disbursement amount topay due or expected items. Items can consist of installments or fees. Note :The sum of withhold items is returned during read of LoanDisbursementRequest "
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.LoanDisbursementRequest-update": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.BusinessProcessChainAssignment-update"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "BusinessProcessChain is a chain of business processes carried out in a business scenarioBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "LifeCycleStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "LifeCycleStatusCode is the coded representation of the life cycle status of a LoanDisbursementRequest.",
+                        "description": "BOCT: LoanDisbursementRequestLifeCycleStatusCode"
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "ReasonCode is the coded representation of the reason for the LoanDisbursementRequest.",
+                        "description": "GDT: LoanDisbursementRequestReasonCode"
+                    },
+                    "CancellationReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "CancellationReasonCode is the coded representation of the reason for the cancellation of the LoanDisbursementRequest",
+                        "description": "Note: This will be filled only when LifeCycleStatusCode is 'Canceled'GDT: LoanDisbursementRequestCancellationReasonCode"
+                    },
+                    "GrossAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "GrossAmount is the gross amount of the disbursement.",
+                        "description": "GDT: Amount"
+                    },
+                    "ValueDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "ValueDate is the value date of the disbursement.",
+                        "description": "GDT: Date"
+                    },
+                    "PlannedPaymentDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "PlannedPaymentDate is the planned payment date of the disbursement.",
+                        "description": "GDT: Date"
+                    },
+                    "ActivationChargeWaiverRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether charges for activation of the loan disbursement request are requested to be waived.",
+                        "description": "GDT: Indicator"
+                    },
+                    "PaymentTransactionInstructionItems": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.PaymentTransactionInstructionItems-update"
+                        },
+                        "title": "An item describes a single element of a BankContractPaymentTransactionInstruction.",
+                        "description": "Remark: It is a Complex type defined as a collection\nNote: It only holds data for 'Disbursement Payment' process result type. (15 - DisbursementPayment\nBDT: BankingBusinessTransactionProcessingResultPaymentTypeCodeNote: During Create the below are the default values used:BankingBusinessTransactionTypeCode = 200008 - Loan Contract Utilization (Disbursement),BankingBusinessTransactionProcessingResultPaymentTypeCode = 15 - DisbursementPayment,DebitCreditCode = 2 - Credit."
+                    }
+                },
+                "title": "LoanDisbursementRequest (for update)",
+                "description": "A LoanDisbursementRequest is a request from a borrower to a lender (credit institute) to transfer money from the loan contract to areceiving account at a specific time. The borrower or a loan officer can decide to withhold money from the gross disbursement amount topay due or expected items. Items can consist of installments or fees. Note :The sum of withhold items is returned during read of LoanDisbursementRequest "
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.ProposedLoanDisbursementRequest": {
+                "type": "object",
+                "properties": {
+                    "LoanContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A globally unique identifier for a LoanContract.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "GrossAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "GrossAmount is the gross amount of the disbursement.",
+                        "description": "GDT: Amount"
+                    },
+                    "ValueDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "ValueDate is the value date of the disbursement.",
+                        "description": "GDT: Date"
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "ReasonCode is the coded representation of the reason for the LoanDisbursementRequest.",
+                        "description": "GDT: LoanDisbursementRequestReasonCode"
+                    },
+                    "ReasonName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Customer Request",
+                        "title": "Name of ReasonCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "PaymentTransactionInstructionItems": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.PaymentTransactionInstructionItems"
+                        },
+                        "title": "An item describes a single element of a BankContractPaymentTransactionInstruction.",
+                        "description": "Will be filled if a PaymentTransactionInstruction for disbursement is maintained in loan contract."
+                    },
+                    "PlannedPaymentDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "PlannedPaymentDate is the planned payment date of the disbursement.",
+                        "description": "GDT: Date"
+                    },
+                    "EligibleWithholdingItems": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.WithholdLoanPaymentPlanItem"
+                        }
+                    }
+                },
+                "title": "ProposedLoanDisbursementRequest",
+                "description": "ProposedLoanDisbursementRequest is the return for the ProposeLoanDisbursementRequest action. This will hold default values and additional data which can be used for creation of a full or partial disbursement request.Remark: Expand to EligibleWithholdingItems returns the entity WithholdLoanPaymentPlanItem."
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.ProposedLoanDisbursementRequest-create": {
+                "type": "object",
+                "properties": {
+                    "LoanContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A globally unique identifier for a LoanContract.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "GrossAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "GrossAmount is the gross amount of the disbursement.",
+                        "description": "GDT: Amount"
+                    },
+                    "ValueDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "ValueDate is the value date of the disbursement.",
+                        "description": "GDT: Date"
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "ReasonCode is the coded representation of the reason for the LoanDisbursementRequest.",
+                        "description": "GDT: LoanDisbursementRequestReasonCode"
+                    },
+                    "ReasonName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Customer Request",
+                        "title": "Name of ReasonCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "PaymentTransactionInstructionItems": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.PaymentTransactionInstructionItems-create"
+                        },
+                        "title": "An item describes a single element of a BankContractPaymentTransactionInstruction.",
+                        "description": "Will be filled if a PaymentTransactionInstruction for disbursement is maintained in loan contract."
+                    },
+                    "PlannedPaymentDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "PlannedPaymentDate is the planned payment date of the disbursement.",
+                        "description": "GDT: Date"
+                    },
+                    "EligibleWithholdingItems": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.WithholdLoanPaymentPlanItem-create"
+                        }
+                    }
+                },
+                "required": [
+                    "LoanContractUUID"
+                ],
+                "title": "ProposedLoanDisbursementRequest (for create)",
+                "description": "ProposedLoanDisbursementRequest is the return for the ProposeLoanDisbursementRequest action. This will hold default values and additional data which can be used for creation of a full or partial disbursement request.Remark: Expand to EligibleWithholdingItems returns the entity WithholdLoanPaymentPlanItem."
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.ProposedLoanDisbursementRequest-update": {
+                "type": "object",
+                "properties": {
+                    "GrossAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "GrossAmount is the gross amount of the disbursement.",
+                        "description": "GDT: Amount"
+                    },
+                    "ValueDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "ValueDate is the value date of the disbursement.",
+                        "description": "GDT: Date"
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "ReasonCode is the coded representation of the reason for the LoanDisbursementRequest.",
+                        "description": "GDT: LoanDisbursementRequestReasonCode"
+                    },
+                    "ReasonName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Customer Request",
+                        "title": "Name of ReasonCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "PaymentTransactionInstructionItems": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.PaymentTransactionInstructionItems-update"
+                        },
+                        "title": "An item describes a single element of a BankContractPaymentTransactionInstruction.",
+                        "description": "Will be filled if a PaymentTransactionInstruction for disbursement is maintained in loan contract."
+                    },
+                    "PlannedPaymentDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "PlannedPaymentDate is the planned payment date of the disbursement.",
+                        "description": "GDT: Date"
+                    }
+                },
+                "title": "ProposedLoanDisbursementRequest (for update)",
+                "description": "ProposedLoanDisbursementRequest is the return for the ProposeLoanDisbursementRequest action. This will hold default values and additional data which can be used for creation of a full or partial disbursement request.Remark: Expand to EligibleWithholdingItems returns the entity WithholdLoanPaymentPlanItem."
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.WithholdLoanPaymentPlanItem": {
+                "type": "object",
+                "properties": {
+                    "PaymentDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The date of payment of the withholding item.",
+                        "description": "GDT: Date"
+                    },
+                    "BankContractFinancialConditionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "501500",
+                        "title": "BankContractFinancialConditionTypeCode is a coded representation of the type of a bank contract financial condition.",
+                        "description": "GDT: BankContractFinancialConditionTypeCode"
+                    },
+                    "BankContractFinancialConditionTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Price Condition - First Discbursement Ch",
+                        "title": "Name of BankContractFinancialConditionTypeCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "PaymentAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "The amount of payment of the withholding item.",
+                        "description": "GDT: Amount"
+                    }
+                },
+                "title": "WithholdLoanPaymentPlanItem",
+                "description": "It is a planned item that is withheld from disbursement order."
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.WithholdLoanPaymentPlanItem-create": {
+                "type": "object",
+                "properties": {
+                    "PaymentDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The date of payment of the withholding item.",
+                        "description": "GDT: Date"
+                    },
+                    "BankContractFinancialConditionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "501500",
+                        "title": "BankContractFinancialConditionTypeCode is a coded representation of the type of a bank contract financial condition.",
+                        "description": "GDT: BankContractFinancialConditionTypeCode"
+                    },
+                    "PaymentAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "The amount of payment of the withholding item.",
+                        "description": "GDT: Amount"
+                    }
+                },
+                "required": [
+                    "PaymentDate",
+                    "BankContractFinancialConditionTypeCode"
+                ],
+                "title": "WithholdLoanPaymentPlanItem (for create)",
+                "description": "It is a planned item that is withheld from disbursement order."
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.WithholdLoanPaymentPlanItem-update": {
+                "type": "object",
+                "properties": {
+                    "PaymentAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "The amount of payment of the withholding item.",
+                        "description": "GDT: Amount"
+                    }
+                },
+                "title": "WithholdLoanPaymentPlanItem (for update)",
+                "description": "It is a planned item that is withheld from disbursement order."
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.Amount": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "nullable": true,
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "10",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.Amount-create": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "nullable": true,
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "10",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount (for create)",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.Amount-update": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "nullable": true,
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "10",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount (for update)",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.Bank": {
+                "type": "object",
+                "properties": {
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 11,
+                        "example": "TOLLDEWDXXX",
+                        "title": "Bank Identification Code (BIC) of the Society for Worldwide Interbank Financial Telecommunications (S.W.I.F.T.), see GDT BankStandardID.",
+                        "description": "GDT: BankStandardID"
+                    },
+                    "RoutingID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "90000001",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    },
+                    "CountryCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "DE",
+                        "title": "Country in which the bank identified earlier goes about its business. If the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here. \nConstraint: Only listID 3166-1; listAgencyID 5 will be supported",
+                        "description": "GDT: CountryCode"
+                    }
+                },
+                "title": "Bank",
+                "description": "A bank is a business entity that performs financial investment services and payment transactions. "
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.Bank-create": {
+                "type": "object",
+                "properties": {
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 11,
+                        "example": "TOLLDEWDXXX",
+                        "title": "Bank Identification Code (BIC) of the Society for Worldwide Interbank Financial Telecommunications (S.W.I.F.T.), see GDT BankStandardID.",
+                        "description": "GDT: BankStandardID"
+                    },
+                    "RoutingID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "90000001",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    },
+                    "CountryCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "DE",
+                        "title": "Country in which the bank identified earlier goes about its business. If the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here. \nConstraint: Only listID 3166-1; listAgencyID 5 will be supported",
+                        "description": "GDT: CountryCode"
+                    }
+                },
+                "title": "Bank (for create)",
+                "description": "A bank is a business entity that performs financial investment services and payment transactions. "
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.Bank-update": {
+                "type": "object",
+                "properties": {
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 11,
+                        "example": "TOLLDEWDXXX",
+                        "title": "Bank Identification Code (BIC) of the Society for Worldwide Interbank Financial Telecommunications (S.W.I.F.T.), see GDT BankStandardID.",
+                        "description": "GDT: BankStandardID"
+                    },
+                    "RoutingID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "90000001",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    }
+                },
+                "title": "Bank (for update)",
+                "description": "A bank is a business entity that performs financial investment services and payment transactions. "
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.BankAccount": {
+                "type": "object",
+                "properties": {
+                    "HolderName": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "Hans Hansen",
+                        "title": "A name of the account holder of a bank account.",
+                        "description": "GDT: BankAccountHolderName_V1"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "0000000976",
+                        "title": "Bank account number (Basic Bank Account Number, BBAN). An account number that is assigned by the account managing bank. It uniquely identifies a bank account in most countries only together with the bank",
+                        "description": "GDT: BankAccountID"
+                    },
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 34,
+                        "example": "DE84900000010000000976",
+                        "title": "International bank account number (International Bank Account Number, IBAN).",
+                        "description": "GDT: BankAccountStandardID"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "CurrencyCode is a coded representation of the currency of the bank account.",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "Bank": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Bank"
+                            }
+                        ],
+                        "title": "Bank where the account is held."
+                    }
+                },
+                "title": "Bank Account"
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.BankAccount-create": {
+                "type": "object",
+                "properties": {
+                    "HolderName": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "Hans Hansen",
+                        "title": "A name of the account holder of a bank account.",
+                        "description": "GDT: BankAccountHolderName_V1"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "0000000976",
+                        "title": "Bank account number (Basic Bank Account Number, BBAN). An account number that is assigned by the account managing bank. It uniquely identifies a bank account in most countries only together with the bank",
+                        "description": "GDT: BankAccountID"
+                    },
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 34,
+                        "example": "DE84900000010000000976",
+                        "title": "International bank account number (International Bank Account Number, IBAN).",
+                        "description": "GDT: BankAccountStandardID"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "CurrencyCode is a coded representation of the currency of the bank account.",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "Bank": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Bank-create"
+                            }
+                        ],
+                        "title": "Bank where the account is held."
+                    }
+                },
+                "title": "Bank Account (for create)"
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.BankAccount-update": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "0000000976",
+                        "title": "Bank account number (Basic Bank Account Number, BBAN). An account number that is assigned by the account managing bank. It uniquely identifies a bank account in most countries only together with the bank",
+                        "description": "GDT: BankAccountID"
+                    },
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 34,
+                        "example": "DE84900000010000000976",
+                        "title": "International bank account number (International Bank Account Number, IBAN).",
+                        "description": "GDT: BankAccountStandardID"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "CurrencyCode is a coded representation of the currency of the bank account.",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "Bank": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Bank-update"
+                            }
+                        ],
+                        "title": "Bank where the account is held."
+                    }
+                },
+                "title": "Bank Account (for update)"
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.BusinessProcessChainAssignment": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "BusinessProcessChainUUID is the UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "200008",
+                        "title": "BankingBusinessTransactionTypeCode is the coded representation of the banking business transaction which is associated with the business process chain to which the hosting buisiness object is assigned to.If BankingBusinessTransactionTypeCode is not provided the code 200008 Loan Contract Utilization (Disbursement) is set.",
+                        "description": "GDT: BankingBusinessTransactionTypeCode"
+                    },
+                    "BankingBusinessTransactionTypeName": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Loan Disbursment Request",
+                        "title": "Name of BankingBusinessTransactionTypeCode ",
+                        "description": "GDT: EXTENDED_Name"
+                    }
+                },
+                "title": "Business Process Chain Assignment ",
+                "description": "BusinessProcessChain is a chain of business processes carried out in a business scenario. "
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.BusinessProcessChainAssignment-create": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "BusinessProcessChainUUID is the UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "200008",
+                        "title": "BankingBusinessTransactionTypeCode is the coded representation of the banking business transaction which is associated with the business process chain to which the hosting buisiness object is assigned to.If BankingBusinessTransactionTypeCode is not provided the code 200008 Loan Contract Utilization (Disbursement) is set.",
+                        "description": "GDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment  (for create)",
+                "description": "BusinessProcessChain is a chain of business processes carried out in a business scenario. "
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.BusinessProcessChainAssignment-update": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "BusinessProcessChainUUID is the UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "200008",
+                        "title": "BankingBusinessTransactionTypeCode is the coded representation of the banking business transaction which is associated with the business process chain to which the hosting buisiness object is assigned to.If BankingBusinessTransactionTypeCode is not provided the code 200008 Loan Contract Utilization (Disbursement) is set.",
+                        "description": "GDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment  (for update)",
+                "description": "BusinessProcessChain is a chain of business processes carried out in a business scenario. "
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.PaymentTransactionInstructionItems": {
+                "type": "object",
+                "properties": {
+                    "AssignmentPercent": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "nullable": true,
+                        "format": "decimal",
+                        "x-sap-precision": 5,
+                        "x-sap-scale": 2,
+                        "multipleOf": 0.01,
+                        "minimum": -999.99,
+                        "maximum": 999.99,
+                        "example": "50.0",
+                        "title": "An AssignmentPercent is the assigned percentage for an item which will be applied to the payment thatresults from processing the payment transaction instruction.",
+                        "description": "Constraints: If provided, the AssignmentPercent must be greater than zero.Only one of the following fields can be provided:  AssignmentPercent, AssignmentAmount.If provided, the cumulated AssignmentPercent must be 100 percent\nGDT: Percent"
+                    },
+                    "AssignmentAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "An AssignmentAmount is the Amount that is the assignment amount for the Payment Transaction Instruction.",
+                        "description": "Constraints: If provided, the Amount must be greater than zero.Only one of the following fields can be provided:AssignmentPercent, AssignmentAmount.\nGDT: Amount"
+                    },
+                    "BankContractPaymentTransactionInstructionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "31",
+                        "title": "A BankContractPaymentTransactionInstructionTypeCode is a coded representation of the type ofa bank contract payment transaction instruction.",
+                        "description": "Constraints: Only the code values 31 - DisbmtByIntBkTransf 32 - DisbmtByDomesticBkTransf 54 - DisbmtByCshPayt 69 - DisbmtBySCT are allowed.Integrity Condition during create:In case of 31 - DisbmtByIntBkTransf ,BankAccountStandardID or BankAccountID, BankRoutingID and CountryCode of CounterpartyBankAccount together have to be filled.HolderName and CurrencyCode is optional.Any other fields if passed will be ignoredIn case of 32 - DisbmtByDomesticBkTransf HolderName, BankAccountStandardID or HolderName, BankAccountID, BankRoutingID, and CountryCode of CounterpartyBankAccount have to be filled.CurrencyCode is optional. Any other fields if passed will be ignored.In case of 54 - DisbmtByCshPayt CounterPartyBankAccount shall not be passed.69 - DisbmtBySCT HolderName, BankAccountStandardID have to be filled BankStandardID is optional .Any other fields if passed will be ignored.\nBDT: BankContractPaymentTransactionInstructionTypeCode"
+                    },
+                    "BankContractPaymentTransactionInstructionTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "DisbmtByIntBkTransf",
+                        "title": "Name of BankContractPaymentTransactionInstructionTypeName",
+                        "description": "\nGDT: MEDIUM_Name"
+                    },
+                    "CounterpartyBankAccount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.BankAccount"
+                            }
+                        ],
+                        "title": "Contains the bank account to which disbursement amount/premium has to be credited."
+                    },
+                    "MappableIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates that CreditDetails of a payment transaction instruction are mappable.",
+                        "description": "MappableIndicator = TRUE indicates that details of a payment transaction instruction items are mappable.Note: MappableIndicator will be set as TRUE if BankContractPaymentTransactionInstructionTypeCode is 31/32/54/69, else it will be set as FALSE.When FALSE it means there are some missing fields in the output structure. So all the fields are not mapped. Ex: Address missing for International Bank Transfer\nGDT: Indicator"
+                    }
+                },
+                "title": "PaymentTransactionInstructionItems",
+                "description": "An item describes a single element of a BankContractPaymentTransactionInstructionIt is a Complex type defined as a collectionNote: It only holds data for 'Disbursement Payment' process result type. (15 - DisbursementPaymentBDT:BankingBusinessTransactionProcessingResultPaymentTypeCode )Note: During Create the below are the default values used: GDT BankingBusinessTransactionTypeCode = 200008 - Loan Contract Utilization (Disbursement),BDT BankingBusinessTransactionProcessingResultPaymentTypeCode = 15 - DisbursementPayment,GDT DebitCreditCode = 2 - Credit.Note: While creating LoanDisbursementRequest we have to pass same attributes for all payment transaction instructions.It means all the records in PaymentTransactionInstructionItem should have the same attributes during POST call.Even if some attributes are not required, we can pass those with blank value to make the request homogeneous."
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.PaymentTransactionInstructionItems-create": {
+                "type": "object",
+                "properties": {
+                    "AssignmentPercent": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "nullable": true,
+                        "format": "decimal",
+                        "x-sap-precision": 5,
+                        "x-sap-scale": 2,
+                        "multipleOf": 0.01,
+                        "minimum": -999.99,
+                        "maximum": 999.99,
+                        "example": "50.0",
+                        "title": "An AssignmentPercent is the assigned percentage for an item which will be applied to the payment thatresults from processing the payment transaction instruction.",
+                        "description": "Constraints: If provided, the AssignmentPercent must be greater than zero.Only one of the following fields can be provided:  AssignmentPercent, AssignmentAmount.If provided, the cumulated AssignmentPercent must be 100 percent\nGDT: Percent"
+                    },
+                    "AssignmentAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "An AssignmentAmount is the Amount that is the assignment amount for the Payment Transaction Instruction.",
+                        "description": "Constraints: If provided, the Amount must be greater than zero.Only one of the following fields can be provided:AssignmentPercent, AssignmentAmount.\nGDT: Amount"
+                    },
+                    "BankContractPaymentTransactionInstructionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "31",
+                        "title": "A BankContractPaymentTransactionInstructionTypeCode is a coded representation of the type ofa bank contract payment transaction instruction.",
+                        "description": "Constraints: Only the code values 31 - DisbmtByIntBkTransf 32 - DisbmtByDomesticBkTransf 54 - DisbmtByCshPayt 69 - DisbmtBySCT are allowed.Integrity Condition during create:In case of 31 - DisbmtByIntBkTransf ,BankAccountStandardID or BankAccountID, BankRoutingID and CountryCode of CounterpartyBankAccount together have to be filled.HolderName and CurrencyCode is optional.Any other fields if passed will be ignoredIn case of 32 - DisbmtByDomesticBkTransf HolderName, BankAccountStandardID or HolderName, BankAccountID, BankRoutingID, and CountryCode of CounterpartyBankAccount have to be filled.CurrencyCode is optional. Any other fields if passed will be ignored.In case of 54 - DisbmtByCshPayt CounterPartyBankAccount shall not be passed.69 - DisbmtBySCT HolderName, BankAccountStandardID have to be filled BankStandardID is optional .Any other fields if passed will be ignored.\nBDT: BankContractPaymentTransactionInstructionTypeCode"
+                    },
+                    "CounterpartyBankAccount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.BankAccount-create"
+                            }
+                        ],
+                        "title": "Contains the bank account to which disbursement amount/premium has to be credited."
+                    }
+                },
+                "title": "PaymentTransactionInstructionItems (for create)",
+                "description": "An item describes a single element of a BankContractPaymentTransactionInstructionIt is a Complex type defined as a collectionNote: It only holds data for 'Disbursement Payment' process result type. (15 - DisbursementPaymentBDT:BankingBusinessTransactionProcessingResultPaymentTypeCode )Note: During Create the below are the default values used: GDT BankingBusinessTransactionTypeCode = 200008 - Loan Contract Utilization (Disbursement),BDT BankingBusinessTransactionProcessingResultPaymentTypeCode = 15 - DisbursementPayment,GDT DebitCreditCode = 2 - Credit.Note: While creating LoanDisbursementRequest we have to pass same attributes for all payment transaction instructions.It means all the records in PaymentTransactionInstructionItem should have the same attributes during POST call.Even if some attributes are not required, we can pass those with blank value to make the request homogeneous."
+            },
+            "com.sap.gateway.default.loandisbursementrequest.v0001.PaymentTransactionInstructionItems-update": {
+                "type": "object",
+                "properties": {
+                    "AssignmentPercent": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "nullable": true,
+                        "format": "decimal",
+                        "x-sap-precision": 5,
+                        "x-sap-scale": 2,
+                        "multipleOf": 0.01,
+                        "minimum": -999.99,
+                        "maximum": 999.99,
+                        "example": "50.0",
+                        "title": "An AssignmentPercent is the assigned percentage for an item which will be applied to the payment thatresults from processing the payment transaction instruction.",
+                        "description": "Constraints: If provided, the AssignmentPercent must be greater than zero.Only one of the following fields can be provided:  AssignmentPercent, AssignmentAmount.If provided, the cumulated AssignmentPercent must be 100 percent\nGDT: Percent"
+                    },
+                    "AssignmentAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "An AssignmentAmount is the Amount that is the assignment amount for the Payment Transaction Instruction.",
+                        "description": "Constraints: If provided, the Amount must be greater than zero.Only one of the following fields can be provided:AssignmentPercent, AssignmentAmount.\nGDT: Amount"
+                    },
+                    "BankContractPaymentTransactionInstructionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "31",
+                        "title": "A BankContractPaymentTransactionInstructionTypeCode is a coded representation of the type ofa bank contract payment transaction instruction.",
+                        "description": "Constraints: Only the code values 31 - DisbmtByIntBkTransf 32 - DisbmtByDomesticBkTransf 54 - DisbmtByCshPayt 69 - DisbmtBySCT are allowed.Integrity Condition during create:In case of 31 - DisbmtByIntBkTransf ,BankAccountStandardID or BankAccountID, BankRoutingID and CountryCode of CounterpartyBankAccount together have to be filled.HolderName and CurrencyCode is optional.Any other fields if passed will be ignoredIn case of 32 - DisbmtByDomesticBkTransf HolderName, BankAccountStandardID or HolderName, BankAccountID, BankRoutingID, and CountryCode of CounterpartyBankAccount have to be filled.CurrencyCode is optional. Any other fields if passed will be ignored.In case of 54 - DisbmtByCshPayt CounterPartyBankAccount shall not be passed.69 - DisbmtBySCT HolderName, BankAccountStandardID have to be filled BankStandardID is optional .Any other fields if passed will be ignored.\nBDT: BankContractPaymentTransactionInstructionTypeCode"
+                    },
+                    "CounterpartyBankAccount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loandisbursementrequest.v0001.BankAccount-update"
+                            }
+                        ],
+                        "title": "Contains the bank account to which disbursement amount/premium has to be credited."
+                    }
+                },
+                "title": "PaymentTransactionInstructionItems (for update)",
+                "description": "An item describes a single element of a BankContractPaymentTransactionInstructionIt is a Complex type defined as a collectionNote: It only holds data for 'Disbursement Payment' process result type. (15 - DisbursementPaymentBDT:BankingBusinessTransactionProcessingResultPaymentTypeCode )Note: During Create the below are the default values used: GDT BankingBusinessTransactionTypeCode = 200008 - Loan Contract Utilization (Disbursement),BDT BankingBusinessTransactionProcessingResultPaymentTypeCode = 15 - DisbursementPayment,GDT DebitCreditCode = 2 - Credit.Note: While creating LoanDisbursementRequest we have to pass same attributes for all payment transaction instructions.It means all the records in PaymentTransactionInstructionItem should have the same attributes during POST call.Even if some attributes are not required, we can pass those with blank value to make the request homogeneous."
+            },
+            "count": {
+                "anyOf": [
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ],
+                "description": "The number of entities in the collection. Available when using the [$count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount) query option."
+            },
+            "error": {
+                "type": "object",
+                "required": [
+                    "error"
+                ],
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "required": [
+                            "code",
+                            "message"
+                        ],
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                            "target": {
+                                "type": "string"
+                            },
+                            "details": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "target": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "innererror": {
+                                "type": "object",
+                                "description": "The structure of this object is service-specific"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "top": {
+                "name": "$top",
+                "in": "query",
+                "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "example": 50
+            },
+            "skip": {
+                "name": "$skip",
+                "in": "query",
+                "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "count": {
+                "name": "$count",
+                "in": "query",
+                "description": "Include count of items, see [Count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount)",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "search": {
+                "name": "$search",
+                "in": "query",
+                "description": "Search items by search phrases, see [Searching](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionsearch)",
+                "schema": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses": {
+            "error": {
+                "description": "Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,115 @@
+{
+    "tables": [
+        {
+            "name": "LoanPaymentSkipRequest",
+            "description": "A LoanPaymentSkipRequest is a request from a borrower to a lender (credit institute) to to skip one or more payments of the loan contract or skip payments for a specific period of the loan contract. Integrity Condition: Any one of the following filter is allowed: ID ,LoanContractUUID ,LoanContractUUID and LifeCycleStatusCode",
+            "columns": [
+                {
+                    "name": "UUID",
+                    "description": "A UUID is a  universal unique identifier of LoanPaymentSkipRequest. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "ID",
+                    "description": "Identifier of the LoanPaymentSkipRequest. Example: 47938",
+                    "format": "string"
+                },
+                {
+                    "name": "LoanContractUUID",
+                    "description": "A globally unique identifier for a LoanContract. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "BusinessProcessChainAssignment",
+                    "description": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                    "format": "string"
+                },
+                {
+                    "name": "ChangeStateID",
+                    "description": "Identifies a change state. Example: 20200220054415.0000000",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusCode",
+                    "description": "LifeCycleStatusCode is the coded representation of the life cycle status of a LoanPaymentSkipRequest. Example: 3",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusName",
+                    "description": "Name of LifeCycleStatusCode Example: Completed",
+                    "format": "string"
+                },
+                {
+                    "name": "LoanPaymentPlanSkippedInstallmentPaymentModeCode",
+                    "description": "A coded representation of the mode of payment of a skipped installment of the payment plan of a loan. Example: 1",
+                    "format": "string"
+                },
+                {
+                    "name": "LoanPaymentPlanSkippedInstallmentPaymentModeName",
+                    "description": "Name of LoanPaymentPlanSkippedInstallmentPaymentModeCode. Example: Term Change",
+                    "format": "string"
+                },
+                {
+                    "name": "ReasonCode",
+                    "description": "ReasonCode is the coded representation of the reason for the cancellation of the LoanPaymentSkipRequest. Example: 1",
+                    "format": "string"
+                },
+                {
+                    "name": "ReasonName",
+                    "description": "Name of ReasonCode. Example: Customer Request",
+                    "format": "string"
+                },
+                {
+                    "name": "CancellationReasonCode",
+                    "description": "CancellationReasonCode is the coded representation of the reason for the cancellation of the LoanPaymentSkipRequest.. Example: 1",
+                    "format": "string"
+                },
+                {
+                    "name": "CancellationReasonName",
+                    "description": "Name of CancellationReasonCode. Example: Error processing",
+                    "format": "string"
+                },
+                {
+                    "name": "ActivationChargeWaiverRequestedIndicator",
+                    "description": "ActivationChargeWaiverRequestedIndicator",
+                    "format": "boolean"
+                },
+                {
+                    "name": "PreviousInstallmentAmount",
+                    "description": "PreviousInstallmentAmount is the installmet amount before the LoanPaymentSkipRequest.",
+                    "format": "string"
+                },
+                {
+                    "name": "NewInstallmentAmount",
+                    "description": "NewInstallmentAmount is the installment amount after the LoanPaymentSkipRequest.",
+                    "format": "string"
+                },
+                {
+                    "name": "NewInstallmentStartDate",
+                    "description": "NewInstallmentStartDate is the calender date on which the new installment starts. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "FinalInstallmentAmount",
+                    "description": "FinalInstallmentAmount is the last installment amount for a loan contract.",
+                    "format": "string"
+                },
+                {
+                    "name": "FinalPaymentDate",
+                    "description": "FinalPaymentDate is the due date for FinalInstallmentAmount. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "SkipDatePeriod",
+                    "description": "SkipDatePeriod is the period for which payments to be skipped.",
+                    "format": "string"
+                },
+                {
+                    "name": "SkipItems",
+                    "description": "",
+                    "format": "array"
+                }
+            ]
+        }
+    ]
+}

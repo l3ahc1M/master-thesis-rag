@@ -1,0 +1,4 @@
+A contractual agreement between lenders and borrowers, which is based on a borrower’s request for a loan and includes, for example, loan type, borrower(s), and general terms and conditions.
+You can use this API to read and to create the basic data, term agreements, inpayment agreements, and payment advices of a loan contract.Note:
+The entity data model for loan contract represents the subtype Loan Contract of a bank account contract. The model contains a subset of the attributes of the business object of loan contract.EDM Loan Contract represents a bank account contract of BankAccountContractSubType 7 - Loan Contract. The assumption is that many attributes are given by the production control (product) and are not displayed or changed in the assisted or unassisted channel for which this domain API is designed.Remark:
+The service Loan Contract is assigned to service group Transactional Banking.

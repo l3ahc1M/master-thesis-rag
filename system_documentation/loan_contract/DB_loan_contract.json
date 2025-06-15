@@ -1,0 +1,130 @@
+{
+    "tables": [
+        {
+            "name": "LoanContract",
+            "description": "LoanContractisacontractualagreementbetweenlendersandborrowers,whichisbasedonaborrower\u2019srequestforaloanandincludes,forexample,loantype,borrower(s),andgeneraltermsandconditions.\n\nComment:ABankAccountisabankaccountassociatedwiththebankaccountcontract.\n\nIntegrityCondition:StartDateofTermSpecificationValidityPeriod,TermAgreementFixingPeriod,andIncomingPaymentAgreementPeriodhavetobethesamedate.\n\nConstraint:LoanContractCreate-Duringcreationofaloancontract,itisrequiredtospecifythedetailsofTermAgreementandInpaymentAgreement.",
+            "columns": [
+                {
+                    "name": "UUID",
+                    "description": "Anuniversaluniqueidentifierofabankaccountcontract. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "ID",
+                    "description": "Anidentifierofabankaccountcontract.",
+                    "format": "string"
+                },
+                {
+                    "name": "CurrencyCode",
+                    "description": "ACurrencyCodespecifiesthecurrencyofthebankaccountcontract. Example: EUR",
+                    "format": "string"
+                },
+                {
+                    "name": "BankAccountIdentifyingElements",
+                    "description": "ABankAccountisabankaccountassociatedwiththebankaccountcontract.",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusCode",
+                    "description": "Acodedrepresentationofthelifecyclestatusofabankaccountcontract. Example: 2",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusName",
+                    "description": "NameofLifeCycleStatusCode. Example: Active",
+                    "format": "string"
+                },
+                {
+                    "name": "BorrowerPartyIdentifyingElements",
+                    "description": "ABorrowerPartyisapartywhotakesupafinancialinstrument,inthiscasealoancontract.",
+                    "format": "string"
+                },
+                {
+                    "name": "Product",
+                    "description": "AProductdescribesthe(financial)productuponwhichthebankaccountcontractisbased.",
+                    "format": "string"
+                },
+                {
+                    "name": "BusinessEventRecord",
+                    "description": "Arecordofabusinesseventthatchangesabankaccountcontract.",
+                    "format": "string"
+                },
+                {
+                    "name": "OperationalBankContractManagement",
+                    "description": "AnOperationalBankContractManagementisresponsibleformanagingoperationalbankcontractsandexecutingtherelatedbankingprocesses.",
+                    "format": "string"
+                },
+                {
+                    "name": "BusinessProcessChainAssignment",
+                    "description": "BusinessProcessChainAssignmentistheassignmentofabusinessobjectnodetoabusinessprocesschain.",
+                    "format": "string"
+                },
+                {
+                    "name": "ChangeStateID",
+                    "description": "AChangeStateIDisauniqueidentifierforachangestate. Example: 20191122135035.7818490",
+                    "format": "string"
+                },
+                {
+                    "name": "ClearingBankAccountContract",
+                    "description": "AClearingBankAccountContractisaBankAccountContractthatreceivesincomingpaymentsthathavetobetransferredtoaspecificloancontract.",
+                    "format": "string"
+                },
+                {
+                    "name": "TermSpecification",
+                    "description": "Aspecificationoftermelementsthataffectsalltermagreementsoftheloancontract.",
+                    "format": "string"
+                },
+                {
+                    "name": "Dunning",
+                    "description": "Specifiestheprocessthroughwhichbankscouldsendnoticestocustomersrequestingpaymentoftheoverduereceivablesoftheloancontract.",
+                    "format": "string"
+                },
+                {
+                    "name": "BalanceKeyFigures",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "CommittedCapitalAdjustments",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "EffectiveYields",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "IncomingPaymentAgreements",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "BasicDataLoanDisbursementRequests",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "LoanContractBorrowerPartyChangeRequests",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "LoanPaymentSkipRequests",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "PaymentTransactionInstructions",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "TermAgreements",
+                    "description": "",
+                    "format": "array"
+                }
+            ]
+        }
+    ]
+}

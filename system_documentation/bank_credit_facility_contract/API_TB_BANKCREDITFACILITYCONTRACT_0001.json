@@ -1,0 +1,2345 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Bank Credit Facility Contract",
+        "version": "1.0.0",
+        "description": "\r\n\r\nA frame contract that defines an overall credit line for a hierarchy of subordinated bank contracts.\r\n\r\nThe subordinated bank contracts can be bank account contracts (drawings) of different kinds of products (for example, current account and loan) having multiple contract currencies. It is also possible to subordinate other facilities, thus building a complex contractual hierarchy.\r\nYou can use this API to query and read bank credit facility contracts.\r\n\r\nEach Bank Credit Facility Contract contains additional information like the main business partner (borrower) or participation conditions which serve as a restriction towards the allowed subordinated bank contracts. A bank master contract is a frame contract between a bank and its customer that is based on a hierarchy of participating bank contracts. Bank master contracts and the associated hierarchies are set up for features such as combined settlement, combined statement and so on.\r\n\r\nBank Credit Facility Contract is a type of a bank master contract."
+    },
+    "externalDocs": {
+        "description": "Business Documentation",
+        "url": "https://help.sap.com/docs/TRBK_S4HANA/d2151b51aacc4d82ad2861e007337fa2/c41ca223c09a4cd78772b4ecff47c73d.html"
+    },
+    "x-sap-api-type": "ODATAV4",
+    "x-sap-shortText": "Query and read bank credit facility contracts using this synchronous inbound service",
+    "x-sap-software-min-version": "1.0",
+    "x-sap-ext-overview": [
+        {
+            "name": "Authentication Methods",
+            "values": [
+                {
+                    "text": "x509",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Service Group Name",
+            "values": [
+                {
+                    "text": "TRANSACTIONALBANKING",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Business Object",
+            "values": [
+                {
+                    "text": "Bank Credit Facility Contract",
+                    "format": "plain"
+                }
+            ]
+        }
+    ],
+    "security": [
+        {
+            "basicAuthentication": []
+        }
+    ],
+    "servers": [
+        {
+            "url": "https://{host}:{port}/sap/opu/odata4/sap/transactionalbanking/default/sap/bankcreditfacilitycontract/0001",
+            "variables": {
+                "host": {
+                    "default": ""
+                },
+                "port": {
+                    "default": ""
+                }
+            }
+        }
+    ],
+    "x-sap-extensible": {
+        "supported": "no"
+    },
+    "tags": [
+        {
+            "name": "Bank Credit Facility Contracts"
+        }
+    ],
+    "paths": {
+        "/BankCreditFacilityContracts/{UUID}": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "A universal unique identifier of a Bank Credit Facility Contract.  \nGDT: NOSC_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Read Bank Credit Facility Contract by UUID",
+                "description": "Is a request to read a bank credit facility contract",
+                "tags": [
+                    "Bank Credit Facility Contracts"
+                ],
+                "parameters": [
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "UUID",
+                                    "ID",
+                                    "CurrencyCode",
+                                    "LifeCycleStatusCode",
+                                    "LifeCycleStatusName",
+                                    "Product",
+                                    "BusinessEventRecord",
+                                    "HolderPartyIdentifyingElements",
+                                    "OperationalBankContractManagement",
+                                    "BusinessProcessChainAssignment",
+                                    "ChangeStateID",
+                                    "SubordinatedBankContractNumberValue",
+                                    "Limits"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "Hierarchies",
+                                    "SeasonalLimits"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContract"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankCreditFacilityContracts/{UUID}/Hierarchies": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "A universal unique identifier of a Bank Credit Facility Contract.  \nGDT: NOSC_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Query Hierarchies",
+                "description": "Is a request to query hierarchies",
+                "tags": [
+                    "Bank Credit Facility Contracts"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/top"
+                    },
+                    {
+                        "$ref": "#/components/parameters/skip"
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "BankContractUUID",
+                                    "ParentBankContractUUID",
+                                    "LevelOrdinalNumberValue",
+                                    "SubordinatedBankContractNumberValue",
+                                    "BankContractTypeCode",
+                                    "BankContractTypeName",
+                                    "BankMasterContract",
+                                    "BankAccountContract"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of Hierarchy",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.Hierarchy"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankCreditFacilityContracts/{UUID}/SeasonalLimits": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "A universal unique identifier of a Bank Credit Facility Contract.  \nGDT: NOSC_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Query SeasonalLimit",
+                "description": "Is a request to query seasonal limit",
+                "tags": [
+                    "Bank Credit Facility Contracts"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "ID",
+                                    "ValidityPeriod",
+                                    "DescriptionCode",
+                                    "DescriptionName",
+                                    "BankAccountLimitTypeCode",
+                                    "BankAccountLimitTypeName",
+                                    "Amount",
+                                    "BoundaryAmount",
+                                    "RecurrenceIndicator",
+                                    "RecurrenceMappableIndicator",
+                                    "Recurrence",
+                                    "MappableIndicator"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of SeasonalLimit",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.SeasonalLimit"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/$batch": {
+            "post": {
+                "summary": "Send a group of requests",
+                "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).\n\n*Please note that \"Try it out\" is not supported for this request.*",
+                "tags": [
+                    "Batch Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Batch request",
+                    "content": {
+                        "multipart/mixed;boundary=request-separator": {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET BankCreditFacilityContracts HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Batch response",
+                        "content": {
+                            "multipart/mixed": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "basicAuthentication": {
+                "type": "http",
+                "scheme": "basic"
+            }
+        },
+        "schemas": {
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContract": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A universal unique identifier of a Bank Credit Facility Contract.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "1234",
+                        "title": "An identifier for a Bank Master Contract of type Bank Credit Facility Contract.",
+                        "description": "GDT: BankMasterContractID"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Specifies the currency of a bank credit facility contract.",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "LifeCycleStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "A coded representation of the life cycle status of a bank credit facility contract.",
+                        "description": "GDT: BankMasterContractLifeCycleStatusCode"
+                    },
+                    "LifeCycleStatusName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Active",
+                        "title": "Name of LifeCycleStatusCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "Product": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.Product"
+                            }
+                        ],
+                        "title": "Describes the (financial) product upon which the bank master contract is based."
+                    },
+                    "BusinessEventRecord": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContractBusinessEventRecord"
+                            }
+                        ],
+                        "title": "A record of a business event that changes a bank master contract."
+                    },
+                    "HolderPartyIdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.PartyIdfgElmnts"
+                            }
+                        ],
+                        "title": "Is a party that legally holds a Bank Master Contract."
+                    },
+                    "OperationalBankContractManagement": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContractOperationalBankContractManagement"
+                            }
+                        ],
+                        "title": "Is responsible for managing operational bank contracts andexecuting the related banking processes.",
+                        "description": "A functional unit that is responsible for managing the contract."
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BusinessProcessChainAssignment"
+                            }
+                        ],
+                        "title": "Is the assignment of a bank credit facility contract to a business process chain.",
+                        "description": "\nBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "ChangeStateID": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "20191122135035.7818490",
+                        "title": "A ChangeStateID is a unique identifier for a change state.",
+                        "description": "\nGDT: ChangeStateID"
+                    },
+                    "SubordinatedBankContractNumberValue": {
+                        "type": "string",
+                        "example": "3",
+                        "title": "A number of subordinated bank contracts of one level below.",
+                        "description": "\nGDT: POSITIVE_NumberValue"
+                    },
+                    "Limits": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContractLimit"
+                        },
+                        "title": "A maximum preset amount of the credit line defined by a bank credit facility contract."
+                    },
+                    "Hierarchies": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.Hierarchy"
+                        }
+                    },
+                    "SeasonalLimits": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.SeasonalLimit"
+                        }
+                    }
+                },
+                "title": "Bank Credit Facility Contract",
+                "description": "Bank Credit Facility Contract is a frame contract that defines an overall credit line for a hierarchy of subordinated bank contracts. "
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContract-create": {
+                "type": "object",
+                "properties": {
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Specifies the currency of a bank credit facility contract.",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "LifeCycleStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "A coded representation of the life cycle status of a bank credit facility contract.",
+                        "description": "GDT: BankMasterContractLifeCycleStatusCode"
+                    },
+                    "LifeCycleStatusName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Active",
+                        "title": "Name of LifeCycleStatusCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "Product": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.Product-create"
+                            }
+                        ],
+                        "title": "Describes the (financial) product upon which the bank master contract is based."
+                    },
+                    "BusinessEventRecord": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContractBusinessEventRecord-create"
+                            }
+                        ],
+                        "title": "A record of a business event that changes a bank master contract."
+                    },
+                    "HolderPartyIdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.PartyIdfgElmnts-create"
+                            }
+                        ],
+                        "title": "Is a party that legally holds a Bank Master Contract."
+                    },
+                    "OperationalBankContractManagement": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContractOperationalBankContractManagement-create"
+                            }
+                        ],
+                        "title": "Is responsible for managing operational bank contracts andexecuting the related banking processes.",
+                        "description": "A functional unit that is responsible for managing the contract."
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BusinessProcessChainAssignment-create"
+                            }
+                        ],
+                        "title": "Is the assignment of a bank credit facility contract to a business process chain.",
+                        "description": "\nBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "SubordinatedBankContractNumberValue": {
+                        "type": "string",
+                        "example": "3",
+                        "title": "A number of subordinated bank contracts of one level below.",
+                        "description": "\nGDT: POSITIVE_NumberValue"
+                    },
+                    "Limits": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContractLimit-create"
+                        },
+                        "title": "A maximum preset amount of the credit line defined by a bank credit facility contract."
+                    },
+                    "Hierarchies": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.Hierarchy-create"
+                        }
+                    },
+                    "SeasonalLimits": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.SeasonalLimit-create"
+                        }
+                    }
+                },
+                "title": "Bank Credit Facility Contract (for create)",
+                "description": "Bank Credit Facility Contract is a frame contract that defines an overall credit line for a hierarchy of subordinated bank contracts. "
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContract-update": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BusinessProcessChainAssignment-update"
+                            }
+                        ],
+                        "title": "Is the assignment of a bank credit facility contract to a business process chain.",
+                        "description": "\nBOCT: BusProcChnAssgmtFSElmnts"
+                    }
+                },
+                "title": "Bank Credit Facility Contract (for update)",
+                "description": "Bank Credit Facility Contract is a frame contract that defines an overall credit line for a hierarchy of subordinated bank contracts. "
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.Hierarchy": {
+                "type": "object",
+                "properties": {
+                    "BankContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID of a bank contract.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "ParentBankContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID of the parent bank contract in the hierarchy.",
+                        "description": "Remark: \nAn entry of hierarchy belonging to the 1st level refers to the UUID of BankCreditFacilityContract.\nGDT: NOSC_UUID"
+                    },
+                    "LevelOrdinalNumberValue": {
+                        "type": "string",
+                        "example": "1",
+                        "title": "Ordinal number of an level of a bank contract in the hierarchy.",
+                        "description": "\nRemark: \nHierarchy starts with the first level.\nUse:\nUsed to specify the level on which a bank contract is located in an hierarchical structure.\nGDT: OrdinalNumberValue_V1"
+                    },
+                    "SubordinatedBankContractNumberValue": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "1",
+                        "title": "A number of subordinated bank contracts of one level below.",
+                        "description": "\nRemark: \nOnly spcified for a bank contract of type \"Bank MasterContract\" \nGDT: OrdinalNumberValue_V1"
+                    },
+                    "BankContractTypeCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "A coded repesentation of a type of a bank contract.",
+                        "description": "\nComment: \nA hierarchy has at each level a subordinated bank contract that could in turn be another bank master contract or an bank account contract (leaf).\nConstraint: \nOnly 1 - Bank Master Contract and 3 - Bank Account Contract are supported.\nIntegrity Condition: \nIn case of BankContractTypeCode is 1 - BankMasterContract BankMasterContract is specified.\nIn case of BankContractTypeCode is 3 - BankAccountContract BankAccountContract is specified.\nCode values:\n1 - Bank Master Contract\n2 - Bank Card Contract\n3 - Bank Account Contract\nGDT:ParticipantBankContractTypeCode"
+                    },
+                    "BankContractTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Bank Master Contract",
+                        "title": "Name of BankContractTypeCode",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "BankMasterContract": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankMasterContract"
+                            }
+                        ],
+                        "title": "A subordinated bank master contract participating in a bank credit facility contract.",
+                        "description": "Comment:\nA bank master contract is a frame contract between a bank and its customer that is based\non a hierarchy of participating bank contracts."
+                    },
+                    "BankAccountContract": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankAccountContract"
+                            }
+                        ],
+                        "title": "A subordinated bank account contract participating in a bank credit facility contract.",
+                        "description": "Comment:\nA bank account is a contractual agreement between a credit institute and customer,\nwhich is based on the customer's request for opening a bank account and contains among others,\the bank account type, account holder / authorized drawer(s), general terms and conditions."
+                    }
+                },
+                "title": "Hierarchy",
+                "description": "A hierarchy of subordinated bank contracts.\nComment:\nSubordinated bank contracts are participating in the bank credit facility contract.\nRemark:\nsubordinated bank contract of type 1 - Bank Master Contract is also called \"commitment\" in context of a bank credit facility hierarchy.A subordinated bank contract of type 3 - Bank Account Contract is called \"drawing\" in context of a bank credit facility hierarchy."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.Hierarchy-create": {
+                "type": "object",
+                "properties": {
+                    "BankContractTypeCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "A coded repesentation of a type of a bank contract.",
+                        "description": "\nComment: \nA hierarchy has at each level a subordinated bank contract that could in turn be another bank master contract or an bank account contract (leaf).\nConstraint: \nOnly 1 - Bank Master Contract and 3 - Bank Account Contract are supported.\nIntegrity Condition: \nIn case of BankContractTypeCode is 1 - BankMasterContract BankMasterContract is specified.\nIn case of BankContractTypeCode is 3 - BankAccountContract BankAccountContract is specified.\nCode values:\n1 - Bank Master Contract\n2 - Bank Card Contract\n3 - Bank Account Contract\nGDT:ParticipantBankContractTypeCode"
+                    },
+                    "BankMasterContract": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankMasterContract-create"
+                            }
+                        ],
+                        "title": "A subordinated bank master contract participating in a bank credit facility contract.",
+                        "description": "Comment:\nA bank master contract is a frame contract between a bank and its customer that is based\non a hierarchy of participating bank contracts."
+                    },
+                    "BankAccountContract": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankAccountContract-create"
+                            }
+                        ],
+                        "title": "A subordinated bank account contract participating in a bank credit facility contract.",
+                        "description": "Comment:\nA bank account is a contractual agreement between a credit institute and customer,\nwhich is based on the customer's request for opening a bank account and contains among others,\the bank account type, account holder / authorized drawer(s), general terms and conditions."
+                    }
+                },
+                "title": "Hierarchy (for create)",
+                "description": "A hierarchy of subordinated bank contracts.\nComment:\nSubordinated bank contracts are participating in the bank credit facility contract.\nRemark:\nsubordinated bank contract of type 1 - Bank Master Contract is also called \"commitment\" in context of a bank credit facility hierarchy.A subordinated bank contract of type 3 - Bank Account Contract is called \"drawing\" in context of a bank credit facility hierarchy."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.Hierarchy-update": {
+                "type": "object",
+                "properties": {
+                    "BankContractTypeCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "A coded repesentation of a type of a bank contract.",
+                        "description": "\nComment: \nA hierarchy has at each level a subordinated bank contract that could in turn be another bank master contract or an bank account contract (leaf).\nConstraint: \nOnly 1 - Bank Master Contract and 3 - Bank Account Contract are supported.\nIntegrity Condition: \nIn case of BankContractTypeCode is 1 - BankMasterContract BankMasterContract is specified.\nIn case of BankContractTypeCode is 3 - BankAccountContract BankAccountContract is specified.\nCode values:\n1 - Bank Master Contract\n2 - Bank Card Contract\n3 - Bank Account Contract\nGDT:ParticipantBankContractTypeCode"
+                    },
+                    "BankMasterContract": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankMasterContract-update"
+                            }
+                        ],
+                        "title": "A subordinated bank master contract participating in a bank credit facility contract.",
+                        "description": "Comment:\nA bank master contract is a frame contract between a bank and its customer that is based\non a hierarchy of participating bank contracts."
+                    },
+                    "BankAccountContract": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankAccountContract-update"
+                            }
+                        ],
+                        "title": "A subordinated bank account contract participating in a bank credit facility contract.",
+                        "description": "Comment:\nA bank account is a contractual agreement between a credit institute and customer,\nwhich is based on the customer's request for opening a bank account and contains among others,\the bank account type, account holder / authorized drawer(s), general terms and conditions."
+                    }
+                },
+                "title": "Hierarchy (for update)",
+                "description": "A hierarchy of subordinated bank contracts.\nComment:\nSubordinated bank contracts are participating in the bank credit facility contract.\nRemark:\nsubordinated bank contract of type 1 - Bank Master Contract is also called \"commitment\" in context of a bank credit facility hierarchy.A subordinated bank contract of type 3 - Bank Account Contract is called \"drawing\" in context of a bank credit facility hierarchy."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.SeasonalLimit": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "000001",
+                        "title": "Is a unique identifier of a seasonal limit within a bank credit facility contract.",
+                        "description": "GDT: BankAccountContractSeasonalLimitID"
+                    },
+                    "ValidityPeriod": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.UPPEROPEN_UNBOUNDED_DatePeriod"
+                            }
+                        ],
+                        "title": "The Validity Period of the Seasonal Limit"
+                    },
+                    "DescriptionCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "001",
+                        "title": "A coded representation of a description of a seasonal limit.",
+                        "description": "GDT: BankAccountContractSeasonalLimitDescriptionCode"
+                    },
+                    "DescriptionName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Temporary Access Limit",
+                        "title": "Name of DescriptionCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "BankAccountLimitTypeCode": {
+                        "type": "string",
+                        "maxLength": 3,
+                        "example": " 9 ",
+                        "title": "Is the coded representation of the type of a bank account limit.",
+                        "description": " A seasonal limit increases either the committed or tolerated limit of a bank credit facility contract.Only BankAccountLimitTypeCode \"9 - Granted Credit Group Limit \" and \"10 - Tolerated Overdraft Group Limit\" are supported. \nThere may more than one seasonal limit with the supported BankAccountLimitTypeCodes.\nGDT: BankAccountLimitTypeCode"
+                    },
+                    "BankAccountLimitTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Granted Credit Limit",
+                        "title": "Name of BankAccountLimitTypeCode",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "Amount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.Amount"
+                            }
+                        ],
+                        "title": "Specifies the amount assigned to a seasonal limit.",
+                        "description": "Integrity Condition:\nCurrencyCode of Amount has to be equal to CurrencyCode of bank credit facility contract.\nGDT: Amount"
+                    },
+                    "BoundaryAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.Amount"
+                            }
+                        ],
+                        "title": "Specifies the boundary amount of a seasonal limit.",
+                        "description": "Integrity Condition:\nCurrencyCode of SeasonalLimit BoundaryAmount has to be equal to CurrencyCode of bank credit facility contract.\nGDT: Amount"
+                    },
+                    "RecurrenceIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether the seasonal limit has a recurrence.",
+                        "description": "Integrity Condition:\nIf RecurrenceIndicator is true a Recurrence is available.\nGDT: Indicator"
+                    },
+                    "RecurrenceMappableIndicator": {
+                        "type": "boolean",
+                        "nullable": true,
+                        "title": "Indicates that the recurrence for the seasonal limit is mappable.",
+                        "description": "Integrity Condition:\nIf RecurrenceMappableIndicator is false no Recurrence is specified.\nRemark:\nThe indicator is false if a recurrence is maintained in the system which cannot be mapped to Recurrence. An example is a monthly recurrence on 15th and 31st of a month.\nRecurrenceMappableIndicator is null, if no Recurrence is available.\nGDT: Indicator"
+                    },
+                    "Recurrence": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.Recurrence"
+                            }
+                        ],
+                        "title": "A representation for the repeated occurrence of the effectiveness of a seasonal limit within a time period or within a time frame."
+                    },
+                    "MappableIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates that the seasonal limit is mappable.",
+                        "description": "GDT: Indicator"
+                    }
+                },
+                "title": "SeasonalLimit",
+                "description": "A Seasonal Limit is a limit that is granted to a bank credit facility contract for a period of time (seasonal).\nConstraints:\nOnly SeasonalLimit of type code 1 (Additional  Seasonal Limit) is supported.\nOnly Seasonal Limits for one-time increase/decrease or recurrent increase/decrease by fix amount are supported. Seasoanal Limits with settings for duration are not  supported.."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.SeasonalLimit-create": {
+                "type": "object",
+                "properties": {
+                    "ValidityPeriod": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.UPPEROPEN_UNBOUNDED_DatePeriod-create"
+                            }
+                        ],
+                        "title": "The Validity Period of the Seasonal Limit"
+                    },
+                    "DescriptionCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "001",
+                        "title": "A coded representation of a description of a seasonal limit.",
+                        "description": "GDT: BankAccountContractSeasonalLimitDescriptionCode"
+                    },
+                    "BankAccountLimitTypeCode": {
+                        "type": "string",
+                        "maxLength": 3,
+                        "example": " 9 ",
+                        "title": "Is the coded representation of the type of a bank account limit.",
+                        "description": " A seasonal limit increases either the committed or tolerated limit of a bank credit facility contract.Only BankAccountLimitTypeCode \"9 - Granted Credit Group Limit \" and \"10 - Tolerated Overdraft Group Limit\" are supported. \nThere may more than one seasonal limit with the supported BankAccountLimitTypeCodes.\nGDT: BankAccountLimitTypeCode"
+                    },
+                    "Amount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "Specifies the amount assigned to a seasonal limit.",
+                        "description": "Integrity Condition:\nCurrencyCode of Amount has to be equal to CurrencyCode of bank credit facility contract.\nGDT: Amount"
+                    },
+                    "BoundaryAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "Specifies the boundary amount of a seasonal limit.",
+                        "description": "Integrity Condition:\nCurrencyCode of SeasonalLimit BoundaryAmount has to be equal to CurrencyCode of bank credit facility contract.\nGDT: Amount"
+                    },
+                    "RecurrenceIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether the seasonal limit has a recurrence.",
+                        "description": "Integrity Condition:\nIf RecurrenceIndicator is true a Recurrence is available.\nGDT: Indicator"
+                    },
+                    "Recurrence": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.Recurrence-create"
+                            }
+                        ],
+                        "title": "A representation for the repeated occurrence of the effectiveness of a seasonal limit within a time period or within a time frame."
+                    }
+                },
+                "title": "SeasonalLimit (for create)",
+                "description": "A Seasonal Limit is a limit that is granted to a bank credit facility contract for a period of time (seasonal).\nConstraints:\nOnly SeasonalLimit of type code 1 (Additional  Seasonal Limit) is supported.\nOnly Seasonal Limits for one-time increase/decrease or recurrent increase/decrease by fix amount are supported. Seasoanal Limits with settings for duration are not  supported.."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.SeasonalLimit-update": {
+                "type": "object",
+                "properties": {
+                    "ValidityPeriod": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.UPPEROPEN_UNBOUNDED_DatePeriod-update"
+                            }
+                        ],
+                        "title": "The Validity Period of the Seasonal Limit"
+                    },
+                    "DescriptionCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "001",
+                        "title": "A coded representation of a description of a seasonal limit.",
+                        "description": "GDT: BankAccountContractSeasonalLimitDescriptionCode"
+                    },
+                    "BankAccountLimitTypeCode": {
+                        "type": "string",
+                        "maxLength": 3,
+                        "example": " 9 ",
+                        "title": "Is the coded representation of the type of a bank account limit.",
+                        "description": " A seasonal limit increases either the committed or tolerated limit of a bank credit facility contract.Only BankAccountLimitTypeCode \"9 - Granted Credit Group Limit \" and \"10 - Tolerated Overdraft Group Limit\" are supported. \nThere may more than one seasonal limit with the supported BankAccountLimitTypeCodes.\nGDT: BankAccountLimitTypeCode"
+                    },
+                    "Amount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "Specifies the amount assigned to a seasonal limit.",
+                        "description": "Integrity Condition:\nCurrencyCode of Amount has to be equal to CurrencyCode of bank credit facility contract.\nGDT: Amount"
+                    },
+                    "BoundaryAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "Specifies the boundary amount of a seasonal limit.",
+                        "description": "Integrity Condition:\nCurrencyCode of SeasonalLimit BoundaryAmount has to be equal to CurrencyCode of bank credit facility contract.\nGDT: Amount"
+                    },
+                    "RecurrenceIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether the seasonal limit has a recurrence.",
+                        "description": "Integrity Condition:\nIf RecurrenceIndicator is true a Recurrence is available.\nGDT: Indicator"
+                    },
+                    "Recurrence": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.Recurrence-update"
+                            }
+                        ],
+                        "title": "A representation for the repeated occurrence of the effectiveness of a seasonal limit within a time period or within a time frame."
+                    }
+                },
+                "title": "SeasonalLimit (for update)",
+                "description": "A Seasonal Limit is a limit that is granted to a bank credit facility contract for a period of time (seasonal).\nConstraints:\nOnly SeasonalLimit of type code 1 (Additional  Seasonal Limit) is supported.\nOnly Seasonal Limits for one-time increase/decrease or recurrent increase/decrease by fix amount are supported. Seasoanal Limits with settings for duration are not  supported.."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.Amount": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.Amount-create": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount (for create)",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.Amount-update": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount (for update)",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.Bank": {
+                "type": "object",
+                "properties": {
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 11,
+                        "example": "TOLLDEWDXXX",
+                        "title": "Bank Identification Code (BIC) of the Society for Worldwide Interbank Financial Telecommunications (S.W.I.F.T.), see GDT BankStandardID.",
+                        "description": "GDT: BankStandardID"
+                    },
+                    "RoutingID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "90000001",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    },
+                    "CountryCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "DE",
+                        "title": "Country in which the bank identified earlier goes about its business. If the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here. Constraint: Only listID 3166-1 of listAgencyID 5 will be supported.",
+                        "description": "GDT: CountryCode"
+                    }
+                },
+                "title": "Bank",
+                "description": "A bank is a business entity that performs financial investment services and payment transactions. "
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.Bank-create": {
+                "type": "object",
+                "properties": {
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 11,
+                        "example": "TOLLDEWDXXX",
+                        "title": "Bank Identification Code (BIC) of the Society for Worldwide Interbank Financial Telecommunications (S.W.I.F.T.), see GDT BankStandardID.",
+                        "description": "GDT: BankStandardID"
+                    },
+                    "RoutingID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "90000001",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    },
+                    "CountryCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "DE",
+                        "title": "Country in which the bank identified earlier goes about its business. If the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here. Constraint: Only listID 3166-1 of listAgencyID 5 will be supported.",
+                        "description": "GDT: CountryCode"
+                    }
+                },
+                "title": "Bank (for create)",
+                "description": "A bank is a business entity that performs financial investment services and payment transactions. "
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.Bank-update": {
+                "type": "object",
+                "properties": {
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 11,
+                        "example": "TOLLDEWDXXX",
+                        "title": "Bank Identification Code (BIC) of the Society for Worldwide Interbank Financial Telecommunications (S.W.I.F.T.), see GDT BankStandardID.",
+                        "description": "GDT: BankStandardID"
+                    },
+                    "RoutingID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "90000001",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    },
+                    "CountryCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "DE",
+                        "title": "Country in which the bank identified earlier goes about its business. If the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here. Constraint: Only listID 3166-1 of listAgencyID 5 will be supported.",
+                        "description": "GDT: CountryCode"
+                    }
+                },
+                "title": "Bank (for update)",
+                "description": "A bank is a business entity that performs financial investment services and payment transactions. "
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankAccountContract": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankAccountContractID"
+                            }
+                        ],
+                        "title": "An identifier of a bank account contract.",
+                        "description": "GDT: BankAccountContractID"
+                    },
+                    "TypeCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "874",
+                        "title": "A coded representation of the type of a bank account contract.",
+                        "description": "\nGDT: BankAccountContractTypeCode"
+                    },
+                    "TypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Current Account Contract",
+                        "title": "Name of TypeCode",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "SubTypeCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "A coded representation of the sub type of a bank account contract.",
+                        "description": "\nGDT: BankAccountContractSubTypeCode"
+                    },
+                    "SubTypeName": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Current Account Contract",
+                        "title": "Name of TypeCode",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "BankAccountIdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BkAcctIdfgElmnts"
+                            }
+                        ],
+                        "title": "A BankAccount is a bank account associated with the bank account contract.",
+                        "description": "BOCT: BankAccountIdentifyingElements"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "A CurrencyCode specifies the currency of the bank account contract.",
+                        "description": "GDT: CurrencyCode"
+                    }
+                },
+                "title": "Bank Account Contract",
+                "description": "A subordinated bank account contract participating in a bank credit facility contract. "
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankAccountContract-create": {
+                "type": "object",
+                "properties": {
+                    "TypeCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "874",
+                        "title": "A coded representation of the type of a bank account contract.",
+                        "description": "\nGDT: BankAccountContractTypeCode"
+                    },
+                    "SubTypeCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "A coded representation of the sub type of a bank account contract.",
+                        "description": "\nGDT: BankAccountContractSubTypeCode"
+                    },
+                    "BankAccountIdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BkAcctIdfgElmnts-create"
+                            }
+                        ],
+                        "title": "A BankAccount is a bank account associated with the bank account contract.",
+                        "description": "BOCT: BankAccountIdentifyingElements"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "A CurrencyCode specifies the currency of the bank account contract.",
+                        "description": "GDT: CurrencyCode"
+                    }
+                },
+                "title": "Bank Account Contract (for create)",
+                "description": "A subordinated bank account contract participating in a bank credit facility contract. "
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankAccountContract-update": {
+                "type": "object",
+                "properties": {
+                    "TypeCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "874",
+                        "title": "A coded representation of the type of a bank account contract.",
+                        "description": "\nGDT: BankAccountContractTypeCode"
+                    },
+                    "SubTypeCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "A coded representation of the sub type of a bank account contract.",
+                        "description": "\nGDT: BankAccountContractSubTypeCode"
+                    }
+                },
+                "title": "Bank Account Contract (for update)",
+                "description": "A subordinated bank account contract participating in a bank credit facility contract. "
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankAccountContractID": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "DE32904200380010000707",
+                        "title": "Content of BankAccountContractID."
+                    },
+                    "schemeID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "BAC.001",
+                        "title": "SchemeID of the BankAccountContractID.",
+                        "description": "Default: If filter value is not provided, BAC.001 will be used as default value for filter."
+                    },
+                    "schemeAgencyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "310",
+                        "title": "SchemeAgencyID of the BankAccountContractID.",
+                        "description": "Default: If filter value is not provided, 310 will be used as default value for filter."
+                    }
+                },
+                "title": "BankAccountContractID",
+                "description": "An identifier of a bank account contract.\nGDT: BankAccountContractID"
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankAccountContractID-create": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "DE32904200380010000707",
+                        "title": "Content of BankAccountContractID."
+                    },
+                    "schemeID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "BAC.001",
+                        "title": "SchemeID of the BankAccountContractID.",
+                        "description": "Default: If filter value is not provided, BAC.001 will be used as default value for filter."
+                    },
+                    "schemeAgencyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "310",
+                        "title": "SchemeAgencyID of the BankAccountContractID.",
+                        "description": "Default: If filter value is not provided, 310 will be used as default value for filter."
+                    }
+                },
+                "title": "BankAccountContractID (for create)",
+                "description": "An identifier of a bank account contract.\nGDT: BankAccountContractID"
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankAccountContractID-update": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "DE32904200380010000707",
+                        "title": "Content of BankAccountContractID."
+                    },
+                    "schemeID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "BAC.001",
+                        "title": "SchemeID of the BankAccountContractID.",
+                        "description": "Default: If filter value is not provided, BAC.001 will be used as default value for filter."
+                    }
+                },
+                "title": "BankAccountContractID (for update)",
+                "description": "An identifier of a bank account contract.\nGDT: BankAccountContractID"
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BkAcctIdfgElmnts": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "0000000976",
+                        "title": "Bank account number (Basic Bank Account Number, BBAN). An account number that is assigned by the account managing bank. It uniquely identifies a bank account in most countries only together with the bank.",
+                        "description": "GDT: BankAccountID"
+                    },
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 34,
+                        "example": "DE84900000010000000976",
+                        "title": "International bank account number (International Bank Account Number, IBAN).",
+                        "description": "GDT: BankAccountStandardID"
+                    },
+                    "InternalID": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "5A880E4987E81EE8A9BCFA163E78A157",
+                        "title": "BankAccountInternalID is a proprietary identifier for a bank account.",
+                        "description": "GDT: BankAccountInternalID"
+                    },
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is an universal unique identifier of a bank account.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "CurrencyCode is a coded representation of the currency of the bank account.",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "Bank": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.Bank"
+                            }
+                        ],
+                        "title": "Bank where the account is held."
+                    }
+                },
+                "title": "Bank Account Identifying Elements",
+                "description": "The identifying elements of a bank account supported by bank account management in Financial Services (Banking)."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BkAcctIdfgElmnts-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "0000000976",
+                        "title": "Bank account number (Basic Bank Account Number, BBAN). An account number that is assigned by the account managing bank. It uniquely identifies a bank account in most countries only together with the bank.",
+                        "description": "GDT: BankAccountID"
+                    }
+                },
+                "title": "Bank Account Identifying Elements (for create)",
+                "description": "The identifying elements of a bank account supported by bank account management in Financial Services (Banking)."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BkAcctIdfgElmnts-update": {
+                "type": "object",
+                "title": "Bank Account Identifying Elements (for update)",
+                "description": "The identifying elements of a bank account supported by bank account management in Financial Services (Banking)."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankMasterContract": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "5678",
+                        "title": "An identifier of a bank Master contract.",
+                        "description": "GDT: BankMasterContractID"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "A CurrencyCode specifies the currency of the bank account contract.",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "Product": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.Product"
+                            }
+                        ],
+                        "title": "Describes the (financial) product upon which the bank master contract is based.",
+                        "description": "GDT: Product"
+                    },
+                    "BusinessEventRecord": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContractBusinessEventRecord"
+                            }
+                        ],
+                        "title": "A record of a business event that changes a bank master contract."
+                    },
+                    "HolderPartyIdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.PartyIdfgElmnts"
+                            }
+                        ],
+                        "title": "Is a party that legally holds a Bank Master Contract."
+                    },
+                    "OperationalBankContractManagement": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContractOperationalBankContractManagement"
+                            }
+                        ],
+                        "title": "Is responsible for managing operational bank contracts andexecuting the related banking processes.",
+                        "description": "A functional unit that is responsible for managing the contract."
+                    },
+                    "Limits": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContractLimit"
+                        },
+                        "title": "A maximum preset amount of the credit line defined by a bank credit facility contract."
+                    },
+                    "SeasonalLimits": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.SeasonalLimit"
+                        }
+                    }
+                },
+                "title": "Bank Master Contract",
+                "description": "A subordinated bank master contract participating in a bank credit facility contract. "
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankMasterContract-create": {
+                "type": "object",
+                "properties": {
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "A CurrencyCode specifies the currency of the bank account contract.",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "Product": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.Product-create"
+                            }
+                        ],
+                        "title": "Describes the (financial) product upon which the bank master contract is based.",
+                        "description": "GDT: Product"
+                    },
+                    "BusinessEventRecord": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContractBusinessEventRecord-create"
+                            }
+                        ],
+                        "title": "A record of a business event that changes a bank master contract."
+                    },
+                    "HolderPartyIdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.PartyIdfgElmnts-create"
+                            }
+                        ],
+                        "title": "Is a party that legally holds a Bank Master Contract."
+                    },
+                    "OperationalBankContractManagement": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContractOperationalBankContractManagement-create"
+                            }
+                        ],
+                        "title": "Is responsible for managing operational bank contracts andexecuting the related banking processes.",
+                        "description": "A functional unit that is responsible for managing the contract."
+                    },
+                    "Limits": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContractLimit-create"
+                        },
+                        "title": "A maximum preset amount of the credit line defined by a bank credit facility contract."
+                    },
+                    "SeasonalLimits": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.SeasonalLimit-create"
+                        }
+                    }
+                },
+                "title": "Bank Master Contract (for create)",
+                "description": "A subordinated bank master contract participating in a bank credit facility contract. "
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankMasterContract-update": {
+                "type": "object",
+                "title": "Bank Master Contract (for update)",
+                "description": "A subordinated bank master contract participating in a bank credit facility contract. "
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContractBusinessEventRecord": {
+                "type": "object",
+                "properties": {
+                    "StartDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Date when the bank credit facility contract becomes operational from the customer's point of view.",
+                        "description": "\nGDT: Date"
+                    },
+                    "ActualCancellationDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Date when a bank credit facility contract is actually canceled.",
+                        "description": "\nGDT: Date"
+                    }
+                },
+                "title": "Bank Credit Facility Contract Business Event Record",
+                "description": "A record of a business event that changes a bank master contract."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContractBusinessEventRecord-create": {
+                "type": "object",
+                "properties": {
+                    "StartDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Date when the bank credit facility contract becomes operational from the customer's point of view.",
+                        "description": "\nGDT: Date"
+                    },
+                    "ActualCancellationDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Date when a bank credit facility contract is actually canceled.",
+                        "description": "\nGDT: Date"
+                    }
+                },
+                "title": "Bank Credit Facility Contract Business Event Record (for create)",
+                "description": "A record of a business event that changes a bank master contract."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContractBusinessEventRecord-update": {
+                "type": "object",
+                "properties": {
+                    "StartDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Date when the bank credit facility contract becomes operational from the customer's point of view.",
+                        "description": "\nGDT: Date"
+                    },
+                    "ActualCancellationDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Date when a bank credit facility contract is actually canceled.",
+                        "description": "\nGDT: Date"
+                    }
+                },
+                "title": "Bank Credit Facility Contract Business Event Record (for update)",
+                "description": "A record of a business event that changes a bank master contract."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BusinessProcessChainAssignment": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "300030",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "\nBankingBusinessTransactionTypeCode is the coded representation of the banking business transaction which\nis associated with the business process chain to which the hosting buisiness object is assigned to.\nRemark:\nIf BankingBusinessTransactionTypeCode is not specfied, in case of update code value\n\"300031 - Ad Hoc Bank Credit Facility Contract Change\" and in case of create\n\"300030 - Bank Credit Facility Contract Change\" will be used by default. \nBDT: BankingBusinessTransactionTypeCode"
+                    },
+                    "BankingBusinessTransactionTypeName": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Bank Credit Facility Contract Opening",
+                        "title": "Name of BankingBusinessTransactionTypeCode",
+                        "description": "GDT: EXTENDED_Name"
+                    }
+                },
+                "title": "Business Process Chain Assignment",
+                "description": "Is the assignment of a business object node to a business process chain."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BusinessProcessChainAssignment-create": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "300030",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "\nBankingBusinessTransactionTypeCode is the coded representation of the banking business transaction which\nis associated with the business process chain to which the hosting buisiness object is assigned to.\nRemark:\nIf BankingBusinessTransactionTypeCode is not specfied, in case of update code value\n\"300031 - Ad Hoc Bank Credit Facility Contract Change\" and in case of create\n\"300030 - Bank Credit Facility Contract Change\" will be used by default. \nBDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for create)",
+                "description": "Is the assignment of a business object node to a business process chain."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BusinessProcessChainAssignment-update": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "300030",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "\nBankingBusinessTransactionTypeCode is the coded representation of the banking business transaction which\nis associated with the business process chain to which the hosting buisiness object is assigned to.\nRemark:\nIf BankingBusinessTransactionTypeCode is not specfied, in case of update code value\n\"300031 - Ad Hoc Bank Credit Facility Contract Change\" and in case of create\n\"300030 - Bank Credit Facility Contract Change\" will be used by default. \nBDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for update)",
+                "description": "Is the assignment of a business object node to a business process chain."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContractLimit": {
+                "type": "object",
+                "properties": {
+                    "TypeCode": {
+                        "type": "string",
+                        "maxLength": 3,
+                        "example": "9",
+                        "title": "Is the coded representation of the type of a bank account limit. Constraint: Only 9 - Granted Credit Group Limit 10 - Tolerated Overdraft Group Limit \nare allowed. ",
+                        "description": "GDT: BankAccountLimitTypeCode "
+                    },
+                    "TypeName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Granted Credit Group Limit",
+                        "title": "Name of TypeCode",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "Amount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.Amount"
+                            }
+                        ],
+                        "title": "Specifies the limit amount assigned to a particular type of the bank account limit.",
+                        "description": "GDT: Amount"
+                    }
+                },
+                "title": "Bank Credit Facility Contract Limit",
+                "description": "A maximum preset amount for a bank credit facility contract for a specific period of time. "
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContractLimit-create": {
+                "type": "object",
+                "properties": {
+                    "TypeCode": {
+                        "type": "string",
+                        "maxLength": 3,
+                        "example": "9",
+                        "title": "Is the coded representation of the type of a bank account limit. Constraint: Only 9 - Granted Credit Group Limit 10 - Tolerated Overdraft Group Limit \nare allowed. ",
+                        "description": "GDT: BankAccountLimitTypeCode "
+                    },
+                    "Amount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "Specifies the limit amount assigned to a particular type of the bank account limit.",
+                        "description": "GDT: Amount"
+                    }
+                },
+                "title": "Bank Credit Facility Contract Limit (for create)",
+                "description": "A maximum preset amount for a bank credit facility contract for a specific period of time. "
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContractLimit-update": {
+                "type": "object",
+                "properties": {
+                    "TypeCode": {
+                        "type": "string",
+                        "maxLength": 3,
+                        "example": "9",
+                        "title": "Is the coded representation of the type of a bank account limit. Constraint: Only 9 - Granted Credit Group Limit 10 - Tolerated Overdraft Group Limit \nare allowed. ",
+                        "description": "GDT: BankAccountLimitTypeCode "
+                    },
+                    "Amount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "Specifies the limit amount assigned to a particular type of the bank account limit.",
+                        "description": "GDT: Amount"
+                    }
+                },
+                "title": "Bank Credit Facility Contract Limit (for update)",
+                "description": "A maximum preset amount for a bank credit facility contract for a specific period of time. "
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContractOperationalBankContractManagement": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "50000608",
+                        "title": "A unique identifier of an organizational unit thatis responsible for managing operational bank contracts and executing the related banking processes.",
+                        "description": "Constraint: The ID may not exceed the length of 8 and may only consist of numerical characters.\nGDT: OrganisationalCentreID "
+                    },
+                    "Name": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "DE01",
+                        "title": "A name of the Bank Credit Facility Contract Operational Bank Contract Management.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "Description": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Xamplebank",
+                        "title": "A description of the Bank Credit Facility Contract Operational Bank Contract Management.",
+                        "description": "GDT: MEDIUM_Description"
+                    }
+                },
+                "title": "Bank Credit Facility Contract Operational Bank Contract Management",
+                "description": "A functional unit that is responsible for managing the contract."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContractOperationalBankContractManagement-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "50000608",
+                        "title": "A unique identifier of an organizational unit thatis responsible for managing operational bank contracts and executing the related banking processes.",
+                        "description": "Constraint: The ID may not exceed the length of 8 and may only consist of numerical characters.\nGDT: OrganisationalCentreID "
+                    }
+                },
+                "title": "Bank Credit Facility Contract Operational Bank Contract Management (for create)",
+                "description": "A functional unit that is responsible for managing the contract."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankCreditFacilityContractOperationalBankContractManagement-update": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "50000608",
+                        "title": "A unique identifier of an organizational unit thatis responsible for managing operational bank contracts and executing the related banking processes.",
+                        "description": "Constraint: The ID may not exceed the length of 8 and may only consist of numerical characters.\nGDT: OrganisationalCentreID "
+                    }
+                },
+                "title": "Bank Credit Facility Contract Operational Bank Contract Management (for update)",
+                "description": "A functional unit that is responsible for managing the contract."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.PartyIdfgElmnts": {
+                "type": "object",
+                "properties": {
+                    "PartyUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "The UUID of a party (business partner).",
+                        "description": "\nGDT: UUID"
+                    },
+                    "PartyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "310867",
+                        "title": "The ID of a party (business partner).",
+                        "description": "\nGDT: PartyID"
+                    }
+                },
+                "title": "Party Identifying Elements",
+                "description": "PartyIdentifyingElements does contain all identifying elements of a party (business partner).  \nRemark:  PartyTypeCode is value 147 (Business Partner). "
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.PartyIdfgElmnts-create": {
+                "type": "object",
+                "properties": {
+                    "PartyUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "The UUID of a party (business partner).",
+                        "description": "\nGDT: UUID"
+                    },
+                    "PartyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "310867",
+                        "title": "The ID of a party (business partner).",
+                        "description": "\nGDT: PartyID"
+                    }
+                },
+                "title": "Party Identifying Elements (for create)",
+                "description": "PartyIdentifyingElements does contain all identifying elements of a party (business partner).  \nRemark:  PartyTypeCode is value 147 (Business Partner). "
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.PartyIdfgElmnts-update": {
+                "type": "object",
+                "title": "Party Identifying Elements (for update)",
+                "description": "PartyIdentifyingElements does contain all identifying elements of a party (business partner).  \nRemark:  PartyTypeCode is value 147 (Business Partner). "
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.Product": {
+                "type": "object",
+                "properties": {
+                    "ProductionControl": {
+                        "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankMasterContractProductionControl"
+                    },
+                    "BankSalesProductID": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.ProductID"
+                            }
+                        ]
+                    }
+                },
+                "title": "Product",
+                "description": "Describes the (financial) product upon which the bank master contract is based."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.Product-create": {
+                "type": "object",
+                "properties": {
+                    "ProductionControl": {
+                        "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankMasterContractProductionControl-create"
+                    },
+                    "BankSalesProductID": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.ProductID-create"
+                            }
+                        ]
+                    }
+                },
+                "title": "Product (for create)",
+                "description": "Describes the (financial) product upon which the bank master contract is based."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.Product-update": {
+                "type": "object",
+                "properties": {
+                    "ProductionControl": {
+                        "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankMasterContractProductionControl-update"
+                    },
+                    "BankSalesProductID": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcreditfacilitycontract.v0001.ProductID-update"
+                            }
+                        ]
+                    }
+                },
+                "title": "Product (for update)",
+                "description": "Describes the (financial) product upon which the bank master contract is based."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.ProductID": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "type": "string",
+                        "maxLength": 60
+                    },
+                    "SchemeID": {
+                        "type": "string",
+                        "maxLength": 60
+                    },
+                    "SchemeAgencyID": {
+                        "type": "string",
+                        "maxLength": 60
+                    }
+                },
+                "title": "ProductID"
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.ProductID-create": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "type": "string",
+                        "maxLength": 60
+                    },
+                    "SchemeID": {
+                        "type": "string",
+                        "maxLength": 60
+                    },
+                    "SchemeAgencyID": {
+                        "type": "string",
+                        "maxLength": 60
+                    }
+                },
+                "title": "ProductID (for create)"
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.ProductID-update": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "type": "string",
+                        "maxLength": 60
+                    },
+                    "SchemeID": {
+                        "type": "string",
+                        "maxLength": 60
+                    },
+                    "SchemeAgencyID": {
+                        "type": "string",
+                        "maxLength": 60
+                    }
+                },
+                "title": "ProductID (for update)"
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankMasterContractProductionControl": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "MC_FAC1",
+                        "title": "ID is an identifier of a bank master production control.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. \nGDT: BankMasterContractProductionControlID"
+                    },
+                    "Description": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Master Contract for Facilities",
+                        "title": "A description of the Bank Master Contract Production Control.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_MEDIUM_Description"
+                    }
+                },
+                "title": "A BankMasterContractProductionControl defines the parameters that control the processing and handling in the production of a bank master contract. ",
+                "description": "Comment: BankMasterContractProductionControl defines the contract information that controls the production of a bank master contract. "
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankMasterContractProductionControl-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "MC_FAC1",
+                        "title": "ID is an identifier of a bank master production control.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. \nGDT: BankMasterContractProductionControlID"
+                    }
+                },
+                "title": "A BankMasterContractProductionControl defines the parameters that control the processing and handling in the production of a bank master contract.  (for create)",
+                "description": "Comment: BankMasterContractProductionControl defines the contract information that controls the production of a bank master contract. "
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.BankMasterContractProductionControl-update": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "MC_FAC1",
+                        "title": "ID is an identifier of a bank master production control.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. \nGDT: BankMasterContractProductionControlID"
+                    }
+                },
+                "title": "A BankMasterContractProductionControl defines the parameters that control the processing and handling in the production of a bank master contract.  (for update)",
+                "description": "Comment: BankMasterContractProductionControl defines the contract information that controls the production of a bank master contract. "
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.Recurrence": {
+                "type": "object",
+                "properties": {
+                    "FrequencyCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "5",
+                        "title": "A FrequencyCode specifies the frequency of the recurrence as a code.\nConstraint: Only codes 4 (Daily), 5 (Weekly), 6 (Monthly) and 7 (Yearly) are supported.Integrity Condition: In case of FrequencyCode 5 (Weekly) WeekdayCode has to be specified, in case of FrequencyCode 6 (Monthly) DayOfMonth has to be specified, n case of FrequencyCode 7 (Yearly) DayOfMonth and Month have to be specified.",
+                        "description": "GDT: CALENDARDAY_RecurrenceFrequencyCode"
+                    },
+                    "FrequencyName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Weekly",
+                        "title": "A name for FrequencyCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "FrequencyValue": {
+                        "type": "integer",
+                        "format": "int16",
+                        "title": "FrequencyValue specifies the number of units derived from the frequency codes that lie between two occurrences.",
+                        "description": "GDT: RecurrenceFrequencyValue"
+                    },
+                    "WeekdayCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 1,
+                        "example": "5",
+                        "title": "A coded representation of a day in a week.\nUse: The WeekdayCode is used to identify a single day in a week. For example to set the first day of a week.",
+                        "description": "GDT: WeekdayCode"
+                    },
+                    "WeekdayName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Friday",
+                        "title": "A name for WeekdayCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "Month": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "July",
+                        "title": "Month specifies the month in which a recurrence takes place.",
+                        "description": "GDT: Month"
+                    },
+                    "DayOfMonth": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "31",
+                        "title": "DayOfMonth specifies the day in a month in the Gregorian calendar on which a recurrence takes place. 31 is equal to the last day of the month.",
+                        "description": "GDT: DayOfMonth"
+                    },
+                    "KeyDateWorkingDayAdjustmentRuleCode": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "A KeyDateWorkingDayAdjustmentRuleCode specifies the rule for adjusting a given key date to a working day.",
+                        "description": "GDT: KeyDateWorkingDayAdjustmentRuleCode"
+                    },
+                    "KeyDateWorkingDayAdjustmentRuleName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "No Adjustment",
+                        "title": "A name for a KeyDateWorkingDayAdjustmentRuleCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    }
+                },
+                "title": "Recurrence",
+                "description": "A representation for the repeated occurrence of an event within a time period or within a time frame."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.Recurrence-create": {
+                "type": "object",
+                "properties": {
+                    "FrequencyCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "5",
+                        "title": "A FrequencyCode specifies the frequency of the recurrence as a code.\nConstraint: Only codes 4 (Daily), 5 (Weekly), 6 (Monthly) and 7 (Yearly) are supported.Integrity Condition: In case of FrequencyCode 5 (Weekly) WeekdayCode has to be specified, in case of FrequencyCode 6 (Monthly) DayOfMonth has to be specified, n case of FrequencyCode 7 (Yearly) DayOfMonth and Month have to be specified.",
+                        "description": "GDT: CALENDARDAY_RecurrenceFrequencyCode"
+                    },
+                    "FrequencyValue": {
+                        "type": "integer",
+                        "format": "int16",
+                        "title": "FrequencyValue specifies the number of units derived from the frequency codes that lie between two occurrences.",
+                        "description": "GDT: RecurrenceFrequencyValue"
+                    },
+                    "WeekdayCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 1,
+                        "example": "5",
+                        "title": "A coded representation of a day in a week.\nUse: The WeekdayCode is used to identify a single day in a week. For example to set the first day of a week.",
+                        "description": "GDT: WeekdayCode"
+                    },
+                    "Month": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "July",
+                        "title": "Month specifies the month in which a recurrence takes place.",
+                        "description": "GDT: Month"
+                    },
+                    "DayOfMonth": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "31",
+                        "title": "DayOfMonth specifies the day in a month in the Gregorian calendar on which a recurrence takes place. 31 is equal to the last day of the month.",
+                        "description": "GDT: DayOfMonth"
+                    },
+                    "KeyDateWorkingDayAdjustmentRuleCode": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "A KeyDateWorkingDayAdjustmentRuleCode specifies the rule for adjusting a given key date to a working day.",
+                        "description": "GDT: KeyDateWorkingDayAdjustmentRuleCode"
+                    }
+                },
+                "title": "Recurrence (for create)",
+                "description": "A representation for the repeated occurrence of an event within a time period or within a time frame."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.Recurrence-update": {
+                "type": "object",
+                "properties": {
+                    "FrequencyCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "5",
+                        "title": "A FrequencyCode specifies the frequency of the recurrence as a code.\nConstraint: Only codes 4 (Daily), 5 (Weekly), 6 (Monthly) and 7 (Yearly) are supported.Integrity Condition: In case of FrequencyCode 5 (Weekly) WeekdayCode has to be specified, in case of FrequencyCode 6 (Monthly) DayOfMonth has to be specified, n case of FrequencyCode 7 (Yearly) DayOfMonth and Month have to be specified.",
+                        "description": "GDT: CALENDARDAY_RecurrenceFrequencyCode"
+                    },
+                    "FrequencyValue": {
+                        "type": "integer",
+                        "format": "int16",
+                        "title": "FrequencyValue specifies the number of units derived from the frequency codes that lie between two occurrences.",
+                        "description": "GDT: RecurrenceFrequencyValue"
+                    },
+                    "WeekdayCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 1,
+                        "example": "5",
+                        "title": "A coded representation of a day in a week.\nUse: The WeekdayCode is used to identify a single day in a week. For example to set the first day of a week.",
+                        "description": "GDT: WeekdayCode"
+                    },
+                    "Month": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "July",
+                        "title": "Month specifies the month in which a recurrence takes place.",
+                        "description": "GDT: Month"
+                    },
+                    "DayOfMonth": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "31",
+                        "title": "DayOfMonth specifies the day in a month in the Gregorian calendar on which a recurrence takes place. 31 is equal to the last day of the month.",
+                        "description": "GDT: DayOfMonth"
+                    },
+                    "KeyDateWorkingDayAdjustmentRuleCode": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "A KeyDateWorkingDayAdjustmentRuleCode specifies the rule for adjusting a given key date to a working day.",
+                        "description": "GDT: KeyDateWorkingDayAdjustmentRuleCode"
+                    }
+                },
+                "title": "Recurrence (for update)",
+                "description": "A representation for the repeated occurrence of an event within a time period or within a time frame."
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.UPPEROPEN_UNBOUNDED_DatePeriod": {
+                "type": "object",
+                "properties": {
+                    "StartDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13"
+                    },
+                    "EndDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13"
+                    }
+                },
+                "title": "UPPEROPEN_UNBOUNDED_DatePeriod"
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.UPPEROPEN_UNBOUNDED_DatePeriod-create": {
+                "type": "object",
+                "properties": {
+                    "StartDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13"
+                    },
+                    "EndDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13"
+                    }
+                },
+                "title": "UPPEROPEN_UNBOUNDED_DatePeriod (for create)"
+            },
+            "com.sap.gateway.default.bankcreditfacilitycontract.v0001.UPPEROPEN_UNBOUNDED_DatePeriod-update": {
+                "type": "object",
+                "properties": {
+                    "StartDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13"
+                    },
+                    "EndDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13"
+                    }
+                },
+                "title": "UPPEROPEN_UNBOUNDED_DatePeriod (for update)"
+            },
+            "count": {
+                "anyOf": [
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ],
+                "description": "The number of entities in the collection. Available when using the [$count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount) query option."
+            },
+            "error": {
+                "type": "object",
+                "required": [
+                    "error"
+                ],
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "required": [
+                            "code",
+                            "message"
+                        ],
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                            "target": {
+                                "type": "string"
+                            },
+                            "details": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "target": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "innererror": {
+                                "type": "object",
+                                "description": "The structure of this object is service-specific"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "top": {
+                "name": "$top",
+                "in": "query",
+                "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "example": 50
+            },
+            "skip": {
+                "name": "$skip",
+                "in": "query",
+                "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "count": {
+                "name": "$count",
+                "in": "query",
+                "description": "Include count of items, see [Count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount)",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "search": {
+                "name": "$search",
+                "in": "query",
+                "description": "Search items by search phrases, see [Searching](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionsearch)",
+                "schema": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses": {
+            "error": {
+                "description": "Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

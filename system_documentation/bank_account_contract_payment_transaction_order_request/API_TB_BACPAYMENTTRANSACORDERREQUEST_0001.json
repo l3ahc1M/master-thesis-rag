@@ -1,0 +1,1666 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Bank Account Contract Payment Transaction Order Request",
+        "version": "1.0.0",
+        "description": "\r\n\r\nExample:\r\nBanks can integrate different online channels where payment transaction orders can be initiated e.g. online banking, ATMs, branch solutions, call center solutions.\r\na. Payment Transaction Order is initiated via a UI where a customer or an employee is interacting with a UI based channel. Example online banking, branch application, call center or ATM\r\nb. This Payment Transaction Order is executed online. This means real-time posting of ordering party and real time posting of recipient party if internal within the bank and technically possible.\r\nc. Channel application expects an online confirmation of the execution of the payment transaction order.\r\n\r\nRemark:\r\nThe current modelling of BankAccountContractPaymentTransactionOrderRequest is limited to payment transaction orders with one recipient item. \t"
+    },
+    "externalDocs": {
+        "description": "Business Documentation",
+        "url": "https://help.sap.com/docs/TRBK_S4HANA/d2151b51aacc4d82ad2861e007337fa2/84335b52eeed4e51aaa691fa560d4f2f.html"
+    },
+    "x-sap-api-type": "ODATAV4",
+    "x-sap-shortText": "A request in bank account contract processing for a payment transaction order",
+    "x-sap-software-min-version": "1.0",
+    "x-sap-ext-overview": [
+        {
+            "name": "Authentication Methods",
+            "values": [
+                {
+                    "text": "x509",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Service Group Name",
+            "values": [
+                {
+                    "text": "TRANSACTIONALBANKING",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Business Object",
+            "values": [
+                {
+                    "text": "Bank Account Contract Payment Transaction Order Request",
+                    "format": "plain"
+                }
+            ]
+        }
+    ],
+    "security": [
+        {
+            "basicAuthentication": []
+        }
+    ],
+    "servers": [
+        {
+            "url": "https://{host}:{port}/sap/opu/odata4/sap/transactionalbanking/default/sap/bacpaymenttransactionorderrequest/0001",
+            "variables": {
+                "host": {
+                    "default": ""
+                },
+                "port": {
+                    "default": ""
+                }
+            }
+        }
+    ],
+    "x-sap-extensible": {
+        "supported": "no"
+    },
+    "tags": [
+        {
+            "name": "Bank Account Contract Payment Transaction Order Requests"
+        }
+    ],
+    "paths": {
+        "/BankAccountContractPaymentTransactionOrderRequests": {
+            "get": {
+                "summary": "Query Bank Account Contract Payment Transaction Order Requests",
+                "description": "Is a request to query bank account contract payment transaction order requests",
+                "tags": [
+                    "Bank Account Contract Payment Transaction Order Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "UUID",
+                                    "ID",
+                                    "BankAccountUUID",
+                                    "RequesterBACPaymentTransactionOrderRequestID",
+                                    "PaymentTransactionReferenceID",
+                                    "ChangeStateID",
+                                    "LifeCycleStatusCode",
+                                    "LifeCycleStatusName",
+                                    "BankAccountPostingDate",
+                                    "PlannedExecutionDate",
+                                    "BankAccountValueDate",
+                                    "TransactionCurrencyAmount",
+                                    "BankAccountCurrencyAmount",
+                                    "SenderItem",
+                                    "RecipientItem",
+                                    "MaterialChecksDeactivationRequestedIndicator",
+                                    "PostOrCancelRequestedIndicator",
+                                    "MoreRecipientsAvailableIndicator",
+                                    "BusinessProcessChainAssignment"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "PaymentNotes"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of BankAccountContractPaymentTransactionOrderRequest",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BankAccountContractPaymentTransactionOrderRequest"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create Bank Account Contract Payment Transaction Order Request",
+                "description": "Is a request to create a bank account contract payment transaction order request",
+                "tags": [
+                    "Bank Account Contract Payment Transaction Order Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Bank Account Contract Payment Transaction Order Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BankAccountContractPaymentTransactionOrderRequest-create"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BankAccountContractPaymentTransactionOrderRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankAccountContractPaymentTransactionOrderRequests/{UUID}": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "Universally unique identifier for a bank account contract payment transaction order request.  \nGDT: ATTRIBUTEINDEPENDENT_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Read Bank Account Contract Payment Transaction Order Request by UUID",
+                "description": "Is a request to read a bank account contract payment transaction order request",
+                "tags": [
+                    "Bank Account Contract Payment Transaction Order Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "UUID",
+                                    "ID",
+                                    "BankAccountUUID",
+                                    "RequesterBACPaymentTransactionOrderRequestID",
+                                    "PaymentTransactionReferenceID",
+                                    "ChangeStateID",
+                                    "LifeCycleStatusCode",
+                                    "LifeCycleStatusName",
+                                    "BankAccountPostingDate",
+                                    "PlannedExecutionDate",
+                                    "BankAccountValueDate",
+                                    "TransactionCurrencyAmount",
+                                    "BankAccountCurrencyAmount",
+                                    "SenderItem",
+                                    "RecipientItem",
+                                    "MaterialChecksDeactivationRequestedIndicator",
+                                    "PostOrCancelRequestedIndicator",
+                                    "MoreRecipientsAvailableIndicator",
+                                    "BusinessProcessChainAssignment"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "PaymentNotes"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BankAccountContractPaymentTransactionOrderRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update Bank Account Contract Payment Transaction Order Request",
+                "description": "Is a request to update a bank account contract payment transaction order request",
+                "tags": [
+                    "Bank Account Contract Payment Transaction Order Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Bank Account Contract Payment Transaction Order Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BankAccountContractPaymentTransactionOrderRequest-update"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankAccountContractPaymentTransactionOrderRequests/{UUID}/SAP__self.CancelBACPaymentTransactionOrderRequest": {
+            "post": {
+                "summary": "Cancel Bank Account Contract Payment Transaction Order Request",
+                "description": "Is a request to cancel a bank account contract payment transaction order request.",
+                "tags": [
+                    "Bank Account Contract Payment Transaction Order Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "UUID",
+                        "in": "path",
+                        "required": true,
+                        "description": "Universally unique identifier for a bank account contract payment transaction order request.  \nGDT: ATTRIBUTEINDEPENDENT_UUID",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "01234567-89ab-cdef-0123-456789abcdef"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Action parameters",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "BusinessProcessChainAssignment": {
+                                        "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BusinessProcessChainAssignment"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BankAccountContractPaymentTransactionOrderRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankAccountContractPaymentTransactionOrderRequests/{UUID}/PaymentNotes": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "Universally unique identifier for a bank account contract payment transaction order request.  \nGDT: ATTRIBUTEINDEPENDENT_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "post": {
+                "summary": "Create Payment Notes",
+                "description": "Is a request to create payment notes for a bank account contract payment transaction order request",
+                "tags": [
+                    "Bank Account Contract Payment Transaction Order Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Payment Note",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.PaymentNote-create"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.PaymentNote"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankAccountContractPaymentTransactionOrderRequests/{UUID}/PaymentNotes/{ID-1}": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "Universally unique identifier for a bank account contract payment transaction order request.  \nGDT: ATTRIBUTEINDEPENDENT_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                },
+                {
+                    "name": "ID-1",
+                    "in": "path",
+                    "required": true,
+                    "description": "An identifier of a payment note.  \nBDT: BankAccountEntryPaymentNoteID",
+                    "schema": {
+                        "type": "string",
+                        "maxLength": 3,
+                        "example": "2"
+                    }
+                }
+            ],
+            "patch": {
+                "summary": "Update Payment Notes",
+                "description": "Is a request to update payment notes for a bank account contract payment transaction order request",
+                "tags": [
+                    "Bank Account Contract Payment Transaction Order Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Payment Note",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.PaymentNote-update"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete Payment Notes",
+                "description": "Is a request to delete payment notes for a bank account contract payment transaction order request",
+                "tags": [
+                    "Bank Account Contract Payment Transaction Order Requests"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/$batch": {
+            "post": {
+                "summary": "Send a group of requests",
+                "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).\n\n*Please note that \"Try it out\" is not supported for this request.*",
+                "tags": [
+                    "Batch Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Batch request",
+                    "content": {
+                        "multipart/mixed;boundary=request-separator": {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET BankAccountContractPaymentTransactionOrderRequests HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Batch response",
+                        "content": {
+                            "multipart/mixed": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "basicAuthentication": {
+                "type": "http",
+                "scheme": "basic"
+            }
+        },
+        "schemas": {
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BankAccountContractPaymentTransactionOrderRequest": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "Universally unique identifier for a bank account contract payment transaction order request.",
+                        "description": "GDT: ATTRIBUTEINDEPENDENT_UUID"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 17,
+                        "example": "0001-123456",
+                        "title": "An indentifier for a bank account contract payment transaction order request.",
+                        "description": "GDT: BankAccountContractPaymentTransactionOrderRequestID"
+                    },
+                    "BankAccountUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is an universal unique identifier of a bank account.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "RequesterBACPaymentTransactionOrderRequestID": {
+                        "type": "string",
+                        "maxLength": 17,
+                        "example": "Xample-RequestID",
+                        "title": "An identifier for a bank account contract payment transaction order request issued by the requester of the BankAccountContractPaymentTransactionOrderRequest.",
+                        "description": "GDT: BankAccountContractPaymentTransactionOrderRequestID"
+                    },
+                    "PaymentTransactionReferenceID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "Xample-ReferenceID",
+                        "title": "A reference number for a transaction in payment transactions.",
+                        "description": "GDT: PaymentTransactionReferenceID"
+                    },
+                    "ChangeStateID": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "20210126091744.5563510",
+                        "title": "An identifier for a change status.",
+                        "description": "GDT: ChangeStateID"
+                    },
+                    "LifeCycleStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "Coded representation of the life cycle status of a BankAccountContractPaymentTransactionOrderRequest.",
+                        "description": "GDT: BankAccountContractPaymentTransactionOrderRequestLifeCycleStatusCode"
+                    },
+                    "LifeCycleStatusName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Active",
+                        "title": "Name of a life cycle status.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "BankAccountPostingDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Specifies the date when the sender item is posted to the corresponding bank account.",
+                        "description": "GDT: Date"
+                    },
+                    "PlannedExecutionDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Date on which a bank account contract payment transaction order request is planned to be executed.",
+                        "description": "GDT: Date"
+                    },
+                    "BankAccountValueDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Specifies the date on which a posted sender item is relevant for interest calculation.",
+                        "description": "GDT: Date"
+                    },
+                    "TransactionCurrencyAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "Amount in the transaction currency of a business transaction.",
+                        "description": "GDT: Amount"
+                    },
+                    "BankAccountCurrencyAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "Amount in the currency of a bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "SenderItem": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.SenderItem"
+                            }
+                        ],
+                        "title": "Represents the sending side of the payment transaction.",
+                        "description": "GDT: SenderItem"
+                    },
+                    "RecipientItem": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.RecipientItem"
+                            }
+                        ],
+                        "title": "Represents the receiving side of the payment transaction.",
+                        "description": "GDT: RecipientItem"
+                    },
+                    "MaterialChecksDeactivationRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether deactivation of the all material checks is requested for processing the bank account payment entries  on the sender and the recipient account of the bank account contract payment transaction order request.",
+                        "description": "GDT: Indicator"
+                    },
+                    "PostOrCancelRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether it is requested that the payment transaction order request shall only be accepted by the system if the bank account payment entries for the sender and recipient account can be posted. Otherwise, the payment transaction order request shall be rejected.",
+                        "description": "GDT: Indicator"
+                    },
+                    "MoreRecipientsAvailableIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates that the payment transaction order requests has more than one recipient.",
+                        "description": "GDT: Indicator"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BusinessProcessChainAssignment"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "BOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "PaymentNotes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.PaymentNote"
+                        }
+                    }
+                },
+                "title": "Bank Account Contract Payment Transaction Order Request",
+                "description": "Request for a payment transaction for a order bank account contract."
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BankAccountContractPaymentTransactionOrderRequest-create": {
+                "type": "object",
+                "properties": {
+                    "BankAccountUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is an universal unique identifier of a bank account.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "RequesterBACPaymentTransactionOrderRequestID": {
+                        "type": "string",
+                        "maxLength": 17,
+                        "example": "Xample-RequestID",
+                        "title": "An identifier for a bank account contract payment transaction order request issued by the requester of the BankAccountContractPaymentTransactionOrderRequest.",
+                        "description": "GDT: BankAccountContractPaymentTransactionOrderRequestID"
+                    },
+                    "PaymentTransactionReferenceID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "Xample-ReferenceID",
+                        "title": "A reference number for a transaction in payment transactions.",
+                        "description": "GDT: PaymentTransactionReferenceID"
+                    },
+                    "PlannedExecutionDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Date on which a bank account contract payment transaction order request is planned to be executed.",
+                        "description": "GDT: Date"
+                    },
+                    "BankAccountValueDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Specifies the date on which a posted sender item is relevant for interest calculation.",
+                        "description": "GDT: Date"
+                    },
+                    "TransactionCurrencyAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "Amount in the transaction currency of a business transaction.",
+                        "description": "GDT: Amount"
+                    },
+                    "BankAccountCurrencyAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "Amount in the currency of a bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "SenderItem": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.SenderItem-create"
+                            }
+                        ],
+                        "title": "Represents the sending side of the payment transaction.",
+                        "description": "GDT: SenderItem"
+                    },
+                    "RecipientItem": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.RecipientItem-create"
+                            }
+                        ],
+                        "title": "Represents the receiving side of the payment transaction.",
+                        "description": "GDT: RecipientItem"
+                    },
+                    "MaterialChecksDeactivationRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether deactivation of the all material checks is requested for processing the bank account payment entries  on the sender and the recipient account of the bank account contract payment transaction order request.",
+                        "description": "GDT: Indicator"
+                    },
+                    "PostOrCancelRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether it is requested that the payment transaction order request shall only be accepted by the system if the bank account payment entries for the sender and recipient account can be posted. Otherwise, the payment transaction order request shall be rejected.",
+                        "description": "GDT: Indicator"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BusinessProcessChainAssignment-create"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "BOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "PaymentNotes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.PaymentNote-create"
+                        }
+                    }
+                },
+                "title": "Bank Account Contract Payment Transaction Order Request (for create)",
+                "description": "Request for a payment transaction for a order bank account contract."
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BankAccountContractPaymentTransactionOrderRequest-update": {
+                "type": "object",
+                "properties": {
+                    "PlannedExecutionDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Date on which a bank account contract payment transaction order request is planned to be executed.",
+                        "description": "GDT: Date"
+                    },
+                    "TransactionCurrencyAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "Amount in the transaction currency of a business transaction.",
+                        "description": "GDT: Amount"
+                    },
+                    "RecipientItem": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.RecipientItem-update"
+                            }
+                        ],
+                        "title": "Represents the receiving side of the payment transaction.",
+                        "description": "GDT: RecipientItem"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BusinessProcessChainAssignment-update"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "BOCT: BusProcChnAssgmtFSElmnts"
+                    }
+                },
+                "title": "Bank Account Contract Payment Transaction Order Request (for update)",
+                "description": "Request for a payment transaction for a order bank account contract."
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.PaymentNote": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 3,
+                        "example": "2",
+                        "title": "An identifier of a payment note.",
+                        "description": "BDT: BankAccountEntryPaymentNoteID"
+                    },
+                    "ContentTypeCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "AAA",
+                        "title": "A coded representation of the content type to interpret the information provided in the payment note for a bank account entry.",
+                        "description": "GDT: BankAccountEntryPaymentNoteContentTypeCode"
+                    },
+                    "ContentTypeName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Example",
+                        "title": "The name of a bank account entry payment note type.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "Note": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Structured Payment Note Line 1",
+                        "title": "A note to a payment for a bank account payment entry.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    }
+                },
+                "title": "Payment Note",
+                "description": "Note in a bank account entry about a payment."
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.PaymentNote-create": {
+                "type": "object",
+                "properties": {
+                    "ContentTypeCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "AAA",
+                        "title": "A coded representation of the content type to interpret the information provided in the payment note for a bank account entry.",
+                        "description": "GDT: BankAccountEntryPaymentNoteContentTypeCode"
+                    },
+                    "Note": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Structured Payment Note Line 1",
+                        "title": "A note to a payment for a bank account payment entry.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    }
+                },
+                "title": "Payment Note (for create)",
+                "description": "Note in a bank account entry about a payment."
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.PaymentNote-update": {
+                "type": "object",
+                "properties": {
+                    "ContentTypeCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "AAA",
+                        "title": "A coded representation of the content type to interpret the information provided in the payment note for a bank account entry.",
+                        "description": "GDT: BankAccountEntryPaymentNoteContentTypeCode"
+                    },
+                    "Note": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Structured Payment Note Line 1",
+                        "title": "A note to a payment for a bank account payment entry.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    }
+                },
+                "title": "Payment Note (for update)",
+                "description": "Note in a bank account entry about a payment."
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.Amount": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.Amount-create": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount (for create)",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.Amount-update": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount (for update)",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.Bank": {
+                "type": "object",
+                "properties": {
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 11,
+                        "example": "TOLLDEWDXXX",
+                        "title": "Bank Identification Code (BIC) of the Society for Worldwide Interbank Financial Telecommunications (S.W.I.F.T.), see GDT BankStandardID.",
+                        "description": "GDT: BankStandardID"
+                    },
+                    "RoutingID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "90000001",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    },
+                    "CountryCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "DE",
+                        "title": "Country in which the bank identified earlier goes about its business. If the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here. Constraint: Only listID 3166-1 of listAgencyID 5 will be supported.",
+                        "description": "GDT: CountryCode"
+                    }
+                },
+                "title": "Bank",
+                "description": "A bank is a business entity that performs financial investment services and payment transactions. "
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.Bank-create": {
+                "type": "object",
+                "properties": {
+                    "RoutingID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "90000001",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    },
+                    "CountryCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "DE",
+                        "title": "Country in which the bank identified earlier goes about its business. If the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here. Constraint: Only listID 3166-1 of listAgencyID 5 will be supported.",
+                        "description": "GDT: CountryCode"
+                    }
+                },
+                "title": "Bank (for create)",
+                "description": "A bank is a business entity that performs financial investment services and payment transactions. "
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.Bank-update": {
+                "type": "object",
+                "title": "Bank (for update)",
+                "description": "A bank is a business entity that performs financial investment services and payment transactions. "
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BankAccount": {
+                "type": "object",
+                "properties": {
+                    "HolderName": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "Hans Hansen",
+                        "title": "A name of the account holder of a bank account.",
+                        "description": "GDT: BankAccountHolderName_V1"
+                    },
+                    "IdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BkAcctIdfgElmnts"
+                            }
+                        ],
+                        "title": "Identifiying elements of a bank account associated with a bank account contract.",
+                        "description": "BOCT: BankAccountIdentifyingElements"
+                    }
+                },
+                "title": "Bank Account"
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BankAccount-create": {
+                "type": "object",
+                "properties": {
+                    "HolderName": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "Hans Hansen",
+                        "title": "A name of the account holder of a bank account.",
+                        "description": "GDT: BankAccountHolderName_V1"
+                    },
+                    "IdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BkAcctIdfgElmnts-create"
+                            }
+                        ],
+                        "title": "Identifiying elements of a bank account associated with a bank account contract.",
+                        "description": "BOCT: BankAccountIdentifyingElements"
+                    }
+                },
+                "title": "Bank Account (for create)"
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BankAccount-update": {
+                "type": "object",
+                "properties": {
+                    "IdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BkAcctIdfgElmnts-update"
+                            }
+                        ],
+                        "title": "Identifiying elements of a bank account associated with a bank account contract.",
+                        "description": "BOCT: BankAccountIdentifyingElements"
+                    }
+                },
+                "title": "Bank Account (for update)"
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BkAcctIdfgElmnts": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "0000000976",
+                        "title": "Bank account number (Basic Bank Account Number, BBAN). An account number that is assigned by the account managing bank. It uniquely identifies a bank account in most countries only together with the bank.",
+                        "description": "GDT: BankAccountID"
+                    },
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 34,
+                        "example": "DE84900000010000000976",
+                        "title": "International bank account number (International Bank Account Number, IBAN).",
+                        "description": "GDT: BankAccountStandardID"
+                    },
+                    "InternalID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 32,
+                        "example": "5A880E4987E81EE8A9BCFA163E78A157",
+                        "title": "BankAccountInternalID is a proprietary identifier for a bank account.",
+                        "description": "GDT: BankAccountInternalID"
+                    },
+                    "UUID": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is an universal unique identifier of a bank account.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "CurrencyCode is a coded representation of the currency of the bank account.",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "Bank": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.Bank"
+                            }
+                        ],
+                        "title": "Bank where the account is held."
+                    }
+                },
+                "title": "Bank Account Identifying Elements",
+                "description": "The identifying elements of a bank account supported by bank account management in Financial Services (Banking)."
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BkAcctIdfgElmnts-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "0000000976",
+                        "title": "Bank account number (Basic Bank Account Number, BBAN). An account number that is assigned by the account managing bank. It uniquely identifies a bank account in most countries only together with the bank.",
+                        "description": "GDT: BankAccountID"
+                    },
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 34,
+                        "example": "DE84900000010000000976",
+                        "title": "International bank account number (International Bank Account Number, IBAN).",
+                        "description": "GDT: BankAccountStandardID"
+                    },
+                    "InternalID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 32,
+                        "example": "5A880E4987E81EE8A9BCFA163E78A157",
+                        "title": "BankAccountInternalID is a proprietary identifier for a bank account.",
+                        "description": "GDT: BankAccountInternalID"
+                    },
+                    "UUID": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is an universal unique identifier of a bank account.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "Bank": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.Bank-create"
+                            }
+                        ],
+                        "title": "Bank where the account is held."
+                    }
+                },
+                "title": "Bank Account Identifying Elements (for create)",
+                "description": "The identifying elements of a bank account supported by bank account management in Financial Services (Banking)."
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BkAcctIdfgElmnts-update": {
+                "type": "object",
+                "properties": {
+                    "Bank": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.Bank-update"
+                            }
+                        ],
+                        "title": "Bank where the account is held."
+                    }
+                },
+                "title": "Bank Account Identifying Elements (for update)",
+                "description": "The identifying elements of a bank account supported by bank account management in Financial Services (Banking)."
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BusinessProcessChainAssignment": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "500030",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BDT: BankingBusinessTransactionTypeCode"
+                    },
+                    "BankingBusinessTransactionTypeName": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Payment Transaction Order Maintenance",
+                        "title": "Name of BankingBusinessTransactionTypeCode",
+                        "description": "GDT: EXTENDED_Name"
+                    }
+                },
+                "title": "Business Process Chain Assignment",
+                "description": "Is the assignment of a business object node to a business process chain.  /nDefault: If BankingBusinessTransactionTypeCode is not specified, code value \"500030 - Payment Transaction Order Maintenance\" will be used by default. "
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BusinessProcessChainAssignment-create": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "500030",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for create)",
+                "description": "Is the assignment of a business object node to a business process chain.  /nDefault: If BankingBusinessTransactionTypeCode is not specified, code value \"500030 - Payment Transaction Order Maintenance\" will be used by default. "
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BusinessProcessChainAssignment-update": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "500030",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for update)",
+                "description": "Is the assignment of a business object node to a business process chain.  /nDefault: If BankingBusinessTransactionTypeCode is not specified, code value \"500030 - Payment Transaction Order Maintenance\" will be used by default. "
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.DirectDebitMandateReference": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "4711",
+                        "title": "A identifier of Direct Debit Mandate Reference",
+                        "description": "GDT: DirectDebitMandateID"
+                    },
+                    "CreditorReferenceID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "DE82ZZZ00000001015",
+                        "title": "A unique identifier of a creditor reference of direct debit mandate.",
+                        "description": "GDT: DirectDebitMandateCreditorReferenceID"
+                    },
+                    "NextDirectDebitDueDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Specifies the date when the next direct debit is due.",
+                        "description": "GDT: Date"
+                    }
+                },
+                "title": "Direct Debit Mandate"
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.DirectDebitMandateReference-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "4711",
+                        "title": "A identifier of Direct Debit Mandate Reference",
+                        "description": "GDT: DirectDebitMandateID"
+                    },
+                    "CreditorReferenceID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "DE82ZZZ00000001015",
+                        "title": "A unique identifier of a creditor reference of direct debit mandate.",
+                        "description": "GDT: DirectDebitMandateCreditorReferenceID"
+                    },
+                    "NextDirectDebitDueDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Specifies the date when the next direct debit is due.",
+                        "description": "GDT: Date"
+                    }
+                },
+                "title": "Direct Debit Mandate (for create)"
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.DirectDebitMandateReference-update": {
+                "type": "object",
+                "properties": {
+                    "NextDirectDebitDueDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Specifies the date when the next direct debit is due.",
+                        "description": "GDT: Date"
+                    }
+                },
+                "title": "Direct Debit Mandate (for update)"
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.RecipientItem": {
+                "type": "object",
+                "properties": {
+                    "BankPaymentTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "020000",
+                        "title": "The coded representation of the type of the BankPaymentTransaction.",
+                        "description": "GDT: BankPaymentTransactionTypeCode"
+                    },
+                    "BankPaymentTransactionTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Bank Transfer",
+                        "title": "Name of a bank payment transaction type.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "BankPaymentCommunicationChannelCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "Coded representation of the communication channel for payments in a bank.",
+                        "description": "GDT: BankPaymentCommunicationChannelCode"
+                    },
+                    "BankPaymentCommunicationChannelName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Internal",
+                        "title": "Name of a bank payment communication channel",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "BankAccount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BankAccount"
+                            }
+                        ],
+                        "title": "The bank account to which the recipient item is posted.",
+                        "description": "BOCT: BankAccount"
+                    },
+                    "DirectDebitMandateReference": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.DirectDebitMandateReference"
+                            }
+                        ],
+                        "title": "The reference to a direct debit mandate, which is the authorisation given by a debtor to a creditor to initiate instructions to debit funds owed to the creditor from a specified account, and the authorisation to the debtor bank to comply with the instructions issued by the creditor.",
+                        "description": "BOCT: DirectDebitMandateReference"
+                    }
+                },
+                "title": "Recipient Item",
+                "description": "Represents the receiving side of the payment transaction."
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.RecipientItem-create": {
+                "type": "object",
+                "properties": {
+                    "BankPaymentTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "020000",
+                        "title": "The coded representation of the type of the BankPaymentTransaction.",
+                        "description": "GDT: BankPaymentTransactionTypeCode"
+                    },
+                    "BankPaymentCommunicationChannelCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "Coded representation of the communication channel for payments in a bank.",
+                        "description": "GDT: BankPaymentCommunicationChannelCode"
+                    },
+                    "BankAccount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BankAccount-create"
+                            }
+                        ],
+                        "title": "The bank account to which the recipient item is posted.",
+                        "description": "BOCT: BankAccount"
+                    },
+                    "DirectDebitMandateReference": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.DirectDebitMandateReference-create"
+                            }
+                        ],
+                        "title": "The reference to a direct debit mandate, which is the authorisation given by a debtor to a creditor to initiate instructions to debit funds owed to the creditor from a specified account, and the authorisation to the debtor bank to comply with the instructions issued by the creditor.",
+                        "description": "BOCT: DirectDebitMandateReference"
+                    }
+                },
+                "title": "Recipient Item (for create)",
+                "description": "Represents the receiving side of the payment transaction."
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.RecipientItem-update": {
+                "type": "object",
+                "properties": {
+                    "DirectDebitMandateReference": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.DirectDebitMandateReference-update"
+                            }
+                        ],
+                        "title": "The reference to a direct debit mandate, which is the authorisation given by a debtor to a creditor to initiate instructions to debit funds owed to the creditor from a specified account, and the authorisation to the debtor bank to comply with the instructions issued by the creditor.",
+                        "description": "BOCT: DirectDebitMandateReference"
+                    }
+                },
+                "title": "Recipient Item (for update)",
+                "description": "Represents the receiving side of the payment transaction."
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.SenderItem": {
+                "type": "object",
+                "properties": {
+                    "BankPaymentTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "020000",
+                        "title": "The coded representation of the type of the BankPaymentTransaction.",
+                        "description": "GDT: BankPaymentTransactionTypeCode"
+                    },
+                    "BankPaymentTransactionTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Bank Transfer",
+                        "title": "Name of a bank payment transaction type.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "BankPaymentCommunicationChannelCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "Coded representation of the communication channel for payments in a bank.",
+                        "description": "GDT: BankPaymentCommunicationChannelCode"
+                    },
+                    "BankPaymentCommunicationChannelName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Internal",
+                        "title": "Name of a bank payment communication channel",
+                        "description": "GDT: MEDIUM_Name"
+                    }
+                },
+                "title": "Sender Item",
+                "description": "Represents the sending side of the payment transaction."
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.SenderItem-create": {
+                "type": "object",
+                "properties": {
+                    "BankPaymentTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "020000",
+                        "title": "The coded representation of the type of the BankPaymentTransaction.",
+                        "description": "GDT: BankPaymentTransactionTypeCode"
+                    },
+                    "BankPaymentCommunicationChannelCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "Coded representation of the communication channel for payments in a bank.",
+                        "description": "GDT: BankPaymentCommunicationChannelCode"
+                    }
+                },
+                "title": "Sender Item (for create)",
+                "description": "Represents the sending side of the payment transaction."
+            },
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.SenderItem-update": {
+                "type": "object",
+                "title": "Sender Item (for update)",
+                "description": "Represents the sending side of the payment transaction."
+            },
+            "count": {
+                "anyOf": [
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ],
+                "description": "The number of entities in the collection. Available when using the [$count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount) query option."
+            },
+            "error": {
+                "type": "object",
+                "required": [
+                    "error"
+                ],
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "required": [
+                            "code",
+                            "message"
+                        ],
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                            "target": {
+                                "type": "string"
+                            },
+                            "details": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "target": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "innererror": {
+                                "type": "object",
+                                "description": "The structure of this object is service-specific"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "top": {
+                "name": "$top",
+                "in": "query",
+                "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "example": 50
+            },
+            "skip": {
+                "name": "$skip",
+                "in": "query",
+                "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "count": {
+                "name": "$count",
+                "in": "query",
+                "description": "Include count of items, see [Count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount)",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "search": {
+                "name": "$search",
+                "in": "query",
+                "description": "Search items by search phrases, see [Searching](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionsearch)",
+                "schema": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses": {
+            "error": {
+                "description": "Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

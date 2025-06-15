@@ -1,0 +1,115 @@
+{
+    "tables": [
+        {
+            "name": "LoanDisbursementRequest",
+            "description": "A LoanDisbursementRequest is a request from a borrower to a lender (credit institute) to transfer money from the loan contract to areceiving account at a specific time. The borrower or a loan officer can decide to withhold money from the gross disbursement amount topay due or expected items. Items can consist of installments or fees. Note :The sum of withhold items is returned during read of LoanDisbursementRequest",
+            "columns": [
+                {
+                    "name": "UUID",
+                    "description": "Is a universal unique identifier of a Loan Disbursement Request. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "ID",
+                    "description": "Identifier of the LoanDisbursementRequest. Example: 47938",
+                    "format": "string"
+                },
+                {
+                    "name": "LoanContractUUID",
+                    "description": "A globally unique identifier for a LoanContract. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "BusinessProcessChainAssignment",
+                    "description": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                    "format": "string"
+                },
+                {
+                    "name": "ChangeStateID",
+                    "description": "Identifies a change state. Example: 20200220054415.0000000",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusCode",
+                    "description": "LifeCycleStatusCode is the coded representation of the life cycle status of a LoanDisbursementRequest. Example: 1",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusName",
+                    "description": "Name of LifeCycleStatusCode Example: In Preparation",
+                    "format": "string"
+                },
+                {
+                    "name": "ReasonCode",
+                    "description": "ReasonCode is the coded representation of the reason for the LoanDisbursementRequest. Example: 1",
+                    "format": "string"
+                },
+                {
+                    "name": "ReasonName",
+                    "description": "Name of ReasonCode. Example: Customer Request",
+                    "format": "string"
+                },
+                {
+                    "name": "CancellationReasonCode",
+                    "description": "CancellationReasonCode is the coded representation of the reason for the cancellation of the LoanDisbursementRequest Example: 1",
+                    "format": "string"
+                },
+                {
+                    "name": "CancellationReasonName",
+                    "description": "Name of CancellationReasonCode Example: Error processing",
+                    "format": "string"
+                },
+                {
+                    "name": "NetAmount",
+                    "description": "NetAmount is the net amount of the disbursement.",
+                    "format": "string"
+                },
+                {
+                    "name": "GrossAmount",
+                    "description": "GrossAmount is the gross amount of the disbursement.",
+                    "format": "string"
+                },
+                {
+                    "name": "BillingItemsWithheldAmount",
+                    "description": "BillingItemsWithheldAmount is the sum of due amount of billing items withheld from the disbursement GrossAmount.",
+                    "format": "string"
+                },
+                {
+                    "name": "ItemsWithheldAmount",
+                    "description": "ItemsWithheldAmount is the sum of planned amount of items withheld from the disbursement GrossAmount",
+                    "format": "string"
+                },
+                {
+                    "name": "ActivationChargeAmount",
+                    "description": "An ActivationChargeAmount is the charge amount for activation.",
+                    "format": "string"
+                },
+                {
+                    "name": "ValueDate",
+                    "description": "ValueDate is the value date of the disbursement. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "PlannedPaymentDate",
+                    "description": "PlannedPaymentDate is the planned payment date of the disbursement. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "ActivationChargeWaiverRequestedIndicator",
+                    "description": "Indicates whether charges for activation of the loan disbursement request are requested to be waived.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "PaymentTransactionInstructionItems",
+                    "description": "An item describes a single element of a BankContractPaymentTransactionInstruction.",
+                    "format": "array"
+                },
+                {
+                    "name": "WithholdLoanPaymentPlanItems",
+                    "description": "",
+                    "format": "array"
+                }
+            ]
+        }
+    ]
+}

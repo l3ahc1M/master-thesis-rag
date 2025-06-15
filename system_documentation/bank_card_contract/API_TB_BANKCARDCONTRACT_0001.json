@@ -1,0 +1,1369 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Bank Card Contract",
+        "version": "1.0.0",
+        "description": "\r\n\r\nA Bank Card Contract is a contract between a financial institution and customer that is based on the customer’s request to have a bank card issued and consists, amongst other things, of the bank card type, the cardholder, and the general terms and conditions.\t\t\t\t\t\r\n\r\nRemark:\r\nThe service Bank Card Contract is assigned to service group Transactional Banking."
+    },
+    "externalDocs": {
+        "description": "Business Documentation",
+        "url": "https://help.sap.com/docs/TRBK_S4HANA/d2151b51aacc4d82ad2861e007337fa2/c16ab45f3212497a9ae77a5c9dcb77ea.html?locale=en-US"
+    },
+    "x-sap-api-type": "ODATAV4",
+    "x-sap-shortText": "Read, create, and query bank card contracts using this synchronous inbound service",
+    "x-sap-software-min-version": "1.0",
+    "x-sap-ext-overview": [
+        {
+            "name": "Authentication Methods",
+            "values": [
+                {
+                    "text": "x509",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Service Group Name",
+            "values": [
+                {
+                    "text": "TRANSACTIONALBANKING",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Business Object",
+            "values": [
+                {
+                    "text": "Bank Card Contract",
+                    "format": "plain"
+                }
+            ]
+        }
+    ],
+    "servers": [
+        {
+            "url": "https://{host}:{port}/sap/opu/odata4/sap/transactionalbanking/default/sap/bankcardcontract/0001",
+            "variables": {
+                "host": {
+                    "default": ""
+                },
+                "port": {
+                    "default": ""
+                }
+            }
+        }
+    ],
+    "x-sap-extensible": {
+        "supported": "no"
+    },
+    "tags": [
+        {
+            "name": "Bank Card Contracts"
+        }
+    ],
+    "paths": {
+        "/BankCardContracts": {
+            "get": {
+                "summary": "Query Bank Card Contract",
+                "description": "A request to query bank card contracts",
+                "tags": [
+                    "Bank Card Contracts"
+                ],
+                "parameters": [
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)\n\nRequired filter properties:\n- CardHolderPartyIdentifyingElements",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "BankCardContractUUID",
+                                    "ID",
+                                    "CurrencyCode",
+                                    "PaymentCardTypeCode",
+                                    "PaymentCardTypeName",
+                                    "PaymentCardID",
+                                    "PaymentCardSequenceID",
+                                    "PaymentCardValidFrom",
+                                    "PaymentCardValidTo",
+                                    "PaymentCardCharacterCode",
+                                    "PaymentCardCharacterName",
+                                    "FirstPaymentCardUUID",
+                                    "AdditionalPaymentCardIndicator",
+                                    "PaymentCardLifeCycleStatusCode",
+                                    "PaymentCardLifeCycleStatusName",
+                                    "PaymentCardRenewalStatusCode",
+                                    "PaymentCardRenewalStatusName",
+                                    "CancellationDate",
+                                    "BankAccount",
+                                    "UsageNote",
+                                    "SystemAdministrativeData",
+                                    "CardHolderPartyIdentifyingElements",
+                                    "ProductControl",
+                                    "OperationalBankContractManagement",
+                                    "BusinessProcessChainAssignment",
+                                    "ChangeStateID"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of BankCardContract",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontract.v0001.BankCardContract"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create Bank Card Contract",
+                "description": "A request to create a bank card contract",
+                "tags": [
+                    "Bank Card Contracts"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Bank Card Contract",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontract.v0001.BankCardContract-create"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontract.v0001.BankCardContract"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankCardContracts/{BankCardContractUUID}": {
+            "parameters": [
+                {
+                    "name": "BankCardContractUUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "A BankCardContractUUID is an universal unique identifier of a bank card contract.  \nGDT: NOSC_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Read Bank Card Contract by UUID",
+                "description": "A request to read a bank card contract by UUID",
+                "tags": [
+                    "Bank Card Contracts"
+                ],
+                "parameters": [
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "BankCardContractUUID",
+                                    "ID",
+                                    "CurrencyCode",
+                                    "PaymentCardTypeCode",
+                                    "PaymentCardTypeName",
+                                    "PaymentCardID",
+                                    "PaymentCardSequenceID",
+                                    "PaymentCardValidFrom",
+                                    "PaymentCardValidTo",
+                                    "PaymentCardCharacterCode",
+                                    "PaymentCardCharacterName",
+                                    "FirstPaymentCardUUID",
+                                    "AdditionalPaymentCardIndicator",
+                                    "PaymentCardLifeCycleStatusCode",
+                                    "PaymentCardLifeCycleStatusName",
+                                    "PaymentCardRenewalStatusCode",
+                                    "PaymentCardRenewalStatusName",
+                                    "CancellationDate",
+                                    "BankAccount",
+                                    "UsageNote",
+                                    "SystemAdministrativeData",
+                                    "CardHolderPartyIdentifyingElements",
+                                    "ProductControl",
+                                    "OperationalBankContractManagement",
+                                    "BusinessProcessChainAssignment",
+                                    "ChangeStateID"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontract.v0001.BankCardContract"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/$batch": {
+            "post": {
+                "summary": "Send a group of requests",
+                "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).\n\n*Please note that \"Try it out\" is not supported for this request.*",
+                "tags": [
+                    "Batch Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Batch request",
+                    "content": {
+                        "multipart/mixed;boundary=request-separator": {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET BankCardContracts HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Batch response",
+                        "content": {
+                            "multipart/mixed": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "com.sap.gateway.default.bankcardcontract.v0001.BankCardContract": {
+                "type": "object",
+                "properties": {
+                    "BankCardContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A BankCardContractUUID is an universal unique identifier of a bank card contract.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "ID": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontract.v0001.BankCardContractID"
+                            }
+                        ],
+                        "title": "An identifier of a bank card contract.",
+                        "description": "GDT: BankCardContractID"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "A CurrencyCode specifies the currency of the bank card contract.",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "PaymentCardTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "0010",
+                        "title": "A coded representation of the type of payment card associated to a bank card contract.",
+                        "description": "BDT: BankCardContractPaymentCardTypeCode"
+                    },
+                    "PaymentCardTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Debit Card",
+                        "title": "Name of PaymentCardTypeCode",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "PaymentCardID": {
+                        "type": "string",
+                        "maxLength": 25,
+                        "example": "4111555533336666",
+                        "title": "PaymentCardID is a unique identifier of a payment card that is assigned by the issuer of the payment card.",
+                        "description": "GDT: PaymentCardID"
+                    },
+                    "PaymentCardSequenceID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 10,
+                        "example": "0001",
+                        "title": "An identifier for the sequence number of a payment card.",
+                        "description": "GDT: PaymentCardSequenceID"
+                    },
+                    "PaymentCardValidFrom": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The valid-from date of the payment card.",
+                        "description": "GDT: Date"
+                    },
+                    "PaymentCardValidTo": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The valid-to date of the payment card.",
+                        "description": "GDT: Date"
+                    },
+                    "PaymentCardCharacterCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "A coded representation for the character of a payment card associated to a bank card contract.",
+                        "description": "BDT: BankCardContractPaymentCardCharacterCode"
+                    },
+                    "PaymentCardCharacterName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "First Payment Card",
+                        "title": "Name of PaymentCardCharacterCode",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "FirstPaymentCardUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "The UUID of the payment card, which has PaymentCardOriginCode = First Card",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "AdditionalPaymentCardIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates that the payment card is an additional payment card to the main payment card.",
+                        "description": "GDT: Indicator"
+                    },
+                    "PaymentCardLifeCycleStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "A coded representation of the life cycle status of a bank card contract payment card.",
+                        "description": "BDT: BankCardContractPaymentCardLifeCycleStatusCode"
+                    },
+                    "PaymentCardLifeCycleStatusName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Active",
+                        "title": "Name of PaymentCardLifeCycleStatusCode",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "PaymentCardRenewalStatusCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 2,
+                        "example": "4",
+                        "title": "A coded representation for the renewal status of a payment card associated to a bank card contract.",
+                        "description": "BDT: BankCardContractPaymentCardRenewalStatusCode"
+                    },
+                    "PaymentCardRenewalStatusName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Renewed",
+                        "title": "Name of PaymentCardRenewalStatusCode",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "CancellationDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Date when a bank card contract is canceled.",
+                        "description": "GDT: Date"
+                    },
+                    "BankAccount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontract.v0001.BankAccount"
+                            }
+                        ],
+                        "title": "BankAccount is the main bank account to which payments and charges in context with using the payment card are settled.",
+                        "description": "BOCT: BankAccount"
+                    },
+                    "UsageNote": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Sample Usage Note",
+                        "title": "A comment on the usage of the bank card contract.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    },
+                    "SystemAdministrativeData": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontract.v0001.SystAdminData"
+                            }
+                        ],
+                        "title": "SystemAdministrativeData is administrative data that is stored in a system. This data includes change dates and change times.",
+                        "description": "BOCT: SystemAdministrativeData"
+                    },
+                    "CardHolderPartyIdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontract.v0001.PartyIdfgElmnts"
+                            }
+                        ],
+                        "title": "A party which legally holds a card associated with the bank card contract.",
+                        "description": "BOCT: PartyIdfgElmnts"
+                    },
+                    "ProductControl": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontract.v0001.BankCardContractProductionControl"
+                            }
+                        ],
+                        "title": "A BankCardContractProductionControl defines the parameters that control the processing and handling in the production of a bank card contract. ",
+                        "description": "BOCT: ProductionControl"
+                    },
+                    "OperationalBankContractManagement": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontract.v0001.OperationalBankContractManagement"
+                            }
+                        ],
+                        "title": "An OperationalBankContractManagement is responsible for managing operational bank contracts and executing the related banking processes.",
+                        "description": "BOCT: OplBkContrMgmt"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontract.v0001.BusinessProcessChainAssignment"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "BOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "ChangeStateID": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "20191122135035.7818490",
+                        "title": "A ChangeStateID is a unique identifier for a change state.",
+                        "description": "GDT: ChangeStateID"
+                    }
+                },
+                "title": "Bank Card Contract",
+                "description": "A Bank Card Contract is a contract between a financial institution and customer that is based on the customer’s request to have a bank card issued."
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.BankCardContract-create": {
+                "type": "object",
+                "properties": {
+                    "PaymentCardValidFrom": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The valid-from date of the payment card.",
+                        "description": "GDT: Date"
+                    },
+                    "BankAccount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontract.v0001.BankAccount-create"
+                            }
+                        ],
+                        "title": "BankAccount is the main bank account to which payments and charges in context with using the payment card are settled.",
+                        "description": "BOCT: BankAccount"
+                    },
+                    "UsageNote": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Sample Usage Note",
+                        "title": "A comment on the usage of the bank card contract.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    },
+                    "CardHolderPartyIdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontract.v0001.PartyIdfgElmnts-create"
+                            }
+                        ],
+                        "title": "A party which legally holds a card associated with the bank card contract.",
+                        "description": "BOCT: PartyIdfgElmnts"
+                    },
+                    "ProductControl": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontract.v0001.BankCardContractProductionControl-create"
+                            }
+                        ],
+                        "title": "A BankCardContractProductionControl defines the parameters that control the processing and handling in the production of a bank card contract. ",
+                        "description": "BOCT: ProductionControl"
+                    },
+                    "OperationalBankContractManagement": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontract.v0001.OperationalBankContractManagement-create"
+                            }
+                        ],
+                        "title": "An OperationalBankContractManagement is responsible for managing operational bank contracts and executing the related banking processes.",
+                        "description": "BOCT: OplBkContrMgmt"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontract.v0001.BusinessProcessChainAssignment-create"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "BOCT: BusProcChnAssgmtFSElmnts"
+                    }
+                },
+                "title": "Bank Card Contract (for create)",
+                "description": "A Bank Card Contract is a contract between a financial institution and customer that is based on the customer’s request to have a bank card issued."
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.BankCardContract-update": {
+                "type": "object",
+                "title": "Bank Card Contract (for update)",
+                "description": "A Bank Card Contract is a contract between a financial institution and customer that is based on the customer’s request to have a bank card issued."
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.Bank": {
+                "type": "object",
+                "properties": {
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 11,
+                        "example": "TOLLDEWDXXX",
+                        "title": "Bank Identification Code (BIC) of the Society for Worldwide Interbank Financial Telecommunications (S.W.I.F.T.), see GDT BankStandardID.",
+                        "description": "GDT: BankStandardID"
+                    },
+                    "RoutingID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "90000001",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    },
+                    "CountryCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "DE",
+                        "title": "Country in which the bank identified earlier goes about its business. If the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here. Constraint: Only listID 3166-1 of listAgencyID 5 will be supported.",
+                        "description": "GDT: CountryCode"
+                    }
+                },
+                "title": "Bank",
+                "description": "A bank is a business entity that performs financial investment services and payment transactions. "
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.Bank-create": {
+                "type": "object",
+                "properties": {
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 11,
+                        "example": "TOLLDEWDXXX",
+                        "title": "Bank Identification Code (BIC) of the Society for Worldwide Interbank Financial Telecommunications (S.W.I.F.T.), see GDT BankStandardID.",
+                        "description": "GDT: BankStandardID"
+                    },
+                    "RoutingID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "90000001",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    },
+                    "CountryCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "DE",
+                        "title": "Country in which the bank identified earlier goes about its business. If the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here. Constraint: Only listID 3166-1 of listAgencyID 5 will be supported.",
+                        "description": "GDT: CountryCode"
+                    }
+                },
+                "title": "Bank (for create)",
+                "description": "A bank is a business entity that performs financial investment services and payment transactions. "
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.Bank-update": {
+                "type": "object",
+                "properties": {
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 11,
+                        "example": "TOLLDEWDXXX",
+                        "title": "Bank Identification Code (BIC) of the Society for Worldwide Interbank Financial Telecommunications (S.W.I.F.T.), see GDT BankStandardID.",
+                        "description": "GDT: BankStandardID"
+                    },
+                    "RoutingID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "90000001",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    },
+                    "CountryCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "DE",
+                        "title": "Country in which the bank identified earlier goes about its business. If the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here. Constraint: Only listID 3166-1 of listAgencyID 5 will be supported.",
+                        "description": "GDT: CountryCode"
+                    }
+                },
+                "title": "Bank (for update)",
+                "description": "A bank is a business entity that performs financial investment services and payment transactions. "
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.BankAccount": {
+                "type": "object",
+                "properties": {
+                    "HolderName": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "Hans Hansen",
+                        "title": "A name of the account holder of a bank account.",
+                        "description": "GDT: BankAccountHolderName_V1"
+                    },
+                    "IdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontract.v0001.BkAcctIdfgElmnts"
+                            }
+                        ],
+                        "title": "Identifiying elements of a bank account associated with a bank account contract.",
+                        "description": "BOCT: BankAccountIdentifyingElements"
+                    }
+                },
+                "title": "Bank Account"
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.BankAccount-create": {
+                "type": "object",
+                "properties": {
+                    "HolderName": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "Hans Hansen",
+                        "title": "A name of the account holder of a bank account.",
+                        "description": "GDT: BankAccountHolderName_V1"
+                    },
+                    "IdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontract.v0001.BkAcctIdfgElmnts-create"
+                            }
+                        ],
+                        "title": "Identifiying elements of a bank account associated with a bank account contract.",
+                        "description": "BOCT: BankAccountIdentifyingElements"
+                    }
+                },
+                "title": "Bank Account (for create)"
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.BankAccount-update": {
+                "type": "object",
+                "properties": {
+                    "IdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontract.v0001.BkAcctIdfgElmnts-update"
+                            }
+                        ],
+                        "title": "Identifiying elements of a bank account associated with a bank account contract.",
+                        "description": "BOCT: BankAccountIdentifyingElements"
+                    }
+                },
+                "title": "Bank Account (for update)"
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.BkAcctIdfgElmnts": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "0000000976",
+                        "title": "Bank account number (Basic Bank Account Number, BBAN). An account number that is assigned by the account managing bank. It uniquely identifies a bank account in most countries only together with the bank.",
+                        "description": "GDT: BankAccountID"
+                    },
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 34,
+                        "example": "DE84900000010000000976",
+                        "title": "International bank account number (International Bank Account Number, IBAN).",
+                        "description": "GDT: BankAccountStandardID"
+                    },
+                    "InternalID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 32,
+                        "example": "5A880E4987E81EE8A9BCFA163E78A157",
+                        "title": "BankAccountInternalID is a proprietary identifier for a bank account.",
+                        "description": "GDT: BankAccountInternalID"
+                    },
+                    "UUID": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is an universal unique identifier of a bank account.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "CurrencyCode is a coded representation of the currency of the bank account.",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "Bank": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontract.v0001.Bank"
+                            }
+                        ],
+                        "title": "Bank where the account is held."
+                    }
+                },
+                "title": "Bank Account Identifying Elements",
+                "description": "The identifying elements of a bank account supported by bank account management in Financial Services (Banking)."
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.BkAcctIdfgElmnts-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "0000000976",
+                        "title": "Bank account number (Basic Bank Account Number, BBAN). An account number that is assigned by the account managing bank. It uniquely identifies a bank account in most countries only together with the bank.",
+                        "description": "GDT: BankAccountID"
+                    },
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 34,
+                        "example": "DE84900000010000000976",
+                        "title": "International bank account number (International Bank Account Number, IBAN).",
+                        "description": "GDT: BankAccountStandardID"
+                    },
+                    "InternalID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 32,
+                        "example": "5A880E4987E81EE8A9BCFA163E78A157",
+                        "title": "BankAccountInternalID is a proprietary identifier for a bank account.",
+                        "description": "GDT: BankAccountInternalID"
+                    },
+                    "UUID": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is an universal unique identifier of a bank account.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "CurrencyCode is a coded representation of the currency of the bank account.",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "Bank": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontract.v0001.Bank-create"
+                            }
+                        ],
+                        "title": "Bank where the account is held."
+                    }
+                },
+                "title": "Bank Account Identifying Elements (for create)",
+                "description": "The identifying elements of a bank account supported by bank account management in Financial Services (Banking)."
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.BkAcctIdfgElmnts-update": {
+                "type": "object",
+                "properties": {
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 34,
+                        "example": "DE84900000010000000976",
+                        "title": "International bank account number (International Bank Account Number, IBAN).",
+                        "description": "GDT: BankAccountStandardID"
+                    },
+                    "InternalID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 32,
+                        "example": "5A880E4987E81EE8A9BCFA163E78A157",
+                        "title": "BankAccountInternalID is a proprietary identifier for a bank account.",
+                        "description": "GDT: BankAccountInternalID"
+                    },
+                    "UUID": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is an universal unique identifier of a bank account.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "CurrencyCode is a coded representation of the currency of the bank account.",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "Bank": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontract.v0001.Bank-update"
+                            }
+                        ],
+                        "title": "Bank where the account is held."
+                    }
+                },
+                "title": "Bank Account Identifying Elements (for update)",
+                "description": "The identifying elements of a bank account supported by bank account management in Financial Services (Banking)."
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.BankCardContractID": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "type": "string",
+                        "maxLength": 137,
+                        "example": "0030  TMP200100000902          20040131",
+                        "title": "Content of BankCardContractID"
+                    },
+                    "SchemeID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "CA.001",
+                        "title": "SchemeID of the BankCardContractID"
+                    },
+                    "SchemeAgencyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "310",
+                        "title": "SchemeAgencyID of the BankCardContractID"
+                    }
+                },
+                "title": "An identifier for a BankCardContract",
+                "description": "GDT: BankCardContractID"
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.BankCardContractID-create": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "type": "string",
+                        "maxLength": 137,
+                        "example": "0030  TMP200100000902          20040131",
+                        "title": "Content of BankCardContractID"
+                    },
+                    "SchemeID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "CA.001",
+                        "title": "SchemeID of the BankCardContractID"
+                    },
+                    "SchemeAgencyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "310",
+                        "title": "SchemeAgencyID of the BankCardContractID"
+                    }
+                },
+                "title": "An identifier for a BankCardContract (for create)",
+                "description": "GDT: BankCardContractID"
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.BankCardContractID-update": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "type": "string",
+                        "maxLength": 137,
+                        "example": "0030  TMP200100000902          20040131",
+                        "title": "Content of BankCardContractID"
+                    },
+                    "SchemeID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "CA.001",
+                        "title": "SchemeID of the BankCardContractID"
+                    },
+                    "SchemeAgencyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "310",
+                        "title": "SchemeAgencyID of the BankCardContractID"
+                    }
+                },
+                "title": "An identifier for a BankCardContract (for update)",
+                "description": "GDT: BankCardContractID"
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.BusinessProcessChainAssignment": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "70000x",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BDT: BankingBusinessTransactionTypeCode"
+                    },
+                    "BankingBusinessTransactionTypeName": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Bank Card Contract Opening",
+                        "title": "Name of BankingBusinessTransactionTypeCode",
+                        "description": "GDT: EXTENDED_Name"
+                    }
+                },
+                "title": "Business Process Chain Assignment",
+                "description": "Is the assignment of a business object node to a business process chain.  /nDefault: If BankingBusinessTransactionTypeCode is not specified, code value \"70000x - Bank Card Contract Opening\" will be used by default. "
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.BusinessProcessChainAssignment-create": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "70000x",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for create)",
+                "description": "Is the assignment of a business object node to a business process chain.  /nDefault: If BankingBusinessTransactionTypeCode is not specified, code value \"70000x - Bank Card Contract Opening\" will be used by default. "
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.BusinessProcessChainAssignment-update": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "70000x",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for update)",
+                "description": "Is the assignment of a business object node to a business process chain.  /nDefault: If BankingBusinessTransactionTypeCode is not specified, code value \"70000x - Bank Card Contract Opening\" will be used by default. "
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.OperationalBankContractManagement": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "50000608",
+                        "title": "A unique identifier of an organizational unit that is responsible for managing operational bank contracts and executing the related banking processes.",
+                        "description": "Constraint: The ID may not exceed the length of 8 and may only consist of numerical characters.\nGDT: OrganisationalCentreID "
+                    },
+                    "Name": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "DE01",
+                        "title": "A name of the Operational Bank Contract Management.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "Description": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Xamplebank",
+                        "title": "A description of the Operational Bank Contract Management.",
+                        "description": "GDT: MEDIUM_Description"
+                    }
+                },
+                "title": "Operational Bank Contract Management",
+                "description": "A functional unit that is responsible for managing the contract. "
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.OperationalBankContractManagement-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "50000608",
+                        "title": "A unique identifier of an organizational unit that is responsible for managing operational bank contracts and executing the related banking processes.",
+                        "description": "Constraint: The ID may not exceed the length of 8 and may only consist of numerical characters.\nGDT: OrganisationalCentreID "
+                    }
+                },
+                "title": "Operational Bank Contract Management (for create)",
+                "description": "A functional unit that is responsible for managing the contract. "
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.OperationalBankContractManagement-update": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "50000608",
+                        "title": "A unique identifier of an organizational unit that is responsible for managing operational bank contracts and executing the related banking processes.",
+                        "description": "Constraint: The ID may not exceed the length of 8 and may only consist of numerical characters.\nGDT: OrganisationalCentreID "
+                    }
+                },
+                "title": "Operational Bank Contract Management (for update)",
+                "description": "A functional unit that is responsible for managing the contract. "
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.PartyIdfgElmnts": {
+                "type": "object",
+                "properties": {
+                    "PartyUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "The UUID of a party (business partner).",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. Only one filter value for PartyUUID can be specified. If filter value for PartyUUID is specified, additional filtering for PartyID or AlternativePartyID is not possible. \nGDT: UUID"
+                    },
+                    "PartyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "310867",
+                        "title": "The ID of a party (business partner).",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. Only one filter value for PartyID can be specified. If filter value for PartyID is specified, additional filtering for PartyUUID or AlternativePartyID is not possible. \nGDT: PartyID"
+                    }
+                },
+                "title": "Party Identifying Elements",
+                "description": "PartyIdentifyingElements does contain all identifying elements of a party (business partner).  \nRemark:  PartyTypeCode is value 147 (Business Partner). \nIntegrity Condition: Either PartyUUID or PartyID or PartyAlternativeIdentification must be specified."
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.PartyIdfgElmnts-create": {
+                "type": "object",
+                "properties": {
+                    "PartyUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "The UUID of a party (business partner).",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. Only one filter value for PartyUUID can be specified. If filter value for PartyUUID is specified, additional filtering for PartyID or AlternativePartyID is not possible. \nGDT: UUID"
+                    },
+                    "PartyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "310867",
+                        "title": "The ID of a party (business partner).",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. Only one filter value for PartyID can be specified. If filter value for PartyID is specified, additional filtering for PartyUUID or AlternativePartyID is not possible. \nGDT: PartyID"
+                    }
+                },
+                "title": "Party Identifying Elements (for create)",
+                "description": "PartyIdentifyingElements does contain all identifying elements of a party (business partner).  \nRemark:  PartyTypeCode is value 147 (Business Partner). \nIntegrity Condition: Either PartyUUID or PartyID or PartyAlternativeIdentification must be specified."
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.PartyIdfgElmnts-update": {
+                "type": "object",
+                "title": "Party Identifying Elements (for update)",
+                "description": "PartyIdentifyingElements does contain all identifying elements of a party (business partner).  \nRemark:  PartyTypeCode is value 147 (Business Partner). \nIntegrity Condition: Either PartyUUID or PartyID or PartyAlternativeIdentification must be specified."
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.BankCardContractProductionControl": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 32
+                    },
+                    "Description": {
+                        "type": "string",
+                        "maxLength": 80
+                    }
+                },
+                "title": "BankCardContractProductionControl"
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.BankCardContractProductionControl-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 32
+                    },
+                    "Description": {
+                        "type": "string",
+                        "maxLength": 80
+                    }
+                },
+                "title": "BankCardContractProductionControl (for create)"
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.BankCardContractProductionControl-update": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 32
+                    },
+                    "Description": {
+                        "type": "string",
+                        "maxLength": 80
+                    }
+                },
+                "title": "BankCardContractProductionControl (for update)"
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.SystAdminData": {
+                "type": "object",
+                "properties": {
+                    "CreationDateTime": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2017-04-13T15:51:04Z"
+                    },
+                    "LastChangeDateTime": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2017-04-13T15:51:04Z"
+                    }
+                },
+                "title": "SystAdminData"
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.SystAdminData-create": {
+                "type": "object",
+                "properties": {
+                    "CreationDateTime": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2017-04-13T15:51:04Z"
+                    },
+                    "LastChangeDateTime": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2017-04-13T15:51:04Z"
+                    }
+                },
+                "title": "SystAdminData (for create)"
+            },
+            "com.sap.gateway.default.bankcardcontract.v0001.SystAdminData-update": {
+                "type": "object",
+                "properties": {
+                    "CreationDateTime": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2017-04-13T15:51:04Z"
+                    },
+                    "LastChangeDateTime": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2017-04-13T15:51:04Z"
+                    }
+                },
+                "title": "SystAdminData (for update)"
+            },
+            "count": {
+                "anyOf": [
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ],
+                "description": "The number of entities in the collection. Available when using the [$count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount) query option."
+            },
+            "error": {
+                "type": "object",
+                "required": [
+                    "error"
+                ],
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "required": [
+                            "code",
+                            "message"
+                        ],
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                            "target": {
+                                "type": "string"
+                            },
+                            "details": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "target": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "innererror": {
+                                "type": "object",
+                                "description": "The structure of this object is service-specific"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "top": {
+                "name": "$top",
+                "in": "query",
+                "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "example": 50
+            },
+            "skip": {
+                "name": "$skip",
+                "in": "query",
+                "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "count": {
+                "name": "$count",
+                "in": "query",
+                "description": "Include count of items, see [Count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount)",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "search": {
+                "name": "$search",
+                "in": "query",
+                "description": "Search items by search phrases, see [Searching](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionsearch)",
+                "schema": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses": {
+            "error": {
+                "description": "Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error"
+                        }
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "OAuth2Auth": {
+                "type": "oauth2",
+                "flows": {
+                    "authorizationCode": {
+                        "scopes": {},
+                        "refreshUrl": "https://{host}:{port}",
+                        "authorizationUrl": "https://{host}:{port}",
+                        "tokenUrl": "https://{host}:{port}"
+                    }
+                }
+            },
+            "BasicAuth": {
+                "type": "http",
+                "scheme": "basic"
+            }
+        }
+    },
+    "security": [
+        {
+            "OAuth2Auth": []
+        },
+        {
+            "BasicAuth": []
+        }
+    ]
+}

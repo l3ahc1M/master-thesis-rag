@@ -1,0 +1,4 @@
+A reservation on a bank account for either a debit or a credit amount.
+You can use this API to create, query,read, update, or delete prenote entries of a bank account.Remark:
+The service Bank Account Prenote Entry is assigned to service group Transactional Banking.General:
+The properties of the EDM that are based on a code GDT do not contain supplementary components (e.g. listID) that are known from the GDTs of the enterprise services.

@@ -1,0 +1,80 @@
+{
+    "tables": [
+        {
+            "name": "BankAccountContractAccountHolderChangeRequest",
+            "description": "A Bank Account Contract Account Holder Change Request is a request to change the account holder of a current account contract or savings account contract or time deposit contract immediately.",
+            "columns": [
+                {
+                    "name": "UUID",
+                    "description": "UUID is an universal unique identifier of a bank account contract account holder change request. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "ID",
+                    "description": "ID is an identifier of a bank account contract account holder change request. Example: 47938",
+                    "format": "string"
+                },
+                {
+                    "name": "BankAccountContractUUID",
+                    "description": "BankAccountContractUUID is an universal unique identifier of a bank account contract. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "ChangeStateID",
+                    "description": "ChangeStateID is a unique identifier for a change state. Example: 20200309121401.6154150",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusCode",
+                    "description": "LifeCycleStatusCode is the coded representation of the life cycle status of a bank account contract account holder change request. Example: 3",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusName",
+                    "description": "Is the name of LifeCycleStatusCode. Example: Completed",
+                    "format": "string"
+                },
+                {
+                    "name": "ReasonCode",
+                    "description": "ReasonCode is the coded representation of the reason for the bank account contract account holder change request. Example: 5",
+                    "format": "string"
+                },
+                {
+                    "name": "ReasonName",
+                    "description": "Is the name of ReasonCode Example: Marriage",
+                    "format": "string"
+                },
+                {
+                    "name": "BusinessProcessChainAssignment",
+                    "description": "BusinessProcessChainAssignment is the assignment of a business object node to a business process chain.",
+                    "format": "string"
+                },
+                {
+                    "name": "NewAccountHolderPartyIdentifyingElements",
+                    "description": "NewAccountHolderPartyIdentifyingElements is a party that legally holds a bank account associated with the bank account contract after completion of the account holder change request.",
+                    "format": "string"
+                },
+                {
+                    "name": "FormerAccountHolderPartyIdentifyingElements",
+                    "description": "FormerAccountHolderPartyIdentifyingElements is a party that legally holds a bank account associated with the current account contract or savings account contract before completion of the account holder change request.",
+                    "format": "string"
+                },
+                {
+                    "name": "ChargeWaiverRequestedIndicator",
+                    "description": "ChargeWaiverRequestedIndicator indicates whether a charge for activation of a bank account contract account holder change request is requested to be waived or not.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "CompletionDate",
+                    "description": "The CompletionDate is the date on which a bank account contract account holder change request is completed. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "Activities",
+                    "description": "",
+                    "format": "array"
+                }
+            ]
+        }
+    ]
+}

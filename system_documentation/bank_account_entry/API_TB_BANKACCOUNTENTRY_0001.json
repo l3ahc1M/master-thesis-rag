@@ -1,0 +1,2433 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Bank Account Entry",
+        "version": "1.0.0",
+        "description": "\r\n\r\nA balance-relevant entry for a Bank Account. A bank account is an account that holds funds in a bank and is subject to deposits and withdrawals.\r\nYou can use this API to retrieve bank account entries for a particular bank account.\r\n\r\nUse:\r\nThe API can be used in scenarios where bank account entries for a particular bank account shall be displayed.\r\n\r\nRemark:\r\nThe service Bank Account Entry is assigned to service group Transactional Banking.\r\n\r\nGeneral:\r\nThe properties of the EDM that are based on a code GDT do not contain supplementary components (e.g. listID) that are known from the GDTs of the enterprise services."
+    },
+    "externalDocs": {
+        "description": "Business Documentation",
+        "url": "https://help.sap.com/docs/TRBK_S4HANA/d2151b51aacc4d82ad2861e007337fa2/125ce6f19cd94e9cb3074c26e3c653d4.html"
+    },
+    "x-sap-api-type": "ODATAV4",
+    "x-sap-shortText": "Query bank account entries for a particular bank account using this synchronous inbound service",
+    "x-sap-software-min-version": "1.0",
+    "x-sap-ext-overview": [
+        {
+            "name": "Authentication Methods",
+            "values": [
+                {
+                    "text": "x509",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Service Group Name",
+            "values": [
+                {
+                    "text": "TRANSACTIONALBANKING",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Business Object",
+            "values": [
+                {
+                    "text": "Bank Account Entry",
+                    "format": "plain"
+                }
+            ]
+        }
+    ],
+    "security": [
+        {
+            "basicAuthentication": []
+        }
+    ],
+    "servers": [
+        {
+            "url": "https://{host}:{port}/sap/opu/odata4/sap/transactionalbanking/default/sap/bankaccountentry/0001",
+            "variables": {
+                "host": {
+                    "default": ""
+                },
+                "port": {
+                    "default": ""
+                }
+            }
+        }
+    ],
+    "x-sap-extensible": {
+        "supported": "no"
+    },
+    "tags": [
+        {
+            "name": "Bank Account Entries"
+        }
+    ],
+    "paths": {
+        "/BankAccountEntries": {
+            "get": {
+                "summary": "Query Bank Account Entries",
+                "description": "Is a request to query bank account entries",
+                "tags": [
+                    "Bank Account Entries"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/top"
+                    },
+                    {
+                        "$ref": "#/components/parameters/skip"
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)\n\nRequired filter properties:\n- BankAccountUUID",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$orderby",
+                        "in": "query",
+                        "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "SystemPostingDateTime",
+                                    "SystemPostingDateTime desc",
+                                    "BankAccountPostingDate",
+                                    "BankAccountPostingDate desc"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "ID",
+                                    "BankAccountUUID",
+                                    "PaymentTransactionReferenceID",
+                                    "ChangeStateID",
+                                    "BankAccountPaymentEntryTypeCode",
+                                    "BankAccountPaymentEntryTypeName",
+                                    "BankAccountPaymentEntryOriginTypeCode",
+                                    "BankAccountPaymentEntryOriginTypeName",
+                                    "StatusCode",
+                                    "StatusName",
+                                    "BankPaymentTransactionTypeCode",
+                                    "BankPaymentTransactionTypeName",
+                                    "BankPaymentCommunicationChannelCode",
+                                    "BankPaymentCommunicationChannelName",
+                                    "ExchangeRateTypeCode",
+                                    "ExchangeRateTypeName",
+                                    "ExchangeRate",
+                                    "BankAccountPaymentEntryReturnReasonCode",
+                                    "BankAccountPaymentEntryReturnReasonName",
+                                    "CancellationReasonCode",
+                                    "CancellationReasonName",
+                                    "BankPaymentNetworkAffiliationCode",
+                                    "BankPaymentNetworkAffiliationName",
+                                    "SystemPostingDateTime",
+                                    "BankAccountPostingDate",
+                                    "BankAccountValueDate",
+                                    "PendingPaymentAvailabilityStartDate",
+                                    "BankAccountCurrencyAmount",
+                                    "TransactionCurrencyAmount",
+                                    "BankAccountDebitIndicator",
+                                    "CancellationDocumentIndicator",
+                                    "LimitCheckDeactivationRequestedIndicator",
+                                    "AdditionalMaterialChecksDeactivationRequestedIndicator",
+                                    "ReturnAllowedIndicator",
+                                    "Note",
+                                    "AdditionalNote",
+                                    "MaterialCheckNote",
+                                    "MaterialCheckAdditionalNote",
+                                    "BankAccountHolderName",
+                                    "OriginalBankAccount",
+                                    "OriginalPaymentTransactionInitiatorBankAccount",
+                                    "FinalPaymentTransactionDestinatedBankAccount",
+                                    "Reference",
+                                    "BusinessProcessChainAssignment"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "PaymentNotes",
+                                    "ReturnSpecifications"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of BankAccountEntry",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BankAccountEntry"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankAccountEntries/{ID}/{BankAccountUUID}/SAP__self.CancelBankAccountEntry": {
+            "post": {
+                "summary": "Cancel Bank Account Entry",
+                "description": "Is a request to cancel a bank account entry.",
+                "tags": [
+                    "Bank Account Entries"
+                ],
+                "parameters": [
+                    {
+                        "name": "ID",
+                        "in": "path",
+                        "required": true,
+                        "description": "An identifier for a bank account entry.  \nGDT: BankAccountEntryID",
+                        "schema": {
+                            "type": "string",
+                            "maxLength": 35,
+                            "example": "FA163E6B7DE11ED9A1BA0CC160B478EC001"
+                        }
+                    },
+                    {
+                        "name": "BankAccountUUID",
+                        "in": "path",
+                        "required": true,
+                        "description": "A BankAccountUUID is an universal unique identifier of a bank account.  \nFilter: Only 'Eq' is supported as logical operator.  Integrity Conditions: If cross-navigation is used, filter for BankAccountUUID must not be used.  GDT: NOSC_UUID",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "01234567-89ab-cdef-0123-456789abcdef"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Action parameters",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "CancellationReasonCode": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "maxLength": 4,
+                                        "example": "10",
+                                        "title": "Coded representation of the cancellation reason for a bank account payment entry.",
+                                        "description": "GDT: BankAccountPaymentEntryCancellationReasonCode"
+                                    },
+                                    "BusinessProcessChainAssignment": {
+                                        "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BusinessProcessChainAssignment"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BankAccountEntry"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankAccountEntries/{ID}/{BankAccountUUID}/SAP__self.ReturnBankAccountEntry": {
+            "post": {
+                "summary": "Return Bank Account Entry",
+                "description": "Is a request to return a bank account entry.",
+                "tags": [
+                    "Bank Account Entries"
+                ],
+                "parameters": [
+                    {
+                        "name": "ID",
+                        "in": "path",
+                        "required": true,
+                        "description": "An identifier for a bank account entry.  \nGDT: BankAccountEntryID",
+                        "schema": {
+                            "type": "string",
+                            "maxLength": 35,
+                            "example": "FA163E6B7DE11ED9A1BA0CC160B478EC001"
+                        }
+                    },
+                    {
+                        "name": "BankAccountUUID",
+                        "in": "path",
+                        "required": true,
+                        "description": "A BankAccountUUID is an universal unique identifier of a bank account.  \nFilter: Only 'Eq' is supported as logical operator.  Integrity Conditions: If cross-navigation is used, filter for BankAccountUUID must not be used.  GDT: NOSC_UUID",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "01234567-89ab-cdef-0123-456789abcdef"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Action parameters",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "BankAccountPaymentEntryReturnReasonCode": {
+                                        "type": "string",
+                                        "maxLength": 4,
+                                        "example": "60",
+                                        "title": "Coded representation of the return reason for a bank account payment entry.",
+                                        "description": "GDT: BankAccountPaymentEntryReturnReasonCode"
+                                    },
+                                    "BusinessProcessChainAssignment": {
+                                        "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BusinessProcessChainAssignment"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BankAccountEntry"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankAccountEntries/{ID}/{BankAccountUUID}/ReturnSpecifications": {
+            "parameters": [
+                {
+                    "name": "ID",
+                    "in": "path",
+                    "required": true,
+                    "description": "An identifier for a bank account entry.  \nGDT: BankAccountEntryID",
+                    "schema": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "FA163E6B7DE11ED9A1BA0CC160B478EC001"
+                    }
+                },
+                {
+                    "name": "BankAccountUUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "A BankAccountUUID is an universal unique identifier of a bank account.  \nFilter: Only 'Eq' is supported as logical operator.  Integrity Conditions: If cross-navigation is used, filter for BankAccountUUID must not be used.  GDT: NOSC_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Query Return Specifications",
+                "description": "Is a request to query return specification for a bank account entry.",
+                "tags": [
+                    "Bank Account Entries"
+                ],
+                "parameters": [
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "ReturnReasonCode",
+                                    "ReturnReasonName",
+                                    "ReturnReasonTypeCode",
+                                    "ReturnReasonTypeName",
+                                    "LatestAllowedReturnDate"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of ReturnSpecification",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.ReturnSpecification"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/$batch": {
+            "post": {
+                "summary": "Send a group of requests",
+                "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).\n\n*Please note that \"Try it out\" is not supported for this request.*",
+                "tags": [
+                    "Batch Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Batch request",
+                    "content": {
+                        "multipart/mixed;boundary=request-separator": {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET BankAccountEntries HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Batch response",
+                        "content": {
+                            "multipart/mixed": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "basicAuthentication": {
+                "type": "http",
+                "scheme": "basic"
+            }
+        },
+        "schemas": {
+            "com.sap.gateway.default.bankaccountentry.v0001.BankAccountEntry": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "FA163E6B7DE11ED9A1BA0CC160B478EC001",
+                        "title": "An identifier for a bank account entry.",
+                        "description": "GDT: BankAccountEntryID"
+                    },
+                    "BankAccountUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A BankAccountUUID is an universal unique identifier of a bank account.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator.  Integrity Conditions: If cross-navigation is used, filter for BankAccountUUID must not be used.  GDT: NOSC_UUID"
+                    },
+                    "PaymentTransactionReferenceID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "REFERENCE CREATION",
+                        "title": "A Reference number for a transaction in payment transactions.",
+                        "description": "GDT: PaymentTransactionReferenceID"
+                    },
+                    "ChangeStateID": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "20210126091744.5563510",
+                        "title": "An identifier for a change status.",
+                        "description": "GDT: ChangeStateID"
+                    },
+                    "BankAccountPaymentEntryTypeCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 1,
+                        "example": "2",
+                        "title": "A coded representation of the type of a bank account payment entry.",
+                        "description": "Remark: Applicable for only BankAccountEntryTypeCode 1 (Bank Account Payment Entry).  \nGDT: BankAccountPaymentEntryTypeCode"
+                    },
+                    "BankAccountPaymentEntryTypeName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Receiver",
+                        "title": "The name of a BankAccountPaymentEntryType.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "BankAccountPaymentEntryOriginTypeCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 2,
+                        "example": "03",
+                        "title": "Coded representation of the origin type of a bank account payment entry.",
+                        "description": "Remark: Applicable for only BankAccountEntryTypeCode 1 (Bank Account Payment Entry).  \nGDT: BankAccountPaymentEntryOriginTypeCode"
+                    },
+                    "BankAccountPaymentEntryOriginTypeName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Electronic Banking",
+                        "title": "The name of a BankAccountPaymentEntryOriginType.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "StatusCode": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "Coded representation of the status of an payment entry of a bank account.",
+                        "description": "Filter:  Only 'Eq' is supported as logical operator.  \nGDT: BankAccountEntryStatusCode"
+                    },
+                    "StatusName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Posted",
+                        "title": "The name of a BankAccountEntryStatus.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "BankPaymentTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "051000",
+                        "title": "Coded representation of the type of the BankPaymentTransaction.",
+                        "description": "Filter:  Only 'Eq' is supported as logical operator.  \nGDT: BankPaymentTransactionTypeCode"
+                    },
+                    "BankPaymentTransactionTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Credit Bank Transfer",
+                        "title": "The name of a BankPaymentTransactionType.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "BankPaymentCommunicationChannelCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "3",
+                        "title": "Coded representation of the communication channel for payments in a bank.",
+                        "description": "GDT: BankPaymentCommunicationChannelCode"
+                    },
+                    "BankPaymentCommunicationChannelName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "EFT",
+                        "title": "The name of a BankPaymentCommunicationChannel.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "ExchangeRateTypeCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "DB",
+                        "title": "Coded representation of the type of an exchange rate, used to define the exchange rate for two given currencies.",
+                        "description": "GDT: ExchangeRateTypeCode"
+                    },
+                    "ExchangeRateTypeName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Forex Selling Rate",
+                        "title": "The name of a exchange rate type.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "ExchangeRate": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.ExchangeRate"
+                            }
+                        ],
+                        "title": "The rate at which the currency specified at TransactionCurrencyAmount can be exchanged into the currency of BankAccountCurrencyAmount.",
+                        "description": "The element Rate within ExchangeRate, represents the rate of conversion between currency of TransactionCurrencyAmount (QuotedCurrency) and the currency specified by BankAccountCurrencyAmount (UnitCurrency)."
+                    },
+                    "BankAccountPaymentEntryReturnReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "60",
+                        "title": "A coded representation of reason for return of a bank account payment entry.",
+                        "description": "Remark: Applicable for only BankAccountPaymentEntryTypeCode 2 (Receiver).  GDT: BankAccountPaymentEntryReturnReasonCode"
+                    },
+                    "BankAccountPaymentEntryReturnReasonName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Lock",
+                        "title": "A name of a ReturnReasonCode.",
+                        "description": "Reason why a payment entry was returned.  Remark:  Applicable for only BankAccountPaymentEntryTypeCode 2 (Receiver). \nGDT: MEDIUM_Name"
+                    },
+                    "CancellationReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "10",
+                        "title": "Coded representation of the cancellation reason for a bank account payment entry.",
+                        "description": "This code is applied to both the entries that are affected by the process of cancellation  (reversal with reference to original payment entry).  \nGDT: BankAccountPaymentEntryCancellationReasonCode"
+                    },
+                    "CancellationReasonName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Correction for Incorrect Posting",
+                        "title": "The name of a PaymentTransactionOrderCancellationReason.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "BankPaymentNetworkAffiliationCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 2,
+                        "example": "02",
+                        "title": "A coded representation of an affiliation to a bank network.",
+                        "description": "Remark:  Applicable for only BankAccountPaymentEntryTypeCode 2 (Receiver).  \nBDT: BankPaymentNetworkAffiliationCode"
+                    },
+                    "BankPaymentNetworkAffiliationName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "External",
+                        "title": "A name of BankPaymentNetworkAffiliationCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "SystemPostingDateTime": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date-time",
+                        "example": "2017-04-13T15:51:04Z",
+                        "title": "Time point at which an entry is posted in the system.",
+                        "description": "Remark: The posting date time is the system time stamp (system date / time) in the UTC time zone (converted).  Use: The SystemPostingDateTime can be used to sort bank account entries in a chronological order (per posting date). \nGDT: GLOBAL_DateTime"
+                    },
+                    "BankAccountPostingDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The date on which the bank account entry is posted to the corresponding bank account.",
+                        "description": "GDT: Date"
+                    },
+                    "BankAccountValueDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The date on which the amount of the bank account entry becomes relevant for interest calculation of the bank account.",
+                        "description": "GDT: Date"
+                    },
+                    "PendingPaymentAvailabilityStartDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Specifies the date from which the pending payment becomes available.",
+                        "description": "GDT: Date"
+                    },
+                    "BankAccountCurrencyAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.Amount"
+                            }
+                        ],
+                        "title": "The amount of the bank account payment entry in the currency of a bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "TransactionCurrencyAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.Amount"
+                            }
+                        ],
+                        "title": "The amount of bank account payment entry in the transaction currency of a business transaction.",
+                        "description": "GDT: Amount"
+                    },
+                    "BankAccountDebitIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether an account has been debited during an account movement.",
+                        "description": "GDT: Indicator"
+                    },
+                    "CancellationDocumentIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether the item is a reversal item.",
+                        "description": "GDT: Indicator"
+                    },
+                    "LimitCheckDeactivationRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether deactivation of limit check was requested for processing the bank account entry.",
+                        "description": "The limit of the bank account is the available amount of the bank account. The LimitCheckDeactivationRequestedIndicator will deactivate the check of available amount of the bank account for which the bank account prenote entry is to be created.  \nGDT: Indicator"
+                    },
+                    "AdditionalMaterialChecksDeactivationRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether deactivation of the all material checks (except limit check) is requested for processing the bank account entry.",
+                        "description": "GDT: Indicator"
+                    },
+                    "ReturnAllowedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether a return of the bank account entry is, in general, allowed or not.",
+                        "description": "GDT: Indicator; Qualifier: Allowed"
+                    },
+                    "Note": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "REFERENCE FREE USAGE",
+                        "title": "A note about a bank account payment entry.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    },
+                    "AdditionalNote": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "REFUSAGE",
+                        "title": "An additional note about a bank account payment entry.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_SHORT_Note"
+                    },
+                    "MaterialCheckNote": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "MATERIAL CHECK NOTE",
+                        "title": "A note for processing customer owned checks for a payment entry.",
+                        "description": "Constraint: Maximum 65 characters are allowed.  \nGDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    },
+                    "MaterialCheckAdditionalNote": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "ADCHNT",
+                        "title": "An additional note for processing customer owned checks for a payment entry.",
+                        "description": "Constraint: Maximum 6 characters are allowed.  \nGDT: LANGUAGEINDEPENDENT_SHORT_Note"
+                    },
+                    "BankAccountHolderName": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "Mike Petersen",
+                        "title": "The name of  the bank account holder, which is specified in the bank account payment entry.",
+                        "description": "Applicable for only BankAccountEntryTypeCode 1 (Bank Account Payment Entry).  \nGDT: BankAccountHolderName_V1"
+                    },
+                    "OriginalBankAccount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.OriginalBankAccount"
+                            }
+                        ],
+                        "title": "The bank account on which the original payment entry must be posted."
+                    },
+                    "OriginalPaymentTransactionInitiatorBankAccount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BankAccount"
+                            }
+                        ],
+                        "title": "The bank account of the party to which the receivable or payable belongs, and which originally initiated the payment or debit memo.",
+                        "description": "Applicable for only BankAccountPaymentEntryTypeCode 2 (Receiver)."
+                    },
+                    "FinalPaymentTransactionDestinatedBankAccount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BankAccount"
+                            }
+                        ],
+                        "title": "A FinalPaymentDestinatedBankAccount is the bank account of the party for which the payment or credit memo is intended.",
+                        "description": "Applicable for only BankAccountPaymentEntryTypeCode 1 (Sender)."
+                    },
+                    "Reference": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BankAccountEntryReference"
+                            }
+                        ],
+                        "title": "References of the bank account entry."
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BusinessProcessChainAssignment"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "BOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "PaymentNotes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.PaymentNote"
+                        }
+                    },
+                    "ReturnSpecifications": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.ReturnSpecification"
+                        }
+                    }
+                },
+                "title": "Bank Account Entry",
+                "description": "A Bank Account Entry is a balance-relevant entry for a Bank Account.  A Bank Account is an account that holds funds in a bank and is subject to deposits and withdrawals.  \n\nRemark: Only bank account entries of BankAccountEntryType 1 (Bank Account Payment Entry), 2 (Bank Account Revenue Expense Entry) and 4 (Bank Account Tax Entry) are selected.  \n\nPaging shall be supported for BankAccountEntry."
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.BankAccountEntry-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "FA163E6B7DE11ED9A1BA0CC160B478EC001",
+                        "title": "An identifier for a bank account entry.",
+                        "description": "GDT: BankAccountEntryID"
+                    },
+                    "BankAccountUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A BankAccountUUID is an universal unique identifier of a bank account.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator.  Integrity Conditions: If cross-navigation is used, filter for BankAccountUUID must not be used.  GDT: NOSC_UUID"
+                    },
+                    "PaymentTransactionReferenceID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "REFERENCE CREATION",
+                        "title": "A Reference number for a transaction in payment transactions.",
+                        "description": "GDT: PaymentTransactionReferenceID"
+                    },
+                    "BankAccountPaymentEntryTypeCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 1,
+                        "example": "2",
+                        "title": "A coded representation of the type of a bank account payment entry.",
+                        "description": "Remark: Applicable for only BankAccountEntryTypeCode 1 (Bank Account Payment Entry).  \nGDT: BankAccountPaymentEntryTypeCode"
+                    },
+                    "BankAccountPaymentEntryTypeName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Receiver",
+                        "title": "The name of a BankAccountPaymentEntryType.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "BankAccountPaymentEntryOriginTypeCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 2,
+                        "example": "03",
+                        "title": "Coded representation of the origin type of a bank account payment entry.",
+                        "description": "Remark: Applicable for only BankAccountEntryTypeCode 1 (Bank Account Payment Entry).  \nGDT: BankAccountPaymentEntryOriginTypeCode"
+                    },
+                    "BankAccountPaymentEntryOriginTypeName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Electronic Banking",
+                        "title": "The name of a BankAccountPaymentEntryOriginType.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "StatusCode": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "Coded representation of the status of an payment entry of a bank account.",
+                        "description": "Filter:  Only 'Eq' is supported as logical operator.  \nGDT: BankAccountEntryStatusCode"
+                    },
+                    "StatusName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Posted",
+                        "title": "The name of a BankAccountEntryStatus.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "BankPaymentTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "051000",
+                        "title": "Coded representation of the type of the BankPaymentTransaction.",
+                        "description": "Filter:  Only 'Eq' is supported as logical operator.  \nGDT: BankPaymentTransactionTypeCode"
+                    },
+                    "BankPaymentTransactionTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Credit Bank Transfer",
+                        "title": "The name of a BankPaymentTransactionType.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "BankPaymentCommunicationChannelCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "3",
+                        "title": "Coded representation of the communication channel for payments in a bank.",
+                        "description": "GDT: BankPaymentCommunicationChannelCode"
+                    },
+                    "BankPaymentCommunicationChannelName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "EFT",
+                        "title": "The name of a BankPaymentCommunicationChannel.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "ExchangeRateTypeCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "DB",
+                        "title": "Coded representation of the type of an exchange rate, used to define the exchange rate for two given currencies.",
+                        "description": "GDT: ExchangeRateTypeCode"
+                    },
+                    "ExchangeRateTypeName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Forex Selling Rate",
+                        "title": "The name of a exchange rate type.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "ExchangeRate": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.ExchangeRate-create"
+                            }
+                        ],
+                        "title": "The rate at which the currency specified at TransactionCurrencyAmount can be exchanged into the currency of BankAccountCurrencyAmount.",
+                        "description": "The element Rate within ExchangeRate, represents the rate of conversion between currency of TransactionCurrencyAmount (QuotedCurrency) and the currency specified by BankAccountCurrencyAmount (UnitCurrency)."
+                    },
+                    "BankAccountPaymentEntryReturnReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "60",
+                        "title": "A coded representation of reason for return of a bank account payment entry.",
+                        "description": "Remark: Applicable for only BankAccountPaymentEntryTypeCode 2 (Receiver).  GDT: BankAccountPaymentEntryReturnReasonCode"
+                    },
+                    "BankAccountPaymentEntryReturnReasonName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Lock",
+                        "title": "A name of a ReturnReasonCode.",
+                        "description": "Reason why a payment entry was returned.  Remark:  Applicable for only BankAccountPaymentEntryTypeCode 2 (Receiver). \nGDT: MEDIUM_Name"
+                    },
+                    "CancellationReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "10",
+                        "title": "Coded representation of the cancellation reason for a bank account payment entry.",
+                        "description": "This code is applied to both the entries that are affected by the process of cancellation  (reversal with reference to original payment entry).  \nGDT: BankAccountPaymentEntryCancellationReasonCode"
+                    },
+                    "CancellationReasonName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Correction for Incorrect Posting",
+                        "title": "The name of a PaymentTransactionOrderCancellationReason.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "BankPaymentNetworkAffiliationCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 2,
+                        "example": "02",
+                        "title": "A coded representation of an affiliation to a bank network.",
+                        "description": "Remark:  Applicable for only BankAccountPaymentEntryTypeCode 2 (Receiver).  \nBDT: BankPaymentNetworkAffiliationCode"
+                    },
+                    "BankPaymentNetworkAffiliationName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "External",
+                        "title": "A name of BankPaymentNetworkAffiliationCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "SystemPostingDateTime": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date-time",
+                        "example": "2017-04-13T15:51:04Z",
+                        "title": "Time point at which an entry is posted in the system.",
+                        "description": "Remark: The posting date time is the system time stamp (system date / time) in the UTC time zone (converted).  Use: The SystemPostingDateTime can be used to sort bank account entries in a chronological order (per posting date). \nGDT: GLOBAL_DateTime"
+                    },
+                    "BankAccountPostingDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The date on which the bank account entry is posted to the corresponding bank account.",
+                        "description": "GDT: Date"
+                    },
+                    "BankAccountValueDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The date on which the amount of the bank account entry becomes relevant for interest calculation of the bank account.",
+                        "description": "GDT: Date"
+                    },
+                    "PendingPaymentAvailabilityStartDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Specifies the date from which the pending payment becomes available.",
+                        "description": "GDT: Date"
+                    },
+                    "BankAccountCurrencyAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "The amount of the bank account payment entry in the currency of a bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "TransactionCurrencyAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "The amount of bank account payment entry in the transaction currency of a business transaction.",
+                        "description": "GDT: Amount"
+                    },
+                    "BankAccountDebitIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether an account has been debited during an account movement.",
+                        "description": "GDT: Indicator"
+                    },
+                    "CancellationDocumentIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether the item is a reversal item.",
+                        "description": "GDT: Indicator"
+                    },
+                    "LimitCheckDeactivationRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether deactivation of limit check was requested for processing the bank account entry.",
+                        "description": "The limit of the bank account is the available amount of the bank account. The LimitCheckDeactivationRequestedIndicator will deactivate the check of available amount of the bank account for which the bank account prenote entry is to be created.  \nGDT: Indicator"
+                    },
+                    "AdditionalMaterialChecksDeactivationRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether deactivation of the all material checks (except limit check) is requested for processing the bank account entry.",
+                        "description": "GDT: Indicator"
+                    },
+                    "ReturnAllowedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether a return of the bank account entry is, in general, allowed or not.",
+                        "description": "GDT: Indicator; Qualifier: Allowed"
+                    },
+                    "Note": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "REFERENCE FREE USAGE",
+                        "title": "A note about a bank account payment entry.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    },
+                    "AdditionalNote": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "REFUSAGE",
+                        "title": "An additional note about a bank account payment entry.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_SHORT_Note"
+                    },
+                    "MaterialCheckNote": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "MATERIAL CHECK NOTE",
+                        "title": "A note for processing customer owned checks for a payment entry.",
+                        "description": "Constraint: Maximum 65 characters are allowed.  \nGDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    },
+                    "MaterialCheckAdditionalNote": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "ADCHNT",
+                        "title": "An additional note for processing customer owned checks for a payment entry.",
+                        "description": "Constraint: Maximum 6 characters are allowed.  \nGDT: LANGUAGEINDEPENDENT_SHORT_Note"
+                    },
+                    "BankAccountHolderName": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "Mike Petersen",
+                        "title": "The name of  the bank account holder, which is specified in the bank account payment entry.",
+                        "description": "Applicable for only BankAccountEntryTypeCode 1 (Bank Account Payment Entry).  \nGDT: BankAccountHolderName_V1"
+                    },
+                    "OriginalBankAccount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.OriginalBankAccount-create"
+                            }
+                        ],
+                        "title": "The bank account on which the original payment entry must be posted."
+                    },
+                    "OriginalPaymentTransactionInitiatorBankAccount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BankAccount-create"
+                            }
+                        ],
+                        "title": "The bank account of the party to which the receivable or payable belongs, and which originally initiated the payment or debit memo.",
+                        "description": "Applicable for only BankAccountPaymentEntryTypeCode 2 (Receiver)."
+                    },
+                    "FinalPaymentTransactionDestinatedBankAccount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BankAccount-create"
+                            }
+                        ],
+                        "title": "A FinalPaymentDestinatedBankAccount is the bank account of the party for which the payment or credit memo is intended.",
+                        "description": "Applicable for only BankAccountPaymentEntryTypeCode 1 (Sender)."
+                    },
+                    "Reference": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BankAccountEntryReference-create"
+                            }
+                        ],
+                        "title": "References of the bank account entry."
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BusinessProcessChainAssignment-create"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "BOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "PaymentNotes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.PaymentNote-create"
+                        }
+                    },
+                    "ReturnSpecifications": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.ReturnSpecification-create"
+                        }
+                    }
+                },
+                "required": [
+                    "ID",
+                    "BankAccountUUID"
+                ],
+                "title": "Bank Account Entry (for create)",
+                "description": "A Bank Account Entry is a balance-relevant entry for a Bank Account.  A Bank Account is an account that holds funds in a bank and is subject to deposits and withdrawals.  \n\nRemark: Only bank account entries of BankAccountEntryType 1 (Bank Account Payment Entry), 2 (Bank Account Revenue Expense Entry) and 4 (Bank Account Tax Entry) are selected.  \n\nPaging shall be supported for BankAccountEntry."
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.BankAccountEntry-update": {
+                "type": "object",
+                "properties": {
+                    "StatusCode": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "Coded representation of the status of an payment entry of a bank account.",
+                        "description": "Filter:  Only 'Eq' is supported as logical operator.  \nGDT: BankAccountEntryStatusCode"
+                    },
+                    "BankPaymentTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "051000",
+                        "title": "Coded representation of the type of the BankPaymentTransaction.",
+                        "description": "Filter:  Only 'Eq' is supported as logical operator.  \nGDT: BankPaymentTransactionTypeCode"
+                    },
+                    "BankPaymentCommunicationChannelCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "3",
+                        "title": "Coded representation of the communication channel for payments in a bank.",
+                        "description": "GDT: BankPaymentCommunicationChannelCode"
+                    },
+                    "SystemPostingDateTime": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date-time",
+                        "example": "2017-04-13T15:51:04Z",
+                        "title": "Time point at which an entry is posted in the system.",
+                        "description": "Remark: The posting date time is the system time stamp (system date / time) in the UTC time zone (converted).  Use: The SystemPostingDateTime can be used to sort bank account entries in a chronological order (per posting date). \nGDT: GLOBAL_DateTime"
+                    },
+                    "BankAccountPostingDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The date on which the bank account entry is posted to the corresponding bank account.",
+                        "description": "GDT: Date"
+                    },
+                    "BankAccountValueDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The date on which the amount of the bank account entry becomes relevant for interest calculation of the bank account.",
+                        "description": "GDT: Date"
+                    },
+                    "BankAccountCurrencyAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "The amount of the bank account payment entry in the currency of a bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "TransactionCurrencyAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "The amount of bank account payment entry in the transaction currency of a business transaction.",
+                        "description": "GDT: Amount"
+                    },
+                    "BankAccountDebitIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether an account has been debited during an account movement.",
+                        "description": "GDT: Indicator"
+                    },
+                    "CancellationDocumentIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether the item is a reversal item.",
+                        "description": "GDT: Indicator"
+                    },
+                    "LimitCheckDeactivationRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether deactivation of limit check was requested for processing the bank account entry.",
+                        "description": "The limit of the bank account is the available amount of the bank account. The LimitCheckDeactivationRequestedIndicator will deactivate the check of available amount of the bank account for which the bank account prenote entry is to be created.  \nGDT: Indicator"
+                    },
+                    "AdditionalMaterialChecksDeactivationRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether deactivation of the all material checks (except limit check) is requested for processing the bank account entry.",
+                        "description": "GDT: Indicator"
+                    },
+                    "ReturnAllowedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether a return of the bank account entry is, in general, allowed or not.",
+                        "description": "GDT: Indicator; Qualifier: Allowed"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BusinessProcessChainAssignment-update"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "BOCT: BusProcChnAssgmtFSElmnts"
+                    }
+                },
+                "title": "Bank Account Entry (for update)",
+                "description": "A Bank Account Entry is a balance-relevant entry for a Bank Account.  A Bank Account is an account that holds funds in a bank and is subject to deposits and withdrawals.  \n\nRemark: Only bank account entries of BankAccountEntryType 1 (Bank Account Payment Entry), 2 (Bank Account Revenue Expense Entry) and 4 (Bank Account Tax Entry) are selected.  \n\nPaging shall be supported for BankAccountEntry."
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.PaymentNote": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 3,
+                        "example": "2",
+                        "title": "An identifier of a payment note.",
+                        "description": "BDT: BankAccountEntryPaymentNoteID"
+                    },
+                    "ContentTypeCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "AAA",
+                        "title": "A coded representation of the content type to interpret the information provided in the payment note for a bank account entry.",
+                        "description": "GDT: BankAccountEntryPaymentNoteContentTypeCode"
+                    },
+                    "ContentTypeName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Example",
+                        "title": "The name of a bank account entry payment note type.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "Note": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Structured Payment Note Line 1",
+                        "title": "A note to a payment for a bank account payment entry.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    }
+                },
+                "title": "Payment Note",
+                "description": "Note in a bank account entry about a payment."
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.PaymentNote-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 3,
+                        "example": "2",
+                        "title": "An identifier of a payment note.",
+                        "description": "BDT: BankAccountEntryPaymentNoteID"
+                    },
+                    "ContentTypeCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "AAA",
+                        "title": "A coded representation of the content type to interpret the information provided in the payment note for a bank account entry.",
+                        "description": "GDT: BankAccountEntryPaymentNoteContentTypeCode"
+                    },
+                    "ContentTypeName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Example",
+                        "title": "The name of a bank account entry payment note type.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "Note": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Structured Payment Note Line 1",
+                        "title": "A note to a payment for a bank account payment entry.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    }
+                },
+                "required": [
+                    "ID"
+                ],
+                "title": "Payment Note (for create)",
+                "description": "Note in a bank account entry about a payment."
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.PaymentNote-update": {
+                "type": "object",
+                "properties": {
+                    "Note": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Structured Payment Note Line 1",
+                        "title": "A note to a payment for a bank account payment entry.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    }
+                },
+                "title": "Payment Note (for update)",
+                "description": "Note in a bank account entry about a payment."
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.ReturnSpecification": {
+                "type": "object",
+                "properties": {
+                    "ReturnReasonCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "60",
+                        "title": "A coded representation of reason for return of a bank account payment entry.",
+                        "description": "GDT: BankAccountPaymentEntryReturnReasonCode"
+                    },
+                    "ReturnReasonName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Lock",
+                        "title": "The name of a ReturnReasonCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "ReturnReasonTypeCode": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "A coded representation of the type for a return reason code of a bank account payment entry.",
+                        "description": "Values are: 1 (Bank), 2 (Account Holder), 3 (Undefined).  \nBDT: BankAccountPaymentEntryReturnReasonTypeCode"
+                    },
+                    "ReturnReasonTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Bank",
+                        "title": "The name of a ReturnReasonTypeCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "LatestAllowedReturnDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Date until when a return is latest allowed.",
+                        "description": "GDT: Date"
+                    }
+                },
+                "title": "Return Specification",
+                "description": "A Return Specification specifies for a returnable bank account payment entry, the valid return reason code and the latest date on which the bank account payment entry can be returned by using the particular reason code.  Remark: Only applicable for bank account entry of type 1 (Bank Account Payment Entry)."
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.ReturnSpecification-create": {
+                "type": "object",
+                "properties": {
+                    "ReturnReasonCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "60",
+                        "title": "A coded representation of reason for return of a bank account payment entry.",
+                        "description": "GDT: BankAccountPaymentEntryReturnReasonCode"
+                    },
+                    "ReturnReasonName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Lock",
+                        "title": "The name of a ReturnReasonCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "ReturnReasonTypeCode": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "A coded representation of the type for a return reason code of a bank account payment entry.",
+                        "description": "Values are: 1 (Bank), 2 (Account Holder), 3 (Undefined).  \nBDT: BankAccountPaymentEntryReturnReasonTypeCode"
+                    },
+                    "ReturnReasonTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Bank",
+                        "title": "The name of a ReturnReasonTypeCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "LatestAllowedReturnDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Date until when a return is latest allowed.",
+                        "description": "GDT: Date"
+                    }
+                },
+                "required": [
+                    "ReturnReasonCode"
+                ],
+                "title": "Return Specification (for create)",
+                "description": "A Return Specification specifies for a returnable bank account payment entry, the valid return reason code and the latest date on which the bank account payment entry can be returned by using the particular reason code.  Remark: Only applicable for bank account entry of type 1 (Bank Account Payment Entry)."
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.ReturnSpecification-update": {
+                "type": "object",
+                "properties": {
+                    "ReturnReasonTypeCode": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "A coded representation of the type for a return reason code of a bank account payment entry.",
+                        "description": "Values are: 1 (Bank), 2 (Account Holder), 3 (Undefined).  \nBDT: BankAccountPaymentEntryReturnReasonTypeCode"
+                    },
+                    "LatestAllowedReturnDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Date until when a return is latest allowed.",
+                        "description": "GDT: Date"
+                    }
+                },
+                "title": "Return Specification (for update)",
+                "description": "A Return Specification specifies for a returnable bank account payment entry, the valid return reason code and the latest date on which the bank account payment entry can be returned by using the particular reason code.  Remark: Only applicable for bank account entry of type 1 (Bank Account Payment Entry)."
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.Amount": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.Amount-create": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount (for create)",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.Amount-update": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount (for update)",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.Bank": {
+                "type": "object",
+                "properties": {
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 11,
+                        "example": "TOLLDEWDXXX",
+                        "title": "Bank Identification Code (BIC) of the Society for Worldwide Interbank Financial Telecommunications (S.W.I.F.T.), see GDT BankStandardID.",
+                        "description": "GDT: BankStandardID"
+                    },
+                    "RoutingID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "90000001",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    },
+                    "CountryCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "DE",
+                        "title": "Country in which the bank identified earlier goes about its business. If the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here. Constraint: Only listID 3166-1 of listAgencyID 5 will be supported.",
+                        "description": "GDT: CountryCode"
+                    }
+                },
+                "title": "Bank",
+                "description": "A bank is a business entity that performs financial investment services and payment transactions. "
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.Bank-create": {
+                "type": "object",
+                "properties": {
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 11,
+                        "example": "TOLLDEWDXXX",
+                        "title": "Bank Identification Code (BIC) of the Society for Worldwide Interbank Financial Telecommunications (S.W.I.F.T.), see GDT BankStandardID.",
+                        "description": "GDT: BankStandardID"
+                    },
+                    "RoutingID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "90000001",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    },
+                    "CountryCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "DE",
+                        "title": "Country in which the bank identified earlier goes about its business. If the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here. Constraint: Only listID 3166-1 of listAgencyID 5 will be supported.",
+                        "description": "GDT: CountryCode"
+                    }
+                },
+                "title": "Bank (for create)",
+                "description": "A bank is a business entity that performs financial investment services and payment transactions. "
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.Bank-update": {
+                "type": "object",
+                "properties": {
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 11,
+                        "example": "TOLLDEWDXXX",
+                        "title": "Bank Identification Code (BIC) of the Society for Worldwide Interbank Financial Telecommunications (S.W.I.F.T.), see GDT BankStandardID.",
+                        "description": "GDT: BankStandardID"
+                    },
+                    "RoutingID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "90000001",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    },
+                    "CountryCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "DE",
+                        "title": "Country in which the bank identified earlier goes about its business. If the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here. Constraint: Only listID 3166-1 of listAgencyID 5 will be supported.",
+                        "description": "GDT: CountryCode"
+                    }
+                },
+                "title": "Bank (for update)",
+                "description": "A bank is a business entity that performs financial investment services and payment transactions. "
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.BankAccount": {
+                "type": "object",
+                "properties": {
+                    "HolderName": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "Hans Hansen",
+                        "title": "A name of the account holder of a bank account.",
+                        "description": "GDT: BankAccountHolderName_V1"
+                    },
+                    "IdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BkAcctIdfgElmnts"
+                            }
+                        ],
+                        "title": "Identifiying elements of a bank account associated with a bank account contract.",
+                        "description": "BOCT: BankAccountIdentifyingElements"
+                    }
+                },
+                "title": "Bank Account"
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.BankAccount-create": {
+                "type": "object",
+                "properties": {
+                    "HolderName": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "Hans Hansen",
+                        "title": "A name of the account holder of a bank account.",
+                        "description": "GDT: BankAccountHolderName_V1"
+                    },
+                    "IdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BkAcctIdfgElmnts-create"
+                            }
+                        ],
+                        "title": "Identifiying elements of a bank account associated with a bank account contract.",
+                        "description": "BOCT: BankAccountIdentifyingElements"
+                    }
+                },
+                "title": "Bank Account (for create)"
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.BankAccount-update": {
+                "type": "object",
+                "properties": {
+                    "IdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BkAcctIdfgElmnts-update"
+                            }
+                        ],
+                        "title": "Identifiying elements of a bank account associated with a bank account contract.",
+                        "description": "BOCT: BankAccountIdentifyingElements"
+                    }
+                },
+                "title": "Bank Account (for update)"
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.BankAccountEntryReference": {
+                "type": "object",
+                "properties": {
+                    "PaymentTransactionOrder": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.PaymentTransactionOrder"
+                            }
+                        ],
+                        "title": "An instruction to execute a payment transaction."
+                    },
+                    "DirectDebitMandate": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.DirectDebitMandate"
+                            }
+                        ],
+                        "title": "The authorisation given by a debtor to a creditor to initiate instructions to debit funds owed to the creditor from a specified account, and the authorisation to the debtor bank to comply with the instructions issued by the creditor."
+                    },
+                    "BankAccountPrenoteEntryReferenceID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "PRENOTE-REFERENCE-4711",
+                        "title": "An identifier for a bank account prenote entry.",
+                        "description": "GDT: BankAccountPrenoteEntryID_V1"
+                    },
+                    "ChequeReferenceID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 20,
+                        "example": "CHECK-REFERENCE-4711",
+                        "title": "A ChequeID is a unique identifier for a check.",
+                        "description": "GDT: ChequeID"
+                    }
+                },
+                "title": "Bank Account Entry Reference"
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.BankAccountEntryReference-create": {
+                "type": "object",
+                "properties": {
+                    "PaymentTransactionOrder": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.PaymentTransactionOrder-create"
+                            }
+                        ],
+                        "title": "An instruction to execute a payment transaction."
+                    },
+                    "DirectDebitMandate": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.DirectDebitMandate-create"
+                            }
+                        ],
+                        "title": "The authorisation given by a debtor to a creditor to initiate instructions to debit funds owed to the creditor from a specified account, and the authorisation to the debtor bank to comply with the instructions issued by the creditor."
+                    },
+                    "BankAccountPrenoteEntryReferenceID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "PRENOTE-REFERENCE-4711",
+                        "title": "An identifier for a bank account prenote entry.",
+                        "description": "GDT: BankAccountPrenoteEntryID_V1"
+                    },
+                    "ChequeReferenceID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 20,
+                        "example": "CHECK-REFERENCE-4711",
+                        "title": "A ChequeID is a unique identifier for a check.",
+                        "description": "GDT: ChequeID"
+                    }
+                },
+                "title": "Bank Account Entry Reference (for create)"
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.BankAccountEntryReference-update": {
+                "type": "object",
+                "title": "Bank Account Entry Reference (for update)"
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.BkAcctIdfgElmnts": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "0000000976",
+                        "title": "Bank account number (Basic Bank Account Number, BBAN). An account number that is assigned by the account managing bank. It uniquely identifies a bank account in most countries only together with the bank.",
+                        "description": "GDT: BankAccountID"
+                    },
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 34,
+                        "example": "DE84900000010000000976",
+                        "title": "International bank account number (International Bank Account Number, IBAN).",
+                        "description": "GDT: BankAccountStandardID"
+                    },
+                    "InternalID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 32,
+                        "example": "5A880E4987E81EE8A9BCFA163E78A157",
+                        "title": "BankAccountInternalID is a proprietary identifier for a bank account.",
+                        "description": "GDT: BankAccountInternalID"
+                    },
+                    "UUID": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is an universal unique identifier of a bank account.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "CurrencyCode is a coded representation of the currency of the bank account.",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "Bank": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.Bank"
+                            }
+                        ],
+                        "title": "Bank where the account is held."
+                    }
+                },
+                "title": "Bank Account Identifying Elements",
+                "description": "The identifying elements of a bank account supported by bank account management in Financial Services (Banking)."
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.BkAcctIdfgElmnts-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "0000000976",
+                        "title": "Bank account number (Basic Bank Account Number, BBAN). An account number that is assigned by the account managing bank. It uniquely identifies a bank account in most countries only together with the bank.",
+                        "description": "GDT: BankAccountID"
+                    },
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 34,
+                        "example": "DE84900000010000000976",
+                        "title": "International bank account number (International Bank Account Number, IBAN).",
+                        "description": "GDT: BankAccountStandardID"
+                    },
+                    "InternalID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 32,
+                        "example": "5A880E4987E81EE8A9BCFA163E78A157",
+                        "title": "BankAccountInternalID is a proprietary identifier for a bank account.",
+                        "description": "GDT: BankAccountInternalID"
+                    },
+                    "UUID": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is an universal unique identifier of a bank account.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "CurrencyCode is a coded representation of the currency of the bank account.",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "Bank": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.Bank-create"
+                            }
+                        ],
+                        "title": "Bank where the account is held."
+                    }
+                },
+                "title": "Bank Account Identifying Elements (for create)",
+                "description": "The identifying elements of a bank account supported by bank account management in Financial Services (Banking)."
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.BkAcctIdfgElmnts-update": {
+                "type": "object",
+                "properties": {
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 34,
+                        "example": "DE84900000010000000976",
+                        "title": "International bank account number (International Bank Account Number, IBAN).",
+                        "description": "GDT: BankAccountStandardID"
+                    },
+                    "InternalID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 32,
+                        "example": "5A880E4987E81EE8A9BCFA163E78A157",
+                        "title": "BankAccountInternalID is a proprietary identifier for a bank account.",
+                        "description": "GDT: BankAccountInternalID"
+                    },
+                    "UUID": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is an universal unique identifier of a bank account.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "CurrencyCode is a coded representation of the currency of the bank account.",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "Bank": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.Bank-update"
+                            }
+                        ],
+                        "title": "Bank where the account is held."
+                    }
+                },
+                "title": "Bank Account Identifying Elements (for update)",
+                "description": "The identifying elements of a bank account supported by bank account management in Financial Services (Banking)."
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.BusinessProcessChainAssignment": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "500002",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BDT: BankingBusinessTransactionTypeCode"
+                    },
+                    "BankingBusinessTransactionTypeName": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Bank Account Payment",
+                        "title": "Name of BankingBusinessTransactionTypeCode",
+                        "description": "GDT: EXTENDED_Name"
+                    }
+                },
+                "title": "Business Process Chain Assignment",
+                "description": "Is the assignment of a business object node to a business process chain.  /nDefault: If BankingBusinessTransactionTypeCode is not specified, code value \"500002 - Bank Account Payment\" will be used by default. "
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.BusinessProcessChainAssignment-create": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "500002",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for create)",
+                "description": "Is the assignment of a business object node to a business process chain.  /nDefault: If BankingBusinessTransactionTypeCode is not specified, code value \"500002 - Bank Account Payment\" will be used by default. "
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.BusinessProcessChainAssignment-update": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "500002",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for update)",
+                "description": "Is the assignment of a business object node to a business process chain.  /nDefault: If BankingBusinessTransactionTypeCode is not specified, code value \"500002 - Bank Account Payment\" will be used by default. "
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.DirectDebitMandate": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "4711",
+                        "title": "A unique identifier of Direct Debit Mandate.",
+                        "description": "GDT: DirectDebitMandateID"
+                    },
+                    "CreditorPartyID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 60,
+                        "example": "DE82ZZZ00000001015",
+                        "title": "A unique identifier of a creditor party of direct debit mandate.",
+                        "description": "GDT: PartyID"
+                    }
+                },
+                "title": "Direct Debit Mandate"
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.DirectDebitMandate-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "4711",
+                        "title": "A unique identifier of Direct Debit Mandate.",
+                        "description": "GDT: DirectDebitMandateID"
+                    },
+                    "CreditorPartyID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 60,
+                        "example": "DE82ZZZ00000001015",
+                        "title": "A unique identifier of a creditor party of direct debit mandate.",
+                        "description": "GDT: PartyID"
+                    }
+                },
+                "title": "Direct Debit Mandate (for create)"
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.DirectDebitMandate-update": {
+                "type": "object",
+                "title": "Direct Debit Mandate (for update)"
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.ExchangeRate": {
+                "type": "object",
+                "properties": {
+                    "UnitCurrency": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "'Leading currency' (see element Rate).",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "QuotedCurrency": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "USD",
+                        "title": "'Following currency' (see element Rate)",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "Rate": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "nullable": true,
+                        "format": "decimal",
+                        "x-sap-precision": 28,
+                        "x-sap-scale": 14,
+                        "multipleOf": 1e-14,
+                        "example": "1.20000000000000",
+                        "title": "Exchange rate between these currencies. This corresponds to the price at which one unit of the currency UnitCurrency can be changed into the currency QuotedCurrency.",
+                        "description": "GDT: ExchangeRateRate"
+                    },
+                    "QuotationDateTime": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date-time",
+                        "example": "2017-04-13T15:51:04Z",
+                        "title": "Exchange rate date. Date and time when the exchange rate was defined.",
+                        "description": "GDT: GLOBAL_DateTime"
+                    }
+                },
+                "title": "Exchange Rate",
+                "description": "The rate at which the unit currency can be exchanged into the quoted currency."
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.ExchangeRate-create": {
+                "type": "object",
+                "properties": {
+                    "UnitCurrency": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "'Leading currency' (see element Rate).",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "QuotedCurrency": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "USD",
+                        "title": "'Following currency' (see element Rate)",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "Rate": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "nullable": true,
+                        "format": "decimal",
+                        "x-sap-precision": 28,
+                        "x-sap-scale": 14,
+                        "multipleOf": 1e-14,
+                        "example": "1.20000000000000",
+                        "title": "Exchange rate between these currencies. This corresponds to the price at which one unit of the currency UnitCurrency can be changed into the currency QuotedCurrency.",
+                        "description": "GDT: ExchangeRateRate"
+                    },
+                    "QuotationDateTime": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date-time",
+                        "example": "2017-04-13T15:51:04Z",
+                        "title": "Exchange rate date. Date and time when the exchange rate was defined.",
+                        "description": "GDT: GLOBAL_DateTime"
+                    }
+                },
+                "title": "Exchange Rate (for create)",
+                "description": "The rate at which the unit currency can be exchanged into the quoted currency."
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.ExchangeRate-update": {
+                "type": "object",
+                "properties": {
+                    "UnitCurrency": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "'Leading currency' (see element Rate).",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "QuotedCurrency": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "USD",
+                        "title": "'Following currency' (see element Rate)",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "Rate": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "nullable": true,
+                        "format": "decimal",
+                        "x-sap-precision": 28,
+                        "x-sap-scale": 14,
+                        "multipleOf": 1e-14,
+                        "example": "1.20000000000000",
+                        "title": "Exchange rate between these currencies. This corresponds to the price at which one unit of the currency UnitCurrency can be changed into the currency QuotedCurrency.",
+                        "description": "GDT: ExchangeRateRate"
+                    },
+                    "QuotationDateTime": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date-time",
+                        "example": "2017-04-13T15:51:04Z",
+                        "title": "Exchange rate date. Date and time when the exchange rate was defined.",
+                        "description": "GDT: GLOBAL_DateTime"
+                    }
+                },
+                "title": "Exchange Rate (for update)",
+                "description": "The rate at which the unit currency can be exchanged into the quoted currency."
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.OriginalBankAccount": {
+                "type": "object",
+                "properties": {
+                    "IdentifyingElements": {
+                        "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BkAcctIdfgElmnts"
+                    }
+                },
+                "title": "OriginalBankAccount"
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.OriginalBankAccount-create": {
+                "type": "object",
+                "properties": {
+                    "IdentifyingElements": {
+                        "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BkAcctIdfgElmnts-create"
+                    }
+                },
+                "title": "OriginalBankAccount (for create)"
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.OriginalBankAccount-update": {
+                "type": "object",
+                "properties": {
+                    "IdentifyingElements": {
+                        "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BkAcctIdfgElmnts-update"
+                    }
+                },
+                "title": "OriginalBankAccount (for update)"
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.PaymentTransactionOrder": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "REFNO_TRANSACTION-ORDER",
+                        "title": "An identifier for a payment transaction order.",
+                        "description": "GDT: PaymentTransactionOrderID"
+                    },
+                    "ItemID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "REFNO_TRANSACTION-ITEM",
+                        "title": "An identifier for an item of a payment transaction order.",
+                        "description": "GDT: PaymentTransactionOrderItemID"
+                    }
+                },
+                "title": "Payment Transaction Order"
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.PaymentTransactionOrder-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "REFNO_TRANSACTION-ORDER",
+                        "title": "An identifier for a payment transaction order.",
+                        "description": "GDT: PaymentTransactionOrderID"
+                    },
+                    "ItemID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "REFNO_TRANSACTION-ITEM",
+                        "title": "An identifier for an item of a payment transaction order.",
+                        "description": "GDT: PaymentTransactionOrderItemID"
+                    }
+                },
+                "title": "Payment Transaction Order (for create)"
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.PaymentTransactionOrder-update": {
+                "type": "object",
+                "title": "Payment Transaction Order (for update)"
+            },
+            "count": {
+                "anyOf": [
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ],
+                "description": "The number of entities in the collection. Available when using the [$count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount) query option."
+            },
+            "error": {
+                "type": "object",
+                "required": [
+                    "error"
+                ],
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "required": [
+                            "code",
+                            "message"
+                        ],
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                            "target": {
+                                "type": "string"
+                            },
+                            "details": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "target": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "innererror": {
+                                "type": "object",
+                                "description": "The structure of this object is service-specific"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "top": {
+                "name": "$top",
+                "in": "query",
+                "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "example": 50
+            },
+            "skip": {
+                "name": "$skip",
+                "in": "query",
+                "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "count": {
+                "name": "$count",
+                "in": "query",
+                "description": "Include count of items, see [Count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount)",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "search": {
+                "name": "$search",
+                "in": "query",
+                "description": "Search items by search phrases, see [Searching](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionsearch)",
+                "schema": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses": {
+            "error": {
+                "description": "Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

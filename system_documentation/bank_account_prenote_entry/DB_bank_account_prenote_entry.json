@@ -1,0 +1,155 @@
+{
+    "tables": [
+        {
+            "name": "BankAccountPrenoteEntry",
+            "description": "A Bank Account Prenote Entry represents a reservation on a Bank Account for either a debit or a credit amount.  A Bank Account is an account that holds funds in a bank and is subject to deposits and withdrawals.",
+            "columns": [
+                {
+                    "name": "UUID",
+                    "description": "Is the unique identifier for a bank account prenote entry. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "BankAccountUUID",
+                    "description": "A BankAccountUUID is an universal unique identifier for the bank account to which the entry is assigned. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "RequesterBankAccountPrenoteEntryID",
+                    "description": "Identifies a bank account prenote entry and is assigned by the requester of the bank account prenote entry. Example: PRENOTE-REFERENCE-4711",
+                    "format": "string"
+                },
+                {
+                    "name": "ChangeStateID",
+                    "description": "Identifies a change state. Example: 2019-06-04T08:29:04Z",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusCode",
+                    "description": "Coded representation of the life cycle status of a bank account prenote entry. Example: 5",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusName",
+                    "description": "Name of a LifeCycleStatusCode. Example: Discarded",
+                    "format": "string"
+                },
+                {
+                    "name": "TypeCode",
+                    "description": "Coded representation of a type of bank account prenote entry. Example: 30",
+                    "format": "string"
+                },
+                {
+                    "name": "TypeName",
+                    "description": "Name of a TypeCode. Example: Payment Advice - Debit",
+                    "format": "string"
+                },
+                {
+                    "name": "RejectionReasonCode",
+                    "description": "A coded representation of reason for reject of a bank account prenote entry. Example: 01",
+                    "format": "string"
+                },
+                {
+                    "name": "RejectionReasonName",
+                    "description": "A name of a RejectionReasonCode. Example: Insufficient Funds",
+                    "format": "string"
+                },
+                {
+                    "name": "BankPaymentCommunicationChannelCode",
+                    "description": "Coded representation of the communication channel for payments in a bank. Example: 3",
+                    "format": "string"
+                },
+                {
+                    "name": "BankPaymentCommunicationChannelName",
+                    "description": "Name of a BankPaymentCommunicationChannel. Example: EFT",
+                    "format": "string"
+                },
+                {
+                    "name": "ValidityStartDate",
+                    "description": "Date on which the bank account prenote entry becomes valid. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "PlannedValidityEndDate",
+                    "description": "Date on which the validity of a bank acocunt prenote entry is planned to end. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "ValidityEndDate",
+                    "description": "Date on which the validity of the bank account prenote entry ends. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "BankAccountDebitIndicator",
+                    "description": "Indicates whether the bank account will be debited by the bank account prenote entry or not.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "BankAccountAvailableAmountRelevanceIndicator",
+                    "description": "Indicates whether the bank account prenote entry is relevant for the calculation of the available amount of the bank account or not.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "LimitCheckDeactivationRequestedIndicator",
+                    "description": "Indicates whether deactivation of limit check was requested for processing the bank account prenote entry.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "AdditionalMaterialChecksDeactivationRequestedIndicator",
+                    "description": "Indicates whether deactivation of the all material checks (except limit check) is requested for processing the bank account prenote entry.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "ValidIndicator",
+                    "description": "Indicates whether the bank account prenote entry is valid or not.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "Note",
+                    "description": "A note about a bank account prenote entry. Example: Long Text",
+                    "format": "string"
+                },
+                {
+                    "name": "AdditionalNote",
+                    "description": "An additional note about a bank account prenote entry. Example: Short Text",
+                    "format": "string"
+                },
+                {
+                    "name": "MaterialCheckNote",
+                    "description": "A note for processing customer owned checks for a prenote entry. Example: Material Check Note",
+                    "format": "string"
+                },
+                {
+                    "name": "MaterialCheckAdditionalNote",
+                    "description": "An additional note for processing customer owned checks for a prenote entry. Example: AdChNt",
+                    "format": "string"
+                },
+                {
+                    "name": "BankAccountCurrencyAmount",
+                    "description": "Amount in the currency of a bank account.",
+                    "format": "string"
+                },
+                {
+                    "name": "TransactionCurrencyAmount",
+                    "description": "Amount in the currency of a business transaction.",
+                    "format": "string"
+                },
+                {
+                    "name": "Reference",
+                    "description": "References of the bank account prenote entry.",
+                    "format": "string"
+                },
+                {
+                    "name": "BusinessProcessChainAssignment",
+                    "description": "The Business Process Chain Assignment is the assignment of a bank prenote entry to a business process chain.",
+                    "format": "string"
+                },
+                {
+                    "name": "PaymentNotes",
+                    "description": "",
+                    "format": "array"
+                }
+            ]
+        }
+    ]
+}

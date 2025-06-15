@@ -1,0 +1,2869 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Loan Contract Payoff Request",
+        "version": "1.0.0",
+        "description": "\r\n\r\nA request from the borrower to a lender (financial institution) to fully or partially pay off a loan.\r\nYou can use this API to read a loan contract payoff request with the corresponding gross amount calculation results, the payment transaction instruction, and unpaid bank account billing entries.\r\nYou can also use this API to cancel an active or a completed payoff request, to calculate the gross payoff amount, or to create a full or partial payoff request. \r\n\r\nNote:\r\nThe entity data model for loan contract payoff request contains a subset of the attributes of the business object of loan contract payoff request.\r\n\r\nRemark:\r\nThe service Loan Contract Payoff Request is assigned to service group Transactional Banking.\r\n\r\nUse:\r\nLoan Contract Payoff Request can be used to create, display or cancel both Full Payoff requests and Partial Payoff requests for a particular loan account. Calculate Loan Contract Payoff Request is a request to calculate the gross payoff amount and the corresponding breakup of the gross payoff amount for both Full Payoff requests and Partial Payoff requests for a particular loan account. Propose Loan Contract Payoff Request is an inquiry to get the proposal with default values of parameters required for a Loan Contract Payoff Request. Cancel Loan Contract Payoff Request can be used to delete an existing loan contract payoff request."
+    },
+    "externalDocs": {
+        "description": "Business Documentation",
+        "url": "https://help.sap.com/docs/TRBK_S4HANA/d2151b51aacc4d82ad2861e007337fa2/0d74dd2cce9340489dc17a5d19fcf2b8.html"
+    },
+    "x-sap-api-type": "ODATAV4",
+    "x-sap-shortText": "Manage payoff requests for loan contracts using this synchronous inbound service",
+    "x-sap-software-min-version": "1.0",
+    "x-sap-ext-overview": [
+        {
+            "name": "Authentication Methods",
+            "values": [
+                {
+                    "text": "x509",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Service Group Name",
+            "values": [
+                {
+                    "text": "TRANSACTIONALBANKING",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Business Object",
+            "values": [
+                {
+                    "text": "Loan Contract Payoff Request",
+                    "format": "plain"
+                }
+            ]
+        }
+    ],
+    "security": [
+        {
+            "basicAuthentication": []
+        }
+    ],
+    "servers": [
+        {
+            "url": "https://{host}:{port}/sap/opu/odata4/sap/transactionalbanking/default/sap/loancontractpayoffrequest/0001",
+            "variables": {
+                "host": {
+                    "default": ""
+                },
+                "port": {
+                    "default": ""
+                }
+            }
+        }
+    ],
+    "x-sap-extensible": {
+        "supported": "no"
+    },
+    "tags": [
+        {
+            "name": "Loan Contract Payoff Requests"
+        }
+    ],
+    "paths": {
+        "/LoanContractPayoffRequests": {
+            "get": {
+                "summary": "Query Loan Contract Payoff Requests",
+                "description": "Is a request to query Loan Contract Payoff Requests",
+                "tags": [
+                    "Loan Contract Payoff Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)\n\nRequired filter properties:\n- LoanContractUUID",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "UUID",
+                                    "ID",
+                                    "LoanContractUUID",
+                                    "ChangeStateID",
+                                    "LifeCycleStatusCode",
+                                    "LifeCycleStatusName",
+                                    "ReasonCode",
+                                    "ReasonName",
+                                    "CancellationReasonCode",
+                                    "CancellationReasonName",
+                                    "LoanPaymentPlanChangeTypeCode",
+                                    "LoanPaymentPlanChangeTypeName",
+                                    "ValueDate",
+                                    "ExpectedPaymentDate",
+                                    "LastScheduledPaymentDate",
+                                    "CompletionDate",
+                                    "DueDate",
+                                    "FinalPaymentDate",
+                                    "NetAmount",
+                                    "GrossAmount",
+                                    "DailyInterestAmount",
+                                    "DailyInterestOnArrearsAmount",
+                                    "ActivationChargeAmount",
+                                    "NewInstalmentAmount",
+                                    "ImmediateCompletionRequiredIndicator",
+                                    "FullPayoffRequiredIndicator",
+                                    "ActivationChargeWaiverRequestedIndicator",
+                                    "ImmediateCompletionChargeWaiverRequestedIndicator",
+                                    "EarlyRepaymentCompensationRequiredIndicator",
+                                    "GrossAmountCalculationResult",
+                                    "BusinessProcessChainAssignment",
+                                    "PaymentTransactionInstruction"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "UnpaidBankAccountBillingEntries"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of LoanContractPayoffRequest",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.LoanContractPayoffRequest"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create Loan Contract Payoff Request",
+                "description": "Is a request to create a Loan Contract Payoff Request",
+                "tags": [
+                    "Loan Contract Payoff Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Loan Contract Payoff Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.LoanContractPayoffRequest-create"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.LoanContractPayoffRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/LoanContractPayoffRequests/{UUID}": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "A UUID is a  universal unique identifier of a LoanContractPayoffRequest.  \nGDT: NOSC_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Read Loan Contract Payoff Request by UUID",
+                "description": "Is a request to read a Loan Contract Payoff Request",
+                "tags": [
+                    "Loan Contract Payoff Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "UUID",
+                                    "ID",
+                                    "LoanContractUUID",
+                                    "ChangeStateID",
+                                    "LifeCycleStatusCode",
+                                    "LifeCycleStatusName",
+                                    "ReasonCode",
+                                    "ReasonName",
+                                    "CancellationReasonCode",
+                                    "CancellationReasonName",
+                                    "LoanPaymentPlanChangeTypeCode",
+                                    "LoanPaymentPlanChangeTypeName",
+                                    "ValueDate",
+                                    "ExpectedPaymentDate",
+                                    "LastScheduledPaymentDate",
+                                    "CompletionDate",
+                                    "DueDate",
+                                    "FinalPaymentDate",
+                                    "NetAmount",
+                                    "GrossAmount",
+                                    "DailyInterestAmount",
+                                    "DailyInterestOnArrearsAmount",
+                                    "ActivationChargeAmount",
+                                    "NewInstalmentAmount",
+                                    "ImmediateCompletionRequiredIndicator",
+                                    "FullPayoffRequiredIndicator",
+                                    "ActivationChargeWaiverRequestedIndicator",
+                                    "ImmediateCompletionChargeWaiverRequestedIndicator",
+                                    "EarlyRepaymentCompensationRequiredIndicator",
+                                    "GrossAmountCalculationResult",
+                                    "BusinessProcessChainAssignment",
+                                    "PaymentTransactionInstruction"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "UnpaidBankAccountBillingEntries"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.LoanContractPayoffRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/LoanContractPayoffRequests/{UUID}/SAP__self.CancelLoanContractPayoffRequest": {
+            "post": {
+                "summary": "Cancel Loan Contract Payoff Request",
+                "description": "Is a request to cancel an individual existing LoanContractPayoffRequest. CancelLoanContractPayoffRequest action is bound to LoanContractPayoffRequest entity.",
+                "tags": [
+                    "Loan Contract Payoff Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "UUID",
+                        "in": "path",
+                        "required": true,
+                        "description": "A UUID is a  universal unique identifier of a LoanContractPayoffRequest.  \nGDT: NOSC_UUID",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "01234567-89ab-cdef-0123-456789abcdef"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Action parameters",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "CancellationReasonCode": {
+                                        "type": "string",
+                                        "maxLength": 4
+                                    },
+                                    "BusinessProcessChainAssignment": {
+                                        "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.BusinessProcessChainAssignment"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.LoanContractPayoffRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/LoanContractPayoffRequests/{UUID}/UnpaidBankAccountBillingEntries": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "A UUID is a  universal unique identifier of a LoanContractPayoffRequest.  \nGDT: NOSC_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Query Unpaid Bank Account Billing Entry",
+                "description": "Is a request to query Unpaid Bank Account Billing Entry",
+                "tags": [
+                    "Loan Contract Payoff Requests"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "ID",
+                                    "DueDate",
+                                    "Amount",
+                                    "BankContractFinancialConditionTypeCode",
+                                    "BankContractFinancialConditionTypeName",
+                                    "SelectedIndicator"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of UnpaidBankAccountBillingEntry",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.UnpaidBankAccountBillingEntry"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/CalculateFullLoanContractPayoffRequest": {
+            "post": {
+                "summary": "Calculate Full Loan Contract PayoffRequest",
+                "description": "Is a request to calculate the gross payoff amount and the corresponding breakup of the gross payoff amount of a new full LoanContractPayoffRequest. Note:The fields marked as nullable can be passed with blank value. But the field name has to be passed always. Remark:Bank Account Billing is a process that determines amounts that a holder of a bank account is expected to pay for a specified period. As of CB4HANA 100 the gross amount calculation result is based exclusively on the completeness of the list of unpaid bank account billing items specified by this node. No validation will be done on completeness of the list. Example:If there are 3 UnpaidBankAccountBillingEntries with following IDs: UnpaidBankAccountBillingEntry  ID1 = 100 EUR,  UnpaidBankAccountBillingEntry  ID2 = 120 EUR, UnpaidBankAccountBillingEntry  ID3 = 150 EUR  And if 'UnpaidBankAccountBillingEntry ID1' is to be included in the calculation of a full payoff, then it is necessary to pass the complete list of unpaid bank account billing items in order to determine the correct gross payoff amount. i.e., the IDs need to be passed as below: ID1 -> Selected Indicator as TRUE ID2 -> Selected Indicator as FALSE ID2 -> Selected Indicator as FALSE",
+                "tags": [
+                    "Loan Contract Payoff Requests"
+                ],
+                "requestBody": {
+                    "description": "Action parameters",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "LoanContractUUID": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                                        "title": "A globally unique identifier for a LoanContract.",
+                                        "description": "GDT: NOSC_UUID"
+                                    },
+                                    "ReasonCode": {
+                                        "type": "string",
+                                        "maxLength": 4,
+                                        "example": "1",
+                                        "title": "A ReasonCode is the coded representation of the reason for the payoff.",
+                                        "description": "GDT: LoanContractPayoffRequestReasonCode"
+                                    },
+                                    "ValueDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2017-04-13",
+                                        "title": "A ValueDate is the value date of the payoff.",
+                                        "description": "GDT: Date"
+                                    },
+                                    "ExpectedPaymentDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2017-04-13",
+                                        "title": "An ExpectedPaymentDate is the date on which the payment to payoff of loan is expected.",
+                                        "description": "GDT: DateIntegrity Condition:The ExpectedPaymentDate cannot be before the  LastScheduledPaymentDate of the payoff request."
+                                    },
+                                    "LastScheduledPaymentDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2017-04-13",
+                                        "title": "The date on which last scheduled payment is to be made before payoff.",
+                                        "description": "GDT: Date"
+                                    },
+                                    "ImmediateCompletionRequiredIndicator": {
+                                        "type": "string",
+                                        "maxLength": 1,
+                                        "example": "X",
+                                        "title": "Indicates whether immediate completion is required for a LoanContractPayoffRequest or not.",
+                                        "description": "GDT: Indicator"
+                                    },
+                                    "ActivationChargeWaiverRequestedIndicator": {
+                                        "type": "string",
+                                        "maxLength": 1,
+                                        "example": "X",
+                                        "title": "Indicates whether a charge is applied for a activated loan contract payoff request or not.",
+                                        "description": "GDT: Indicator"
+                                    },
+                                    "ImmediateCompletionChargeWaiverRequestedIndicator": {
+                                        "type": "string",
+                                        "maxLength": 1,
+                                        "example": "X",
+                                        "title": "Indicates whether a charge is applied for immediate completion of  loan contract payoff request or not.",
+                                        "description": "GDT: Indicator"
+                                    },
+                                    "EarlyRepaymentCompensationRequiredIndicator": {
+                                        "type": "string",
+                                        "maxLength": 1,
+                                        "example": "X",
+                                        "title": "Indicates whether early repayment compensation is required or not.",
+                                        "description": "GDT: Indicator"
+                                    },
+                                    "UnpaidBankAccountBillingEntry": {
+                                        "type": "array",
+                                        "items": {
+                                            "nullable": true,
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.BankAccountBillingEntry"
+                                                }
+                                            ]
+                                        },
+                                        "title": "UnpaidBankAccountBillingEntry is an entry of bank account billing which is billed but not paid.",
+                                        "description": "GDT: UnpaidBankAccountBillingItem"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.LoanContractPayoffRequest"
+                                        }
+                                    ],
+                                    "title": "Calculate Full Loan Contract PayoffRequest",
+                                    "description": "A Loan Contract Payoff Request is a request from the borrower to a lender (financial institution) to pay off a loan contract."
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/CalculatePartialLoanContractPayoffRequest": {
+            "post": {
+                "summary": "Calculate Partial Loan Contract Payoff Request",
+                "description": "Is a request to calculate the gross payoff amount and the corresponding breakup of the gross payoff amount of a new partial LoanContractPayoffRequest. Note:The fields marked as nullable can be passed with blank value. But the field name has to be passed always. Remark:As of CB4HANA 100 the gross amount calculation result is based exclusively on the completeness of the list of unpaid bank account billing items specified by this node. No validation will be done on completeness of the list. Example:If there are 3 UnpaidBankAccountBillingEntries with following IDs: UnpaidBankAccountBillingEntry  ID1 = 100 EUR, UnpaidBankAccountBillingEntry  ID2 = 120 EUR, UnpaidBankAccountBillingEntry  ID3 = 150 EUR  And if 'UnpaidBankAccountBillingEntry ID1' is to be included in the calculation of a partial payoff, then it is necessary to pass the complete list of unpaid bank account billing items in order to determine the correct gross payoff amount. i.e., the IDs need to be passed as below: ID1 -> Selected Indicator as TRUE ID2 -> Selected Indicator as FALSE ID2 -> Selected Indicator as FALSE",
+                "tags": [
+                    "Loan Contract Payoff Requests"
+                ],
+                "requestBody": {
+                    "description": "Action parameters",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "LoanContractUUID": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                                        "title": "A globally unique identifier for a LoanContract.",
+                                        "description": "GDT: NOSC_UUID"
+                                    },
+                                    "ReasonCode": {
+                                        "type": "string",
+                                        "maxLength": 4,
+                                        "example": "1",
+                                        "title": "A ReasonCode is the coded representation of the reason for the payoff.",
+                                        "description": "GDT: LoanContractPayoffRequestReasonCode"
+                                    },
+                                    "LoanPaymentPlanChangeTypeCode": {
+                                        "type": "string",
+                                        "maxLength": 2,
+                                        "example": "1",
+                                        "title": "A LoanPaymentPlanChangeTypeCode is a coded representation of the type of a LoanPaymentPlanChange.",
+                                        "description": "GDT: LoanPaymentPlanChangeTypeCode"
+                                    },
+                                    "ValueDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2017-04-13",
+                                        "title": "A ValueDate is the value date of the payoff.",
+                                        "description": "GDT: Date"
+                                    },
+                                    "ExpectedPaymentDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2017-04-13",
+                                        "title": "An ExpectedPaymentDate is the date on which the payment to payoff of loan is expected.",
+                                        "description": "GDT: Date"
+                                    },
+                                    "DueDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2017-04-13",
+                                        "title": "A PayoffDueDate is the date on which the payoff  is due.",
+                                        "description": "GDT: Date"
+                                    },
+                                    "NetAmount": {
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount"
+                                            }
+                                        ],
+                                        "title": "A NetAmount is the net amount of the loan contract payoff request.",
+                                        "description": "GDT: Amount"
+                                    },
+                                    "ImmediateCompletionRequiredIndicator": {
+                                        "type": "string",
+                                        "maxLength": 1,
+                                        "example": "X",
+                                        "title": "Indicates whether immediate completion is required for a LoanContractPayoffRequest or not.",
+                                        "description": "GDT: Indicator"
+                                    },
+                                    "ActivationChargeWaiverRequestedIndicator": {
+                                        "type": "string",
+                                        "maxLength": 1,
+                                        "example": "X",
+                                        "title": "Indicates whether a charge is applied for a activated loan contract payoff request or not.",
+                                        "description": "GDT: Indicator"
+                                    },
+                                    "ImmediateCompletionChargeWaiverRequestedIndicator": {
+                                        "type": "string",
+                                        "maxLength": 1,
+                                        "example": "X",
+                                        "title": "Indicates whether a charge is applied for immediate completion of  loan contract payoff request or not.",
+                                        "description": "GDT: Indicator"
+                                    },
+                                    "EarlyRepaymentCompensationRequiredIndicator": {
+                                        "type": "string",
+                                        "maxLength": 1,
+                                        "example": "X",
+                                        "title": "Indicates whether early repayment compensation is required or not.",
+                                        "description": "GDT: Indicator"
+                                    },
+                                    "UnpaidBankAccountBillingEntry": {
+                                        "type": "array",
+                                        "items": {
+                                            "nullable": true,
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.BankAccountBillingEntry"
+                                                }
+                                            ]
+                                        },
+                                        "title": "UnpaidBankAccountBillingEntry is an entry of bank account billing which is billed but not paid.",
+                                        "description": "GDT: UnpaidBankAccountBillingItem"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.LoanContractPayoffRequest"
+                                        }
+                                    ],
+                                    "title": "Calculate Partial Loan Contract Payoff Request",
+                                    "description": "A Loan Contract Payoff Request is a request from the borrower to a lender (financial institution) to pay off a loan contract."
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/ProposeLoanContractPayoffRequest": {
+            "post": {
+                "summary": "Propose Loan Contract Payoff Request",
+                "description": "Is an inquiry to get the proposal with default values of parameters including Unpaid Bank Account Billing Entry required to create a loan contract payoff request.Note:The fields marked as nullable can be passed with blank value. But the field name has to be passed always.",
+                "tags": [
+                    "Loan Contract Payoff Requests"
+                ],
+                "requestBody": {
+                    "description": "Action parameters",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "LoanContractUUID": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                                        "title": "A globally unique identifier for a LoanContract.",
+                                        "description": "GDT: NOSC_UUID"
+                                    },
+                                    "FullPayoffRequiredIndicator": {
+                                        "type": "string",
+                                        "maxLength": 1,
+                                        "example": "TRUE",
+                                        "title": "A FullPayoffRequiredIndicator indicates whether a full payoff is required for a loan contract payoff or not.",
+                                        "description": "GDT: Indicator"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.ProposeLoanContractPayoffRequest"
+                                        }
+                                    ],
+                                    "title": "Propose Loan Contract Payoff Request",
+                                    "description": "A Proposed Loan Contract Payoff Request is the return for the ProposeLoanLoanContractPayoffRequest action.This will hold the default values and the unpaid bank account billing entries which can be used for the creation of a full or partial, binding or non-binding payoff request."
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/$batch": {
+            "post": {
+                "summary": "Send a group of requests",
+                "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).\n\n*Please note that \"Try it out\" is not supported for this request.*",
+                "tags": [
+                    "Batch Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Batch request",
+                    "content": {
+                        "multipart/mixed;boundary=request-separator": {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET LoanContractPayoffRequests HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Batch response",
+                        "content": {
+                            "multipart/mixed": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "basicAuthentication": {
+                "type": "http",
+                "scheme": "basic"
+            }
+        },
+        "schemas": {
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.LoanContractPayoffRequest": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is a  universal unique identifier of a LoanContractPayoffRequest.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "71",
+                        "title": "An ID is an identifier of the LoanContractPayoffRequest.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. Remark: Either 'ID' or 'LoanContractUUID' is a required filter criteria.\nGDT: LoanContractPayoffRequestID"
+                    },
+                    "LoanContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "An internal ID of Loan Contract.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. Remark: Either 'ID' or 'LoanContractUUID' is a required filter criteria.\nGDT: NOSC_UUID"
+                    },
+                    "ChangeStateID": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "20200309121401.6154150",
+                        "title": "Identifies a change state.",
+                        "description": "GDT: ChangeStateID"
+                    },
+                    "LifeCycleStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "5",
+                        "title": "A LifeCycleStatusCode is the coded representation of the life cycle status of a LoanContractPayoffRequest.",
+                        "description": "The values for the GDT LoanContractPayoffRequestLifeCycleStatusCode are: \n1 - In Preparation \n2 - Discarded \n3 - Active \n4 - Deactivated \n5 - Completed \n6 - Cancelled \n7 - In Release for Activation\n8 - InRelease for Reactivation \n9 - In Release for Deactivation \n10 - In Release for Cancellation\nFilter: \nOnly 'Eq' & 'Or' is supported as logical operator. \nDefault: If LifeCycleStatusCode is not specified as a filter criteria, then code value \"3 - Active\" will be used by default.\nGDT: LoanContractPayoffRequestLifeCycleStatusCode"
+                    },
+                    "LifeCycleStatusName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Completed",
+                        "title": "Name of a LifeCycleStatusCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "A ReasonCode is the coded representation of the reason for the payoff.",
+                        "description": "The values for the GDT LoanContractPayoffRequestReasonCode are: \n1 - Borrower Decision \n2 - Lack of Reliability \n3 - Reason Unspecified\nFilter: Only 'Eq' is supported as logical operator.\nGDT: LoanContractPayoffRequestReasonCode"
+                    },
+                    "ReasonName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Borrower Decision",
+                        "title": "Is the name of the reason code",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "CancellationReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "A CancellationReasonCode is the coded representation of the reason for the cancellation of a loan contract payoff request.",
+                        "description": "The values for the GDT LoanContractPayoffRequestCancellationReasonCode  are: \n1 - Borrower Decision \n2 - Editing Error \n3 - Reason Unspecified\nFilter: Only 'Eq' is supported as logical operator.\nGDT: LoanContractPayoffRequestCancellationReasonCode"
+                    },
+                    "CancellationReasonName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Borrower Decision",
+                        "title": "Is the name of a CancellationReasonCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "LoanPaymentPlanChangeTypeCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "A LoanPaymentPlanChangeTypeCode is a coded representation of the type of a LoanPaymentPlanChange.",
+                        "description": "The values for the GDT LoanPaymentPlanChangeTypeCode are: \n1 - Without Term End Change \n2 - With Term End Change\nRemark: LoanPaymentPlanChangeTypeCode is applicable only when the FullPayoffIndicator is 'FALSE'.\nFilter: Only 'Eq' is supported as logical operator.\nGDT: LoanPaymentPlanChangeTypeCode"
+                    },
+                    "LoanPaymentPlanChangeTypeName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Without Term End Change",
+                        "title": "Is the name of a LoanPaymentPlanChangeTypeCode.",
+                        "description": "\nRemark: LoanPaymentPlanChangeTypeName is applicable only when the FullPayoffIndicator is 'FALSE'.\nGDT: MEDIUM_Name"
+                    },
+                    "ValueDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "A ValueDate is the value date of the payoff.",
+                        "description": "Remark: If not specified, the ExpectedPaymentDate will be used as default.\nGDT: Date"
+                    },
+                    "ExpectedPaymentDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "An ExpectedPaymentDate is the date on which the payment to payoff of loan is expected.",
+                        "description": "Remark: ExpectedPaymentDate is the date on which the incoming payoff amount made by the borrower is expected.\nDefault: If not specified, the next working day of current posting date of the account management system will be used as default.\nConstraint: The ExpectedPaymentDate cannot be before the  LastScheduledPaymentDate of the payoff request.\nGDT: Date"
+                    },
+                    "LastScheduledPaymentDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The date on which last scheduled payment is to be made before payoff.",
+                        "description": "Remark: LastScheduledPaymentDate is applicable only when the FullPayoffIndicator is 'TRUE'.\nDefault: If not specified then this date is the current posting  date of the account management system.\nGDT: Date"
+                    },
+                    "CompletionDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "A Completion Date is the  date on which the loan contract payoff request is completed.",
+                        "description": "GDT: Date"
+                    },
+                    "DueDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "A PayoffDueDate is the date on which the payoff  is due.",
+                        "description": "Remark: It indicates the due date for payoff receivables(net payoff amount and payoff charges ).   This date is applicable only when the FullPayoffIndicator is 'FALSE'.\nDefault: Default value for this date is the ValueDate.\nGDT: Date"
+                    },
+                    "FinalPaymentDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Indicates whether the bank account will be debited by the bank account prenote entry or not.",
+                        "description": "GDT: Date"
+                    },
+                    "NetAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "A NetAmount is the net amount of the loan contract payoff request.",
+                        "description": "Remark: The net amount reduces the outstanding principal balance..\nNetAmount is includeda as a part of gross amount.\nGDT: Amount"
+                    },
+                    "GrossAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "A GrossAmount is the gross amount of the loan contract payoff request",
+                        "description": "GDT: Amount"
+                    },
+                    "DailyInterestAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "A DailyInterestAmount is the daily amount of the interest calculated for the value date of the loan contract payoff request.",
+                        "description": "Remark: The daily interest amount is applicable only when the FullPayoffIndicator is 'TRUE'. The daily interest is calculated from next day of  LastScheduledPaymentDate to the ValueDate of the payoff request.\nGDT: Amount"
+                    },
+                    "DailyInterestOnArrearsAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "A DailyInterestOnArrearsAmount is the daily amount of the interest on arrears calculated for the value date of the loan contract payoff request. ",
+                        "description": "The daily interest on arrears amount is applicable only when the FullPayoffIndicator is 'True'. The daily interest on arrears is calculated for overdue open items on the ValueDate of the payoff request.\nGDT: Amount"
+                    },
+                    "ActivationChargeAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "An ActivationChargeAmount is the charge amount for activation.",
+                        "description": "GDT: Amount"
+                    },
+                    "NewInstalmentAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "NewInstallmentAmount is the  installment amount after the LoanContractPayoff Request.",
+                        "description": "Remark: This is applicable when FullPayoffRequiredIndicator is false and LoanPaymentPlanChangeTypeCode is 1 (Keep the term unchanged).\nGDT: Amount"
+                    },
+                    "ImmediateCompletionRequiredIndicator": {
+                        "type": "boolean",
+                        "title": "An ImmediateCompletionRequiredIndicator indicates whether immediate completion is required for a LoanContractPayoffRequest or not.",
+                        "description": "Remark: If ImmediateCompletionRequiredIndicator is TRUE, then it is a binding payoff.If ImmediateCompletionRequiredIndicator is FALSE, then it is a non-binding payoff.\nGDT: Indicator"
+                    },
+                    "FullPayoffRequiredIndicator": {
+                        "type": "boolean",
+                        "title": "A FullPayoffRequiredIndicator indicates whether a full payoff is required for a loan contract payoff or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "ActivationChargeWaiverRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether a charge is applied for a activated loan contract payoff request or not.",
+                        "description": "Remark:ActivationChargeWaiverRequestedIndicator is applicable only if ImmediateCompletionRequiredIndicator is FALSE.\nGDT: Indicator"
+                    },
+                    "ImmediateCompletionChargeWaiverRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether a charge is applied for immediate completion of  loan contract payoff request or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "EarlyRepaymentCompensationRequiredIndicator": {
+                        "type": "boolean",
+                        "title": "An EarlyRepaymentCompensationRequiredIndicator is an indicator of whether early repayment compensation is required or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "GrossAmountCalculationResult": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.GrossAmountCalculationResult"
+                            }
+                        ],
+                        "title": "Gross Amount Calculation Result",
+                        "description": "Remark: The calculation of gross payoff amount result includes calculations of key figures such as interest and charges that are relevant for payoff.This includes due and overdue items existing at the time of calculation.GrossAmountCalculationResult will be calculated and returned only in context with the GET operation using the key parameter."
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.BusinessProcessChainAssignment"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of Loan Contract Payoff Request to a business process chain.",
+                        "description": "Default: If BankingBusinessTransactionTypeCode is not specfiied,code value \"200016 - Loan Contract Payoff\" will be used by default.\nBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "PaymentTransactionInstruction": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.PaymentTransactionInstruction"
+                        },
+                        "title": "A Payment Transaction Instruction is an instruction for payment transactions related to the loan contract.",
+                        "description": "Remark: PaymentTransactionInstruction holds data only for the process result type \"Payoff Payment\"(BDT BankingBusinessTransactionProcessingResultPaymentTypeCode with Code Value = \"14 - Payoff Payment\").\"PaymentTransactionInstruction is only supported in READ by UUID operation.Note: For a LoanContractPayoffRequest, the resulting payment transaction is always a debit transaction.Hence BankContractPaymentTransactionInstructionTypeCodes corresponding to debit transactions are supported.\nBkContrPaytTransacInstrnFSElmnts"
+                    },
+                    "UnpaidBankAccountBillingEntries": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.UnpaidBankAccountBillingEntry"
+                        }
+                    }
+                },
+                "title": "Loan Contract Payoff Request",
+                "description": "A Loan Contract Payoff Request is a request from the borrower to a lender (financial institution) to pay off a loan contract."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.LoanContractPayoffRequest-create": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is a  universal unique identifier of a LoanContractPayoffRequest.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "LoanContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "An internal ID of Loan Contract.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. Remark: Either 'ID' or 'LoanContractUUID' is a required filter criteria.\nGDT: NOSC_UUID"
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "A ReasonCode is the coded representation of the reason for the payoff.",
+                        "description": "The values for the GDT LoanContractPayoffRequestReasonCode are: \n1 - Borrower Decision \n2 - Lack of Reliability \n3 - Reason Unspecified\nFilter: Only 'Eq' is supported as logical operator.\nGDT: LoanContractPayoffRequestReasonCode"
+                    },
+                    "NetAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "A NetAmount is the net amount of the loan contract payoff request.",
+                        "description": "Remark: The net amount reduces the outstanding principal balance..\nNetAmount is includeda as a part of gross amount.\nGDT: Amount"
+                    },
+                    "GrossAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "A GrossAmount is the gross amount of the loan contract payoff request",
+                        "description": "GDT: Amount"
+                    },
+                    "DailyInterestAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "A DailyInterestAmount is the daily amount of the interest calculated for the value date of the loan contract payoff request.",
+                        "description": "Remark: The daily interest amount is applicable only when the FullPayoffIndicator is 'TRUE'. The daily interest is calculated from next day of  LastScheduledPaymentDate to the ValueDate of the payoff request.\nGDT: Amount"
+                    },
+                    "DailyInterestOnArrearsAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "A DailyInterestOnArrearsAmount is the daily amount of the interest on arrears calculated for the value date of the loan contract payoff request. ",
+                        "description": "The daily interest on arrears amount is applicable only when the FullPayoffIndicator is 'True'. The daily interest on arrears is calculated for overdue open items on the ValueDate of the payoff request.\nGDT: Amount"
+                    },
+                    "ActivationChargeAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "An ActivationChargeAmount is the charge amount for activation.",
+                        "description": "GDT: Amount"
+                    },
+                    "NewInstalmentAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "NewInstallmentAmount is the  installment amount after the LoanContractPayoff Request.",
+                        "description": "Remark: This is applicable when FullPayoffRequiredIndicator is false and LoanPaymentPlanChangeTypeCode is 1 (Keep the term unchanged).\nGDT: Amount"
+                    },
+                    "ImmediateCompletionRequiredIndicator": {
+                        "type": "boolean",
+                        "title": "An ImmediateCompletionRequiredIndicator indicates whether immediate completion is required for a LoanContractPayoffRequest or not.",
+                        "description": "Remark: If ImmediateCompletionRequiredIndicator is TRUE, then it is a binding payoff.If ImmediateCompletionRequiredIndicator is FALSE, then it is a non-binding payoff.\nGDT: Indicator"
+                    },
+                    "FullPayoffRequiredIndicator": {
+                        "type": "boolean",
+                        "title": "A FullPayoffRequiredIndicator indicates whether a full payoff is required for a loan contract payoff or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "ActivationChargeWaiverRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether a charge is applied for a activated loan contract payoff request or not.",
+                        "description": "Remark:ActivationChargeWaiverRequestedIndicator is applicable only if ImmediateCompletionRequiredIndicator is FALSE.\nGDT: Indicator"
+                    },
+                    "ImmediateCompletionChargeWaiverRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether a charge is applied for immediate completion of  loan contract payoff request or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "EarlyRepaymentCompensationRequiredIndicator": {
+                        "type": "boolean",
+                        "title": "An EarlyRepaymentCompensationRequiredIndicator is an indicator of whether early repayment compensation is required or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "GrossAmountCalculationResult": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.GrossAmountCalculationResult-create"
+                            }
+                        ],
+                        "title": "Gross Amount Calculation Result",
+                        "description": "Remark: The calculation of gross payoff amount result includes calculations of key figures such as interest and charges that are relevant for payoff.This includes due and overdue items existing at the time of calculation.GrossAmountCalculationResult will be calculated and returned only in context with the GET operation using the key parameter."
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.BusinessProcessChainAssignment-create"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of Loan Contract Payoff Request to a business process chain.",
+                        "description": "Default: If BankingBusinessTransactionTypeCode is not specfiied,code value \"200016 - Loan Contract Payoff\" will be used by default.\nBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "PaymentTransactionInstruction": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.PaymentTransactionInstruction-create"
+                        },
+                        "title": "A Payment Transaction Instruction is an instruction for payment transactions related to the loan contract.",
+                        "description": "Remark: PaymentTransactionInstruction holds data only for the process result type \"Payoff Payment\"(BDT BankingBusinessTransactionProcessingResultPaymentTypeCode with Code Value = \"14 - Payoff Payment\").\"PaymentTransactionInstruction is only supported in READ by UUID operation.Note: For a LoanContractPayoffRequest, the resulting payment transaction is always a debit transaction.Hence BankContractPaymentTransactionInstructionTypeCodes corresponding to debit transactions are supported.\nBkContrPaytTransacInstrnFSElmnts"
+                    },
+                    "UnpaidBankAccountBillingEntries": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.UnpaidBankAccountBillingEntry-create"
+                        }
+                    }
+                },
+                "required": [
+                    "UUID"
+                ],
+                "title": "Loan Contract Payoff Request (for create)",
+                "description": "A Loan Contract Payoff Request is a request from the borrower to a lender (financial institution) to pay off a loan contract."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.LoanContractPayoffRequest-update": {
+                "type": "object",
+                "properties": {
+                    "ReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "A ReasonCode is the coded representation of the reason for the payoff.",
+                        "description": "The values for the GDT LoanContractPayoffRequestReasonCode are: \n1 - Borrower Decision \n2 - Lack of Reliability \n3 - Reason Unspecified\nFilter: Only 'Eq' is supported as logical operator.\nGDT: LoanContractPayoffRequestReasonCode"
+                    },
+                    "NetAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "A NetAmount is the net amount of the loan contract payoff request.",
+                        "description": "Remark: The net amount reduces the outstanding principal balance..\nNetAmount is includeda as a part of gross amount.\nGDT: Amount"
+                    },
+                    "GrossAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "A GrossAmount is the gross amount of the loan contract payoff request",
+                        "description": "GDT: Amount"
+                    },
+                    "DailyInterestAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "A DailyInterestAmount is the daily amount of the interest calculated for the value date of the loan contract payoff request.",
+                        "description": "Remark: The daily interest amount is applicable only when the FullPayoffIndicator is 'TRUE'. The daily interest is calculated from next day of  LastScheduledPaymentDate to the ValueDate of the payoff request.\nGDT: Amount"
+                    },
+                    "DailyInterestOnArrearsAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "A DailyInterestOnArrearsAmount is the daily amount of the interest on arrears calculated for the value date of the loan contract payoff request. ",
+                        "description": "The daily interest on arrears amount is applicable only when the FullPayoffIndicator is 'True'. The daily interest on arrears is calculated for overdue open items on the ValueDate of the payoff request.\nGDT: Amount"
+                    },
+                    "ActivationChargeAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "An ActivationChargeAmount is the charge amount for activation.",
+                        "description": "GDT: Amount"
+                    },
+                    "NewInstalmentAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "NewInstallmentAmount is the  installment amount after the LoanContractPayoff Request.",
+                        "description": "Remark: This is applicable when FullPayoffRequiredIndicator is false and LoanPaymentPlanChangeTypeCode is 1 (Keep the term unchanged).\nGDT: Amount"
+                    },
+                    "ImmediateCompletionRequiredIndicator": {
+                        "type": "boolean",
+                        "title": "An ImmediateCompletionRequiredIndicator indicates whether immediate completion is required for a LoanContractPayoffRequest or not.",
+                        "description": "Remark: If ImmediateCompletionRequiredIndicator is TRUE, then it is a binding payoff.If ImmediateCompletionRequiredIndicator is FALSE, then it is a non-binding payoff.\nGDT: Indicator"
+                    },
+                    "FullPayoffRequiredIndicator": {
+                        "type": "boolean",
+                        "title": "A FullPayoffRequiredIndicator indicates whether a full payoff is required for a loan contract payoff or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "ActivationChargeWaiverRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether a charge is applied for a activated loan contract payoff request or not.",
+                        "description": "Remark:ActivationChargeWaiverRequestedIndicator is applicable only if ImmediateCompletionRequiredIndicator is FALSE.\nGDT: Indicator"
+                    },
+                    "ImmediateCompletionChargeWaiverRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether a charge is applied for immediate completion of  loan contract payoff request or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "EarlyRepaymentCompensationRequiredIndicator": {
+                        "type": "boolean",
+                        "title": "An EarlyRepaymentCompensationRequiredIndicator is an indicator of whether early repayment compensation is required or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "GrossAmountCalculationResult": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.GrossAmountCalculationResult-update"
+                            }
+                        ],
+                        "title": "Gross Amount Calculation Result",
+                        "description": "Remark: The calculation of gross payoff amount result includes calculations of key figures such as interest and charges that are relevant for payoff.This includes due and overdue items existing at the time of calculation.GrossAmountCalculationResult will be calculated and returned only in context with the GET operation using the key parameter."
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.BusinessProcessChainAssignment-update"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of Loan Contract Payoff Request to a business process chain.",
+                        "description": "Default: If BankingBusinessTransactionTypeCode is not specfiied,code value \"200016 - Loan Contract Payoff\" will be used by default.\nBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "PaymentTransactionInstruction": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.PaymentTransactionInstruction-update"
+                        },
+                        "title": "A Payment Transaction Instruction is an instruction for payment transactions related to the loan contract.",
+                        "description": "Remark: PaymentTransactionInstruction holds data only for the process result type \"Payoff Payment\"(BDT BankingBusinessTransactionProcessingResultPaymentTypeCode with Code Value = \"14 - Payoff Payment\").\"PaymentTransactionInstruction is only supported in READ by UUID operation.Note: For a LoanContractPayoffRequest, the resulting payment transaction is always a debit transaction.Hence BankContractPaymentTransactionInstructionTypeCodes corresponding to debit transactions are supported.\nBkContrPaytTransacInstrnFSElmnts"
+                    }
+                },
+                "title": "Loan Contract Payoff Request (for update)",
+                "description": "A Loan Contract Payoff Request is a request from the borrower to a lender (financial institution) to pay off a loan contract."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.ProposeLoanContractPayoffRequest": {
+                "type": "object",
+                "properties": {
+                    "LoanContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "An UUID of Loan Contract.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "A ReasonCode is the coded representation of the reason for the payoff.",
+                        "description": "The values for the GDT LoanContractPayoffRequestReasonCode are: \n1 - Borrower Decision \n2 - Lack of Reliability \n3 - Reason Unspecified\nGDT: LoanContractPayoffRequestReasonCode"
+                    },
+                    "ReasonName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Borrower Decision",
+                        "title": "Is the name of the reason code",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "LoanPaymentPlanChangeTypeCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "A LoanPaymentPlanChangeTypeCode is a coded representation of the type of a LoanPaymentPlanChange.",
+                        "description": "The values for the GDT LoanPaymentPlanChangeTypeCode are: \n1 - Without Term End Change \n2 - With Term End Change\nRemark: LoanPaymentPlanChangeTypeCode is applicable only when the FullPayoffIndicator is 'FALSE'.\nGDT: LoanPaymentPlanChangeTypeCode"
+                    },
+                    "LoanPaymentPlanChangeTypeName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Without Term End Change",
+                        "title": "Is the name of a LoanPaymentPlanChangeTypeCode.",
+                        "description": "\nRemark: LoanPaymentPlanChangeTypeName is applicable only when the FullPayoffIndicator is 'FALSE'.\nGDT: MEDIUM_Name"
+                    },
+                    "ValueDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "A ValueDate is the value date of the payoff.",
+                        "description": "Remark: If not specified, the ExpectedPaymentDate will be used as default.\nGDT: Date"
+                    },
+                    "DueDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13"
+                    },
+                    "ExpectedPaymentDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "An ExpectedPaymentDate is the date on which the payment to payoff of loan is expected.",
+                        "description": "Remark: ExpectedPaymentDate is the date on which the incoming payoff amount made by the borrower is expected.\nDefault: If not specified, the next working day of current posting date of the account management system will be used as default.\nConstraint: The ExpectedPaymentDate cannot be before the  LastScheduledPaymentDate of the payoff request.\nGDT: Date"
+                    },
+                    "LastScheduledPaymentDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The date on which last scheduled payment is to be made before payoff.",
+                        "description": "Remark: LastScheduledPaymentDate is applicable only when the FullPayoffIndicator is 'TRUE'.\nDefault: If not specified then this date is the current posting  date of the account management system.\nGDT: Date"
+                    },
+                    "FullPayoffRequiredIndicator": {
+                        "type": "boolean",
+                        "title": "A FullPayoffRequiredIndicator indicates whether a full payoff is required for a loan contract payoff or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "PaymentTransactionInstruction": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.PaymentTransactionInstruction"
+                        },
+                        "title": "An item describes a single element of a BankContractPaymentTransactionInstruction",
+                        "description": "The value for PaymentTransactionInstruction is proposed if a PaymentTransactionInstruction for 'Payoff' is maintained in the loan contract.Remark: PaymentTransactionInstruction holds data only for the process result type \"Payoff Payment\"(BDT BankingBusinessTransactionProcessingResultPaymentTypeCode with Code Value = \"14 - Payoff Payment\").\"PaymentTransactionInstruction is only supported in READ by UUID operation.Note: For a LoanContractPayoffRequest, the resulting payment transaction is always a debit transaction.Hence BankContractPaymentTransactionInstructionTypeCodes corresponding to debit transactions are supported.\nBkContrPaytTransacInstrnFSElmnts"
+                    },
+                    "UnpaidBankAccountBillingEntries": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.UnpaidBankAccountBillingEntry"
+                        }
+                    }
+                },
+                "title": "Proposed Loan Contract Payoff Request",
+                "description": "A Proposed Loan Contract Payoff Request is the return for the ProposeLoanLoanContractPayoffRequest action.This will hold the default values and the unpaid bank account billing entries which can be used for the creation of a full or partial, binding or non-binding payoff request."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.ProposeLoanContractPayoffRequest-create": {
+                "type": "object",
+                "properties": {
+                    "LoanContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "An UUID of Loan Contract.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "A ReasonCode is the coded representation of the reason for the payoff.",
+                        "description": "The values for the GDT LoanContractPayoffRequestReasonCode are: \n1 - Borrower Decision \n2 - Lack of Reliability \n3 - Reason Unspecified\nGDT: LoanContractPayoffRequestReasonCode"
+                    },
+                    "DueDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13"
+                    },
+                    "FullPayoffRequiredIndicator": {
+                        "type": "boolean",
+                        "title": "A FullPayoffRequiredIndicator indicates whether a full payoff is required for a loan contract payoff or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "PaymentTransactionInstruction": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.PaymentTransactionInstruction-create"
+                        },
+                        "title": "An item describes a single element of a BankContractPaymentTransactionInstruction",
+                        "description": "The value for PaymentTransactionInstruction is proposed if a PaymentTransactionInstruction for 'Payoff' is maintained in the loan contract.Remark: PaymentTransactionInstruction holds data only for the process result type \"Payoff Payment\"(BDT BankingBusinessTransactionProcessingResultPaymentTypeCode with Code Value = \"14 - Payoff Payment\").\"PaymentTransactionInstruction is only supported in READ by UUID operation.Note: For a LoanContractPayoffRequest, the resulting payment transaction is always a debit transaction.Hence BankContractPaymentTransactionInstructionTypeCodes corresponding to debit transactions are supported.\nBkContrPaytTransacInstrnFSElmnts"
+                    },
+                    "UnpaidBankAccountBillingEntries": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.UnpaidBankAccountBillingEntry-create"
+                        }
+                    }
+                },
+                "required": [
+                    "LoanContractUUID"
+                ],
+                "title": "Proposed Loan Contract Payoff Request (for create)",
+                "description": "A Proposed Loan Contract Payoff Request is the return for the ProposeLoanLoanContractPayoffRequest action.This will hold the default values and the unpaid bank account billing entries which can be used for the creation of a full or partial, binding or non-binding payoff request."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.ProposeLoanContractPayoffRequest-update": {
+                "type": "object",
+                "properties": {
+                    "ReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "A ReasonCode is the coded representation of the reason for the payoff.",
+                        "description": "The values for the GDT LoanContractPayoffRequestReasonCode are: \n1 - Borrower Decision \n2 - Lack of Reliability \n3 - Reason Unspecified\nGDT: LoanContractPayoffRequestReasonCode"
+                    },
+                    "DueDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13"
+                    },
+                    "FullPayoffRequiredIndicator": {
+                        "type": "boolean",
+                        "title": "A FullPayoffRequiredIndicator indicates whether a full payoff is required for a loan contract payoff or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "PaymentTransactionInstruction": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.PaymentTransactionInstruction-update"
+                        },
+                        "title": "An item describes a single element of a BankContractPaymentTransactionInstruction",
+                        "description": "The value for PaymentTransactionInstruction is proposed if a PaymentTransactionInstruction for 'Payoff' is maintained in the loan contract.Remark: PaymentTransactionInstruction holds data only for the process result type \"Payoff Payment\"(BDT BankingBusinessTransactionProcessingResultPaymentTypeCode with Code Value = \"14 - Payoff Payment\").\"PaymentTransactionInstruction is only supported in READ by UUID operation.Note: For a LoanContractPayoffRequest, the resulting payment transaction is always a debit transaction.Hence BankContractPaymentTransactionInstructionTypeCodes corresponding to debit transactions are supported.\nBkContrPaytTransacInstrnFSElmnts"
+                    }
+                },
+                "title": "Proposed Loan Contract Payoff Request (for update)",
+                "description": "A Proposed Loan Contract Payoff Request is the return for the ProposeLoanLoanContractPayoffRequest action.This will hold the default values and the unpaid bank account billing entries which can be used for the creation of a full or partial, binding or non-binding payoff request."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.UnpaidBankAccountBillingEntry": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "198494",
+                        "title": "A unique identifier for an entry of bank account billing.",
+                        "description": "GDT: BankAccountBillingEntryID"
+                    },
+                    "DueDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Date on which bank account billing entry is due.",
+                        "description": "GDT: Date"
+                    },
+                    "Amount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "The amount due of bank account billing entry.",
+                        "description": "GDT: Amount"
+                    },
+                    "BankContractFinancialConditionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "115050",
+                        "title": "BankContractFinancialConditionTypeCode is a coded representation of the type of a bank contract financial condition.",
+                        "description": "GDT: BankContractFinancialConditionTypeCode"
+                    },
+                    "BankContractFinancialConditionTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Transaction Charge - Penalty Charge",
+                        "title": "BankContractFinancialConditionTypeCode is a coded representation of the type of a bank contract financial condition.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "SelectedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether the bank account billing entry is selected to be paid with this loan contract payoff request or not.",
+                        "description": "GDT: Indicator"
+                    }
+                },
+                "title": "Unpaid Bank Account Billing Entry",
+                "description": "UnpaidBankAccountBillingEntry is an entry of bank account billing which is billed but not paid. Remark: In the GET use case, UnpaidBankAccountBillingEntry is only supported in READ by UUID operation. Bank Account Billing is a process that determines amounts that a holder of a bank account is expected to pay for a specified period. As of CB4HANA 100 the gross amount calculation result is based exclusively on the completeness of the list of unpaid bank account billing items specified by this node. No validation will be done on completeness of the list. Example:If there are 3 UnpaidBankAccountBillingEntries with following IDs: UnpaidBankAccountBillingEntry  ID1 = 100 EUR, UnpaidBankAccountBillingEntry  ID2 = 120 EUR, UnpaidBankAccountBillingEntry  ID3 = 150 EUR, And if 'UnpaidBankAccountBillingEntry  ID1' is to be included in the creation/calculation of a full/partial payoff, then it is necessary to pass the complete list of unpaid bank account billing items in order to determine the correct gross payoff amount.i.e., the IDs need to be passed as below: ID1 -> Selected Indicator as TRUE, ID2 -> Selected Indicator as FALSE, ID2 -> Selected Indicator as FALSE."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.UnpaidBankAccountBillingEntry-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "198494",
+                        "title": "A unique identifier for an entry of bank account billing.",
+                        "description": "GDT: BankAccountBillingEntryID"
+                    },
+                    "Amount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "The amount due of bank account billing entry.",
+                        "description": "GDT: Amount"
+                    },
+                    "SelectedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether the bank account billing entry is selected to be paid with this loan contract payoff request or not.",
+                        "description": "GDT: Indicator"
+                    }
+                },
+                "required": [
+                    "ID"
+                ],
+                "title": "Unpaid Bank Account Billing Entry (for create)",
+                "description": "UnpaidBankAccountBillingEntry is an entry of bank account billing which is billed but not paid. Remark: In the GET use case, UnpaidBankAccountBillingEntry is only supported in READ by UUID operation. Bank Account Billing is a process that determines amounts that a holder of a bank account is expected to pay for a specified period. As of CB4HANA 100 the gross amount calculation result is based exclusively on the completeness of the list of unpaid bank account billing items specified by this node. No validation will be done on completeness of the list. Example:If there are 3 UnpaidBankAccountBillingEntries with following IDs: UnpaidBankAccountBillingEntry  ID1 = 100 EUR, UnpaidBankAccountBillingEntry  ID2 = 120 EUR, UnpaidBankAccountBillingEntry  ID3 = 150 EUR, And if 'UnpaidBankAccountBillingEntry  ID1' is to be included in the creation/calculation of a full/partial payoff, then it is necessary to pass the complete list of unpaid bank account billing items in order to determine the correct gross payoff amount.i.e., the IDs need to be passed as below: ID1 -> Selected Indicator as TRUE, ID2 -> Selected Indicator as FALSE, ID2 -> Selected Indicator as FALSE."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.UnpaidBankAccountBillingEntry-update": {
+                "type": "object",
+                "properties": {
+                    "Amount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "The amount due of bank account billing entry.",
+                        "description": "GDT: Amount"
+                    },
+                    "SelectedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether the bank account billing entry is selected to be paid with this loan contract payoff request or not.",
+                        "description": "GDT: Indicator"
+                    }
+                },
+                "title": "Unpaid Bank Account Billing Entry (for update)",
+                "description": "UnpaidBankAccountBillingEntry is an entry of bank account billing which is billed but not paid. Remark: In the GET use case, UnpaidBankAccountBillingEntry is only supported in READ by UUID operation. Bank Account Billing is a process that determines amounts that a holder of a bank account is expected to pay for a specified period. As of CB4HANA 100 the gross amount calculation result is based exclusively on the completeness of the list of unpaid bank account billing items specified by this node. No validation will be done on completeness of the list. Example:If there are 3 UnpaidBankAccountBillingEntries with following IDs: UnpaidBankAccountBillingEntry  ID1 = 100 EUR, UnpaidBankAccountBillingEntry  ID2 = 120 EUR, UnpaidBankAccountBillingEntry  ID3 = 150 EUR, And if 'UnpaidBankAccountBillingEntry  ID1' is to be included in the creation/calculation of a full/partial payoff, then it is necessary to pass the complete list of unpaid bank account billing items in order to determine the correct gross payoff amount.i.e., the IDs need to be passed as below: ID1 -> Selected Indicator as TRUE, ID2 -> Selected Indicator as FALSE, ID2 -> Selected Indicator as FALSE."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-create": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount (for create)",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-update": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount (for update)",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.Bank": {
+                "type": "object",
+                "properties": {
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 11,
+                        "example": "TOLLDEWDXXX",
+                        "title": "Bank Identification Code (BIC) of the Society for Worldwide Interbank Financial Telecommunications (S.W.I.F.T.), see GDT BankStandardID.",
+                        "description": "GDT: BankStandardID"
+                    },
+                    "RoutingID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "90000001",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    },
+                    "CountryCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "DE",
+                        "title": "Country in which the bank identified earlier goes about its business. If the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here. Constraint: Only listID 3166-1 of listAgencyID 5 will be supported.",
+                        "description": "GDT: CountryCode"
+                    }
+                },
+                "title": "Bank",
+                "description": "A bank is a business entity that performs financial investment services and payment transactions. "
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.Bank-create": {
+                "type": "object",
+                "properties": {
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 11,
+                        "example": "TOLLDEWDXXX",
+                        "title": "Bank Identification Code (BIC) of the Society for Worldwide Interbank Financial Telecommunications (S.W.I.F.T.), see GDT BankStandardID.",
+                        "description": "GDT: BankStandardID"
+                    },
+                    "RoutingID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "90000001",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    },
+                    "CountryCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "DE",
+                        "title": "Country in which the bank identified earlier goes about its business. If the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here. Constraint: Only listID 3166-1 of listAgencyID 5 will be supported.",
+                        "description": "GDT: CountryCode"
+                    }
+                },
+                "title": "Bank (for create)",
+                "description": "A bank is a business entity that performs financial investment services and payment transactions. "
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.Bank-update": {
+                "type": "object",
+                "properties": {
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 11,
+                        "example": "TOLLDEWDXXX",
+                        "title": "Bank Identification Code (BIC) of the Society for Worldwide Interbank Financial Telecommunications (S.W.I.F.T.), see GDT BankStandardID.",
+                        "description": "GDT: BankStandardID"
+                    },
+                    "RoutingID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "90000001",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    },
+                    "CountryCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "DE",
+                        "title": "Country in which the bank identified earlier goes about its business. If the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here. Constraint: Only listID 3166-1 of listAgencyID 5 will be supported.",
+                        "description": "GDT: CountryCode"
+                    }
+                },
+                "title": "Bank (for update)",
+                "description": "A bank is a business entity that performs financial investment services and payment transactions. "
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.BankAccount": {
+                "type": "object",
+                "properties": {
+                    "HolderName": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "John Doe",
+                        "title": "A name of the account holder of a bank account.",
+                        "description": "GDT: BankAccountHolderName_V1"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "4711",
+                        "title": "Bank account number (Basic Bank Account Number, BBAN). An account number that is assigned by the account managing bank. It uniquely identifies a bank account in most countries only together with the bank",
+                        "description": "GDT: BankAccountID"
+                    },
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 34,
+                        "example": "DE58200505500000004711",
+                        "title": "International bank account number (International Bank Account Number, IBAN)",
+                        "description": "GDT: BankAccountStandardID"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "CurrencyCode is a coded representation of the currency of the bank account.",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "Bank": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Bank"
+                            }
+                        ],
+                        "title": "Bank where the account is held."
+                    }
+                },
+                "title": "Bank Account",
+                "description": "An account that holds funds in a bank and is subject to deposits and withdrawals."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.BankAccount-create": {
+                "type": "object",
+                "properties": {
+                    "HolderName": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "John Doe",
+                        "title": "A name of the account holder of a bank account.",
+                        "description": "GDT: BankAccountHolderName_V1"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "4711",
+                        "title": "Bank account number (Basic Bank Account Number, BBAN). An account number that is assigned by the account managing bank. It uniquely identifies a bank account in most countries only together with the bank",
+                        "description": "GDT: BankAccountID"
+                    },
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 34,
+                        "example": "DE58200505500000004711",
+                        "title": "International bank account number (International Bank Account Number, IBAN)",
+                        "description": "GDT: BankAccountStandardID"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "CurrencyCode is a coded representation of the currency of the bank account.",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "Bank": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Bank-create"
+                            }
+                        ],
+                        "title": "Bank where the account is held."
+                    }
+                },
+                "title": "Bank Account (for create)",
+                "description": "An account that holds funds in a bank and is subject to deposits and withdrawals."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.BankAccount-update": {
+                "type": "object",
+                "properties": {
+                    "HolderName": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "John Doe",
+                        "title": "A name of the account holder of a bank account.",
+                        "description": "GDT: BankAccountHolderName_V1"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "4711",
+                        "title": "Bank account number (Basic Bank Account Number, BBAN). An account number that is assigned by the account managing bank. It uniquely identifies a bank account in most countries only together with the bank",
+                        "description": "GDT: BankAccountID"
+                    },
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 34,
+                        "example": "DE58200505500000004711",
+                        "title": "International bank account number (International Bank Account Number, IBAN)",
+                        "description": "GDT: BankAccountStandardID"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "CurrencyCode is a coded representation of the currency of the bank account.",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "Bank": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Bank-update"
+                            }
+                        ],
+                        "title": "Bank where the account is held."
+                    }
+                },
+                "title": "Bank Account (for update)",
+                "description": "An account that holds funds in a bank and is subject to deposits and withdrawals."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.BankAccountBillingEntry": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "182456",
+                        "title": "A unique identifier for an entry of bank account billing.",
+                        "description": "GDT: BankAccountBillingEntryID"
+                    },
+                    "SelectedIndicator": {
+                        "type": "boolean",
+                        "nullable": true,
+                        "title": "Indicates whether the bank account billing entry is selected to be paid with this loan contract payoff request or not.",
+                        "description": "GDT: Indicator"
+                    }
+                },
+                "title": "Bank Account Billing Entry",
+                "description": "A BankAccountBillingEntry is an entry of bank account billing which is billed but not paid."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.BankAccountBillingEntry-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "182456",
+                        "title": "A unique identifier for an entry of bank account billing.",
+                        "description": "GDT: BankAccountBillingEntryID"
+                    },
+                    "SelectedIndicator": {
+                        "type": "boolean",
+                        "nullable": true,
+                        "title": "Indicates whether the bank account billing entry is selected to be paid with this loan contract payoff request or not.",
+                        "description": "GDT: Indicator"
+                    }
+                },
+                "title": "Bank Account Billing Entry (for create)",
+                "description": "A BankAccountBillingEntry is an entry of bank account billing which is billed but not paid."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.BankAccountBillingEntry-update": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "182456",
+                        "title": "A unique identifier for an entry of bank account billing.",
+                        "description": "GDT: BankAccountBillingEntryID"
+                    },
+                    "SelectedIndicator": {
+                        "type": "boolean",
+                        "nullable": true,
+                        "title": "Indicates whether the bank account billing entry is selected to be paid with this loan contract payoff request or not.",
+                        "description": "GDT: Indicator"
+                    }
+                },
+                "title": "Bank Account Billing Entry (for update)",
+                "description": "A BankAccountBillingEntry is an entry of bank account billing which is billed but not paid."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.BusinessProcessChainAssignment": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which Loan Contract Payoff Request is assigned to.",
+                        "description": "NOSC_UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "200016",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BDT: BankingBusinessTransactionTypeCode"
+                    },
+                    "BankingBusinessTransactionTypeName": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Loan Contract Payoff",
+                        "title": "Name of BankingBusinessTransactionTypeCode",
+                        "description": "GDT: EXTENDED_Name"
+                    }
+                },
+                "title": "Business Process Chain Assignment",
+                "description": "Business Process Chain Assignment is the assignment of Loan Contract Payoff Request to a business process chain."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.BusinessProcessChainAssignment-create": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which Loan Contract Payoff Request is assigned to.",
+                        "description": "NOSC_UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "200016",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for create)",
+                "description": "Business Process Chain Assignment is the assignment of Loan Contract Payoff Request to a business process chain."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.BusinessProcessChainAssignment-update": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which Loan Contract Payoff Request is assigned to.",
+                        "description": "NOSC_UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "200016",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for update)",
+                "description": "Business Process Chain Assignment is the assignment of Loan Contract Payoff Request to a business process chain."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.CreationDateCumulativeOverdueAmountSplit": {
+                "type": "object",
+                "properties": {
+                    "InterestAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "The current cumulative interest overdue for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "ChargeAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "The current  cumulative charges overdue for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "InterestOnArrearsAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "The current cumulative interest on arrears overdue for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "InstalmentAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "The current cumulative installment overdue for the bank account.",
+                        "description": "Note:For a full payoff the InstalmentAmount is included as part of the NetAmount.GDT: Amount"
+                    }
+                },
+                "title": "Creation Date Cumulative Overdue Amount Split",
+                "description": "Split of amount that is overdue cumulated upto the creation date of this loan contract payoff request.Remark:This node includes the amounts for which the due date is before the creation date of the loan contract payoff request."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.CreationDateCumulativeOverdueAmountSplit-create": {
+                "type": "object",
+                "properties": {
+                    "InterestAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "The current cumulative interest overdue for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "ChargeAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "The current  cumulative charges overdue for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "InterestOnArrearsAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "The current cumulative interest on arrears overdue for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "InstalmentAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "The current cumulative installment overdue for the bank account.",
+                        "description": "Note:For a full payoff the InstalmentAmount is included as part of the NetAmount.GDT: Amount"
+                    }
+                },
+                "title": "Creation Date Cumulative Overdue Amount Split (for create)",
+                "description": "Split of amount that is overdue cumulated upto the creation date of this loan contract payoff request.Remark:This node includes the amounts for which the due date is before the creation date of the loan contract payoff request."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.CreationDateCumulativeOverdueAmountSplit-update": {
+                "type": "object",
+                "properties": {
+                    "InterestAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "The current cumulative interest overdue for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "ChargeAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "The current  cumulative charges overdue for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "InterestOnArrearsAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "The current cumulative interest on arrears overdue for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "InstalmentAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "The current cumulative installment overdue for the bank account.",
+                        "description": "Note:For a full payoff the InstalmentAmount is included as part of the NetAmount.GDT: Amount"
+                    }
+                },
+                "title": "Creation Date Cumulative Overdue Amount Split (for update)",
+                "description": "Split of amount that is overdue cumulated upto the creation date of this loan contract payoff request.Remark:This node includes the amounts for which the due date is before the creation date of the loan contract payoff request."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.DirectDebitMandate": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "4711",
+                        "title": "A identifier of Direct Debit Mandate",
+                        "description": "GDT: DirectDebitMandateID"
+                    },
+                    "CreditorPartyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "DE82ZZZ00000001015",
+                        "title": "A unique identifier of a creditor party of direct debit mandate.",
+                        "description": "Constraint: Only 35 characters maximum are allowed.GDT: PartyID"
+                    }
+                },
+                "title": "Direct Debit Mandate",
+                "description": "The direct debit mandate used in a payment transaction instruction."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.DirectDebitMandate-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "4711",
+                        "title": "A identifier of Direct Debit Mandate",
+                        "description": "GDT: DirectDebitMandateID"
+                    },
+                    "CreditorPartyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "DE82ZZZ00000001015",
+                        "title": "A unique identifier of a creditor party of direct debit mandate.",
+                        "description": "Constraint: Only 35 characters maximum are allowed.GDT: PartyID"
+                    }
+                },
+                "title": "Direct Debit Mandate (for create)",
+                "description": "The direct debit mandate used in a payment transaction instruction."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.DirectDebitMandate-update": {
+                "type": "object",
+                "title": "Direct Debit Mandate (for update)",
+                "description": "The direct debit mandate used in a payment transaction instruction."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.GrossAmountCalculationResult": {
+                "type": "object",
+                "properties": {
+                    "EffectiveCapitalAmount": {
+                        "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount"
+                    },
+                    "EarlyRepaymentCompensationAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount"
+                            }
+                        ]
+                    },
+                    "ImmediateCompletionChargeAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount"
+                            }
+                        ]
+                    },
+                    "ValueDateDueAmountSplit": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.ValueDateDueAmountSplit"
+                            }
+                        ],
+                        "title": "Value Date Due Amount Split",
+                        "description": "Split of amount that is due as on the value date of this loan contract payoff request.Remark: This node includes the amounts for which  the due date is on or before the value dateof the loan contract payoff request."
+                    },
+                    "CreationDateCumulativeOverdueAmountSplit": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.CreationDateCumulativeOverdueAmountSplit"
+                            }
+                        ],
+                        "title": "Creation Date Cumulative Overdue Amount Split",
+                        "description": "Split of amount that is overdue cumulated upto the creation date of this loan contract payoff request.Remark:This node includes the amounts for which the due date is before the creation date of the loan contract payoff request."
+                    },
+                    "ValueDateCumulativeOverdueAmountSplit": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.ValueDateCumulativeOverdueAmountSplit"
+                            }
+                        ],
+                        "title": "Value Date Cumulative Overdue Amount Split",
+                        "description": "Split of calculated amount that will be overdue cumulated upto the value date of this loan contract payoff request.Remark: This node includes the amounts for which the due date would be after the creation date and up to thevalue date of the loan contract payoff request."
+                    }
+                },
+                "title": "Gross Amount Calculation Result",
+                "description": "The result of gross amount calculation for a loan contract payoff request. Remark: The calculation of gross payoff amount result includes calculations of key figuressuch as interest and charges that are relevant for payoff.This includes due and overdue items existing at the time of calculation.ValueDateDueAmountSplit, CreationDateCumulativeOverdueAmountSplit and ValueDateCumulativeOverdueAmountSplit ofGrossAmountCalculationResult is only supported in READ by UUID operation."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.GrossAmountCalculationResult-create": {
+                "type": "object",
+                "properties": {
+                    "EffectiveCapitalAmount": {
+                        "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-create"
+                    },
+                    "EarlyRepaymentCompensationAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-create"
+                            }
+                        ]
+                    },
+                    "ImmediateCompletionChargeAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-create"
+                            }
+                        ]
+                    },
+                    "ValueDateDueAmountSplit": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.ValueDateDueAmountSplit-create"
+                            }
+                        ],
+                        "title": "Value Date Due Amount Split",
+                        "description": "Split of amount that is due as on the value date of this loan contract payoff request.Remark: This node includes the amounts for which  the due date is on or before the value dateof the loan contract payoff request."
+                    },
+                    "CreationDateCumulativeOverdueAmountSplit": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.CreationDateCumulativeOverdueAmountSplit-create"
+                            }
+                        ],
+                        "title": "Creation Date Cumulative Overdue Amount Split",
+                        "description": "Split of amount that is overdue cumulated upto the creation date of this loan contract payoff request.Remark:This node includes the amounts for which the due date is before the creation date of the loan contract payoff request."
+                    },
+                    "ValueDateCumulativeOverdueAmountSplit": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.ValueDateCumulativeOverdueAmountSplit-create"
+                            }
+                        ],
+                        "title": "Value Date Cumulative Overdue Amount Split",
+                        "description": "Split of calculated amount that will be overdue cumulated upto the value date of this loan contract payoff request.Remark: This node includes the amounts for which the due date would be after the creation date and up to thevalue date of the loan contract payoff request."
+                    }
+                },
+                "title": "Gross Amount Calculation Result (for create)",
+                "description": "The result of gross amount calculation for a loan contract payoff request. Remark: The calculation of gross payoff amount result includes calculations of key figuressuch as interest and charges that are relevant for payoff.This includes due and overdue items existing at the time of calculation.ValueDateDueAmountSplit, CreationDateCumulativeOverdueAmountSplit and ValueDateCumulativeOverdueAmountSplit ofGrossAmountCalculationResult is only supported in READ by UUID operation."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.GrossAmountCalculationResult-update": {
+                "type": "object",
+                "properties": {
+                    "EffectiveCapitalAmount": {
+                        "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-update"
+                    },
+                    "EarlyRepaymentCompensationAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-update"
+                            }
+                        ]
+                    },
+                    "ImmediateCompletionChargeAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-update"
+                            }
+                        ]
+                    },
+                    "ValueDateDueAmountSplit": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.ValueDateDueAmountSplit-update"
+                            }
+                        ],
+                        "title": "Value Date Due Amount Split",
+                        "description": "Split of amount that is due as on the value date of this loan contract payoff request.Remark: This node includes the amounts for which  the due date is on or before the value dateof the loan contract payoff request."
+                    },
+                    "CreationDateCumulativeOverdueAmountSplit": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.CreationDateCumulativeOverdueAmountSplit-update"
+                            }
+                        ],
+                        "title": "Creation Date Cumulative Overdue Amount Split",
+                        "description": "Split of amount that is overdue cumulated upto the creation date of this loan contract payoff request.Remark:This node includes the amounts for which the due date is before the creation date of the loan contract payoff request."
+                    },
+                    "ValueDateCumulativeOverdueAmountSplit": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.ValueDateCumulativeOverdueAmountSplit-update"
+                            }
+                        ],
+                        "title": "Value Date Cumulative Overdue Amount Split",
+                        "description": "Split of calculated amount that will be overdue cumulated upto the value date of this loan contract payoff request.Remark: This node includes the amounts for which the due date would be after the creation date and up to thevalue date of the loan contract payoff request."
+                    }
+                },
+                "title": "Gross Amount Calculation Result (for update)",
+                "description": "The result of gross amount calculation for a loan contract payoff request. Remark: The calculation of gross payoff amount result includes calculations of key figuressuch as interest and charges that are relevant for payoff.This includes due and overdue items existing at the time of calculation.ValueDateDueAmountSplit, CreationDateCumulativeOverdueAmountSplit and ValueDateCumulativeOverdueAmountSplit ofGrossAmountCalculationResult is only supported in READ by UUID operation."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.PaymentTransactionInstruction": {
+                "type": "object",
+                "properties": {
+                    "BankContractPaymentTransactionInstructionTypeCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 6,
+                        "example": "27",
+                        "title": "A BankContractPaymentTransactionInstructionTypeCode is a coded representation of the type ofa bank contract payment transaction instruction.",
+                        "description": "Constraint:Only the code values: \n26 - Payoff by Internal Debit Memo\n27 - Payoff by Domestic Debit Memo\n30 - Cash Deposit\n86 - PayoffBySDDCore\n87 - PayoffBySDDCoreB2B are allowed.\nBDT: BankContractPaymentTransactionInstructionTypeCode"
+                    },
+                    "BankContractPaymentTransactionInstructionTypeName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Payoff by Domestic Debit Memo",
+                        "title": "Name of BankContractPaymentTransactionInstructionTypeCode",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "CounterpartyBankAccount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.BankAccount"
+                            }
+                        ],
+                        "title": "Contains the bank account for which residual account balance has to be credited or cancellation charge amount to be debited."
+                    },
+                    "DirectDebitMandate": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.DirectDebitMandate"
+                            }
+                        ],
+                        "title": "The direct debit mandate used in a payment transaction instruction."
+                    },
+                    "MappableIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates that CreditDetails of a payment transaction instruction are mappable.",
+                        "description": "GDT: Indicator"
+                    }
+                },
+                "title": "Payment Transaction Instruction",
+                "description": "A Payment Transaction Instruction is an instruction for payment transactions related to the loan contract.Remark: PaymentTransactionInstruction holds data only for the process result type \"Payoff Payment\"(BDT BankingBusinessTransactionProcessingResultPaymentTypeCode with Code Value = \"14 - Payoff Payment\").\"PaymentTransactionInstruction is only supported in READ by UUID operation.Note: For a LoanContractPayoffRequest, the resulting payment transaction is always a debit transaction.Hence BankContractPaymentTransactionInstructionTypeCodes corresponding to debit transactions are supported."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.PaymentTransactionInstruction-create": {
+                "type": "object",
+                "properties": {
+                    "BankContractPaymentTransactionInstructionTypeCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 6,
+                        "example": "27",
+                        "title": "A BankContractPaymentTransactionInstructionTypeCode is a coded representation of the type ofa bank contract payment transaction instruction.",
+                        "description": "Constraint:Only the code values: \n26 - Payoff by Internal Debit Memo\n27 - Payoff by Domestic Debit Memo\n30 - Cash Deposit\n86 - PayoffBySDDCore\n87 - PayoffBySDDCoreB2B are allowed.\nBDT: BankContractPaymentTransactionInstructionTypeCode"
+                    },
+                    "MappableIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates that CreditDetails of a payment transaction instruction are mappable.",
+                        "description": "GDT: Indicator"
+                    }
+                },
+                "title": "Payment Transaction Instruction (for create)",
+                "description": "A Payment Transaction Instruction is an instruction for payment transactions related to the loan contract.Remark: PaymentTransactionInstruction holds data only for the process result type \"Payoff Payment\"(BDT BankingBusinessTransactionProcessingResultPaymentTypeCode with Code Value = \"14 - Payoff Payment\").\"PaymentTransactionInstruction is only supported in READ by UUID operation.Note: For a LoanContractPayoffRequest, the resulting payment transaction is always a debit transaction.Hence BankContractPaymentTransactionInstructionTypeCodes corresponding to debit transactions are supported."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.PaymentTransactionInstruction-update": {
+                "type": "object",
+                "properties": {
+                    "BankContractPaymentTransactionInstructionTypeCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 6,
+                        "example": "27",
+                        "title": "A BankContractPaymentTransactionInstructionTypeCode is a coded representation of the type ofa bank contract payment transaction instruction.",
+                        "description": "Constraint:Only the code values: \n26 - Payoff by Internal Debit Memo\n27 - Payoff by Domestic Debit Memo\n30 - Cash Deposit\n86 - PayoffBySDDCore\n87 - PayoffBySDDCoreB2B are allowed.\nBDT: BankContractPaymentTransactionInstructionTypeCode"
+                    },
+                    "MappableIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates that CreditDetails of a payment transaction instruction are mappable.",
+                        "description": "GDT: Indicator"
+                    }
+                },
+                "title": "Payment Transaction Instruction (for update)",
+                "description": "A Payment Transaction Instruction is an instruction for payment transactions related to the loan contract.Remark: PaymentTransactionInstruction holds data only for the process result type \"Payoff Payment\"(BDT BankingBusinessTransactionProcessingResultPaymentTypeCode with Code Value = \"14 - Payoff Payment\").\"PaymentTransactionInstruction is only supported in READ by UUID operation.Note: For a LoanContractPayoffRequest, the resulting payment transaction is always a debit transaction.Hence BankContractPaymentTransactionInstructionTypeCodes corresponding to debit transactions are supported."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.ValueDateDueAmountSplit": {
+                "type": "object",
+                "properties": {
+                    "InterestAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "The current interest due for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "ChargeAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "The current  charges due for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "InterestOnArrearsAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "The current interest on arreras due for the bank account.",
+                        "description": "GDT: Amount"
+                    }
+                },
+                "title": "Value Date Due Amount Split",
+                "description": "Split of amount that is due as on the value date of this loan contract payoff request.Remark: This node includes the amounts for which  the due date is on or before the value dateof the loan contract payoff request."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.ValueDateDueAmountSplit-create": {
+                "type": "object",
+                "properties": {
+                    "InterestAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "The current interest due for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "ChargeAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "The current  charges due for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "InterestOnArrearsAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "The current interest on arreras due for the bank account.",
+                        "description": "GDT: Amount"
+                    }
+                },
+                "title": "Value Date Due Amount Split (for create)",
+                "description": "Split of amount that is due as on the value date of this loan contract payoff request.Remark: This node includes the amounts for which  the due date is on or before the value dateof the loan contract payoff request."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.ValueDateDueAmountSplit-update": {
+                "type": "object",
+                "properties": {
+                    "InterestAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "The current interest due for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "ChargeAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "The current  charges due for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "InterestOnArrearsAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "The current interest on arreras due for the bank account.",
+                        "description": "GDT: Amount"
+                    }
+                },
+                "title": "Value Date Due Amount Split (for update)",
+                "description": "Split of amount that is due as on the value date of this loan contract payoff request.Remark: This node includes the amounts for which  the due date is on or before the value dateof the loan contract payoff request."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.ValueDateCumulativeOverdueAmountSplit": {
+                "type": "object",
+                "properties": {
+                    "InterestAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "The cumulative calculated interest overdue for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "ChargeAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "The cumulative calculated charges overdue for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "InterestOnArrearsAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "The cumulative calculated interest on arrears overdue for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "InstalmentAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "The cumulative calculated installment overdue for the bank account.",
+                        "description": "Note:For a full payoff the InstalmentAmount is included as part of the NetAmount.GDT: Amount"
+                    }
+                },
+                "title": "Value Date Cumulative Overdue Amount Split",
+                "description": "Split of calculated amount that will be overdue cumulated upto the value date of this loan contract payoff request.Remark: This node includes the amounts for which the due date would be after the creation date and up to thevalue date of the loan contract payoff request."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.ValueDateCumulativeOverdueAmountSplit-create": {
+                "type": "object",
+                "properties": {
+                    "InterestAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "The cumulative calculated interest overdue for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "ChargeAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "The cumulative calculated charges overdue for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "InterestOnArrearsAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "The cumulative calculated interest on arrears overdue for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "InstalmentAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "The cumulative calculated installment overdue for the bank account.",
+                        "description": "Note:For a full payoff the InstalmentAmount is included as part of the NetAmount.GDT: Amount"
+                    }
+                },
+                "title": "Value Date Cumulative Overdue Amount Split (for create)",
+                "description": "Split of calculated amount that will be overdue cumulated upto the value date of this loan contract payoff request.Remark: This node includes the amounts for which the due date would be after the creation date and up to thevalue date of the loan contract payoff request."
+            },
+            "com.sap.gateway.default.loancontractpayoffrequest.v0001.ValueDateCumulativeOverdueAmountSplit-update": {
+                "type": "object",
+                "properties": {
+                    "InterestAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "The cumulative calculated interest overdue for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "ChargeAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "The cumulative calculated charges overdue for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "InterestOnArrearsAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "The cumulative calculated interest on arrears overdue for the bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "InstalmentAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractpayoffrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "The cumulative calculated installment overdue for the bank account.",
+                        "description": "Note:For a full payoff the InstalmentAmount is included as part of the NetAmount.GDT: Amount"
+                    }
+                },
+                "title": "Value Date Cumulative Overdue Amount Split (for update)",
+                "description": "Split of calculated amount that will be overdue cumulated upto the value date of this loan contract payoff request.Remark: This node includes the amounts for which the due date would be after the creation date and up to thevalue date of the loan contract payoff request."
+            },
+            "count": {
+                "anyOf": [
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ],
+                "description": "The number of entities in the collection. Available when using the [$count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount) query option."
+            },
+            "error": {
+                "type": "object",
+                "required": [
+                    "error"
+                ],
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "required": [
+                            "code",
+                            "message"
+                        ],
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                            "target": {
+                                "type": "string"
+                            },
+                            "details": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "target": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "innererror": {
+                                "type": "object",
+                                "description": "The structure of this object is service-specific"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "top": {
+                "name": "$top",
+                "in": "query",
+                "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "example": 50
+            },
+            "skip": {
+                "name": "$skip",
+                "in": "query",
+                "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "count": {
+                "name": "$count",
+                "in": "query",
+                "description": "Include count of items, see [Count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount)",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "search": {
+                "name": "$search",
+                "in": "query",
+                "description": "Search items by search phrases, see [Searching](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionsearch)",
+                "schema": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses": {
+            "error": {
+                "description": "Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

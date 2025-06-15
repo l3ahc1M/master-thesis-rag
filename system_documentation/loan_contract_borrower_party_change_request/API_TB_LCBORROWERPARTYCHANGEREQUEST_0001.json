@@ -1,0 +1,1209 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Loan Contract Borrower Party Change Request",
+        "version": "1.0.0",
+        "description": "\n\nA request from the borrower to a lender (financial institution) to change the borrower of a loan contract immediately. A loan contract borrower party change request also supports the transfer of due items from the previous borrower to the new borrower.\n\n\nNote:\nThe entity data model for loan contract borrower party change request contains a subset of the attributes of the business object of loan contract borrower party change request.\n\nRemark:\nThe service Loan Contract Borrower Party Change Request is assigned to service group Transactional Banking.\n\nUse:\nA Loan Contract Borrower Party Change Request is used to propose, create and display borrower party change requests. The propose loan contract borrower party change request is used to query default values for reason code, correspondence required indicators for new and former borrower party, charge waiver requested indicator and additional data like activity codes and checklist item codes for creation of a loan contract borrower party change request."
+    },
+    "externalDocs": {
+        "description": "Business Documentation",
+        "url": "https://help.sap.com/docs/TRBK_S4HANA/d2151b51aacc4d82ad2861e007337fa2/1620fedd55574133a03f4bae95cb55c9.html"
+    },
+    "x-sap-api-type": "ODATAV4",
+    "x-sap-shortText": "Manage borrower party change requests for loan contracts using this synchronous inbound service",
+    "x-sap-software-min-version": "1.0",
+    "x-sap-ext-overview": [
+        {
+            "name": "Authentication Methods",
+            "values": [
+                {
+                    "text": "x509",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Service Group Name",
+            "values": [
+                {
+                    "text": "TRANSACTIONALBANKING",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Business Object",
+            "values": [
+                {
+                    "text": "Loan Contract Borrower Party Change Request",
+                    "format": "plain"
+                }
+            ]
+        }
+    ],
+    "security": [
+        {
+            "basicAuthentication": []
+        }
+    ],
+    "servers": [
+        {
+            "url": "https://{host}:{port}/sap/opu/odata4/sap/transactionalbanking/default/sap/lcborrowerpartychangerequest/0001",
+            "variables": {
+                "host": {
+                    "default": ""
+                },
+                "port": {
+                    "default": ""
+                }
+            }
+        }
+    ],
+    "x-sap-extensible": {
+        "supported": "no"
+    },
+    "tags": [
+        {
+            "name": "Loan Contract Borrower Party Change Requests"
+        }
+    ],
+    "paths": {
+        "/LoanContractBorrowerPartyChangeRequests": {
+            "get": {
+                "summary": "Query Loan Contract Borrower Party Change Requests",
+                "description": "Is a request to query Loan Contract Borrower Party Change Requests",
+                "tags": [
+                    "Loan Contract Borrower Party Change Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)\n\nRequired filter properties:\n- ID\n- LoanContractUUID\n- LifeCycleStatusCode",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "UUID",
+                                    "ID",
+                                    "LoanContractUUID",
+                                    "ChangeStateID",
+                                    "LifeCycleStatusCode",
+                                    "LifeCycleStatusName",
+                                    "ReasonCode",
+                                    "ReasonName",
+                                    "BusinessProcessChainAssignment",
+                                    "NewBorrowerPartyIdentifyingElements",
+                                    "FormerBorrowerPartyIdentifyingElements",
+                                    "NewClearingBankAccountContractUUID",
+                                    "ChargeWaiverRequestedIndicator",
+                                    "CompletionDate"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of LoanContractBorrowerPartyChangeRequest",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.LoanContractBorrowerPartyChangeRequest"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create Loan Contract Borrower Party Change Request",
+                "description": "Is a request to create a Loan Contract Borrower Party Change Request",
+                "tags": [
+                    "Loan Contract Borrower Party Change Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Loan Contract Borrower Party Change Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.LoanContractBorrowerPartyChangeRequest-create"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.LoanContractBorrowerPartyChangeRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/LoanContractBorrowerPartyChangeRequests/{UUID}": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "UUID is an universal unique identifier of a loan contract borrower party change request.  \nGDT: NOSC_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Read Loan Contract Borrower Party Change Request by UUID",
+                "description": "Is a request to read a Loan Contract Borrower Party Change Request",
+                "tags": [
+                    "Loan Contract Borrower Party Change Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "UUID",
+                                    "ID",
+                                    "LoanContractUUID",
+                                    "ChangeStateID",
+                                    "LifeCycleStatusCode",
+                                    "LifeCycleStatusName",
+                                    "ReasonCode",
+                                    "ReasonName",
+                                    "BusinessProcessChainAssignment",
+                                    "NewBorrowerPartyIdentifyingElements",
+                                    "FormerBorrowerPartyIdentifyingElements",
+                                    "NewClearingBankAccountContractUUID",
+                                    "ChargeWaiverRequestedIndicator",
+                                    "CompletionDate"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.LoanContractBorrowerPartyChangeRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/LoanContractBorrowerPartyChangeRequests/{UUID}/SAP__self.ProposedByLCUUID": {
+            "post": {
+                "summary": "Invoke action ProposedByLCUUID",
+                "description": "Is a request to propose a Loan Contract Borrower Party Change Request",
+                "tags": [
+                    "Loan Contract Borrower Party Change Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "UUID",
+                        "in": "path",
+                        "required": true,
+                        "description": "UUID is an universal unique identifier of a loan contract borrower party change request.  \nGDT: NOSC_UUID",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "01234567-89ab-cdef-0123-456789abcdef"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Action parameters",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "LoanContractUUID": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.ProposedLoanContractBorrowerPartyChangeRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/ProposedLoanContractBorrowerPartyChangeRequest": {
+            "post": {
+                "summary": "Proposed Loan Contract Borrower Party Change Request",
+                "description": "Is the return for ProposeByLoanContractUUID action. This will hold the default values, activites which can be performed along with borrower party change and checklist itemthat needs to be taken into account by the service consumer within the process of the loan contract borrower party change request.",
+                "tags": [
+                    "Loan Contract Borrower Party Change Requests"
+                ],
+                "requestBody": {
+                    "description": "Action parameters",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "LoanContractUUID": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                                        "title": "A globally unique identifier for a LoanContract.",
+                                        "description": "GDT: NOSC_UUID"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.ProposedLoanContractBorrowerPartyChangeRequest"
+                                        }
+                                    ],
+                                    "title": "Proposed Loan Contract Borrower Party Change Request",
+                                    "description": "A ProposedLoanContractBorrowerPartyChangeRequest is the return for the ProposeByLoanContractUUID action. This will hold the default values, activites which can be performed along with borrower party change and checklist itemthat needs to be taken into account by the service consumer within the process of the loan contract borrower party change request."
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/$batch": {
+            "post": {
+                "summary": "Send a group of requests",
+                "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).\n\n*Please note that \"Try it out\" is not supported for this request.*",
+                "tags": [
+                    "Batch Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Batch request",
+                    "content": {
+                        "multipart/mixed;boundary=request-separator": {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET LoanContractBorrowerPartyChangeRequests HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Batch response",
+                        "content": {
+                            "multipart/mixed": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "basicAuthentication": {
+                "type": "http",
+                "scheme": "basic"
+            }
+        },
+        "schemas": {
+            "com.sap.gateway.default.lcborrowerpartychangerequest.v0001.Activity": {
+                "type": "object",
+                "properties": {
+                    "Code": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "13",
+                        "title": "Activity Code is the a coded representation of an activity that is available with the completion of a loan contract borrower party change request.",
+                        "description": "\nGDT: LoanContractBorrowerPartyChangeRequestActivityCode "
+                    },
+                    "Name": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Cancel loan contract payoff request",
+                        "title": "Is the name of an activity code.",
+                        "description": "GDT: LONG_Name"
+                    }
+                },
+                "title": "An Activity can be performed along with completion of the loan contract borrower party change request."
+            },
+            "com.sap.gateway.default.lcborrowerpartychangerequest.v0001.Activity-create": {
+                "type": "object",
+                "properties": {
+                    "Code": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "13",
+                        "title": "Activity Code is the a coded representation of an activity that is available with the completion of a loan contract borrower party change request.",
+                        "description": "\nGDT: LoanContractBorrowerPartyChangeRequestActivityCode "
+                    }
+                },
+                "required": [
+                    "Code"
+                ],
+                "title": "An Activity can be performed along with completion of the loan contract borrower party change request. (for create)"
+            },
+            "com.sap.gateway.default.lcborrowerpartychangerequest.v0001.Activity-update": {
+                "type": "object",
+                "title": "An Activity can be performed along with completion of the loan contract borrower party change request. (for update)"
+            },
+            "com.sap.gateway.default.lcborrowerpartychangerequest.v0001.Checklistitem": {
+                "type": "object",
+                "properties": {
+                    "Code": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "19",
+                        "title": "Checklistitem Code is a coded representation of a item in a checklist that needs to be considered before completion of the loan contract borrower party change request.",
+                        "description": "\nGDT: LoanContractBorrowerPartyChangeRequestChecklistitemCode "
+                    },
+                    "Name": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Pending loan contract payoff request existence",
+                        "title": "Is the name of a checklist item.",
+                        "description": "GDT: LONG_Name"
+                    },
+                    "Description": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "A pending loan contract payoff request exists",
+                        "title": "Is a detailed description of a loan contract borrower party change request checklist item.",
+                        "description": "GDT: Description"
+                    },
+                    "BusinessTransactionDocumentRef": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.BusinessTransactionDocumentRef"
+                        },
+                        "title": "BusinessTransactionDocumentReference is a unique reference to other business documents or business document items that are of significance within the Checklistitem",
+                        "description": "Remark: It is a Complex type defined as a collection. The availability of BusinessTransactionDocumentReference depends on value of CheckCode.BOCT: BusTransacDocRef"
+                    }
+                },
+                "title": "A Checklistitem defines a checklist item that needs to be taken into account by the service consumer within the process of the loan contract borrower party change request."
+            },
+            "com.sap.gateway.default.lcborrowerpartychangerequest.v0001.Checklistitem-create": {
+                "type": "object",
+                "properties": {
+                    "Description": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "A pending loan contract payoff request exists",
+                        "title": "Is a detailed description of a loan contract borrower party change request checklist item.",
+                        "description": "GDT: Description"
+                    },
+                    "BusinessTransactionDocumentRef": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.BusinessTransactionDocumentRef-create"
+                        },
+                        "title": "BusinessTransactionDocumentReference is a unique reference to other business documents or business document items that are of significance within the Checklistitem",
+                        "description": "Remark: It is a Complex type defined as a collection. The availability of BusinessTransactionDocumentReference depends on value of CheckCode.BOCT: BusTransacDocRef"
+                    }
+                },
+                "title": "A Checklistitem defines a checklist item that needs to be taken into account by the service consumer within the process of the loan contract borrower party change request. (for create)"
+            },
+            "com.sap.gateway.default.lcborrowerpartychangerequest.v0001.Checklistitem-update": {
+                "type": "object",
+                "properties": {
+                    "Description": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "A pending loan contract payoff request exists",
+                        "title": "Is a detailed description of a loan contract borrower party change request checklist item.",
+                        "description": "GDT: Description"
+                    },
+                    "BusinessTransactionDocumentRef": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.BusinessTransactionDocumentRef-update"
+                        },
+                        "title": "BusinessTransactionDocumentReference is a unique reference to other business documents or business document items that are of significance within the Checklistitem",
+                        "description": "Remark: It is a Complex type defined as a collection. The availability of BusinessTransactionDocumentReference depends on value of CheckCode.BOCT: BusTransacDocRef"
+                    }
+                },
+                "title": "A Checklistitem defines a checklist item that needs to be taken into account by the service consumer within the process of the loan contract borrower party change request. (for update)"
+            },
+            "com.sap.gateway.default.lcborrowerpartychangerequest.v0001.LoanContractBorrowerPartyChangeRequest": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID is an universal unique identifier of a loan contract borrower party change request.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "47938",
+                        "title": "ID is an identifier of a loan contract borrower party change request.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. \nGDT: LoanContractPartyChangeRequestID"
+                    },
+                    "LoanContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "An internal ID of Loan Contract.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator.\nGDT: NOSC_UUID"
+                    },
+                    "ChangeStateID": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "20200309121401.6154150",
+                        "title": "Identifies a change state.",
+                        "description": "GDT: ChangeStateID"
+                    },
+                    "LifeCycleStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "3",
+                        "title": "LifeCycleStatusCode is the coded representation of the life cycle status of a loan contract borrower party change request.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator\nGDT: LoanContractBorrowerPartyChangeRequestLifeCycleStatusCode "
+                    },
+                    "LifeCycleStatusName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Completed",
+                        "title": "Name of a LifeCycleStatusCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "ReasonCode is the coded representation of the reason for the loan contract borrower party change request.",
+                        "description": "Note: During create default value will be used from production control if ReasonCode is not specified.\nGDT: LoanContractBorrowerPartyChangeRequestReasonCode"
+                    },
+                    "ReasonName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Change of legal  form",
+                        "title": "Is the name of the reason code",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.BusinessProcessChainAssignment"
+                            }
+                        ],
+                        "title": "BusinessProcessChainAssignment is the assignment of a business object node to a business process chain. ",
+                        "description": "BusinessProcessChain is a chain of business processes carried out in a business scenario.\nBOCT: BusProcChnAssgmt"
+                    },
+                    "NewBorrowerPartyIdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.PartyIdentifyingElements"
+                            }
+                        ],
+                        "title": "NewBorrowerPartyIdentifyingElements is a party that legally holds a bank account associated with the loan contract after completion of the borrower party change request.",
+                        "description": "Constraint 1: The new borrower party must differ from the former borrower party\nConstraint 2: The party that is defined as new borrower party must have the role account holder party.\nBOCT: PartyIdfgElmnts"
+                    },
+                    "FormerBorrowerPartyIdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.PartyIdentifyingElements"
+                            }
+                        ],
+                        "title": "FormerBorrowerPartyIdentifyingElements is a party that legally holds a bank account associated with the loan contract before completion of the borrower party change request.",
+                        "description": "\nBOCT: PartyIdfgElmnts"
+                    },
+                    "NewClearingBankAccountContractUUID": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "NewClearingBankAccountContractUUID is an universal unique identifier of a bank account contract.",
+                        "description": "A clearing bank account contract is a the bank account contract that receives incoming payments that have to be transferred to a specific loan contract.\nGDT: NOSC_UUID"
+                    },
+                    "ChargeWaiverRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "ChargeWaiverRequestedIndicator indicates whether a charge for activation of a loan contract borrower party change request is requested to be waived or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "CompletionDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The CompletionDate is the date on which a loan contract borrower party change request is completed.",
+                        "description": "Constraint: The CompletionDate is set if LifeCycleStatusCode is 03 (Completed).\nGDT: Date"
+                    },
+                    "Activities": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.Activity"
+                        }
+                    }
+                },
+                "title": "Loan Contract Borrower Party Change Request",
+                "description": "A LoanContractBorrowerPartyChangeRequest is a request to change the borrower of a loan contract immediately."
+            },
+            "com.sap.gateway.default.lcborrowerpartychangerequest.v0001.LoanContractBorrowerPartyChangeRequest-create": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID is an universal unique identifier of a loan contract borrower party change request.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "LoanContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "An internal ID of Loan Contract.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator.\nGDT: NOSC_UUID"
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "ReasonCode is the coded representation of the reason for the loan contract borrower party change request.",
+                        "description": "Note: During create default value will be used from production control if ReasonCode is not specified.\nGDT: LoanContractBorrowerPartyChangeRequestReasonCode"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.BusinessProcessChainAssignment-create"
+                            }
+                        ],
+                        "title": "BusinessProcessChainAssignment is the assignment of a business object node to a business process chain. ",
+                        "description": "BusinessProcessChain is a chain of business processes carried out in a business scenario.\nBOCT: BusProcChnAssgmt"
+                    },
+                    "NewBorrowerPartyIdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.PartyIdentifyingElements-create"
+                            }
+                        ],
+                        "title": "NewBorrowerPartyIdentifyingElements is a party that legally holds a bank account associated with the loan contract after completion of the borrower party change request.",
+                        "description": "Constraint 1: The new borrower party must differ from the former borrower party\nConstraint 2: The party that is defined as new borrower party must have the role account holder party.\nBOCT: PartyIdfgElmnts"
+                    },
+                    "FormerBorrowerPartyIdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.PartyIdentifyingElements-create"
+                            }
+                        ],
+                        "title": "FormerBorrowerPartyIdentifyingElements is a party that legally holds a bank account associated with the loan contract before completion of the borrower party change request.",
+                        "description": "\nBOCT: PartyIdfgElmnts"
+                    },
+                    "NewClearingBankAccountContractUUID": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "NewClearingBankAccountContractUUID is an universal unique identifier of a bank account contract.",
+                        "description": "A clearing bank account contract is a the bank account contract that receives incoming payments that have to be transferred to a specific loan contract.\nGDT: NOSC_UUID"
+                    },
+                    "ChargeWaiverRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "ChargeWaiverRequestedIndicator indicates whether a charge for activation of a loan contract borrower party change request is requested to be waived or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "Activities": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.Activity-create"
+                        }
+                    }
+                },
+                "required": [
+                    "UUID"
+                ],
+                "title": "Loan Contract Borrower Party Change Request (for create)",
+                "description": "A LoanContractBorrowerPartyChangeRequest is a request to change the borrower of a loan contract immediately."
+            },
+            "com.sap.gateway.default.lcborrowerpartychangerequest.v0001.LoanContractBorrowerPartyChangeRequest-update": {
+                "type": "object",
+                "properties": {
+                    "ReasonCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "ReasonCode is the coded representation of the reason for the loan contract borrower party change request.",
+                        "description": "Note: During create default value will be used from production control if ReasonCode is not specified.\nGDT: LoanContractBorrowerPartyChangeRequestReasonCode"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.BusinessProcessChainAssignment-update"
+                            }
+                        ],
+                        "title": "BusinessProcessChainAssignment is the assignment of a business object node to a business process chain. ",
+                        "description": "BusinessProcessChain is a chain of business processes carried out in a business scenario.\nBOCT: BusProcChnAssgmt"
+                    },
+                    "NewBorrowerPartyIdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.PartyIdentifyingElements-update"
+                            }
+                        ],
+                        "title": "NewBorrowerPartyIdentifyingElements is a party that legally holds a bank account associated with the loan contract after completion of the borrower party change request.",
+                        "description": "Constraint 1: The new borrower party must differ from the former borrower party\nConstraint 2: The party that is defined as new borrower party must have the role account holder party.\nBOCT: PartyIdfgElmnts"
+                    },
+                    "FormerBorrowerPartyIdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.PartyIdentifyingElements-update"
+                            }
+                        ],
+                        "title": "FormerBorrowerPartyIdentifyingElements is a party that legally holds a bank account associated with the loan contract before completion of the borrower party change request.",
+                        "description": "\nBOCT: PartyIdfgElmnts"
+                    },
+                    "ChargeWaiverRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "ChargeWaiverRequestedIndicator indicates whether a charge for activation of a loan contract borrower party change request is requested to be waived or not.",
+                        "description": "GDT: Indicator"
+                    }
+                },
+                "title": "Loan Contract Borrower Party Change Request (for update)",
+                "description": "A LoanContractBorrowerPartyChangeRequest is a request to change the borrower of a loan contract immediately."
+            },
+            "com.sap.gateway.default.lcborrowerpartychangerequest.v0001.ProposedLoanContractBorrowerPartyChangeRequest": {
+                "type": "object",
+                "properties": {
+                    "LoanContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "LoanContractUUID is an universal unique identifier of a loan contract.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "2",
+                        "title": "ReasonCode is the coded representation of the reason for the loan contract borrower party change request.",
+                        "description": "Note: Default value maintained on production control is proposed\nGDT: LoanContractBorrowerPartyChangeRequestReasonCode"
+                    },
+                    "ReasonName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Change of legal  form",
+                        "title": "Is the name of the reason code",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "ChargeWaiverRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "ChargeWaiverRequestedIndicator indicates whether a charge for activation of a loan contract borrower party change request is requested to be waived or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "Activities": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.Activity"
+                        }
+                    },
+                    "Checklistitems": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.Checklistitem"
+                        }
+                    }
+                },
+                "title": "Proposed Loan Contract Borrower Party Change Request",
+                "description": "A ProposedLoanContractBorrowerPartyChangeRequest is the return for the ProposeByLoanContractUUID action. This will hold the default values, activites which can be performed along with borrower party change and checklist itemthat needs to be taken into account by the service consumer within the process of the loan contract borrower party change request."
+            },
+            "com.sap.gateway.default.lcborrowerpartychangerequest.v0001.ProposedLoanContractBorrowerPartyChangeRequest-create": {
+                "type": "object",
+                "properties": {
+                    "LoanContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "LoanContractUUID is an universal unique identifier of a loan contract.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "2",
+                        "title": "ReasonCode is the coded representation of the reason for the loan contract borrower party change request.",
+                        "description": "Note: Default value maintained on production control is proposed\nGDT: LoanContractBorrowerPartyChangeRequestReasonCode"
+                    },
+                    "ChargeWaiverRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "ChargeWaiverRequestedIndicator indicates whether a charge for activation of a loan contract borrower party change request is requested to be waived or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "Activities": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.Activity-create"
+                        }
+                    },
+                    "Checklistitems": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.lcborrowerpartychangerequest.v0001.Checklistitem-create"
+                        }
+                    }
+                },
+                "required": [
+                    "LoanContractUUID"
+                ],
+                "title": "Proposed Loan Contract Borrower Party Change Request (for create)",
+                "description": "A ProposedLoanContractBorrowerPartyChangeRequest is the return for the ProposeByLoanContractUUID action. This will hold the default values, activites which can be performed along with borrower party change and checklist itemthat needs to be taken into account by the service consumer within the process of the loan contract borrower party change request."
+            },
+            "com.sap.gateway.default.lcborrowerpartychangerequest.v0001.ProposedLoanContractBorrowerPartyChangeRequest-update": {
+                "type": "object",
+                "properties": {
+                    "ReasonCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "2",
+                        "title": "ReasonCode is the coded representation of the reason for the loan contract borrower party change request.",
+                        "description": "Note: Default value maintained on production control is proposed\nGDT: LoanContractBorrowerPartyChangeRequestReasonCode"
+                    },
+                    "ChargeWaiverRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "ChargeWaiverRequestedIndicator indicates whether a charge for activation of a loan contract borrower party change request is requested to be waived or not.",
+                        "description": "GDT: Indicator"
+                    }
+                },
+                "title": "Proposed Loan Contract Borrower Party Change Request (for update)",
+                "description": "A ProposedLoanContractBorrowerPartyChangeRequest is the return for the ProposeByLoanContractUUID action. This will hold the default values, activites which can be performed along with borrower party change and checklist itemthat needs to be taken into account by the service consumer within the process of the loan contract borrower party change request."
+            },
+            "com.sap.gateway.default.lcborrowerpartychangerequest.v0001.BusinessProcessChainAssignment": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "BusinessProcessChainUUID is the UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "NOSC_UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "200004",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BankingBusinessTransactionTypeCode is the coded representation of the banking business transaction which is associated with the business process chain to which the hosting buisiness object is assigned to.If BankingBusinessTransactionTypeCode is not specfiied, code value \"200004 - Loan Contract Borrower Change\" will be used by default.BDT: BankingBusinessTransactionTypeCode"
+                    },
+                    "BankingBusinessTransactionTypeName": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Loan Contract Borrower Change",
+                        "title": "Name of BankingBusinessTransactionTypeCode",
+                        "description": "GDT: EXTENDED_Name"
+                    }
+                },
+                "title": "Business Process Chain Assignment",
+                "description": "BusinessProcessChainAssignment is the assignment of a business object node to a business process chain. "
+            },
+            "com.sap.gateway.default.lcborrowerpartychangerequest.v0001.BusinessProcessChainAssignment-create": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "BusinessProcessChainUUID is the UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "NOSC_UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "200004",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BankingBusinessTransactionTypeCode is the coded representation of the banking business transaction which is associated with the business process chain to which the hosting buisiness object is assigned to.If BankingBusinessTransactionTypeCode is not specfiied, code value \"200004 - Loan Contract Borrower Change\" will be used by default.BDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for create)",
+                "description": "BusinessProcessChainAssignment is the assignment of a business object node to a business process chain. "
+            },
+            "com.sap.gateway.default.lcborrowerpartychangerequest.v0001.BusinessProcessChainAssignment-update": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "BusinessProcessChainUUID is the UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "NOSC_UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "200004",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BankingBusinessTransactionTypeCode is the coded representation of the banking business transaction which is associated with the business process chain to which the hosting buisiness object is assigned to.If BankingBusinessTransactionTypeCode is not specfiied, code value \"200004 - Loan Contract Borrower Change\" will be used by default.BDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for update)",
+                "description": "BusinessProcessChainAssignment is the assignment of a business object node to a business process chain. "
+            },
+            "com.sap.gateway.default.lcborrowerpartychangerequest.v0001.BusinessTransactionDocumentRef": {
+                "type": "object",
+                "properties": {
+                    "BusinessTransactionDocumentID": {
+                        "type": "string",
+                        "maxLength": 29,
+                        "example": "4711",
+                        "title": "A BusinessTransactionDocumentID is an identifier for a business transaction document.",
+                        "description": "GDT: BusinessTransactionDocumentID"
+                    },
+                    "BusinessTransactionDocumentUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A BusinessTransactionDocumentUUID is a unique identifier for a business transaction document.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "BusinessTransactionDocumentTypeCode": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "200016",
+                        "title": "A BusinessTransactionDocumentTypeCode is an identifier for a business transaction document.",
+                        "description": "GDT: BusinessTransactionDocumentTypeCode"
+                    },
+                    "BusinessTransactionDocumentTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Loan Contract Payoff",
+                        "title": "The name of a business transacition document type.",
+                        "description": "GDT: MEDIUM_Name"
+                    }
+                },
+                "title": "A BusinessTransactionDocumentReference is a unique reference to other business documents or business document items. "
+            },
+            "com.sap.gateway.default.lcborrowerpartychangerequest.v0001.BusinessTransactionDocumentRef-create": {
+                "type": "object",
+                "properties": {
+                    "BusinessTransactionDocumentID": {
+                        "type": "string",
+                        "maxLength": 29,
+                        "example": "4711",
+                        "title": "A BusinessTransactionDocumentID is an identifier for a business transaction document.",
+                        "description": "GDT: BusinessTransactionDocumentID"
+                    },
+                    "BusinessTransactionDocumentUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A BusinessTransactionDocumentUUID is a unique identifier for a business transaction document.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "BusinessTransactionDocumentTypeCode": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "200016",
+                        "title": "A BusinessTransactionDocumentTypeCode is an identifier for a business transaction document.",
+                        "description": "GDT: BusinessTransactionDocumentTypeCode"
+                    },
+                    "BusinessTransactionDocumentTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Loan Contract Payoff",
+                        "title": "The name of a business transacition document type.",
+                        "description": "GDT: MEDIUM_Name"
+                    }
+                },
+                "title": "A BusinessTransactionDocumentReference is a unique reference to other business documents or business document items.  (for create)"
+            },
+            "com.sap.gateway.default.lcborrowerpartychangerequest.v0001.BusinessTransactionDocumentRef-update": {
+                "type": "object",
+                "properties": {
+                    "BusinessTransactionDocumentID": {
+                        "type": "string",
+                        "maxLength": 29,
+                        "example": "4711",
+                        "title": "A BusinessTransactionDocumentID is an identifier for a business transaction document.",
+                        "description": "GDT: BusinessTransactionDocumentID"
+                    },
+                    "BusinessTransactionDocumentUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A BusinessTransactionDocumentUUID is a unique identifier for a business transaction document.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "BusinessTransactionDocumentTypeCode": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "200016",
+                        "title": "A BusinessTransactionDocumentTypeCode is an identifier for a business transaction document.",
+                        "description": "GDT: BusinessTransactionDocumentTypeCode"
+                    },
+                    "BusinessTransactionDocumentTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Loan Contract Payoff",
+                        "title": "The name of a business transacition document type.",
+                        "description": "GDT: MEDIUM_Name"
+                    }
+                },
+                "title": "A BusinessTransactionDocumentReference is a unique reference to other business documents or business document items.  (for update)"
+            },
+            "com.sap.gateway.default.lcborrowerpartychangerequest.v0001.PartyIdentifyingElements": {
+                "type": "object",
+                "properties": {
+                    "PartyUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "The UUID of a party (business partner)",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. Only one filter value for PartyUUID can be specified. If filter value for PartyUUID is specified, additional filtering for PartyID is not possible.NOSC_UUID"
+                    },
+                    "PartyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "310867",
+                        "title": "The ID of a party (business partner)",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. Only one filter value for PartyID can be specified. If filter value for PartyID is specified, additional filtering for PartyUUID is not possible.GDT: PartyID"
+                    }
+                },
+                "title": "PartyIdentifyingElements does contain all identifying elements of a party (business partner)",
+                "description": "Remark:\nPartyTypeCode value 147 \"Business Partner\" is supported.\nIntegrity Condition: Either PartyUUID or PartyID must be specified during creation of a loan contract."
+            },
+            "com.sap.gateway.default.lcborrowerpartychangerequest.v0001.PartyIdentifyingElements-create": {
+                "type": "object",
+                "properties": {
+                    "PartyUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "The UUID of a party (business partner)",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. Only one filter value for PartyUUID can be specified. If filter value for PartyUUID is specified, additional filtering for PartyID is not possible.NOSC_UUID"
+                    },
+                    "PartyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "310867",
+                        "title": "The ID of a party (business partner)",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. Only one filter value for PartyID can be specified. If filter value for PartyID is specified, additional filtering for PartyUUID is not possible.GDT: PartyID"
+                    }
+                },
+                "title": "PartyIdentifyingElements does contain all identifying elements of a party (business partner) (for create)",
+                "description": "Remark:\nPartyTypeCode value 147 \"Business Partner\" is supported.\nIntegrity Condition: Either PartyUUID or PartyID must be specified during creation of a loan contract."
+            },
+            "com.sap.gateway.default.lcborrowerpartychangerequest.v0001.PartyIdentifyingElements-update": {
+                "type": "object",
+                "properties": {
+                    "PartyUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "The UUID of a party (business partner)",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. Only one filter value for PartyUUID can be specified. If filter value for PartyUUID is specified, additional filtering for PartyID is not possible.NOSC_UUID"
+                    },
+                    "PartyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "310867",
+                        "title": "The ID of a party (business partner)",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. Only one filter value for PartyID can be specified. If filter value for PartyID is specified, additional filtering for PartyUUID is not possible.GDT: PartyID"
+                    }
+                },
+                "title": "PartyIdentifyingElements does contain all identifying elements of a party (business partner) (for update)",
+                "description": "Remark:\nPartyTypeCode value 147 \"Business Partner\" is supported.\nIntegrity Condition: Either PartyUUID or PartyID must be specified during creation of a loan contract."
+            },
+            "count": {
+                "anyOf": [
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ],
+                "description": "The number of entities in the collection. Available when using the [$count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount) query option."
+            },
+            "error": {
+                "type": "object",
+                "required": [
+                    "error"
+                ],
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "required": [
+                            "code",
+                            "message"
+                        ],
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                            "target": {
+                                "type": "string"
+                            },
+                            "details": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "target": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "innererror": {
+                                "type": "object",
+                                "description": "The structure of this object is service-specific"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "top": {
+                "name": "$top",
+                "in": "query",
+                "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "example": 50
+            },
+            "skip": {
+                "name": "$skip",
+                "in": "query",
+                "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "count": {
+                "name": "$count",
+                "in": "query",
+                "description": "Include count of items, see [Count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount)",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "search": {
+                "name": "$search",
+                "in": "query",
+                "description": "Search items by search phrases, see [Searching](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionsearch)",
+                "schema": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses": {
+            "error": {
+                "description": "Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

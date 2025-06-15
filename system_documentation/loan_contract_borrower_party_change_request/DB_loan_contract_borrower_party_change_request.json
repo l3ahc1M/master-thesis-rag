@@ -1,0 +1,85 @@
+{
+    "tables": [
+        {
+            "name": "LoanContractBorrowerPartyChangeRequest",
+            "description": "A LoanContractBorrowerPartyChangeRequest is a request to change the borrower of a loan contract immediately.",
+            "columns": [
+                {
+                    "name": "UUID",
+                    "description": "UUID is an universal unique identifier of a loan contract borrower party change request. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "ID",
+                    "description": "ID is an identifier of a loan contract borrower party change request. Example: 47938",
+                    "format": "string"
+                },
+                {
+                    "name": "LoanContractUUID",
+                    "description": "An internal ID of Loan Contract. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "ChangeStateID",
+                    "description": "Identifies a change state. Example: 20200309121401.6154150",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusCode",
+                    "description": "LifeCycleStatusCode is the coded representation of the life cycle status of a loan contract borrower party change request. Example: 3",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusName",
+                    "description": "Name of a LifeCycleStatusCode. Example: Completed",
+                    "format": "string"
+                },
+                {
+                    "name": "ReasonCode",
+                    "description": "ReasonCode is the coded representation of the reason for the loan contract borrower party change request. Example: 1",
+                    "format": "string"
+                },
+                {
+                    "name": "ReasonName",
+                    "description": "Is the name of the reason code Example: Change of legal  form",
+                    "format": "string"
+                },
+                {
+                    "name": "BusinessProcessChainAssignment",
+                    "description": "BusinessProcessChainAssignment is the assignment of a business object node to a business process chain.",
+                    "format": "string"
+                },
+                {
+                    "name": "NewBorrowerPartyIdentifyingElements",
+                    "description": "NewBorrowerPartyIdentifyingElements is a party that legally holds a bank account associated with the loan contract after completion of the borrower party change request.",
+                    "format": "string"
+                },
+                {
+                    "name": "FormerBorrowerPartyIdentifyingElements",
+                    "description": "FormerBorrowerPartyIdentifyingElements is a party that legally holds a bank account associated with the loan contract before completion of the borrower party change request.",
+                    "format": "string"
+                },
+                {
+                    "name": "NewClearingBankAccountContractUUID",
+                    "description": "NewClearingBankAccountContractUUID is an universal unique identifier of a bank account contract. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "ChargeWaiverRequestedIndicator",
+                    "description": "ChargeWaiverRequestedIndicator indicates whether a charge for activation of a loan contract borrower party change request is requested to be waived or not.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "CompletionDate",
+                    "description": "The CompletionDate is the date on which a loan contract borrower party change request is completed. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "Activities",
+                    "description": "",
+                    "format": "array"
+                }
+            ]
+        }
+    ]
+}

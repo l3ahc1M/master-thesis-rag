@@ -1,0 +1,230 @@
+{
+    "tables": [
+        {
+            "name": "BankAccountContract",
+            "description": "Bank Account Contract is a contract between a credit institute and customer, which is based on the customer's request for opening a bank account and consists among others, the bank account type, account holder, general terms and conditions.",
+            "columns": [
+                {
+                    "name": "UUID",
+                    "description": "A UUID is an universal unique identifier of a bank account contract. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "ID",
+                    "description": "An identifier of a bank account contract.",
+                    "format": "string"
+                },
+                {
+                    "name": "TypeCode",
+                    "description": "A coded representation of the type of a bank account contract. Example: 874",
+                    "format": "string"
+                },
+                {
+                    "name": "TypeName",
+                    "description": "Name of TypeCode. Example: Current Account Contract",
+                    "format": "string"
+                },
+                {
+                    "name": "SubTypeCode",
+                    "description": "A coded representation of the sub type of a bank account contract. Example: 1",
+                    "format": "string"
+                },
+                {
+                    "name": "SubTypeName",
+                    "description": "Name of SubTypeCode. Example: Current Account Contract",
+                    "format": "string"
+                },
+                {
+                    "name": "GroupCode",
+                    "description": "A coded representation of a group of bank account contracts. Example: 0030",
+                    "format": "string"
+                },
+                {
+                    "name": "GroupName",
+                    "description": "Name of GroupCode. Example: Current Accounts",
+                    "format": "string"
+                },
+                {
+                    "name": "CurrencyCode",
+                    "description": "A CurrencyCode specifies the currency of the bank account contract. Example: EUR",
+                    "format": "string"
+                },
+                {
+                    "name": "BankAccountIdentifyingElements",
+                    "description": "A BankAccount is a bank account associated with the bank account contract.",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusCode",
+                    "description": "A coded representation of the life cycle status of a bank account contract. Example: 2",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusName",
+                    "description": "Name of LifeCycleStatusCode. Example: Active",
+                    "format": "string"
+                },
+                {
+                    "name": "DormancyStatusCode",
+                    "description": "A coded representation of the dormancy status of a bank account contract. Example: 01",
+                    "format": "string"
+                },
+                {
+                    "name": "DormancyStatusName",
+                    "description": "Name of DormancyStatusCode. Example: Active",
+                    "format": "string"
+                },
+                {
+                    "name": "Product",
+                    "description": "A Product describes the (financial) product upon which the bank account contract is based.",
+                    "format": "string"
+                },
+                {
+                    "name": "AccountHolderPartyIdfgElmnts",
+                    "description": "A party which legally holds a Bank Account associated with the bank account contract.",
+                    "format": "string"
+                },
+                {
+                    "name": "UsageNote",
+                    "description": "A comment on the usage of the bank account contract. Example: USAGENOTE",
+                    "format": "string"
+                },
+                {
+                    "name": "StartDate",
+                    "description": "Date when the bank account contract becomes operational from the customer's point of view. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "ActualCancellationDate",
+                    "description": "Date when a bank account contract is actually canceled. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "PlannedCancellationDate",
+                    "description": "Date when a cancellation of a bank account contract is planned. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "ActiveProductionControlFeatures",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "AlternativeIdentifications",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "BankAccount",
+                    "description": "",
+                    "format": "string"
+                },
+                {
+                    "name": "BankAccountContractAccountHolderChangeRequests",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "BankAccountContractCancelRequests",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "BalanceKeyFigures",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "CurrentAccountContract",
+                    "description": "",
+                    "format": "string"
+                },
+                {
+                    "name": "LoanContractBorrowerPartyChangeRequests",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "LoanContract",
+                    "description": "",
+                    "format": "string"
+                },
+                {
+                    "name": "BankAccountContractLockRequests",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "OtherPartyIdfgElmnts",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "SavingsAccountContract",
+                    "description": "",
+                    "format": "string"
+                },
+                {
+                    "name": "TimeDepositContract",
+                    "description": "",
+                    "format": "string"
+                }
+            ]
+        },
+        {
+            "name": "BankAccount",
+            "description": "A Bank Account is an account that holds funds in a bank and is subject to deposits and withdrawals.Remark: \n Filter: Only 'Eq' is supported as logical operator. \n Integrity Conditions: \n The following combinations of properties for filtering are allowed: \n a.) by Bank Account ID \n - ID (mandatory) \n - CurrencyCode (optional) \n - BankRoutingID (optional) \n - BankCountryCode (optional) \n No other filter attributes are allowed. \n b.) by Bank Account Standard ID \n - StandardID (mandatory) \n - CurrencyCode (optional) \n c.) by BankAccountContractUUID \n - BankAccountContractUUID (mandatory) \n d.) by Bank Account Contract ID \n - BankAccountContractID (mandatory)",
+            "columns": [
+                {
+                    "name": "UUID",
+                    "description": "A UUID is a universal unique identifier of a bank account. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                }
+            ]
+        },
+        {
+            "name": "CurrentAccountContract",
+            "description": "A Current Account Contract is a contract between a credit institute and customer, which is based on the customer's request for opening a bank account of type current account and consists among others, account holder, general terms and conditions.\n\nComment: A bank account based on a current account contract is an account that allows money to be held on behalf of the account holder",
+            "columns": [
+                {
+                    "name": "UUID",
+                    "description": "An universal unique identifier of a bank account contract. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                }
+            ]
+        },
+        {
+            "name": "LoanContract",
+            "description": "Loan Contract is a contractual agreement between lenders and borrowers, which is based on a borrower\u2019s request for a loan and includes, for example, loan type, borrower(s), and general terms and conditions.\n\nComment: A BankAccount is a bank account associated with the bank account contract. \n\nIntegrity Condition:StartDate of TermSpecificationValidityPeriod, TermAgreementFixingPeriod, and IncomingPaymentAgreementPeriod have to be the same date. \n\nConstraint: Loan Contract Create - During creation of a loan contract , it is required to specify the details of Term Agreement and Inpayment Agreement.",
+            "columns": [
+                {
+                    "name": "UUID",
+                    "description": "An universal unique identifier of a bank account contract. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                }
+            ]
+        },
+        {
+            "name": "SavingsAccountContract",
+            "description": "A SavingsAccountContract is a contract between a credit institute and customer, which is based on the customer's request for opening a bank account of type savings account and consists among others, account holder, general terms and conditions.\nComment: A bank account based on a time deposit contract is an account that allows money to be held on behalf of the account holder",
+            "columns": [
+                {
+                    "name": "UUID",
+                    "description": "An universal unique identifier of a bank account contract. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                }
+            ]
+        },
+        {
+            "name": "TimeDepositContract",
+            "description": "A Time Deposit Contract is a contract between a credit institute and customer, which is based on the customer's request for opening a bank account of type time deposit and consists among others, account holder, general terms and conditions.\nComment: A bank account based on a time deposit contract is an account that allows money to be held on behalf of the account holder",
+            "columns": [
+                {
+                    "name": "UUID",
+                    "description": "An universal unique identifier of a bank account contract. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                }
+            ]
+        }
+    ]
+}

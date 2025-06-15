@@ -1,0 +1,5 @@
+A contract between a credit institute and customer, which is based on the customer's request for opening a bank account of type saving account and consists among others, account holder, general terms and conditions.
+You can use this API to read and update savings account contracts.Note:
+The entity data model for savings account contract represents the subtype Savings Account Contract of a bank account contract. The model contains a subset of the attributes of the business object of savings account contract.
+EDM Savings Account Contract represents a bank account contract of BankAccountContractSubType 3 - Savings Account Contract. The assumption is that many attributes are given by the production control (product) and are not display or changed in the assisted or unassisted channel for which this domain API is designed.Remark:
+The service Savings Account Contract is assigned to service group Transactional Banking.

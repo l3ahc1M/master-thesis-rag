@@ -1,0 +1,1769 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Loan Payment Skip Request",
+        "version": "1.0.0",
+        "description": "\r\n\r\nA request from a borrower to a lender (credit institute) to skip one or more payments of the loan contract. The skipped payments will be paid: With Planned Final Payment, as additional installments at the end of the payment plan, increasing the term, as increased installment amount within current term. A Skip is non-payment by borrower of one or more payment of a loan contract. If an payment is skipped, interest calculation capital is not reduced on the original due date. Interest continues to be charged on the higher principal balance.\r\nYou can use this API to query and read skip requests.\r\n\r\nNote:\r\nThe entity data model for loan payment skip request contains a subset of the attributes of the business object Loan Payment Plan Change Request.\r\n\r\nRemark:\r\nThe service Loan Payment Skip Request is assigned to service group Transactional Banking. Use: Loan Payment Skip Request can be used to read skip requests."
+    },
+    "externalDocs": {
+        "description": "Business Documentation",
+        "url": "https://help.sap.com/docs/TRBK_S4HANA/d2151b51aacc4d82ad2861e007337fa2/00a658479c0740a5a554575f18a535e8.html"
+    },
+    "x-sap-api-type": "ODATAV4",
+    "x-sap-shortText": "Query and read skip requests for loan payments using this synchronous inbound service",
+    "x-sap-software-min-version": "1.0",
+    "x-sap-ext-overview": [
+        {
+            "name": "Authentication Methods",
+            "values": [
+                {
+                    "text": "x509",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Service Group Name",
+            "values": [
+                {
+                    "text": "TRANSACTIONALBANKING",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Business Object",
+            "values": [
+                {
+                    "text": "Loan Payment Skip Request",
+                    "format": "plain"
+                }
+            ]
+        }
+    ],
+    "security": [
+        {
+            "basicAuthentication": []
+        }
+    ],
+    "servers": [
+        {
+            "url": "https://{host}:{port}/sap/opu/odata4/sap/transactionalbanking/default/sap/loanpaymentskiprequest/0001",
+            "variables": {
+                "host": {
+                    "default": ""
+                },
+                "port": {
+                    "default": ""
+                }
+            }
+        }
+    ],
+    "x-sap-extensible": {
+        "supported": "no"
+    },
+    "tags": [
+        {
+            "name": "Loan Payment Skip Requests"
+        }
+    ],
+    "paths": {
+        "/LoanPaymentSkipRequests": {
+            "get": {
+                "summary": "Query loan payment skip requests",
+                "description": "Is a request to query loan payment skip requests",
+                "tags": [
+                    "Loan Payment Skip Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "UUID",
+                                    "ID",
+                                    "LoanContractUUID",
+                                    "BusinessProcessChainAssignment",
+                                    "ChangeStateID",
+                                    "LifeCycleStatusCode",
+                                    "LifeCycleStatusName",
+                                    "LoanPaymentPlanSkippedInstallmentPaymentModeCode",
+                                    "LoanPaymentPlanSkippedInstallmentPaymentModeName",
+                                    "ReasonCode",
+                                    "ReasonName",
+                                    "CancellationReasonCode",
+                                    "CancellationReasonName",
+                                    "ActivationChargeWaiverRequestedIndicator",
+                                    "PreviousInstallmentAmount",
+                                    "NewInstallmentAmount",
+                                    "NewInstallmentStartDate",
+                                    "FinalInstallmentAmount",
+                                    "FinalPaymentDate",
+                                    "SkipDatePeriod"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "SkipItems"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of LoanPaymentSkipRequest",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.LoanPaymentSkipRequest"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create loan payment skip request",
+                "description": "Is a request to create a loan payment skip request",
+                "tags": [
+                    "Loan Payment Skip Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "LoanPaymentSkipRequest",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.LoanPaymentSkipRequest-create"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.LoanPaymentSkipRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/LoanPaymentSkipRequests/{UUID}": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "A UUID is a  universal unique identifier of LoanPaymentSkipRequest.  \nGDT:NOSC_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Read loan payment skip request",
+                "description": "Is a request to read a loan payment skip request",
+                "tags": [
+                    "Loan Payment Skip Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "UUID",
+                                    "ID",
+                                    "LoanContractUUID",
+                                    "BusinessProcessChainAssignment",
+                                    "ChangeStateID",
+                                    "LifeCycleStatusCode",
+                                    "LifeCycleStatusName",
+                                    "LoanPaymentPlanSkippedInstallmentPaymentModeCode",
+                                    "LoanPaymentPlanSkippedInstallmentPaymentModeName",
+                                    "ReasonCode",
+                                    "ReasonName",
+                                    "CancellationReasonCode",
+                                    "CancellationReasonName",
+                                    "ActivationChargeWaiverRequestedIndicator",
+                                    "PreviousInstallmentAmount",
+                                    "NewInstallmentAmount",
+                                    "NewInstallmentStartDate",
+                                    "FinalInstallmentAmount",
+                                    "FinalPaymentDate",
+                                    "SkipDatePeriod"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "SkipItems"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.LoanPaymentSkipRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/LoanPaymentSkipRequests/{UUID}/SAP__self.CancelLoanPaymentSkipRequest": {
+            "post": {
+                "summary": "Cancel loan payment skip request",
+                "description": "Is a request to cancel an individual LoanPaymentSkipRequest. Note: The fields marked as nullable can be passed with blank value. But the field name has to be passed always.",
+                "tags": [
+                    "Loan Payment Skip Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "UUID",
+                        "in": "path",
+                        "required": true,
+                        "description": "A UUID is a  universal unique identifier of LoanPaymentSkipRequest.  \nGDT:NOSC_UUID",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "01234567-89ab-cdef-0123-456789abcdef"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Action parameters",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "BusinessProcessChainAssignment": {
+                                        "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.BusinessProcessChainAssignment"
+                                    },
+                                    "CancellationReasonCode": {
+                                        "type": "string",
+                                        "maxLength": 4
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.LoanPaymentSkipRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/ProposeLoanPaymentSkipRequest": {
+            "post": {
+                "summary": "Propose Loan Payment Skip Request",
+                "description": "Propose loan payment skip request is an inquiry to get the proposal with default values of  parameters including skip items required to create LoanPaymentSkipRequest.",
+                "tags": [
+                    "Loan Payment Skip Requests"
+                ],
+                "requestBody": {
+                    "description": "Action parameters",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "LoanContractUUID": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                                        "title": "LoanContractUUID",
+                                        "description": " A globally unique identifier for a LoanContract.GDT: NOSC_UUID"
+                                    },
+                                    "EligibleSkippableItemsSelectionEndDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2017-04-13",
+                                        "title": "EligibleSkippableItemsSelectionEndDate",
+                                        "description": "The date at which the selection of eligible skippable item proposal end.GDT: Date"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.ProposedLoanPaymentSkipRequest"
+                                        }
+                                    ],
+                                    "title": "Proposed Loan Payment Skip Request",
+                                    "description": "A Proposed Loan Payment Skip Request is the return for the ProposeLoanPaymentSkipRequest action. This will hold the default values and the payment which can be skipped."
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/$batch": {
+            "post": {
+                "summary": "Send a group of requests",
+                "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).\n\n*Please note that \"Try it out\" is not supported for this request.*",
+                "tags": [
+                    "Batch Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Batch request",
+                    "content": {
+                        "multipart/mixed;boundary=request-separator": {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET LoanPaymentSkipRequests HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Batch response",
+                        "content": {
+                            "multipart/mixed": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "basicAuthentication": {
+                "type": "http",
+                "scheme": "basic"
+            }
+        },
+        "schemas": {
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.LoanPaymentSkipRequest": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is a  universal unique identifier of LoanPaymentSkipRequest.",
+                        "description": "GDT:NOSC_UUID"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "47938",
+                        "title": "Identifier of the LoanPaymentSkipRequest.",
+                        "description": "ID is an identifier of the LoanPaymentSkipRequest. ID is a semantic key which uniquely identifies loan Payment Skip Request. Constraint: Filter: Only Eq is supported as logical operator GDT: LoanPaymentPlanChangeRequestID"
+                    },
+                    "LoanContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A globally unique identifier for a LoanContract.",
+                        "description": " Constraint: Filter: Only Eq is supported as logical operator GDT: NOSC_UUID"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.BusinessProcessChainAssignment"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "BusinessProcessChain is a chain of business processes carried out in a business scenarioBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "ChangeStateID": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "20200220054415.0000000",
+                        "title": "Identifies a change state.",
+                        "description": "Remark:  1) Property is required for subsequent update operation. 2) Property is used as ETag. GDT: ChangeStateID"
+                    },
+                    "LifeCycleStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "3",
+                        "title": "LifeCycleStatusCode is the coded representation of the life cycle status of a LoanPaymentSkipRequest.",
+                        "description": " Constraint: Filter: Only Eq is supported as logical operator. GDT: LoanPaymentPlanChangeRequestLifeCycleStatusCode"
+                    },
+                    "LifeCycleStatusName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Completed",
+                        "title": "Name of LifeCycleStatusCode",
+                        "description": "GDT: MEDIUM_Name "
+                    },
+                    "LoanPaymentPlanSkippedInstallmentPaymentModeCode": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "A coded representation of the mode of payment of a skipped installment of the payment plan of a loan.",
+                        "description": "The mode of payment of a skipped installment of a payment plan of a loan.GDT: LoanPaymentPlanSkippedInstallmentPaymentModeCode"
+                    },
+                    "LoanPaymentPlanSkippedInstallmentPaymentModeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Term Change",
+                        "title": "Name of LoanPaymentPlanSkippedInstallmentPaymentModeCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "ReasonCode is the coded representation of the reason for the cancellation of the LoanPaymentSkipRequest.",
+                        "description": "GDT: LoanPaymentPlanChangeRequestReasonCode"
+                    },
+                    "ReasonName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Customer Request",
+                        "title": "Name of ReasonCode.",
+                        "description": "GDT: MEDIUM_Name."
+                    },
+                    "CancellationReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "CancellationReasonCode is the coded representation of the reason for the cancellation of the LoanPaymentSkipRequest..",
+                        "description": "GDT: LoanPaymentPlanChangeRequestCancellationReasonCode"
+                    },
+                    "CancellationReasonName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Error processing",
+                        "title": "Name of CancellationReasonCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "ActivationChargeWaiverRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "ActivationChargeWaiverRequestedIndicator",
+                        "description": "Indicates whether a charge for activation of LoanPaymentSkipRequest is requested to be waived or not.GDT: Indicator"
+                    },
+                    "PreviousInstallmentAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "PreviousInstallmentAmount is the installmet amount before the LoanPaymentSkipRequest.",
+                        "description": "GDT: Amount"
+                    },
+                    "NewInstallmentAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "NewInstallmentAmount is the installment amount after the LoanPaymentSkipRequest.",
+                        "description": "GDT: Amount"
+                    },
+                    "NewInstallmentStartDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "NewInstallmentStartDate is the calender date on which the new installment starts.",
+                        "description": "NewInstallmentStartDate is provided when LoanPaymentPlanSkippedInstallmentPaymentModeCode is either 1=Term Change or 2=Installment Amount Change.GDT: Date"
+                    },
+                    "FinalInstallmentAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "FinalInstallmentAmount is the last installment amount for a loan contract.",
+                        "description": "In context of LoanPaymentSkipRequest this field holds the last installment amount for a loan contract as on skip executed date.GDT: Amount"
+                    },
+                    "FinalPaymentDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "FinalPaymentDate is the due date for FinalInstallmentAmount.",
+                        "description": "In context of LoanPaymentSkipRequest this field holds the due date for FinalInstallmentAmount as on skip executed date.GDT: Date"
+                    },
+                    "SkipDatePeriod": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.DatePeriod"
+                            }
+                        ],
+                        "title": "SkipDatePeriod is the period for which payments to be skipped.",
+                        "description": "Integrity Constraint: Either SkipDatePeriod or SkipItem must be provided but not both.GDT: DatePeriod"
+                    },
+                    "SkipItems": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.SkipItem"
+                        }
+                    }
+                },
+                "title": "LoanPaymentSkipRequest",
+                "description": "A LoanPaymentSkipRequest is a request from a borrower to a lender (credit institute) to to skip one or more payments of the loan contract or skip payments for a specific period of the loan contract. Integrity Condition: Any one of the following filter is allowed: ID ,LoanContractUUID ,LoanContractUUID and LifeCycleStatusCode"
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.LoanPaymentSkipRequest-create": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is a  universal unique identifier of LoanPaymentSkipRequest.",
+                        "description": "GDT:NOSC_UUID"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "47938",
+                        "title": "Identifier of the LoanPaymentSkipRequest.",
+                        "description": "ID is an identifier of the LoanPaymentSkipRequest. ID is a semantic key which uniquely identifies loan Payment Skip Request. Constraint: Filter: Only Eq is supported as logical operator GDT: LoanPaymentPlanChangeRequestID"
+                    },
+                    "LoanContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A globally unique identifier for a LoanContract.",
+                        "description": " Constraint: Filter: Only Eq is supported as logical operator GDT: NOSC_UUID"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.BusinessProcessChainAssignment-create"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "BusinessProcessChain is a chain of business processes carried out in a business scenarioBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "LifeCycleStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "3",
+                        "title": "LifeCycleStatusCode is the coded representation of the life cycle status of a LoanPaymentSkipRequest.",
+                        "description": " Constraint: Filter: Only Eq is supported as logical operator. GDT: LoanPaymentPlanChangeRequestLifeCycleStatusCode"
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "ReasonCode is the coded representation of the reason for the cancellation of the LoanPaymentSkipRequest.",
+                        "description": "GDT: LoanPaymentPlanChangeRequestReasonCode"
+                    },
+                    "CancellationReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "CancellationReasonCode is the coded representation of the reason for the cancellation of the LoanPaymentSkipRequest..",
+                        "description": "GDT: LoanPaymentPlanChangeRequestCancellationReasonCode"
+                    },
+                    "SkipItems": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.SkipItem-create"
+                        }
+                    }
+                },
+                "required": [
+                    "UUID"
+                ],
+                "title": "LoanPaymentSkipRequest (for create)",
+                "description": "A LoanPaymentSkipRequest is a request from a borrower to a lender (credit institute) to to skip one or more payments of the loan contract or skip payments for a specific period of the loan contract. Integrity Condition: Any one of the following filter is allowed: ID ,LoanContractUUID ,LoanContractUUID and LifeCycleStatusCode"
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.LoanPaymentSkipRequest-update": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.BusinessProcessChainAssignment-update"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "BusinessProcessChain is a chain of business processes carried out in a business scenarioBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "LifeCycleStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "3",
+                        "title": "LifeCycleStatusCode is the coded representation of the life cycle status of a LoanPaymentSkipRequest.",
+                        "description": " Constraint: Filter: Only Eq is supported as logical operator. GDT: LoanPaymentPlanChangeRequestLifeCycleStatusCode"
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "ReasonCode is the coded representation of the reason for the cancellation of the LoanPaymentSkipRequest.",
+                        "description": "GDT: LoanPaymentPlanChangeRequestReasonCode"
+                    },
+                    "CancellationReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "CancellationReasonCode is the coded representation of the reason for the cancellation of the LoanPaymentSkipRequest..",
+                        "description": "GDT: LoanPaymentPlanChangeRequestCancellationReasonCode"
+                    }
+                },
+                "title": "LoanPaymentSkipRequest (for update)",
+                "description": "A LoanPaymentSkipRequest is a request from a borrower to a lender (credit institute) to to skip one or more payments of the loan contract or skip payments for a specific period of the loan contract. Integrity Condition: Any one of the following filter is allowed: ID ,LoanContractUUID ,LoanContractUUID and LifeCycleStatusCode"
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.ProposedLoanPaymentSkipRequest": {
+                "type": "object",
+                "properties": {
+                    "LoanContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A globally unique identifier for a LoanContract.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "LoanPaymentPlanSkippedInstallmentPaymentModeCode": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "A coded representation of the mode of payment of a skipped installment of the payment plan of a loan. The mode of payment of a skipped installment of a payment plan of a loan.Note: Default value 3=Balloon Amount Change is proposed.",
+                        "description": "GDT: LoanPaymentPlanSkippedInstallmentPaymentModeCode"
+                    },
+                    "LoanPaymentPlanSkippedInstallmentPaymentModeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Term Change",
+                        "title": "Name of LoanPaymentPlanSkippedInstallmentPaymentModeCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "ReasonCode is the coded representation of the reason for the LoanPaymentSkipRequest.Note: Default value maintained on production control is proposed",
+                        "description": "GDT: LoanPaymentPlanChangeRequestReasonCode"
+                    },
+                    "ReasonName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Customer Request",
+                        "title": "Name of ReasonCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "AvailedAnnualMaximumNumberValue": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "The number of already performed Skips in the current year.",
+                        "description": "GDT: NumberValue"
+                    },
+                    "AvailedLoanTermMaximumNumberValue": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "The number of already performed skips during the term.",
+                        "description": "GDT: NumberValue"
+                    },
+                    "AllowedAnnualMaximumNumberValue": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "The maximum number of skips allowed for a loan account per calendar year.Note: Default value maintained on production control is proposed",
+                        "description": "GDT: NumberValue"
+                    },
+                    "AllowedLoanTermMaximumNumberValue": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "The maximum number of skips allowed for a loan account in total.Note: Default value maintained on production control is proposed",
+                        "description": "GDT: NumberValue"
+                    },
+                    "SkipItems": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.SkipItems"
+                        },
+                        "title": "A SkipLoanPaymentItem are the items which are skipped or to be skipped by the LoanPaymentSkipRequest.In context of ProposedLoanPaymentSkipRequest this field holds the skippable items for the LoanPaymentSkipRequest.",
+                        "description": "Note: The skippable Planed Items/Due Item/Overdue Items are proposed."
+                    }
+                },
+                "title": "ProposedLoanPaymentSkipRequest",
+                "description": "A Proposed Loan Payment Skip Request is the return for the ProposeLoanPaymentSkipRequest action. This will hold the default values and the payment which can be skipped."
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.ProposedLoanPaymentSkipRequest-create": {
+                "type": "object",
+                "properties": {
+                    "LoanContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A globally unique identifier for a LoanContract.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "LoanPaymentPlanSkippedInstallmentPaymentModeCode": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "A coded representation of the mode of payment of a skipped installment of the payment plan of a loan. The mode of payment of a skipped installment of a payment plan of a loan.Note: Default value 3=Balloon Amount Change is proposed.",
+                        "description": "GDT: LoanPaymentPlanSkippedInstallmentPaymentModeCode"
+                    },
+                    "LoanPaymentPlanSkippedInstallmentPaymentModeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Term Change",
+                        "title": "Name of LoanPaymentPlanSkippedInstallmentPaymentModeCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "ReasonCode is the coded representation of the reason for the LoanPaymentSkipRequest.Note: Default value maintained on production control is proposed",
+                        "description": "GDT: LoanPaymentPlanChangeRequestReasonCode"
+                    },
+                    "ReasonName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Customer Request",
+                        "title": "Name of ReasonCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "AvailedAnnualMaximumNumberValue": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "The number of already performed Skips in the current year.",
+                        "description": "GDT: NumberValue"
+                    },
+                    "AvailedLoanTermMaximumNumberValue": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "The number of already performed skips during the term.",
+                        "description": "GDT: NumberValue"
+                    },
+                    "AllowedAnnualMaximumNumberValue": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "The maximum number of skips allowed for a loan account per calendar year.Note: Default value maintained on production control is proposed",
+                        "description": "GDT: NumberValue"
+                    },
+                    "AllowedLoanTermMaximumNumberValue": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "The maximum number of skips allowed for a loan account in total.Note: Default value maintained on production control is proposed",
+                        "description": "GDT: NumberValue"
+                    },
+                    "SkipItems": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.SkipItems-create"
+                        },
+                        "title": "A SkipLoanPaymentItem are the items which are skipped or to be skipped by the LoanPaymentSkipRequest.In context of ProposedLoanPaymentSkipRequest this field holds the skippable items for the LoanPaymentSkipRequest.",
+                        "description": "Note: The skippable Planed Items/Due Item/Overdue Items are proposed."
+                    }
+                },
+                "required": [
+                    "LoanContractUUID"
+                ],
+                "title": "ProposedLoanPaymentSkipRequest (for create)",
+                "description": "A Proposed Loan Payment Skip Request is the return for the ProposeLoanPaymentSkipRequest action. This will hold the default values and the payment which can be skipped."
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.ProposedLoanPaymentSkipRequest-update": {
+                "type": "object",
+                "properties": {
+                    "LoanPaymentPlanSkippedInstallmentPaymentModeCode": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "A coded representation of the mode of payment of a skipped installment of the payment plan of a loan. The mode of payment of a skipped installment of a payment plan of a loan.Note: Default value 3=Balloon Amount Change is proposed.",
+                        "description": "GDT: LoanPaymentPlanSkippedInstallmentPaymentModeCode"
+                    },
+                    "LoanPaymentPlanSkippedInstallmentPaymentModeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Term Change",
+                        "title": "Name of LoanPaymentPlanSkippedInstallmentPaymentModeCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "ReasonCode is the coded representation of the reason for the LoanPaymentSkipRequest.Note: Default value maintained on production control is proposed",
+                        "description": "GDT: LoanPaymentPlanChangeRequestReasonCode"
+                    },
+                    "ReasonName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Customer Request",
+                        "title": "Name of ReasonCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "AvailedAnnualMaximumNumberValue": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "The number of already performed Skips in the current year.",
+                        "description": "GDT: NumberValue"
+                    },
+                    "AvailedLoanTermMaximumNumberValue": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "The number of already performed skips during the term.",
+                        "description": "GDT: NumberValue"
+                    },
+                    "AllowedAnnualMaximumNumberValue": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "The maximum number of skips allowed for a loan account per calendar year.Note: Default value maintained on production control is proposed",
+                        "description": "GDT: NumberValue"
+                    },
+                    "AllowedLoanTermMaximumNumberValue": {
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "1",
+                        "title": "The maximum number of skips allowed for a loan account in total.Note: Default value maintained on production control is proposed",
+                        "description": "GDT: NumberValue"
+                    },
+                    "SkipItems": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.SkipItems-update"
+                        },
+                        "title": "A SkipLoanPaymentItem are the items which are skipped or to be skipped by the LoanPaymentSkipRequest.In context of ProposedLoanPaymentSkipRequest this field holds the skippable items for the LoanPaymentSkipRequest.",
+                        "description": "Note: The skippable Planed Items/Due Item/Overdue Items are proposed."
+                    }
+                },
+                "title": "ProposedLoanPaymentSkipRequest (for update)",
+                "description": "A Proposed Loan Payment Skip Request is the return for the ProposeLoanPaymentSkipRequest action. This will hold the default values and the payment which can be skipped."
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.SkipItem": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A globally unique identifier for a SkipLoanPaymentItem.",
+                        "description": "GDT:NOSC_UUID"
+                    },
+                    "PlannedPayment": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.PlannedPayment"
+                            }
+                        ],
+                        "title": "PlannedPayment is a payment planned for a key date of a loan payment plan.",
+                        "description": "PlannedPayment in context of LoanPaymentSkipRequest specifies items which are skipped or to be skipped."
+                    },
+                    "DuePayment": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.DuePayment"
+                            }
+                        ],
+                        "title": "DuePayment is a payment which is due or overdue.",
+                        "description": "DuePayment in context of LoanPaymentSkipRequest specifies unpaid bank account billing entries which are skipped or to be skipped.Note:DuePayment refers to bank account billing entry."
+                    }
+                },
+                "title": "SkipItem",
+                "description": "SkipItem are the items which are skipped or to be skipped by the LoanPaymentSkipRequest.This can include Plan Items/Due Item/Overdue Items"
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.SkipItem-create": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A globally unique identifier for a SkipLoanPaymentItem.",
+                        "description": "GDT:NOSC_UUID"
+                    },
+                    "PlannedPayment": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.PlannedPayment-create"
+                            }
+                        ],
+                        "title": "PlannedPayment is a payment planned for a key date of a loan payment plan.",
+                        "description": "PlannedPayment in context of LoanPaymentSkipRequest specifies items which are skipped or to be skipped."
+                    },
+                    "DuePayment": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.DuePayment-create"
+                            }
+                        ],
+                        "title": "DuePayment is a payment which is due or overdue.",
+                        "description": "DuePayment in context of LoanPaymentSkipRequest specifies unpaid bank account billing entries which are skipped or to be skipped.Note:DuePayment refers to bank account billing entry."
+                    }
+                },
+                "required": [
+                    "UUID"
+                ],
+                "title": "SkipItem (for create)",
+                "description": "SkipItem are the items which are skipped or to be skipped by the LoanPaymentSkipRequest.This can include Plan Items/Due Item/Overdue Items"
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.SkipItem-update": {
+                "type": "object",
+                "title": "SkipItem (for update)",
+                "description": "SkipItem are the items which are skipped or to be skipped by the LoanPaymentSkipRequest.This can include Plan Items/Due Item/Overdue Items"
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.Amount": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "nullable": true,
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "10",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.Amount-create": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "nullable": true,
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "10",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount (for create)",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.Amount-update": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "nullable": true,
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "10",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount (for update)",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.BPCA_Cancel": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "BusinessProcessChainUUID",
+                        "description": "BusinessProcessChainUUID is the UUID of the business process chain to which the hosting business object is assigned to.GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BankingBusinessTransactionTypeCode is the coded representation of the banking business transaction which isassociated with the business process chain to which the hosting buisiness object is assigned to.Default:If BankingBusinessTransactionTypeCode is not provided the code 200009 for Loan Contract Skip is set.GDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "BPCA_Cancel",
+                "description": "GDT:BusProcChnAssgmtFSElmnts"
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.BPCA_Cancel-create": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "BusinessProcessChainUUID",
+                        "description": "BusinessProcessChainUUID is the UUID of the business process chain to which the hosting business object is assigned to.GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BankingBusinessTransactionTypeCode is the coded representation of the banking business transaction which isassociated with the business process chain to which the hosting buisiness object is assigned to.Default:If BankingBusinessTransactionTypeCode is not provided the code 200009 for Loan Contract Skip is set.GDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "BPCA_Cancel (for create)",
+                "description": "GDT:BusProcChnAssgmtFSElmnts"
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.BPCA_Cancel-update": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "BusinessProcessChainUUID",
+                        "description": "BusinessProcessChainUUID is the UUID of the business process chain to which the hosting business object is assigned to.GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BankingBusinessTransactionTypeCode is the coded representation of the banking business transaction which isassociated with the business process chain to which the hosting buisiness object is assigned to.Default:If BankingBusinessTransactionTypeCode is not provided the code 200009 for Loan Contract Skip is set.GDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "BPCA_Cancel (for update)",
+                "description": "GDT:BusProcChnAssgmtFSElmnts"
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.BusinessProcessChainAssignment": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "BusinessProcessChainUUID is the UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "200009",
+                        "title": "BankingBusinessTransactionTypeCode is the coded representation of the banking business transaction which is associated with the business process chain to which the hosting buisiness object is assigned to. If BankingBusinessTransactionTypeCode is not provided the code 200009 for Loan Contract Skip is set.",
+                        "description": "GDT: BankingBusinessTransactionTypeCode"
+                    },
+                    "BankingBusinessTransactionTypeName": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Loan Contract Skip",
+                        "title": "Name of BankingBusinessTransactionTypeCode ",
+                        "description": "GDT: EXTENDED_Name"
+                    }
+                },
+                "title": "Business Process Chain Assignment ",
+                "description": "GDT:BusProcChnAssgmtFSElmntsBusiness Process Chain Assignment is the assignment of a business object node to a business process chain.  "
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.BusinessProcessChainAssignment-create": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "BusinessProcessChainUUID is the UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "200009",
+                        "title": "BankingBusinessTransactionTypeCode is the coded representation of the banking business transaction which is associated with the business process chain to which the hosting buisiness object is assigned to. If BankingBusinessTransactionTypeCode is not provided the code 200009 for Loan Contract Skip is set.",
+                        "description": "GDT: BankingBusinessTransactionTypeCode"
+                    },
+                    "BankingBusinessTransactionTypeName": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Loan Contract Skip",
+                        "title": "Name of BankingBusinessTransactionTypeCode ",
+                        "description": "GDT: EXTENDED_Name"
+                    }
+                },
+                "title": "Business Process Chain Assignment  (for create)",
+                "description": "GDT:BusProcChnAssgmtFSElmntsBusiness Process Chain Assignment is the assignment of a business object node to a business process chain.  "
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.BusinessProcessChainAssignment-update": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "BusinessProcessChainUUID is the UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "200009",
+                        "title": "BankingBusinessTransactionTypeCode is the coded representation of the banking business transaction which is associated with the business process chain to which the hosting buisiness object is assigned to. If BankingBusinessTransactionTypeCode is not provided the code 200009 for Loan Contract Skip is set.",
+                        "description": "GDT: BankingBusinessTransactionTypeCode"
+                    },
+                    "BankingBusinessTransactionTypeName": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Loan Contract Skip",
+                        "title": "Name of BankingBusinessTransactionTypeCode ",
+                        "description": "GDT: EXTENDED_Name"
+                    }
+                },
+                "title": "Business Process Chain Assignment  (for update)",
+                "description": "GDT:BusProcChnAssgmtFSElmntsBusiness Process Chain Assignment is the assignment of a business object node to a business process chain.  "
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.DatePeriod": {
+                "type": "object",
+                "properties": {
+                    "StartDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Start Date",
+                        "description": "The StartDate is the start date of the period.GDT: Date"
+                    },
+                    "EndDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "End Date",
+                        "description": "The EndDate is the end date of period.GDT: Date"
+                    }
+                },
+                "title": "DatePeriod",
+                "description": "CLOSED_DatePeriod is a period that is defined by two points in time. These points in time are expressed in calendar days. CLOSED_DatePeriod includes the start and the end time-point."
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.DatePeriod-create": {
+                "type": "object",
+                "properties": {
+                    "StartDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Start Date",
+                        "description": "The StartDate is the start date of the period.GDT: Date"
+                    },
+                    "EndDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "End Date",
+                        "description": "The EndDate is the end date of period.GDT: Date"
+                    }
+                },
+                "title": "DatePeriod (for create)",
+                "description": "CLOSED_DatePeriod is a period that is defined by two points in time. These points in time are expressed in calendar days. CLOSED_DatePeriod includes the start and the end time-point."
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.DatePeriod-update": {
+                "type": "object",
+                "properties": {
+                    "StartDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Start Date",
+                        "description": "The StartDate is the start date of the period.GDT: Date"
+                    },
+                    "EndDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "End Date",
+                        "description": "The EndDate is the end date of period.GDT: Date"
+                    }
+                },
+                "title": "DatePeriod (for update)",
+                "description": "CLOSED_DatePeriod is a period that is defined by two points in time. These points in time are expressed in calendar days. CLOSED_DatePeriod includes the start and the end time-point."
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.DuePayment": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "198494",
+                        "title": "ID",
+                        "description": "A unique identifier for bank account billing entry.GDT: BankAccountBillingEntryID"
+                    },
+                    "DueDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Due Date",
+                        "description": "Is the adjusted date on which payment of the bank account billing entry is due as per the working day calender of the associated bank account contract.GDT: Date"
+                    },
+                    "BilledAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "Billed Amount",
+                        "description": "The billed amount of bank account billing entry.GDT: Amount"
+                    },
+                    "BankContractFinancialConditionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "115050",
+                        "title": "Bank Contract Financial Condition Type Code",
+                        "description": "BankContractFinancialConditionTypeCode is a coded representation of the type of a bank contract financial condition.In case of DuePayment BankContractFinancialConditionTypeCode represents the payment condition of skip item. GDT: BankContractFinancialConditionTypeCode"
+                    },
+                    "BankContractFinancialConditionTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Transaction Charge - Penalty Charge",
+                        "title": "Bank Contract Financial Condition Type Name",
+                        "description": "Name of BankContractFinancialConditionTypeCode.GDT: MEDIUM_Name"
+                    }
+                },
+                "title": "Due Payment",
+                "description": "DuePayment is a payment which is due or overdue.  DuePayment in context of LoanPaymentSkipRequest specifies unpaid bank account billing entries which are skipped or to be skipped. "
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.DuePayment-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "198494",
+                        "title": "ID",
+                        "description": "A unique identifier for bank account billing entry.GDT: BankAccountBillingEntryID"
+                    },
+                    "DueDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Due Date",
+                        "description": "Is the adjusted date on which payment of the bank account billing entry is due as per the working day calender of the associated bank account contract.GDT: Date"
+                    },
+                    "BilledAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "Billed Amount",
+                        "description": "The billed amount of bank account billing entry.GDT: Amount"
+                    },
+                    "BankContractFinancialConditionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "115050",
+                        "title": "Bank Contract Financial Condition Type Code",
+                        "description": "BankContractFinancialConditionTypeCode is a coded representation of the type of a bank contract financial condition.In case of DuePayment BankContractFinancialConditionTypeCode represents the payment condition of skip item. GDT: BankContractFinancialConditionTypeCode"
+                    },
+                    "BankContractFinancialConditionTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Transaction Charge - Penalty Charge",
+                        "title": "Bank Contract Financial Condition Type Name",
+                        "description": "Name of BankContractFinancialConditionTypeCode.GDT: MEDIUM_Name"
+                    }
+                },
+                "title": "Due Payment (for create)",
+                "description": "DuePayment is a payment which is due or overdue.  DuePayment in context of LoanPaymentSkipRequest specifies unpaid bank account billing entries which are skipped or to be skipped. "
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.DuePayment-update": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "198494",
+                        "title": "ID",
+                        "description": "A unique identifier for bank account billing entry.GDT: BankAccountBillingEntryID"
+                    },
+                    "DueDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Due Date",
+                        "description": "Is the adjusted date on which payment of the bank account billing entry is due as per the working day calender of the associated bank account contract.GDT: Date"
+                    },
+                    "BilledAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "Billed Amount",
+                        "description": "The billed amount of bank account billing entry.GDT: Amount"
+                    },
+                    "BankContractFinancialConditionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "115050",
+                        "title": "Bank Contract Financial Condition Type Code",
+                        "description": "BankContractFinancialConditionTypeCode is a coded representation of the type of a bank contract financial condition.In case of DuePayment BankContractFinancialConditionTypeCode represents the payment condition of skip item. GDT: BankContractFinancialConditionTypeCode"
+                    },
+                    "BankContractFinancialConditionTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Transaction Charge - Penalty Charge",
+                        "title": "Bank Contract Financial Condition Type Name",
+                        "description": "Name of BankContractFinancialConditionTypeCode.GDT: MEDIUM_Name"
+                    }
+                },
+                "title": "Due Payment (for update)",
+                "description": "DuePayment is a payment which is due or overdue.  DuePayment in context of LoanPaymentSkipRequest specifies unpaid bank account billing entries which are skipped or to be skipped. "
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.PlannedPayment": {
+                "type": "object",
+                "properties": {
+                    "PaymentAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "Payment Amount",
+                        "description": "The amount of payment of the PlannedPayment item.GDT: Amount"
+                    },
+                    "PaymentDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Payment Date",
+                        "description": "The date of payment of the PlannedItem.GDT: Date"
+                    },
+                    "BankContractFinancialConditionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "501500",
+                        "title": "Bank Contract Financial Condition Type Code",
+                        "description": "BankContractFinancialConditionTypeCode is a coded representation of the type of a bank contract financial condition.In case of DuePayment BankContractFinancialConditionTypeCode represents the payment condition of skip item. GDT: BankContractFinancialConditionTypeCode"
+                    },
+                    "BankContractFinancialConditionTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Price Condition - First Discbursement Ch",
+                        "title": "Bank Contract Financial Condition Type Name",
+                        "description": "Name of BankContractFinancialConditionTypeCode.GDT: MEDIUM_Name"
+                    }
+                },
+                "title": "Planned Payment",
+                "description": "PlannedPayment is a payment planned for a key date of a loan payment plan.  PlannedPayment in context of LoanPaymentSkipRequest specifies items which are skipped or to be skipped."
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.PlannedPayment-create": {
+                "type": "object",
+                "properties": {
+                    "PaymentAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "Payment Amount",
+                        "description": "The amount of payment of the PlannedPayment item.GDT: Amount"
+                    },
+                    "PaymentDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Payment Date",
+                        "description": "The date of payment of the PlannedItem.GDT: Date"
+                    },
+                    "BankContractFinancialConditionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "501500",
+                        "title": "Bank Contract Financial Condition Type Code",
+                        "description": "BankContractFinancialConditionTypeCode is a coded representation of the type of a bank contract financial condition.In case of DuePayment BankContractFinancialConditionTypeCode represents the payment condition of skip item. GDT: BankContractFinancialConditionTypeCode"
+                    },
+                    "BankContractFinancialConditionTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Price Condition - First Discbursement Ch",
+                        "title": "Bank Contract Financial Condition Type Name",
+                        "description": "Name of BankContractFinancialConditionTypeCode.GDT: MEDIUM_Name"
+                    }
+                },
+                "title": "Planned Payment (for create)",
+                "description": "PlannedPayment is a payment planned for a key date of a loan payment plan.  PlannedPayment in context of LoanPaymentSkipRequest specifies items which are skipped or to be skipped."
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.PlannedPayment-update": {
+                "type": "object",
+                "properties": {
+                    "PaymentAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "Payment Amount",
+                        "description": "The amount of payment of the PlannedPayment item.GDT: Amount"
+                    },
+                    "PaymentDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Payment Date",
+                        "description": "The date of payment of the PlannedItem.GDT: Date"
+                    },
+                    "BankContractFinancialConditionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "501500",
+                        "title": "Bank Contract Financial Condition Type Code",
+                        "description": "BankContractFinancialConditionTypeCode is a coded representation of the type of a bank contract financial condition.In case of DuePayment BankContractFinancialConditionTypeCode represents the payment condition of skip item. GDT: BankContractFinancialConditionTypeCode"
+                    },
+                    "BankContractFinancialConditionTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Price Condition - First Discbursement Ch",
+                        "title": "Bank Contract Financial Condition Type Name",
+                        "description": "Name of BankContractFinancialConditionTypeCode.GDT: MEDIUM_Name"
+                    }
+                },
+                "title": "Planned Payment (for update)",
+                "description": "PlannedPayment is a payment planned for a key date of a loan payment plan.  PlannedPayment in context of LoanPaymentSkipRequest specifies items which are skipped or to be skipped."
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.SkipItems": {
+                "type": "object",
+                "properties": {
+                    "DuePayment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.DuePayment"
+                            }
+                        ],
+                        "title": "DuePayment",
+                        "description": "DuePayment is a payment which is due or overdue.DuePayment in context of LoanPaymentSkipRequest specifies unpaid bank account billing entries which are skipped or to be skipped. "
+                    },
+                    "PlannedPayment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.PlannedPayment"
+                            }
+                        ],
+                        "title": "PlannedPayment",
+                        "description": "PlannedPayment is a payment planned for a key date of a loan payment plan. PlannedPayment in context of LoanPaymentSkipRequest specifies items which are skipped or to be skipped."
+                    }
+                },
+                "title": "SkipItems",
+                "description": "A SkipLoanPaymentItem are the items which are skipped or to be skipped by the LoanPaymentSkipRequest.In context of ProposedLoanPaymentSkipRequest this field holds the skippable items for the LoanPaymentSkipRequest."
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.SkipItems-create": {
+                "type": "object",
+                "properties": {
+                    "DuePayment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.DuePayment-create"
+                            }
+                        ],
+                        "title": "DuePayment",
+                        "description": "DuePayment is a payment which is due or overdue.DuePayment in context of LoanPaymentSkipRequest specifies unpaid bank account billing entries which are skipped or to be skipped. "
+                    },
+                    "PlannedPayment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.PlannedPayment-create"
+                            }
+                        ],
+                        "title": "PlannedPayment",
+                        "description": "PlannedPayment is a payment planned for a key date of a loan payment plan. PlannedPayment in context of LoanPaymentSkipRequest specifies items which are skipped or to be skipped."
+                    }
+                },
+                "title": "SkipItems (for create)",
+                "description": "A SkipLoanPaymentItem are the items which are skipped or to be skipped by the LoanPaymentSkipRequest.In context of ProposedLoanPaymentSkipRequest this field holds the skippable items for the LoanPaymentSkipRequest."
+            },
+            "com.sap.gateway.default.loanpaymentskiprequest.v0001.SkipItems-update": {
+                "type": "object",
+                "properties": {
+                    "DuePayment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.DuePayment-update"
+                            }
+                        ],
+                        "title": "DuePayment",
+                        "description": "DuePayment is a payment which is due or overdue.DuePayment in context of LoanPaymentSkipRequest specifies unpaid bank account billing entries which are skipped or to be skipped. "
+                    },
+                    "PlannedPayment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loanpaymentskiprequest.v0001.PlannedPayment-update"
+                            }
+                        ],
+                        "title": "PlannedPayment",
+                        "description": "PlannedPayment is a payment planned for a key date of a loan payment plan. PlannedPayment in context of LoanPaymentSkipRequest specifies items which are skipped or to be skipped."
+                    }
+                },
+                "title": "SkipItems (for update)",
+                "description": "A SkipLoanPaymentItem are the items which are skipped or to be skipped by the LoanPaymentSkipRequest.In context of ProposedLoanPaymentSkipRequest this field holds the skippable items for the LoanPaymentSkipRequest."
+            },
+            "count": {
+                "anyOf": [
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ],
+                "description": "The number of entities in the collection. Available when using the [$count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount) query option."
+            },
+            "error": {
+                "type": "object",
+                "required": [
+                    "error"
+                ],
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "required": [
+                            "code",
+                            "message"
+                        ],
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                            "target": {
+                                "type": "string"
+                            },
+                            "details": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "target": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "innererror": {
+                                "type": "object",
+                                "description": "The structure of this object is service-specific"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "top": {
+                "name": "$top",
+                "in": "query",
+                "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "example": 50
+            },
+            "skip": {
+                "name": "$skip",
+                "in": "query",
+                "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "count": {
+                "name": "$count",
+                "in": "query",
+                "description": "Include count of items, see [Count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount)",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "search": {
+                "name": "$search",
+                "in": "query",
+                "description": "Search items by search phrases, see [Searching](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionsearch)",
+                "schema": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses": {
+            "error": {
+                "description": "Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

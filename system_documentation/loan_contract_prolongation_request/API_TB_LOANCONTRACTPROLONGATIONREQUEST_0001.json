@@ -1,0 +1,1551 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Loan Contract Prolongation Request",
+        "version": "1.0.0",
+        "description": "\r\n\r\nA request to extend one or multiple time-limited parts of the contractual relationship between the lender party and the borrower party. Loan contract prolongation involves one or multiple of the following: extension of the term; new term agreement(s); new incoming payment agreement(s) of a loan contract. A new term agreement will involve new interest, charge, settlement and waiver conditions. A new Incoming payment agreement involves changes in the payment period and corresponding payment conditions.\r\n\r\nLoan contract prolongation also typically involves adjustment of conditions themselves (interest, charges and so on), in addition to the periods.\r\n\r\nNote:\r\nThe entity data model for loan contract prolongation request contains a subset of the attributes of the business object of loan contract prolongation request.\r\n\r\nRemark:\r\nThe service Loan Contract Prolongation Request is assigned to service group Transactional Banking.\r\n\r\nUse:\r\nLoan Contract Prolongation Request can be used to display details of a prolongation (rollover/renewal) of a loan contract."
+    },
+    "externalDocs": {
+        "description": "Business Documentation",
+        "url": "https://help.sap.com/docs/TRBK_S4HANA/d2151b51aacc4d82ad2861e007337fa2/ae15a4f63ee442c4812b3eab8177a27d.html"
+    },
+    "x-sap-api-type": "ODATAV4",
+    "x-sap-shortText": "Query and read prolongation requests for loan contracts using this synchronous inbound service",
+    "x-sap-software-min-version": "1.0",
+    "x-sap-ext-overview": [
+        {
+            "name": "Authentication Methods",
+            "values": [
+                {
+                    "text": "x509",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Service Group Name",
+            "values": [
+                {
+                    "text": "TRANSACTIONALBANKING",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Business Object",
+            "values": [
+                {
+                    "text": "Loan Contract Prolongation Request",
+                    "format": "plain"
+                }
+            ]
+        }
+    ],
+    "security": [
+        {
+            "basicAuthentication": []
+        }
+    ],
+    "servers": [
+        {
+            "url": "https://{host}:{port}/sap/opu/odata4/sap/transactionalbanking/default/sap/loancontractprolongationrequest/0001",
+            "variables": {
+                "host": {
+                    "default": ""
+                },
+                "port": {
+                    "default": ""
+                }
+            }
+        }
+    ],
+    "x-sap-extensible": {
+        "supported": "no"
+    },
+    "tags": [
+        {
+            "name": "Loan Contract Prolongation Requests"
+        }
+    ],
+    "paths": {
+        "/LoanContractProlongationRequests": {
+            "get": {
+                "summary": "Query Loan Contract Prolongation Requests",
+                "description": "Is a request to query Loan Contract Prolongation Requests",
+                "tags": [
+                    "Loan Contract Prolongation Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)\n\nRequired filter properties:\n- LoanContract/UUID",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "UUID",
+                                    "ID",
+                                    "LoanContract",
+                                    "BusinessProcessChainAssignment",
+                                    "ChangeStateID",
+                                    "LifeCycleStatusCode",
+                                    "LifeCycleStatusName",
+                                    "CancellationReasonCode",
+                                    "CancellationReasonName",
+                                    "PenaltyRelevanceIndicator",
+                                    "ActivationChargeWaiverRequestedIndicator",
+                                    "LoanContractProlongationTermValidityEndDate",
+                                    "ActivationChargeAmount",
+                                    "EarlyRepaymentCompensationAmount",
+                                    "ReimbursementAmount",
+                                    "LoanContractPaymentPlanPlannedBalanceAmount",
+                                    "LoanContractPaymentPlanActualBalanceAmount",
+                                    "FinalPaymentAmount",
+                                    "FinalPaymentDate"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "IncomingPaymentAgreements",
+                                    "TermAgreements"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of LoanContractProlongationRequest",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.LoanContractProlongationRequest"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/LoanContractProlongationRequests/{UUID}": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "A UUID is a  universal unique identifier of a LoanContractProlongationRequest.  \nGDT: NOSC_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Read Loan Contract Prolongation Request by UUID",
+                "description": "Is a request to read a Loan Contract Prolongation Request",
+                "tags": [
+                    "Loan Contract Prolongation Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "UUID",
+                                    "ID",
+                                    "LoanContract",
+                                    "BusinessProcessChainAssignment",
+                                    "ChangeStateID",
+                                    "LifeCycleStatusCode",
+                                    "LifeCycleStatusName",
+                                    "CancellationReasonCode",
+                                    "CancellationReasonName",
+                                    "PenaltyRelevanceIndicator",
+                                    "ActivationChargeWaiverRequestedIndicator",
+                                    "LoanContractProlongationTermValidityEndDate",
+                                    "ActivationChargeAmount",
+                                    "EarlyRepaymentCompensationAmount",
+                                    "ReimbursementAmount",
+                                    "LoanContractPaymentPlanPlannedBalanceAmount",
+                                    "LoanContractPaymentPlanActualBalanceAmount",
+                                    "FinalPaymentAmount",
+                                    "FinalPaymentDate"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "IncomingPaymentAgreements",
+                                    "TermAgreements"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.LoanContractProlongationRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/LoanContractProlongationRequests/{UUID}/IncomingPaymentAgreements": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "A UUID is a  universal unique identifier of a LoanContractProlongationRequest.  \nGDT: NOSC_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Query Incoming Payment Agreements",
+                "description": "Is a request to query Incoming Payment Agreements",
+                "tags": [
+                    "Loan Contract Prolongation Requests"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "ID",
+                                    "Period",
+                                    "PlannedFinalPaymentAmount",
+                                    "LastPaymentDatePeriodEndAdjustmentIndicator"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of IncomingPaymentAgreement",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.IncomingPaymentAgreement"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/LoanContractProlongationRequests/{UUID}/TermAgreements": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "A UUID is a  universal unique identifier of a LoanContractProlongationRequest.  \nGDT: NOSC_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Query Term Agreements",
+                "description": "Is a request to query Term Agreements",
+                "tags": [
+                    "Loan Contract Prolongation Requests"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "ID",
+                                    "CommittedCapitalAmount",
+                                    "BankContractFinancialConditionContextValueCode",
+                                    "BankContractFinancialConditionContextValueName",
+                                    "FixingPeriod"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of TermAgreement",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.TermAgreement"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/$batch": {
+            "post": {
+                "summary": "Send a group of requests",
+                "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).\n\n*Please note that \"Try it out\" is not supported for this request.*",
+                "tags": [
+                    "Batch Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Batch request",
+                    "content": {
+                        "multipart/mixed;boundary=request-separator": {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET LoanContractProlongationRequests HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Batch response",
+                        "content": {
+                            "multipart/mixed": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "basicAuthentication": {
+                "type": "http",
+                "scheme": "basic"
+            }
+        },
+        "schemas": {
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.IncomingPaymentAgreement": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "1",
+                        "title": "Is an identifier for  loan contract prolongation incoming payment agreement.",
+                        "description": "GDT: BankAccountContractIncomingPaymentAgreementID"
+                    },
+                    "Period": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.UPPEROPEN_DatePeriod"
+                            }
+                        ],
+                        "title": "Is the period in which the IncomingPaymentAgreement is valid."
+                    },
+                    "PlannedFinalPaymentAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "The amount of the final payment that is planned for the incoming payment agreement. ",
+                        "description": "Use: The planned final payment for a loan is a payment agreed with the account holder. It is due as the last payment of the loan. \nGDT: Amount"
+                    },
+                    "LastPaymentDatePeriodEndAdjustmentIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether the last payment date in the payment plan must be adjusted to the end date of the period of the incoming payment agreement or not. ",
+                        "description": "GDT: Indicator"
+                    }
+                },
+                "title": "IncomingPaymentAgreement",
+                "description": "An Incoming Payment Agreement is an agreement that specifies the term for incoming payments for the prolongation of the loan contract."
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.IncomingPaymentAgreement-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "1",
+                        "title": "Is an identifier for  loan contract prolongation incoming payment agreement.",
+                        "description": "GDT: BankAccountContractIncomingPaymentAgreementID"
+                    },
+                    "Period": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.UPPEROPEN_DatePeriod-create"
+                            }
+                        ],
+                        "title": "Is the period in which the IncomingPaymentAgreement is valid."
+                    },
+                    "PlannedFinalPaymentAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "The amount of the final payment that is planned for the incoming payment agreement. ",
+                        "description": "Use: The planned final payment for a loan is a payment agreed with the account holder. It is due as the last payment of the loan. \nGDT: Amount"
+                    },
+                    "LastPaymentDatePeriodEndAdjustmentIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether the last payment date in the payment plan must be adjusted to the end date of the period of the incoming payment agreement or not. ",
+                        "description": "GDT: Indicator"
+                    }
+                },
+                "required": [
+                    "ID"
+                ],
+                "title": "IncomingPaymentAgreement (for create)",
+                "description": "An Incoming Payment Agreement is an agreement that specifies the term for incoming payments for the prolongation of the loan contract."
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.IncomingPaymentAgreement-update": {
+                "type": "object",
+                "properties": {
+                    "Period": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.UPPEROPEN_DatePeriod-update"
+                            }
+                        ],
+                        "title": "Is the period in which the IncomingPaymentAgreement is valid."
+                    },
+                    "PlannedFinalPaymentAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "The amount of the final payment that is planned for the incoming payment agreement. ",
+                        "description": "Use: The planned final payment for a loan is a payment agreed with the account holder. It is due as the last payment of the loan. \nGDT: Amount"
+                    },
+                    "LastPaymentDatePeriodEndAdjustmentIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether the last payment date in the payment plan must be adjusted to the end date of the period of the incoming payment agreement or not. ",
+                        "description": "GDT: Indicator"
+                    }
+                },
+                "title": "IncomingPaymentAgreement (for update)",
+                "description": "An Incoming Payment Agreement is an agreement that specifies the term for incoming payments for the prolongation of the loan contract."
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.LoanContractProlongationRequest": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is a  universal unique identifier of a LoanContractProlongationRequest.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "71",
+                        "title": "ID is an identifier of the LoanContractProlongationRequest.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. Remark: Either 'ID' or 'LoanContractUUID' is a required filter criteria.\nGDT: LoanContractProlongationRequestID"
+                    },
+                    "LoanContract": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.LoanContract"
+                            }
+                        ],
+                        "title": "The loan contract for which a loan contract prolongation request is made.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. Remark: Either 'ID' or 'LoanContractUUID' is a required filter criteria."
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.BusinessProcessChainAssignment"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain. ",
+                        "description": "Default: If BankingBusinessTransactionTypeCode is not specfiied, code value \"200007 - Loan Contract Renewal (Rollover/Prolongation)\" will be used by default.\nBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "ChangeStateID": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "2019-06-03T06:16:41Z",
+                        "title": "Identifies a change state of a Loan Contract Prolongation Request.",
+                        "description": "GDT: ChangeStateID"
+                    },
+                    "LifeCycleStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "5",
+                        "title": "A LifeCycleStatusCode is the coded representation of the life cycle status of a LoanContractProlongationRequest.",
+                        "description": "The values for the GDT LoanContractProlongationRequestLifeCycleStatusCode are:\n1 - In Preparation \n2 - Discarded \n3 - Active \n4 - Deactivated \n5 - Completed \n6 - Cancelled \n7 - In Release for Activation \n8 - In Release for Reactivatoin  \n9 - In Release for Deactivation \n10 - In Release for Cancellation\nFilter: \nOnly 'Eq' & 'Or' is supported as logical operator. \nDefault: If LifeCycleStatusCode is not specified as a filter criteria, then code value \"3 - Active\" will be used by default.\nGDT: LoanContractProlongationRequestLifeCycleStatusCode_V1"
+                    },
+                    "LifeCycleStatusName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Completed",
+                        "title": "Name of a LifeCycleStatusCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "CancellationReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "10",
+                        "title": "A CancellationReasonCode is the coded representation of the reason for the cancellation of a Loan Contract Prolongation Request.",
+                        "description": "Default: If not specified, the default reason code maintained in bank account contract production control will be used. If there is no default reason code maintained in bank account contract production control then loan contract prolongation request will be canceled without any reason.Filter: Only 'Eq' is supported as logical operator.\nGDT: LoanContractProlongationRequestCancellationReasonCode"
+                    },
+                    "CancellationReasonName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Bank Request",
+                        "title": "Name of a CancellationReasonCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "PenaltyRelevanceIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether the penalty for the Loan Contract Prolongation Request is relevant or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "ActivationChargeWaiverRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether a charge for activation of Loan Contract Prolongation Request is requested to be waived or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "LoanContractProlongationTermValidityEndDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Is the end date of validity of term after prolongation of the loan contract. ",
+                        "description": "GDT: Date"
+                    },
+                    "ActivationChargeAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "Is the activation charge amount.",
+                        "description": "GDT: Amount"
+                    },
+                    "EarlyRepaymentCompensationAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "Is the amount of early repayment compensation.",
+                        "description": "Remark: Is applicable only when loan contract is prolonged before the current term agreement end date.GDT: Amount"
+                    },
+                    "ReimbursementAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "Is the amount of reimbursement.",
+                        "description": "Remark: Is applicable only when loan contract is prolonged before the current term agreement end date.Reimbursement amount includes discount and premium amount to be reimbursed to the customer. The reimbursment is done by posting a debit/credit payment.Default: If not specified, the default reason code maintained in bank account contract production control will be used.GDT: Amount"
+                    },
+                    "LoanContractPaymentPlanPlannedBalanceAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "Is the planned balance of payments remaining in the payment plan of the  loan contract at the time of the LoanContractProlongationRequest.",
+                        "description": "GDT: Amount"
+                    },
+                    "LoanContractPaymentPlanActualBalanceAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "Is the actual balance of payments remaining in the payment plan of the  loan contract at the time of the LoanContractProlongationRequest.",
+                        "description": "GDT: Amount"
+                    },
+                    "FinalPaymentAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "Is the final installment amount(Balloon)  for a loan contract after this loan contract prolongation request.",
+                        "description": "GDT: Amount"
+                    },
+                    "FinalPaymentDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Is the due date for FinalPaymentAmount after this loan contract prolongation request.",
+                        "description": "GDT: Date"
+                    },
+                    "IncomingPaymentAgreements": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.IncomingPaymentAgreement"
+                        }
+                    },
+                    "TermAgreements": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.TermAgreement"
+                        }
+                    }
+                },
+                "title": "Loan Contract Prolongation Request",
+                "description": "A Loan Contract Prolongation Request is a request to extend one or multiple time-limited parts of the contractual relationship between the lender party and the borrower party."
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.LoanContractProlongationRequest-create": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is a  universal unique identifier of a LoanContractProlongationRequest.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "71",
+                        "title": "ID is an identifier of the LoanContractProlongationRequest.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. Remark: Either 'ID' or 'LoanContractUUID' is a required filter criteria.\nGDT: LoanContractProlongationRequestID"
+                    },
+                    "LoanContract": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.LoanContract-create"
+                            }
+                        ],
+                        "title": "The loan contract for which a loan contract prolongation request is made.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. Remark: Either 'ID' or 'LoanContractUUID' is a required filter criteria."
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.BusinessProcessChainAssignment-create"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain. ",
+                        "description": "Default: If BankingBusinessTransactionTypeCode is not specfiied, code value \"200007 - Loan Contract Renewal (Rollover/Prolongation)\" will be used by default.\nBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "PenaltyRelevanceIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether the penalty for the Loan Contract Prolongation Request is relevant or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "ActivationChargeWaiverRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether a charge for activation of Loan Contract Prolongation Request is requested to be waived or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "ActivationChargeAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "Is the activation charge amount.",
+                        "description": "GDT: Amount"
+                    },
+                    "EarlyRepaymentCompensationAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "Is the amount of early repayment compensation.",
+                        "description": "Remark: Is applicable only when loan contract is prolonged before the current term agreement end date.GDT: Amount"
+                    },
+                    "ReimbursementAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "Is the amount of reimbursement.",
+                        "description": "Remark: Is applicable only when loan contract is prolonged before the current term agreement end date.Reimbursement amount includes discount and premium amount to be reimbursed to the customer. The reimbursment is done by posting a debit/credit payment.Default: If not specified, the default reason code maintained in bank account contract production control will be used.GDT: Amount"
+                    },
+                    "LoanContractPaymentPlanPlannedBalanceAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "Is the planned balance of payments remaining in the payment plan of the  loan contract at the time of the LoanContractProlongationRequest.",
+                        "description": "GDT: Amount"
+                    },
+                    "LoanContractPaymentPlanActualBalanceAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "Is the actual balance of payments remaining in the payment plan of the  loan contract at the time of the LoanContractProlongationRequest.",
+                        "description": "GDT: Amount"
+                    },
+                    "FinalPaymentAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "Is the final installment amount(Balloon)  for a loan contract after this loan contract prolongation request.",
+                        "description": "GDT: Amount"
+                    },
+                    "IncomingPaymentAgreements": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.IncomingPaymentAgreement-create"
+                        }
+                    },
+                    "TermAgreements": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.TermAgreement-create"
+                        }
+                    }
+                },
+                "required": [
+                    "UUID"
+                ],
+                "title": "Loan Contract Prolongation Request (for create)",
+                "description": "A Loan Contract Prolongation Request is a request to extend one or multiple time-limited parts of the contractual relationship between the lender party and the borrower party."
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.LoanContractProlongationRequest-update": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "71",
+                        "title": "ID is an identifier of the LoanContractProlongationRequest.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. Remark: Either 'ID' or 'LoanContractUUID' is a required filter criteria.\nGDT: LoanContractProlongationRequestID"
+                    },
+                    "LoanContract": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.LoanContract-update"
+                            }
+                        ],
+                        "title": "The loan contract for which a loan contract prolongation request is made.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. Remark: Either 'ID' or 'LoanContractUUID' is a required filter criteria."
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.BusinessProcessChainAssignment-update"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain. ",
+                        "description": "Default: If BankingBusinessTransactionTypeCode is not specfiied, code value \"200007 - Loan Contract Renewal (Rollover/Prolongation)\" will be used by default.\nBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "PenaltyRelevanceIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether the penalty for the Loan Contract Prolongation Request is relevant or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "ActivationChargeWaiverRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether a charge for activation of Loan Contract Prolongation Request is requested to be waived or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "ActivationChargeAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "Is the activation charge amount.",
+                        "description": "GDT: Amount"
+                    },
+                    "EarlyRepaymentCompensationAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "Is the amount of early repayment compensation.",
+                        "description": "Remark: Is applicable only when loan contract is prolonged before the current term agreement end date.GDT: Amount"
+                    },
+                    "ReimbursementAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "Is the amount of reimbursement.",
+                        "description": "Remark: Is applicable only when loan contract is prolonged before the current term agreement end date.Reimbursement amount includes discount and premium amount to be reimbursed to the customer. The reimbursment is done by posting a debit/credit payment.Default: If not specified, the default reason code maintained in bank account contract production control will be used.GDT: Amount"
+                    },
+                    "LoanContractPaymentPlanPlannedBalanceAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "Is the planned balance of payments remaining in the payment plan of the  loan contract at the time of the LoanContractProlongationRequest.",
+                        "description": "GDT: Amount"
+                    },
+                    "LoanContractPaymentPlanActualBalanceAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "Is the actual balance of payments remaining in the payment plan of the  loan contract at the time of the LoanContractProlongationRequest.",
+                        "description": "GDT: Amount"
+                    },
+                    "FinalPaymentAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "Is the final installment amount(Balloon)  for a loan contract after this loan contract prolongation request.",
+                        "description": "GDT: Amount"
+                    }
+                },
+                "title": "Loan Contract Prolongation Request (for update)",
+                "description": "A Loan Contract Prolongation Request is a request to extend one or multiple time-limited parts of the contractual relationship between the lender party and the borrower party."
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.TermAgreement": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "1",
+                        "title": "Is an identifier for loan contract prolongation term agreement.",
+                        "description": "GDT: BankAccountContractTermAgreementID"
+                    },
+                    "CommittedCapitalAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "Is the committed amount of the loan contract prolongation term agreement.",
+                        "description": "GDT: Amount"
+                    },
+                    "BankContractFinancialConditionContextValueCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 2,
+                        "example": "FC",
+                        "title": "Is a coded representation of the context of a financial condition given by the other properties of a bank contract.",
+                        "description": "GDT: BankContractFinancialConditionContextValueCode"
+                    },
+                    "BankContractFinancialConditionContextValueName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 46,
+                        "example": "Fixed Interest, to be capitalized",
+                        "title": "Name of BankContractFinancialConditionContextValueCode",
+                        "description": "\nGDT: LONG_Name"
+                    },
+                    "FixingPeriod": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.UPPEROPEN_DatePeriod"
+                            }
+                        ],
+                        "title": "A FixingPeriod is the period for which the term agreement is fixed.",
+                        "description": "Use: the FixingPeriod is the period for which the committed capital amount is fixed. "
+                    }
+                },
+                "title": "Term Agreement",
+                "description": "A TermAgreement is an agreement on the duration, amount, applicable conditions of the Bank Account Contract added in the process of prolongation of the loan contract.A term in this case refers to a period of time."
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.TermAgreement-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "1",
+                        "title": "Is an identifier for loan contract prolongation term agreement.",
+                        "description": "GDT: BankAccountContractTermAgreementID"
+                    },
+                    "CommittedCapitalAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "Is the committed amount of the loan contract prolongation term agreement.",
+                        "description": "GDT: Amount"
+                    },
+                    "BankContractFinancialConditionContextValueCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 2,
+                        "example": "FC",
+                        "title": "Is a coded representation of the context of a financial condition given by the other properties of a bank contract.",
+                        "description": "GDT: BankContractFinancialConditionContextValueCode"
+                    },
+                    "BankContractFinancialConditionContextValueName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 46,
+                        "example": "Fixed Interest, to be capitalized",
+                        "title": "Name of BankContractFinancialConditionContextValueCode",
+                        "description": "\nGDT: LONG_Name"
+                    },
+                    "FixingPeriod": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.UPPEROPEN_DatePeriod-create"
+                            }
+                        ],
+                        "title": "A FixingPeriod is the period for which the term agreement is fixed.",
+                        "description": "Use: the FixingPeriod is the period for which the committed capital amount is fixed. "
+                    }
+                },
+                "required": [
+                    "ID"
+                ],
+                "title": "Term Agreement (for create)",
+                "description": "A TermAgreement is an agreement on the duration, amount, applicable conditions of the Bank Account Contract added in the process of prolongation of the loan contract.A term in this case refers to a period of time."
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.TermAgreement-update": {
+                "type": "object",
+                "properties": {
+                    "CommittedCapitalAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "Is the committed amount of the loan contract prolongation term agreement.",
+                        "description": "GDT: Amount"
+                    },
+                    "BankContractFinancialConditionContextValueCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 2,
+                        "example": "FC",
+                        "title": "Is a coded representation of the context of a financial condition given by the other properties of a bank contract.",
+                        "description": "GDT: BankContractFinancialConditionContextValueCode"
+                    },
+                    "BankContractFinancialConditionContextValueName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 46,
+                        "example": "Fixed Interest, to be capitalized",
+                        "title": "Name of BankContractFinancialConditionContextValueCode",
+                        "description": "\nGDT: LONG_Name"
+                    },
+                    "FixingPeriod": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.UPPEROPEN_DatePeriod-update"
+                            }
+                        ],
+                        "title": "A FixingPeriod is the period for which the term agreement is fixed.",
+                        "description": "Use: the FixingPeriod is the period for which the committed capital amount is fixed. "
+                    }
+                },
+                "title": "Term Agreement (for update)",
+                "description": "A TermAgreement is an agreement on the duration, amount, applicable conditions of the Bank Account Contract added in the process of prolongation of the loan contract.A term in this case refers to a period of time."
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount-create": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount (for create)",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.Amount-update": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount (for update)",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.BusinessProcessChainAssignment": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which hosting business object is assigned to.",
+                        "description": "NOSC_UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "200007",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "Is the coded representation of the banking business transaction which is associated with the business process chain to which the hosting buisiness object is assigned to.Default: If BankingBusinessTransactionTypeCode is not specfiied, code value \"200007 - Loan Contract Renewal (Rollover/Prolongation)\" will be used by default.GDT: BankingBusinessTransactionTypeCode"
+                    },
+                    "BankingBusinessTransactionTypeName": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Loan Contract Prolongation",
+                        "title": "Name of BankingBusinessTransactionTypeCode",
+                        "description": "GDT: EXTENDED_Name"
+                    }
+                },
+                "title": "Business Process Chain Assignment",
+                "description": "Business Process Chain Assignment is the assignment of business object node to a business process chain."
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.BusinessProcessChainAssignment-create": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which hosting business object is assigned to.",
+                        "description": "NOSC_UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "200007",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "Is the coded representation of the banking business transaction which is associated with the business process chain to which the hosting buisiness object is assigned to.Default: If BankingBusinessTransactionTypeCode is not specfiied, code value \"200007 - Loan Contract Renewal (Rollover/Prolongation)\" will be used by default.GDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for create)",
+                "description": "Business Process Chain Assignment is the assignment of business object node to a business process chain."
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.BusinessProcessChainAssignment-update": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which hosting business object is assigned to.",
+                        "description": "NOSC_UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "200007",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "Is the coded representation of the banking business transaction which is associated with the business process chain to which the hosting buisiness object is assigned to.Default: If BankingBusinessTransactionTypeCode is not specfiied, code value \"200007 - Loan Contract Renewal (Rollover/Prolongation)\" will be used by default.GDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for update)",
+                "description": "Business Process Chain Assignment is the assignment of business object node to a business process chain."
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.LoanContract": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "An UUID of Loan Contract.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator.Remark: Either 'ID' or 'LoanContractUUID' is a required filter criteria.GDT: NOSC_UUID"
+                    },
+                    "TermSpecificationValidityPeriod": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.UPPEROPENUNBOUNDED_DatePeriod"
+                            }
+                        ],
+                        "title": "Term Specification Validity Period",
+                        "description": "Is the original term of the loan contract for which the LoanContractProlongationRequest is made.GDT: UPPEROPEN_UNBOUNDED_DatePeriod"
+                    }
+                },
+                "title": "Loan Contract",
+                "description": "The loan contract for which a loan contract prolongation request is made."
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.LoanContract-create": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "An UUID of Loan Contract.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator.Remark: Either 'ID' or 'LoanContractUUID' is a required filter criteria.GDT: NOSC_UUID"
+                    },
+                    "TermSpecificationValidityPeriod": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.UPPEROPENUNBOUNDED_DatePeriod-create"
+                            }
+                        ],
+                        "title": "Term Specification Validity Period",
+                        "description": "Is the original term of the loan contract for which the LoanContractProlongationRequest is made.GDT: UPPEROPEN_UNBOUNDED_DatePeriod"
+                    }
+                },
+                "title": "Loan Contract (for create)",
+                "description": "The loan contract for which a loan contract prolongation request is made."
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.LoanContract-update": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "An UUID of Loan Contract.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator.Remark: Either 'ID' or 'LoanContractUUID' is a required filter criteria.GDT: NOSC_UUID"
+                    },
+                    "TermSpecificationValidityPeriod": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.loancontractprolongationrequest.v0001.UPPEROPENUNBOUNDED_DatePeriod-update"
+                            }
+                        ],
+                        "title": "Term Specification Validity Period",
+                        "description": "Is the original term of the loan contract for which the LoanContractProlongationRequest is made.GDT: UPPEROPEN_UNBOUNDED_DatePeriod"
+                    }
+                },
+                "title": "Loan Contract (for update)",
+                "description": "The loan contract for which a loan contract prolongation request is made."
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.UPPEROPENUNBOUNDED_DatePeriod": {
+                "type": "object",
+                "properties": {
+                    "StartDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13"
+                    },
+                    "EndDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13"
+                    }
+                },
+                "title": "UPPEROPENUNBOUNDED_DatePeriod"
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.UPPEROPENUNBOUNDED_DatePeriod-create": {
+                "type": "object",
+                "properties": {
+                    "StartDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13"
+                    },
+                    "EndDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13"
+                    }
+                },
+                "title": "UPPEROPENUNBOUNDED_DatePeriod (for create)"
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.UPPEROPENUNBOUNDED_DatePeriod-update": {
+                "type": "object",
+                "properties": {
+                    "StartDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13"
+                    },
+                    "EndDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13"
+                    }
+                },
+                "title": "UPPEROPENUNBOUNDED_DatePeriod (for update)"
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.UPPEROPEN_DatePeriod": {
+                "type": "object",
+                "properties": {
+                    "StartDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Is the start date of the validity period.",
+                        "description": "Constraint for Create/Update: \nIf StartDate and EndDate are provided no Duration must be provided.\nGDT:Date"
+                    },
+                    "Duration": {
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "P1M",
+                        "title": "The duration of the period.",
+                        "description": "Constraint for Create/Update: \nIf duration is provided StartDate must be provided and EndDate must not be provided.\nGDT:Duration"
+                    },
+                    "EndDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The EndDate is the end date of period.",
+                        "description": "GDT:Date"
+                    }
+                },
+                "title": "UPPEROPEN_DatePeriod",
+                "description": "DatePeriod is a period that is defined by two points in time. These points in time are expressed in calendar days.\nRemark:UPPEROPEN_DatePeriod includes the start time-point, but excludes the end time-point."
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.UPPEROPEN_DatePeriod-create": {
+                "type": "object",
+                "properties": {
+                    "StartDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Is the start date of the validity period.",
+                        "description": "Constraint for Create/Update: \nIf StartDate and EndDate are provided no Duration must be provided.\nGDT:Date"
+                    },
+                    "Duration": {
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "P1M",
+                        "title": "The duration of the period.",
+                        "description": "Constraint for Create/Update: \nIf duration is provided StartDate must be provided and EndDate must not be provided.\nGDT:Duration"
+                    },
+                    "EndDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The EndDate is the end date of period.",
+                        "description": "GDT:Date"
+                    }
+                },
+                "title": "UPPEROPEN_DatePeriod (for create)",
+                "description": "DatePeriod is a period that is defined by two points in time. These points in time are expressed in calendar days.\nRemark:UPPEROPEN_DatePeriod includes the start time-point, but excludes the end time-point."
+            },
+            "com.sap.gateway.default.loancontractprolongationrequest.v0001.UPPEROPEN_DatePeriod-update": {
+                "type": "object",
+                "properties": {
+                    "StartDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Is the start date of the validity period.",
+                        "description": "Constraint for Create/Update: \nIf StartDate and EndDate are provided no Duration must be provided.\nGDT:Date"
+                    },
+                    "Duration": {
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "P1M",
+                        "title": "The duration of the period.",
+                        "description": "Constraint for Create/Update: \nIf duration is provided StartDate must be provided and EndDate must not be provided.\nGDT:Duration"
+                    },
+                    "EndDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The EndDate is the end date of period.",
+                        "description": "GDT:Date"
+                    }
+                },
+                "title": "UPPEROPEN_DatePeriod (for update)",
+                "description": "DatePeriod is a period that is defined by two points in time. These points in time are expressed in calendar days.\nRemark:UPPEROPEN_DatePeriod includes the start time-point, but excludes the end time-point."
+            },
+            "count": {
+                "anyOf": [
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ],
+                "description": "The number of entities in the collection. Available when using the [$count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount) query option."
+            },
+            "error": {
+                "type": "object",
+                "required": [
+                    "error"
+                ],
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "required": [
+                            "code",
+                            "message"
+                        ],
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                            "target": {
+                                "type": "string"
+                            },
+                            "details": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "target": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "innererror": {
+                                "type": "object",
+                                "description": "The structure of this object is service-specific"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "top": {
+                "name": "$top",
+                "in": "query",
+                "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "example": 50
+            },
+            "skip": {
+                "name": "$skip",
+                "in": "query",
+                "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "count": {
+                "name": "$count",
+                "in": "query",
+                "description": "Include count of items, see [Count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount)",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "search": {
+                "name": "$search",
+                "in": "query",
+                "description": "Search items by search phrases, see [Searching](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionsearch)",
+                "schema": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses": {
+            "error": {
+                "description": "Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,6 @@
+A request from the borrower to a lender (financial institution) to fully or partially pay off a loan.
+You can use this API to read a loan contract payoff request with the corresponding gross amount calculation results, the payment transaction instruction, and unpaid bank account billing entries.
+You can also use this API to cancel an active or a completed payoff request, to calculate the gross payoff amount, or to create a full or partial payoff request. Note:
+The entity data model for loan contract payoff request contains a subset of the attributes of the business object of loan contract payoff request.Remark:
+The service Loan Contract Payoff Request is assigned to service group Transactional Banking.Use:
+Loan Contract Payoff Request can be used to create, display or cancel both Full Payoff requests and Partial Payoff requests for a particular loan account. Calculate Loan Contract Payoff Request is a request to calculate the gross payoff amount and the corresponding breakup of the gross payoff amount for both Full Payoff requests and Partial Payoff requests for a particular loan account. Propose Loan Contract Payoff Request is an inquiry to get the proposal with default values of parameters required for a Loan Contract Payoff Request. Cancel Loan Contract Payoff Request can be used to delete an existing loan contract payoff request.

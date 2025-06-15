@@ -1,0 +1,86 @@
+{
+    "tables": [
+        {
+            "name": "BankCardContractLockRequestEventSpecification",
+            "description": "A Bank card contract lock request event specification is a specification of the possible events of a bank card contract lock request.",
+            "columns": [
+                {
+                    "name": "EventCode",
+                    "description": "A coded representation of the event of a bank card contract lock request. Example: 301000",
+                    "format": "string"
+                },
+                {
+                    "name": "EventName",
+                    "description": "Name of EventCode. Example: Debit Card Lock",
+                    "format": "string"
+                }
+            ]
+        },
+        {
+            "name": "BankCardContractLockRequest",
+            "description": "A Bank Card Contract Lock Request is a request from the card holder party to the bank to lock a card contract immediately or at a future time.",
+            "columns": [
+                {
+                    "name": "ID",
+                    "description": "Is an identifier of a bank card contract lock request. Example: 105",
+                    "format": "string"
+                },
+                {
+                    "name": "PartyIdentifyingElements",
+                    "description": "PartyIdentifyingElements contains all the identifying elements of a bank customer.",
+                    "format": "string"
+                },
+                {
+                    "name": "ChangeStateID",
+                    "description": "An unique identifier of a bank card contract lock request for a change state. Example: 2019-07-13T13:34:46Z",
+                    "format": "string"
+                },
+                {
+                    "name": "EventCode",
+                    "description": "A coded representation of the event of a bank card contract lock request. Example: 103000",
+                    "format": "string"
+                },
+                {
+                    "name": "EventName",
+                    "description": "Name of EventCode. Example: Card Dispatch Lock",
+                    "format": "string"
+                },
+                {
+                    "name": "UserStatusCode",
+                    "description": "A coded representation of the user status of a bank contract lock request. Example: 2",
+                    "format": "string"
+                },
+                {
+                    "name": "UserStatusName",
+                    "description": "Name of UserStatusCode. Example: Active",
+                    "format": "string"
+                },
+                {
+                    "name": "ValidityStartDate",
+                    "description": "The validity start date for a bank contract lock request. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "ValidityEndDate",
+                    "description": "The validity end date for a bank contract lock request. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "BusinessProcessChainAssignment",
+                    "description": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                    "format": "string"
+                },
+                {
+                    "name": "Note",
+                    "description": "A note on bank contract lock request about the lock. Example: Customer permanently moved to another country",
+                    "format": "string"
+                },
+                {
+                    "name": "BankCardContractSelections",
+                    "description": "",
+                    "format": "array"
+                }
+            ]
+        }
+    ]
+}

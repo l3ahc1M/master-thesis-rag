@@ -1,0 +1,5 @@
+A balance-relevant entry for a Bank Account. A bank account is an account that holds funds in a bank and is subject to deposits and withdrawals.
+You can use this API to retrieve bank account entries for a particular bank account.Use:
+The API can be used in scenarios where bank account entries for a particular bank account shall be displayed.Remark:
+The service Bank Account Entry is assigned to service group Transactional Banking.General:
+The properties of the EDM that are based on a code GDT do not contain supplementary components (e.g. listID) that are known from the GDTs of the enterprise services.

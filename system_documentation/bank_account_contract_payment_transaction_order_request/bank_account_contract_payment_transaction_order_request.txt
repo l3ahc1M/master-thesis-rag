@@ -1,0 +1,6 @@
+Example:
+Banks can integrate different online channels where payment transaction orders can be initiated e.g. online banking, ATMs, branch solutions, call center solutions.
+a. Payment Transaction Order is initiated via a UI where a customer or an employee is interacting with a UI based channel. Example online banking, branch application, call center or ATM
+b. This Payment Transaction Order is executed online. This means real-time posting of ordering party and real time posting of recipient party if internal within the bank and technically possible.
+c. Channel application expects an online confirmation of the execution of the payment transaction order.Remark:
+The current modelling of BankAccountContractPaymentTransactionOrderRequest is limited to payment transaction orders with one recipient item.

@@ -1,0 +1,1271 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Bank Account Prenote Entry",
+        "version": "1.0.0",
+        "description": "\r\n\r\nA reservation on a bank account for either a debit or a credit amount.\r\nYou can use this API to create, query,read, update, or delete prenote entries of a bank account.\r\n\r\nRemark:\r\nThe service Bank Account Prenote Entry is assigned to service group Transactional Banking.\r\n\r\nGeneral:\r\nThe properties of the EDM that are based on a code GDT do not contain supplementary components (e.g. listID) that are known from the GDTs of the enterprise services."
+    },
+    "externalDocs": {
+        "description": "Business Documentation",
+        "url": "https://help.sap.com/docs/TRBK_S4HANA/d2151b51aacc4d82ad2861e007337fa2/43150f1ab469467897fb999f9875fdbc.html"
+    },
+    "x-sap-api-type": "ODATAV4",
+    "x-sap-shortText": "Manage prenote entries of a bank account using this synchronous inbound service",
+    "x-sap-software-min-version": "1.0",
+    "x-sap-ext-overview": [
+        {
+            "name": "Authentication Methods",
+            "values": [
+                {
+                    "text": "x509",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Service Group Name",
+            "values": [
+                {
+                    "text": "TRANSACTIONALBANKING",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Business Object",
+            "values": [
+                {
+                    "text": "Bank Account Prenote Entry",
+                    "format": "plain"
+                }
+            ]
+        }
+    ],
+    "security": [
+        {
+            "basicAuthentication": []
+        }
+    ],
+    "servers": [
+        {
+            "url": "https://{host}:{port}/sap/opu/odata4/sap/transactionalbanking/default/sap/bankaccountprenoteentry/0001",
+            "variables": {
+                "host": {
+                    "default": ""
+                },
+                "port": {
+                    "default": ""
+                }
+            }
+        }
+    ],
+    "x-sap-extensible": {
+        "supported": "no"
+    },
+    "tags": [
+        {
+            "name": "Bank Account Prenote Entries"
+        }
+    ],
+    "paths": {
+        "/BankAccountPrenoteEntries": {
+            "get": {
+                "summary": "Query Bank Account Prenote Entries",
+                "description": "Is a request to query bank account prenote entries",
+                "tags": [
+                    "Bank Account Prenote Entries"
+                ],
+                "parameters": [
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)\n\nRequired filter properties:\n- BankAccountUUID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "UUID",
+                                    "BankAccountUUID",
+                                    "RequesterBankAccountPrenoteEntryID",
+                                    "ChangeStateID",
+                                    "LifeCycleStatusCode",
+                                    "LifeCycleStatusName",
+                                    "TypeCode",
+                                    "TypeName",
+                                    "RejectionReasonCode",
+                                    "RejectionReasonName",
+                                    "BankPaymentCommunicationChannelCode",
+                                    "BankPaymentCommunicationChannelName",
+                                    "ValidityStartDate",
+                                    "PlannedValidityEndDate",
+                                    "ValidityEndDate",
+                                    "BankAccountDebitIndicator",
+                                    "BankAccountAvailableAmountRelevanceIndicator",
+                                    "LimitCheckDeactivationRequestedIndicator",
+                                    "AdditionalMaterialChecksDeactivationRequestedIndicator",
+                                    "ValidIndicator",
+                                    "Note",
+                                    "AdditionalNote",
+                                    "MaterialCheckNote",
+                                    "MaterialCheckAdditionalNote",
+                                    "BankAccountCurrencyAmount",
+                                    "TransactionCurrencyAmount",
+                                    "Reference",
+                                    "BusinessProcessChainAssignment"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "PaymentNotes"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of BankAccountPrenoteEntry",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.BankAccountPrenoteEntry"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create Bank Account Prenote Entry",
+                "description": "Is a request to create a bank account prenote entry",
+                "tags": [
+                    "Bank Account Prenote Entries"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Bank Account Prenote Entry",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.BankAccountPrenoteEntry-create"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.BankAccountPrenoteEntry"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankAccountPrenoteEntries/{UUID}/{BankAccountUUID}": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "Is the unique identifier for a bank account prenote entry.  \nGDT: UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                },
+                {
+                    "name": "BankAccountUUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "A BankAccountUUID is an universal unique identifier for the bank account to which the entry is assigned.  \nRemark:  UUID identifies a bank account prenote entry. The BankAccountUUID is required for performant read of one prenote entry because BankAccountUUID is part of the primary index of the database table.  \nFilter: Only 'Eq' is supported as logical operator.  \nIntegrity Conditions: If cross-navigation is used, filter for BankAccountUUID must not be used.  GDT: NOSC_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Read Bank Account Prenote Entry by ID",
+                "description": "Is a request to read a bank account prenote entry",
+                "tags": [
+                    "Bank Account Prenote Entries"
+                ],
+                "parameters": [
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "UUID",
+                                    "BankAccountUUID",
+                                    "RequesterBankAccountPrenoteEntryID",
+                                    "ChangeStateID",
+                                    "LifeCycleStatusCode",
+                                    "LifeCycleStatusName",
+                                    "TypeCode",
+                                    "TypeName",
+                                    "RejectionReasonCode",
+                                    "RejectionReasonName",
+                                    "BankPaymentCommunicationChannelCode",
+                                    "BankPaymentCommunicationChannelName",
+                                    "ValidityStartDate",
+                                    "PlannedValidityEndDate",
+                                    "ValidityEndDate",
+                                    "BankAccountDebitIndicator",
+                                    "BankAccountAvailableAmountRelevanceIndicator",
+                                    "LimitCheckDeactivationRequestedIndicator",
+                                    "AdditionalMaterialChecksDeactivationRequestedIndicator",
+                                    "ValidIndicator",
+                                    "Note",
+                                    "AdditionalNote",
+                                    "MaterialCheckNote",
+                                    "MaterialCheckAdditionalNote",
+                                    "BankAccountCurrencyAmount",
+                                    "TransactionCurrencyAmount",
+                                    "Reference",
+                                    "BusinessProcessChainAssignment"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "PaymentNotes"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.BankAccountPrenoteEntry"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update Bank Account Prenote Entry",
+                "description": "Is a request to update a bank account prenote entry",
+                "tags": [
+                    "Bank Account Prenote Entries"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Bank Account Prenote Entry",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.BankAccountPrenoteEntry-update"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete Bank Account Prenote Entry",
+                "description": "Is a request to cancel a bank account prenote entry",
+                "tags": [
+                    "Bank Account Prenote Entries"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/$batch": {
+            "post": {
+                "summary": "Send a group of requests",
+                "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).\n\n*Please note that \"Try it out\" is not supported for this request.*",
+                "tags": [
+                    "Batch Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Batch request",
+                    "content": {
+                        "multipart/mixed;boundary=request-separator": {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET BankAccountPrenoteEntries HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Batch response",
+                        "content": {
+                            "multipart/mixed": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "basicAuthentication": {
+                "type": "http",
+                "scheme": "basic"
+            }
+        },
+        "schemas": {
+            "com.sap.gateway.default.bankaccountprenoteentry.v0001.BankAccountPrenoteEntry": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "Is the unique identifier for a bank account prenote entry.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankAccountUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A BankAccountUUID is an universal unique identifier for the bank account to which the entry is assigned.",
+                        "description": "Remark:  UUID identifies a bank account prenote entry. The BankAccountUUID is required for performant read of one prenote entry because BankAccountUUID is part of the primary index of the database table.  \nFilter: Only 'Eq' is supported as logical operator.  \nIntegrity Conditions: If cross-navigation is used, filter for BankAccountUUID must not be used.  GDT: NOSC_UUID"
+                    },
+                    "RequesterBankAccountPrenoteEntryID": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "PRENOTE-REFERENCE-4711",
+                        "title": "Identifies a bank account prenote entry and is assigned by the requester of the bank account prenote entry.",
+                        "description": "The RequesterBankAccountPrenoteEntryID in combination with the BankAccountUUID uniquely identifies a bank account prenote entry.  \nGDT: BankAccountPrenoteEntryID_V1"
+                    },
+                    "ChangeStateID": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "2019-06-04T08:29:04Z",
+                        "title": "Identifies a change state.",
+                        "description": "Remark:  1) Property is required for subsequent usage of corresponding SOAP update service. 2) Property is used as ETag. \nGDT: ChangeStateID"
+                    },
+                    "LifeCycleStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "5",
+                        "title": "Coded representation of the life cycle status of a bank account prenote entry.",
+                        "description": "The values for the BDT BankAccountPrenoteEntryLifeCycleStatusCode_V1 are:  \n1 - Created  \n2 - Creation in approval \n3 - Update in approval \n4 - Discard in approval \n5 - Discarded \n6 - Cancelled \n7 - Assigned \n8 - Creation Exception \nFilter:  Only 'Eq' is supported as logical operator.  \nBDT: BankAccountPrenoteEntryLifeCycleStatusCode_V1"
+                    },
+                    "LifeCycleStatusName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Discarded",
+                        "title": "Name of a LifeCycleStatusCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "TypeCode": {
+                        "type": "string",
+                        "maxLength": 3,
+                        "example": "30",
+                        "title": "Coded representation of a type of bank account prenote entry.",
+                        "description": "Filter:  Only 'Eq' is supported as logical operator.  \nGDT: BankAccountPrenoteEntryTypeCode"
+                    },
+                    "TypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Payment Advice - Debit",
+                        "title": "Name of a TypeCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "RejectionReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "01",
+                        "title": "A coded representation of reason for reject of a bank account prenote entry.",
+                        "description": "BDT: BankAccountPrenoteEntryRejectionReasonCode"
+                    },
+                    "RejectionReasonName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Insufficient Funds",
+                        "title": "A name of a RejectionReasonCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "BankPaymentCommunicationChannelCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "3",
+                        "title": "Coded representation of the communication channel for payments in a bank.",
+                        "description": "GDT: BankPaymentCommunicationChannelCode"
+                    },
+                    "BankPaymentCommunicationChannelName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "EFT",
+                        "title": "Name of a BankPaymentCommunicationChannel.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "ValidityStartDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Date on which the bank account prenote entry becomes valid.",
+                        "description": "At the time of creation, the default posting date of payment transactions of the underlying bank posting area of the bank account for which the bank account prenote entry is created will be the validity start date of the bank account prenote entry.  \nGDT: Date"
+                    },
+                    "PlannedValidityEndDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Date on which the validity of a bank acocunt prenote entry is planned to end.",
+                        "description": "PlannedValidityEndDate is the date up to and including which the bank account prenote entry could be assigned to a corresponding bank account payment entry and might be relevent for the calculation of available amount of the bank account for which the bank account prenote entry is created.  \nGDT: Date"
+                    },
+                    "ValidityEndDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Date on which the validity of the bank account prenote entry ends.",
+                        "description": "ValidityEndDate specifies the date on which the status of the bank account prenote entry changed to Deleted or Assigned.  \nGDT: Date"
+                    },
+                    "BankAccountDebitIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether the bank account will be debited by the bank account prenote entry or not.",
+                        "description": "If the BankAccountDebitIndicator is true and the BankAccountAvailableAmountRelevanceIndicator is true, then the bank account   available amount will be debited by the prenote balance.  \nIf the BankAccountDebitIndicator is false and the    BankAccountAvailableAmountRelevanceIndicator is true, then the bank account available amount will be credited by the prenote balance.   \nGDT: Indicator"
+                    },
+                    "BankAccountAvailableAmountRelevanceIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether the bank account prenote entry is relevant for the calculation of the available amount of the bank account or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "LimitCheckDeactivationRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether deactivation of limit check was requested for processing the bank account prenote entry.",
+                        "description": "The limit of the bank account is the available amount of the bank account. The LimitCheckDeactivationRequestedIndicator will deactivate   the check of available amount of the bank account for which the bank account prenote entry is to be created.  \nGDT: Indicator"
+                    },
+                    "AdditionalMaterialChecksDeactivationRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether deactivation of the all material checks (except limit check) is requested for processing the bank account prenote entry.",
+                        "description": "GDT: Indicator"
+                    },
+                    "ValidIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether the bank account prenote entry is valid or not.",
+                        "description": "A bank account prenote entry can be valid only when LifeCycleStatusCode is 1 (Created) and current posting date is between ValidityStartDate  and ValidityEndDate.  \nGDT: Indicator"
+                    },
+                    "Note": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Long Text",
+                        "title": "A note about a bank account prenote entry.",
+                        "description": "Constraint: Maximum 50 characters are allowed.  \nGDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    },
+                    "AdditionalNote": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Short Text",
+                        "title": "An additional note about a bank account prenote entry.",
+                        "description": "Constraint: Maximum 10 characters are allowed.  \nGDT: LANGUAGEINDEPENDENT_SHORT_Note"
+                    },
+                    "MaterialCheckNote": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Material Check Note",
+                        "title": "A note for processing customer owned checks for a prenote entry.",
+                        "description": "Constraint: Maximum 65 characters are allowed.  \nGDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    },
+                    "MaterialCheckAdditionalNote": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "AdChNt",
+                        "title": "An additional note for processing customer owned checks for a prenote entry.",
+                        "description": "Constraint: Maximum 6 characters are allowed.  \nGDT: LANGUAGEINDEPENDENT_SHORT_Note"
+                    },
+                    "BankAccountCurrencyAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.Amount"
+                            }
+                        ],
+                        "title": "Amount in the currency of a bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "TransactionCurrencyAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.Amount"
+                            }
+                        ],
+                        "title": "Amount in the currency of a business transaction.",
+                        "description": "GDT: Amount"
+                    },
+                    "Reference": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.BankAccountPrenoteEntryReference"
+                            }
+                        ],
+                        "title": "References of the bank account prenote entry."
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.BusinessProcessChainAssignment"
+                            }
+                        ],
+                        "title": "The Business Process Chain Assignment is the assignment of a bank prenote entry to a business process chain.",
+                        "description": "BOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "PaymentNotes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.PaymentNote"
+                        }
+                    }
+                },
+                "title": "Bank Account Prenote Entry",
+                "description": "A Bank Account Prenote Entry represents a reservation on a Bank Account for either a debit or a credit amount.  A Bank Account is an account that holds funds in a bank and is subject to deposits and withdrawals."
+            },
+            "com.sap.gateway.default.bankaccountprenoteentry.v0001.BankAccountPrenoteEntry-create": {
+                "type": "object",
+                "properties": {
+                    "BankAccountUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A BankAccountUUID is an universal unique identifier for the bank account to which the entry is assigned.",
+                        "description": "Remark:  UUID identifies a bank account prenote entry. The BankAccountUUID is required for performant read of one prenote entry because BankAccountUUID is part of the primary index of the database table.  \nFilter: Only 'Eq' is supported as logical operator.  \nIntegrity Conditions: If cross-navigation is used, filter for BankAccountUUID must not be used.  GDT: NOSC_UUID"
+                    },
+                    "RequesterBankAccountPrenoteEntryID": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "PRENOTE-REFERENCE-4711",
+                        "title": "Identifies a bank account prenote entry and is assigned by the requester of the bank account prenote entry.",
+                        "description": "The RequesterBankAccountPrenoteEntryID in combination with the BankAccountUUID uniquely identifies a bank account prenote entry.  \nGDT: BankAccountPrenoteEntryID_V1"
+                    },
+                    "TypeCode": {
+                        "type": "string",
+                        "maxLength": 3,
+                        "example": "30",
+                        "title": "Coded representation of a type of bank account prenote entry.",
+                        "description": "Filter:  Only 'Eq' is supported as logical operator.  \nGDT: BankAccountPrenoteEntryTypeCode"
+                    },
+                    "BankPaymentCommunicationChannelCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 4,
+                        "example": "3",
+                        "title": "Coded representation of the communication channel for payments in a bank.",
+                        "description": "GDT: BankPaymentCommunicationChannelCode"
+                    },
+                    "PlannedValidityEndDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Date on which the validity of a bank acocunt prenote entry is planned to end.",
+                        "description": "PlannedValidityEndDate is the date up to and including which the bank account prenote entry could be assigned to a corresponding bank account payment entry and might be relevent for the calculation of available amount of the bank account for which the bank account prenote entry is created.  \nGDT: Date"
+                    },
+                    "ValidityEndDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Date on which the validity of the bank account prenote entry ends.",
+                        "description": "ValidityEndDate specifies the date on which the status of the bank account prenote entry changed to Deleted or Assigned.  \nGDT: Date"
+                    },
+                    "LimitCheckDeactivationRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether deactivation of limit check was requested for processing the bank account prenote entry.",
+                        "description": "The limit of the bank account is the available amount of the bank account. The LimitCheckDeactivationRequestedIndicator will deactivate   the check of available amount of the bank account for which the bank account prenote entry is to be created.  \nGDT: Indicator"
+                    },
+                    "AdditionalMaterialChecksDeactivationRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether deactivation of the all material checks (except limit check) is requested for processing the bank account prenote entry.",
+                        "description": "GDT: Indicator"
+                    },
+                    "Note": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Long Text",
+                        "title": "A note about a bank account prenote entry.",
+                        "description": "Constraint: Maximum 50 characters are allowed.  \nGDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    },
+                    "AdditionalNote": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Short Text",
+                        "title": "An additional note about a bank account prenote entry.",
+                        "description": "Constraint: Maximum 10 characters are allowed.  \nGDT: LANGUAGEINDEPENDENT_SHORT_Note"
+                    },
+                    "MaterialCheckNote": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Material Check Note",
+                        "title": "A note for processing customer owned checks for a prenote entry.",
+                        "description": "Constraint: Maximum 65 characters are allowed.  \nGDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    },
+                    "MaterialCheckAdditionalNote": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "AdChNt",
+                        "title": "An additional note for processing customer owned checks for a prenote entry.",
+                        "description": "Constraint: Maximum 6 characters are allowed.  \nGDT: LANGUAGEINDEPENDENT_SHORT_Note"
+                    },
+                    "BankAccountCurrencyAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "Amount in the currency of a bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "TransactionCurrencyAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "Amount in the currency of a business transaction.",
+                        "description": "GDT: Amount"
+                    },
+                    "Reference": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.BankAccountPrenoteEntryReference-create"
+                            }
+                        ],
+                        "title": "References of the bank account prenote entry."
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.BusinessProcessChainAssignment-create"
+                            }
+                        ],
+                        "title": "The Business Process Chain Assignment is the assignment of a bank prenote entry to a business process chain.",
+                        "description": "BOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "PaymentNotes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.PaymentNote-create"
+                        }
+                    }
+                },
+                "required": [
+                    "BankAccountUUID"
+                ],
+                "title": "Bank Account Prenote Entry (for create)",
+                "description": "A Bank Account Prenote Entry represents a reservation on a Bank Account for either a debit or a credit amount.  A Bank Account is an account that holds funds in a bank and is subject to deposits and withdrawals."
+            },
+            "com.sap.gateway.default.bankaccountprenoteentry.v0001.BankAccountPrenoteEntry-update": {
+                "type": "object",
+                "properties": {
+                    "PlannedValidityEndDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Date on which the validity of a bank acocunt prenote entry is planned to end.",
+                        "description": "PlannedValidityEndDate is the date up to and including which the bank account prenote entry could be assigned to a corresponding bank account payment entry and might be relevent for the calculation of available amount of the bank account for which the bank account prenote entry is created.  \nGDT: Date"
+                    },
+                    "ValidityEndDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Date on which the validity of the bank account prenote entry ends.",
+                        "description": "ValidityEndDate specifies the date on which the status of the bank account prenote entry changed to Deleted or Assigned.  \nGDT: Date"
+                    },
+                    "Note": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Long Text",
+                        "title": "A note about a bank account prenote entry.",
+                        "description": "Constraint: Maximum 50 characters are allowed.  \nGDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    },
+                    "AdditionalNote": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Short Text",
+                        "title": "An additional note about a bank account prenote entry.",
+                        "description": "Constraint: Maximum 10 characters are allowed.  \nGDT: LANGUAGEINDEPENDENT_SHORT_Note"
+                    },
+                    "MaterialCheckNote": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Material Check Note",
+                        "title": "A note for processing customer owned checks for a prenote entry.",
+                        "description": "Constraint: Maximum 65 characters are allowed.  \nGDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    },
+                    "MaterialCheckAdditionalNote": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "AdChNt",
+                        "title": "An additional note for processing customer owned checks for a prenote entry.",
+                        "description": "Constraint: Maximum 6 characters are allowed.  \nGDT: LANGUAGEINDEPENDENT_SHORT_Note"
+                    },
+                    "BankAccountCurrencyAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "Amount in the currency of a bank account.",
+                        "description": "GDT: Amount"
+                    },
+                    "TransactionCurrencyAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.Amount-update"
+                            }
+                        ],
+                        "title": "Amount in the currency of a business transaction.",
+                        "description": "GDT: Amount"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.BusinessProcessChainAssignment-update"
+                            }
+                        ],
+                        "title": "The Business Process Chain Assignment is the assignment of a bank prenote entry to a business process chain.",
+                        "description": "BOCT: BusProcChnAssgmtFSElmnts"
+                    }
+                },
+                "title": "Bank Account Prenote Entry (for update)",
+                "description": "A Bank Account Prenote Entry represents a reservation on a Bank Account for either a debit or a credit amount.  A Bank Account is an account that holds funds in a bank and is subject to deposits and withdrawals."
+            },
+            "com.sap.gateway.default.bankaccountprenoteentry.v0001.PaymentNote": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 3,
+                        "example": "2",
+                        "title": "An identifier of a payment note.",
+                        "description": "In Create: PaymentNoteID will be assigned internally.  \nBDT: BankAccountEntryPaymentNoteID"
+                    },
+                    "ContentTypeCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "AAA",
+                        "title": "A coded representation of the content type to interpret the information provided in the payment note for a bank account entry.",
+                        "description": "GDT: BankAccountEntryPaymentNoteContentTypeCode"
+                    },
+                    "ContentTypeName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Example",
+                        "title": "The name of a bank account entry payment note type.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "Note": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Structured Payment Note Line 1",
+                        "title": "A note to a payment for a bank account payment entry.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    }
+                },
+                "title": "Payment Note",
+                "description": "Note in a bank account prenote entry about a payment."
+            },
+            "com.sap.gateway.default.bankaccountprenoteentry.v0001.PaymentNote-create": {
+                "type": "object",
+                "properties": {
+                    "ContentTypeCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "AAA",
+                        "title": "A coded representation of the content type to interpret the information provided in the payment note for a bank account entry.",
+                        "description": "GDT: BankAccountEntryPaymentNoteContentTypeCode"
+                    },
+                    "Note": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Structured Payment Note Line 1",
+                        "title": "A note to a payment for a bank account payment entry.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    }
+                },
+                "title": "Payment Note (for create)",
+                "description": "Note in a bank account prenote entry about a payment."
+            },
+            "com.sap.gateway.default.bankaccountprenoteentry.v0001.PaymentNote-update": {
+                "type": "object",
+                "title": "Payment Note (for update)",
+                "description": "Note in a bank account prenote entry about a payment."
+            },
+            "com.sap.gateway.default.bankaccountprenoteentry.v0001.Amount": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.bankaccountprenoteentry.v0001.Amount-create": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount (for create)",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.bankaccountprenoteentry.v0001.Amount-update": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount (for update)",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.bankaccountprenoteentry.v0001.BankAccountPrenoteEntryReference": {
+                "type": "object",
+                "properties": {
+                    "DirectDebitMandate": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.DirectDebitMandate"
+                            }
+                        ],
+                        "title": "The Direct Debit Mandate is the authorisation given by a debtor to a creditor to initiate instructions to  debit funds owed to the creditor from a specified account, and the authorisation to the debtor bank to comply  with the instructions issued by the creditor."
+                    },
+                    "ChequeReferenceID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 20,
+                        "example": "CHEQUE-REFERENCE-4711",
+                        "title": "A ChequeID is a unique identifier for a check.",
+                        "description": "GDT: ChequeID"
+                    }
+                },
+                "title": "BankAccountPrenoteEntryReference"
+            },
+            "com.sap.gateway.default.bankaccountprenoteentry.v0001.BankAccountPrenoteEntryReference-create": {
+                "type": "object",
+                "properties": {
+                    "DirectDebitMandate": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.DirectDebitMandate-create"
+                            }
+                        ],
+                        "title": "The Direct Debit Mandate is the authorisation given by a debtor to a creditor to initiate instructions to  debit funds owed to the creditor from a specified account, and the authorisation to the debtor bank to comply  with the instructions issued by the creditor."
+                    },
+                    "ChequeReferenceID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 20,
+                        "example": "CHEQUE-REFERENCE-4711",
+                        "title": "A ChequeID is a unique identifier for a check.",
+                        "description": "GDT: ChequeID"
+                    }
+                },
+                "title": "BankAccountPrenoteEntryReference (for create)"
+            },
+            "com.sap.gateway.default.bankaccountprenoteentry.v0001.BankAccountPrenoteEntryReference-update": {
+                "type": "object",
+                "title": "BankAccountPrenoteEntryReference (for update)"
+            },
+            "com.sap.gateway.default.bankaccountprenoteentry.v0001.BusinessProcessChainAssignment": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "500002",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BDT: BankingBusinessTransactionTypeCode"
+                    },
+                    "BankingBusinessTransactionTypeName": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "BankAccountPayment",
+                        "title": "Name of BankingBusinessTransactionTypeCode",
+                        "description": "GDT: EXTENDED_Name"
+                    }
+                },
+                "title": "Business Process Chain Assignment",
+                "description": "Is the assignment of a business object node to a business process chain.  /nDefault: If BankingBusinessTransactionTypeCode is not specified, code value \"500002 - BankAccountPayment\" will be used by default. "
+            },
+            "com.sap.gateway.default.bankaccountprenoteentry.v0001.BusinessProcessChainAssignment-create": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "500002",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for create)",
+                "description": "Is the assignment of a business object node to a business process chain.  /nDefault: If BankingBusinessTransactionTypeCode is not specified, code value \"500002 - BankAccountPayment\" will be used by default. "
+            },
+            "com.sap.gateway.default.bankaccountprenoteentry.v0001.BusinessProcessChainAssignment-update": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "500002",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for update)",
+                "description": "Is the assignment of a business object node to a business process chain.  /nDefault: If BankingBusinessTransactionTypeCode is not specified, code value \"500002 - BankAccountPayment\" will be used by default. "
+            },
+            "com.sap.gateway.default.bankaccountprenoteentry.v0001.DirectDebitMandate": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "4711",
+                        "title": "A identifier of Direct Debit Mandate",
+                        "description": "GDT: DirectDebitMandateID"
+                    },
+                    "CreditorPartyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "DE82ZZZ00000001015",
+                        "title": "A unique identifier of a creditor party of direct debit mandate.",
+                        "description": "GDT: PartyID"
+                    }
+                },
+                "title": "Direct Debit Mandate"
+            },
+            "com.sap.gateway.default.bankaccountprenoteentry.v0001.DirectDebitMandate-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "4711",
+                        "title": "A identifier of Direct Debit Mandate",
+                        "description": "GDT: DirectDebitMandateID"
+                    },
+                    "CreditorPartyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "DE82ZZZ00000001015",
+                        "title": "A unique identifier of a creditor party of direct debit mandate.",
+                        "description": "GDT: PartyID"
+                    }
+                },
+                "title": "Direct Debit Mandate (for create)"
+            },
+            "com.sap.gateway.default.bankaccountprenoteentry.v0001.DirectDebitMandate-update": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "4711",
+                        "title": "A identifier of Direct Debit Mandate",
+                        "description": "GDT: DirectDebitMandateID"
+                    },
+                    "CreditorPartyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "DE82ZZZ00000001015",
+                        "title": "A unique identifier of a creditor party of direct debit mandate.",
+                        "description": "GDT: PartyID"
+                    }
+                },
+                "title": "Direct Debit Mandate (for update)"
+            },
+            "count": {
+                "anyOf": [
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ],
+                "description": "The number of entities in the collection. Available when using the [$count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount) query option."
+            },
+            "error": {
+                "type": "object",
+                "required": [
+                    "error"
+                ],
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "required": [
+                            "code",
+                            "message"
+                        ],
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                            "target": {
+                                "type": "string"
+                            },
+                            "details": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "target": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "innererror": {
+                                "type": "object",
+                                "description": "The structure of this object is service-specific"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "top": {
+                "name": "$top",
+                "in": "query",
+                "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "example": 50
+            },
+            "skip": {
+                "name": "$skip",
+                "in": "query",
+                "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "count": {
+                "name": "$count",
+                "in": "query",
+                "description": "Include count of items, see [Count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount)",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "search": {
+                "name": "$search",
+                "in": "query",
+                "description": "Search items by search phrases, see [Searching](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionsearch)",
+                "schema": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses": {
+            "error": {
+                "description": "Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

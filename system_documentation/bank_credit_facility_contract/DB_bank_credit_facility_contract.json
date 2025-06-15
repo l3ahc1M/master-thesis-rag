@@ -1,0 +1,85 @@
+{
+    "tables": [
+        {
+            "name": "BankCreditFacilityContract",
+            "description": "Bank Credit Facility Contract is a frame contract that defines an overall credit line for a hierarchy of subordinated bank contracts.",
+            "columns": [
+                {
+                    "name": "UUID",
+                    "description": "A universal unique identifier of a Bank Credit Facility Contract. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "ID",
+                    "description": "An identifier for a Bank Master Contract of type Bank Credit Facility Contract. Example: 1234",
+                    "format": "string"
+                },
+                {
+                    "name": "CurrencyCode",
+                    "description": "Specifies the currency of a bank credit facility contract. Example: EUR",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusCode",
+                    "description": "A coded representation of the life cycle status of a bank credit facility contract. Example: 1",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusName",
+                    "description": "Name of LifeCycleStatusCode. Example: Active",
+                    "format": "string"
+                },
+                {
+                    "name": "Product",
+                    "description": "Describes the (financial) product upon which the bank master contract is based.",
+                    "format": "string"
+                },
+                {
+                    "name": "BusinessEventRecord",
+                    "description": "A record of a business event that changes a bank master contract.",
+                    "format": "string"
+                },
+                {
+                    "name": "HolderPartyIdentifyingElements",
+                    "description": "Is a party that legally holds a Bank Master Contract.",
+                    "format": "string"
+                },
+                {
+                    "name": "OperationalBankContractManagement",
+                    "description": "Is responsible for managing operational bank contracts andexecuting the related banking processes.",
+                    "format": "string"
+                },
+                {
+                    "name": "BusinessProcessChainAssignment",
+                    "description": "Is the assignment of a bank credit facility contract to a business process chain.",
+                    "format": "string"
+                },
+                {
+                    "name": "ChangeStateID",
+                    "description": "A ChangeStateID is a unique identifier for a change state. Example: 20191122135035.7818490",
+                    "format": "string"
+                },
+                {
+                    "name": "SubordinatedBankContractNumberValue",
+                    "description": "A number of subordinated bank contracts of one level below. Example: 3",
+                    "format": "string"
+                },
+                {
+                    "name": "Limits",
+                    "description": "A maximum preset amount of the credit line defined by a bank credit facility contract.",
+                    "format": "array"
+                },
+                {
+                    "name": "Hierarchies",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "SeasonalLimits",
+                    "description": "",
+                    "format": "array"
+                }
+            ]
+        }
+    ]
+}

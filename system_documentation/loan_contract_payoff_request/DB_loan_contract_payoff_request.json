@@ -1,0 +1,175 @@
+{
+    "tables": [
+        {
+            "name": "LoanContractPayoffRequest",
+            "description": "A Loan Contract Payoff Request is a request from the borrower to a lender (financial institution) to pay off a loan contract.",
+            "columns": [
+                {
+                    "name": "UUID",
+                    "description": "A UUID is a  universal unique identifier of a LoanContractPayoffRequest. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "ID",
+                    "description": "An ID is an identifier of the LoanContractPayoffRequest. Example: 71",
+                    "format": "string"
+                },
+                {
+                    "name": "LoanContractUUID",
+                    "description": "An internal ID of Loan Contract. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "ChangeStateID",
+                    "description": "Identifies a change state. Example: 20200309121401.6154150",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusCode",
+                    "description": "A LifeCycleStatusCode is the coded representation of the life cycle status of a LoanContractPayoffRequest. Example: 5",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusName",
+                    "description": "Name of a LifeCycleStatusCode. Example: Completed",
+                    "format": "string"
+                },
+                {
+                    "name": "ReasonCode",
+                    "description": "A ReasonCode is the coded representation of the reason for the payoff. Example: 1",
+                    "format": "string"
+                },
+                {
+                    "name": "ReasonName",
+                    "description": "Is the name of the reason code Example: Borrower Decision",
+                    "format": "string"
+                },
+                {
+                    "name": "CancellationReasonCode",
+                    "description": "A CancellationReasonCode is the coded representation of the reason for the cancellation of a loan contract payoff request. Example: 1",
+                    "format": "string"
+                },
+                {
+                    "name": "CancellationReasonName",
+                    "description": "Is the name of a CancellationReasonCode. Example: Borrower Decision",
+                    "format": "string"
+                },
+                {
+                    "name": "LoanPaymentPlanChangeTypeCode",
+                    "description": "A LoanPaymentPlanChangeTypeCode is a coded representation of the type of a LoanPaymentPlanChange. Example: 1",
+                    "format": "string"
+                },
+                {
+                    "name": "LoanPaymentPlanChangeTypeName",
+                    "description": "Is the name of a LoanPaymentPlanChangeTypeCode. Example: Without Term End Change",
+                    "format": "string"
+                },
+                {
+                    "name": "ValueDate",
+                    "description": "A ValueDate is the value date of the payoff. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "ExpectedPaymentDate",
+                    "description": "An ExpectedPaymentDate is the date on which the payment to payoff of loan is expected. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "LastScheduledPaymentDate",
+                    "description": "The date on which last scheduled payment is to be made before payoff. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "CompletionDate",
+                    "description": "A Completion Date is the  date on which the loan contract payoff request is completed. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "DueDate",
+                    "description": "A PayoffDueDate is the date on which the payoff  is due. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "FinalPaymentDate",
+                    "description": "Indicates whether the bank account will be debited by the bank account prenote entry or not. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "NetAmount",
+                    "description": "A NetAmount is the net amount of the loan contract payoff request.",
+                    "format": "string"
+                },
+                {
+                    "name": "GrossAmount",
+                    "description": "A GrossAmount is the gross amount of the loan contract payoff request",
+                    "format": "string"
+                },
+                {
+                    "name": "DailyInterestAmount",
+                    "description": "A DailyInterestAmount is the daily amount of the interest calculated for the value date of the loan contract payoff request.",
+                    "format": "string"
+                },
+                {
+                    "name": "DailyInterestOnArrearsAmount",
+                    "description": "A DailyInterestOnArrearsAmount is the daily amount of the interest on arrears calculated for the value date of the loan contract payoff request.",
+                    "format": "string"
+                },
+                {
+                    "name": "ActivationChargeAmount",
+                    "description": "An ActivationChargeAmount is the charge amount for activation.",
+                    "format": "string"
+                },
+                {
+                    "name": "NewInstalmentAmount",
+                    "description": "NewInstallmentAmount is the  installment amount after the LoanContractPayoff Request.",
+                    "format": "string"
+                },
+                {
+                    "name": "ImmediateCompletionRequiredIndicator",
+                    "description": "An ImmediateCompletionRequiredIndicator indicates whether immediate completion is required for a LoanContractPayoffRequest or not.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "FullPayoffRequiredIndicator",
+                    "description": "A FullPayoffRequiredIndicator indicates whether a full payoff is required for a loan contract payoff or not.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "ActivationChargeWaiverRequestedIndicator",
+                    "description": "Indicates whether a charge is applied for a activated loan contract payoff request or not.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "ImmediateCompletionChargeWaiverRequestedIndicator",
+                    "description": "Indicates whether a charge is applied for immediate completion of  loan contract payoff request or not.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "EarlyRepaymentCompensationRequiredIndicator",
+                    "description": "An EarlyRepaymentCompensationRequiredIndicator is an indicator of whether early repayment compensation is required or not.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "GrossAmountCalculationResult",
+                    "description": "Gross Amount Calculation Result",
+                    "format": "string"
+                },
+                {
+                    "name": "BusinessProcessChainAssignment",
+                    "description": "Business Process Chain Assignment is the assignment of Loan Contract Payoff Request to a business process chain.",
+                    "format": "string"
+                },
+                {
+                    "name": "PaymentTransactionInstruction",
+                    "description": "A Payment Transaction Instruction is an instruction for payment transactions related to the loan contract.",
+                    "format": "array"
+                },
+                {
+                    "name": "UnpaidBankAccountBillingEntries",
+                    "description": "",
+                    "format": "array"
+                }
+            ]
+        }
+    ]
+}

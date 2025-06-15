@@ -1,0 +1,4 @@
+An authorization given by a debtor to a creditor to initiate instructions to debit funds owed to the creditor from a specified account, and the authorization to the debtor bank to comply with the instructions issued by the creditor.
+You can use this API to create new direct debit mandates or to query existing direct debit mandates.Remark:
+The service Direct Debit Mandate is assigned to service group Transactional Banking.General:
+The properties of the EDM that are based on a code GDT do not contain supplementary components (e.g. listID) that are known from the GDTs of the enterprise services.

@@ -1,0 +1,186 @@
+{
+    "tables": [
+        {
+            "name": "CurrentAccountContract",
+            "description": "A Current Account Contract is a contract between a credit institute and customer, which is based on the customer's request for opening a bank account of type current account and consists among others, account holder, general terms and conditions.\n\nComment: A bank account based on a current account contract is an account that allows money to be held on behalf of the account holder",
+            "columns": [
+                {
+                    "name": "UUID",
+                    "description": "An universal unique identifier of a bank account contract. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "ID",
+                    "description": "An identifier of a bank account contract.",
+                    "format": "string"
+                },
+                {
+                    "name": "CurrencyCode",
+                    "description": "A CurrencyCode specifies the currency of the bank account contract. Example: EUR",
+                    "format": "string"
+                },
+                {
+                    "name": "BankAccountIdentifyingElements",
+                    "description": "A BankAccount is a bank account associated with the bank account contract.",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusCode",
+                    "description": "A coded representation of the life cycle status of a bank account contract. Example: 2",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusName",
+                    "description": "Name of LifeCycleStatusCode. Example: Active",
+                    "format": "string"
+                },
+                {
+                    "name": "DormancyStatusCode",
+                    "description": "A coded representation of the dormancy status of a bank account contract. Example: 01",
+                    "format": "string"
+                },
+                {
+                    "name": "DormancyStatusName",
+                    "description": "Name of DormancyStatusCode. Example: Active",
+                    "format": "string"
+                },
+                {
+                    "name": "UsageNote",
+                    "description": "A comment on the usage of the current account contract.",
+                    "format": "string"
+                },
+                {
+                    "name": "SystemAdministrativeData",
+                    "description": "SystemAdministrativeData is administrative data that is stored in a system. This data includes change dates and change times.",
+                    "format": "string"
+                },
+                {
+                    "name": "AccountHolderPartyIdentifyingElements",
+                    "description": "A party which legally holds a Bank Account associated with the bank account contract.",
+                    "format": "string"
+                },
+                {
+                    "name": "Product",
+                    "description": "A Product describes the (financial) product upon which the bank account contract is based.",
+                    "format": "string"
+                },
+                {
+                    "name": "BusinessEventRecord",
+                    "description": "A record of a business event that changes a bank account contract.",
+                    "format": "string"
+                },
+                {
+                    "name": "OperationalBankContractManagement",
+                    "description": "An OperationalBankContractManagement is responsible for managing operational bank contracts and executing the related banking processes.",
+                    "format": "string"
+                },
+                {
+                    "name": "BusinessProcessChainAssignment",
+                    "description": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                    "format": "string"
+                },
+                {
+                    "name": "ChangeStateID",
+                    "description": "A ChangeStateID is a unique identifier for a change state. Example: 20191122135035.7818490",
+                    "format": "string"
+                },
+                {
+                    "name": "CreateDraftRequestedIndicator",
+                    "description": "Indicates whether the current account contract shall be created with life cycle status code 'Draft Entered'.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "AdaptedInterestConditions",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "BankAccountStatementArrangements",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "BankAccountEntryBalanceBasedRestrictions",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "BankAccountEntryStatisticBasedRestrictions",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "BankProductPriceListAssignments",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "BankAccount",
+                    "description": "",
+                    "format": "string"
+                },
+                {
+                    "name": "BankAccountContractAccountHolderChangeRequests",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "BankAccountContractCancelRequests",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "BankAccountContractLockRequests",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "FinancialConditionTypeGroupAssignments",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "IndividualInterestConditions",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "Limits",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "OtherPartyIdentifyingElements",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "PaymentTransactionInstructions",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "SeasonalLimits",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "SettlementArrangements",
+                    "description": "",
+                    "format": "array"
+                }
+            ]
+        },
+        {
+            "name": "BankAccount",
+            "description": "A Bank Account is an account that holds funds in a bank and is subject to deposits and withdrawals.Remark: \n Filter: Only 'Eq' is supported as logical operator. \n Integrity Conditions: \n The following combinations of properties for filtering are allowed: \n a.) by Bank Account ID \n - ID (mandatory) \n - CurrencyCode (optional) \n - BankRoutingID (optional) \n - BankCountryCode (optional) \n No other filter attributes are allowed. \n b.) by Bank Account Standard ID \n - StandardID (mandatory) \n - CurrencyCode (optional) \n c.) by BankAccountContractUUID \n - BankAccountContractUUID (mandatory) \n d.) by Bank Account Contract ID \n - BankAccountContractID (mandatory)",
+            "columns": [
+                {
+                    "name": "UUID",
+                    "description": "A UUID is a universal unique identifier of a bank account. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                }
+            ]
+        }
+    ]
+}

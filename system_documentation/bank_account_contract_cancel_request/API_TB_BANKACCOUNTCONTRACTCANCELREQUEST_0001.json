@@ -1,0 +1,1633 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Bank Account Contract Cancel Request",
+        "version": "1.0.0",
+        "description": "\r\n\r\nA request from the account holder party to the bank to cancel a current account contract or a savings account contract immediately or at a future time. \r\nYou can cancel a bank account contract, reverse the cancellation of a bank account contract, or calculate the financial results of a bank account contract cancellation.\r\nYou can use this API to create, query, read, update, or delete cancel requests.\r\n\r\nComment:\r\nA Current Account Contract is a contract between a credit institute and customer, which is based on the customer's request for opening a bank account of type current account and consists among others, account holder, general terms and conditions. A Savings Account Contract is a contract between a financial institution and a customer, which is based on the customer's request to open a bank account of type savings account. A savings account is a depository account offered by a financial institution that provides principal security and a modest interest rate. Withdrawals from savings accounts can be subject to notice, and are usually not allowed by using checks or debit cards.\r\n\r\nRemark:\r\nThe service Bank Account Contract Cancel Request is assigned to service group Transactional Banking. General: The properties of the EDM that are based on a code GDT do not contain supplementary components (e.g. listID) that are known from the GDTs of the enterprise services."
+    },
+    "externalDocs": {
+        "description": "Business Documentation",
+        "url": "https://help.sap.com/docs/TRBK_S4HANA/d2151b51aacc4d82ad2861e007337fa2/8258ec254df04ba490e730005df97305.html"
+    },
+    "x-sap-api-type": "ODATAV4",
+    "x-sap-shortText": "Manage requests to cancel bank account contracts using this synchronous inbound service",
+    "x-sap-software-min-version": "1.0",
+    "x-sap-ext-overview": [
+        {
+            "name": "Authentication Methods",
+            "values": [
+                {
+                    "text": "x509",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Service Group Name",
+            "values": [
+                {
+                    "text": "TRANSACTIONALBANKING",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Business Object",
+            "values": [
+                {
+                    "text": "Bank Account Contract Cancel Request",
+                    "format": "plain"
+                }
+            ]
+        }
+    ],
+    "security": [
+        {
+            "basicAuthentication": []
+        }
+    ],
+    "servers": [
+        {
+            "url": "https://{host}:{port}/sap/opu/odata4/sap/transactionalbanking/default/sap/bankaccountcontractcancelrequest/0001",
+            "variables": {
+                "host": {
+                    "default": ""
+                },
+                "port": {
+                    "default": ""
+                }
+            }
+        }
+    ],
+    "x-sap-extensible": {
+        "supported": "no"
+    },
+    "tags": [
+        {
+            "name": "Bank Account Contract Cancel Requests"
+        }
+    ],
+    "paths": {
+        "/BankAccountContractCancelRequests": {
+            "get": {
+                "summary": "Query Bank Account Contract Cancel Request",
+                "description": "Is a request to query bank account contract payment cancel requests",
+                "tags": [
+                    "Bank Account Contract Cancel Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)\n\nRequired filter properties:\n- BankAccountContractUUID",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "UUID",
+                                    "ID",
+                                    "BankAccountContractUUID",
+                                    "ChangeStateID",
+                                    "LifeCycleStatusCode",
+                                    "LifeCycleStatusName",
+                                    "ReasonCode",
+                                    "ReasonName",
+                                    "ImmediateCompletionRequiredIndicator",
+                                    "ReceiptDate",
+                                    "PlannedCompletionDate",
+                                    "CompletionDate",
+                                    "BankAccountSettlementRequiredIndicator",
+                                    "BankAccountSettlementRequestedValueDate",
+                                    "CancellationReasonCode",
+                                    "CancellationReasonName",
+                                    "BankAccountSettlementCancellationRequiredIndicator",
+                                    "CancellationDate",
+                                    "ResidualBankAccountBalanceAmount",
+                                    "CancellationChargeAmount",
+                                    "BusinessProcessChainAssignment",
+                                    "BalancingByCashIndicator",
+                                    "BalancingPaymentTransactionInstruction"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "BankAccountSettlementSummaries"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of BankAccountContractCancelRequest",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BankAccountContractCancelRequest"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create Bank Account Contract Cancel Request",
+                "description": "Is a request to create a bank account contract payment cancel request",
+                "tags": [
+                    "Bank Account Contract Cancel Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Bank Account Contract Cancel Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BankAccountContractCancelRequest-create"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BankAccountContractCancelRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankAccountContractCancelRequests/{UUID}": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "A UUID is an universal unique identifier of a bank account contract cancel request.  \nGDT: NOSC_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Read Bank Account Contract Cancel Request by UUID",
+                "description": "Is a request to read a bank account contract payment cancel request",
+                "tags": [
+                    "Bank Account Contract Cancel Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "UUID",
+                                    "ID",
+                                    "BankAccountContractUUID",
+                                    "ChangeStateID",
+                                    "LifeCycleStatusCode",
+                                    "LifeCycleStatusName",
+                                    "ReasonCode",
+                                    "ReasonName",
+                                    "ImmediateCompletionRequiredIndicator",
+                                    "ReceiptDate",
+                                    "PlannedCompletionDate",
+                                    "CompletionDate",
+                                    "BankAccountSettlementRequiredIndicator",
+                                    "BankAccountSettlementRequestedValueDate",
+                                    "CancellationReasonCode",
+                                    "CancellationReasonName",
+                                    "BankAccountSettlementCancellationRequiredIndicator",
+                                    "CancellationDate",
+                                    "ResidualBankAccountBalanceAmount",
+                                    "CancellationChargeAmount",
+                                    "BusinessProcessChainAssignment",
+                                    "BalancingByCashIndicator",
+                                    "BalancingPaymentTransactionInstruction"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "BankAccountSettlementSummaries"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BankAccountContractCancelRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update Bank Account Contract Cancel Request",
+                "description": "Is a request to update a bank account contract payment cancel request",
+                "tags": [
+                    "Bank Account Contract Cancel Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Bank Account Contract Cancel Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BankAccountContractCancelRequest-update"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Cancel Bank Account Contract Cancel Request",
+                "description": "Is a request to cancel a bank account contract payment cancel request",
+                "tags": [
+                    "Bank Account Contract Cancel Requests"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/CalculateByBankAccountContractUUID": {
+            "post": {
+                "summary": "Calculate by Bank Account Contract UUID.",
+                "description": "Calculates a bank account contract cancel request by bank account contract UUID in case no cancel request exists.",
+                "tags": [
+                    "Bank Account Contract Cancel Requests"
+                ],
+                "requestBody": {
+                    "description": "Action parameters",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "BankAccountContractUUID": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                                        "title": "A BankAccountContractUUID is an universal unique identifier of a bank account contract.",
+                                        "description": "GDT: NOSC_UUID"
+                                    },
+                                    "ReasonCode": {
+                                        "type": "string",
+                                        "maxLength": 6,
+                                        "example": "107",
+                                        "title": "A coded representation of the reason for the BankAccountContractCancelRequest.",
+                                        "description": "GDT: BankAccountContractCancelRequestReasonCode"
+                                    },
+                                    "ReceiptDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2017-04-13",
+                                        "title": "A ReceiptDate is the date on which the request for canceling the bank account contract is received .",
+                                        "description": "GDT: Date"
+                                    },
+                                    "PlannedCompletionDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2017-04-13",
+                                        "title": "A PlannedCompletionDate is the date for which the completion of the bank account contract cancel request is planned.",
+                                        "description": "GDT: Date"
+                                    },
+                                    "BankAccountSettlementRequiredIndicator": {
+                                        "type": "boolean",
+                                        "title": "Indicates whether a bank account settlement is required for a bank account contract cancel request or not.",
+                                        "description": "GDT: Indicator"
+                                    },
+                                    "BankAccountSettlementRequestedValueDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2017-04-13",
+                                        "title": "Is the value date requested for settlement of the bank account associated with the cancelled bank account contract.",
+                                        "description": "Integrity Condition: Only specified if LifeCycleStatus is \"Completed\".\nGDT: Date"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BankAccountContractCancelRequest"
+                                        }
+                                    ],
+                                    "title": "Bank Account Contract Cancel Request",
+                                    "description": "A Bank Account Contract Cancel Request is a request from the account holder party to the bank to cancel a current account contract or a savings account contract immediately or at a future time."
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/CalculateByUUID": {
+            "post": {
+                "summary": "Calculate by UUID.",
+                "description": "Calculates a bank account contract cancel request by UUID of an existing bank account contract cancel request.",
+                "tags": [
+                    "Bank Account Contract Cancel Requests"
+                ],
+                "requestBody": {
+                    "description": "Action parameters",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "UUID": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                                        "title": "A UUID is an universal unique identifier of a bank account contract cancel request.",
+                                        "description": "GDT: NOSC_UUID"
+                                    },
+                                    "ReasonCode": {
+                                        "type": "string",
+                                        "maxLength": 6,
+                                        "example": "107",
+                                        "title": "A coded representation of the reason for the BankAccountContractCancelRequest.",
+                                        "description": "GDT: BankAccountContractCancelRequestReasonCode"
+                                    },
+                                    "ReceiptDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2017-04-13",
+                                        "title": "A ReceiptDate is the date on which the request for canceling the bank account contract is received .",
+                                        "description": "GDT: Date"
+                                    },
+                                    "PlannedCompletionDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2017-04-13",
+                                        "title": "A PlannedCompletionDate is the date for which the completion of the bank account contract cancel request is planned.",
+                                        "description": "GDT: Date"
+                                    },
+                                    "BankAccountSettlementRequiredIndicator": {
+                                        "type": "boolean",
+                                        "title": "Indicates whether a bank account settlement is required for a bank account contract cancel request or not.",
+                                        "description": "GDT: Indicator"
+                                    },
+                                    "BankAccountSettlementRequestedValueDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2017-04-13",
+                                        "title": "Is the value date requested for settlement of the bank account associated with the cancelled bank account contract.",
+                                        "description": "Integrity Condition: Only specified if LifeCycleStatus is \"Completed\".\nGDT: Date"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BankAccountContractCancelRequest"
+                                        }
+                                    ],
+                                    "title": "Bank Account Contract Cancel Request",
+                                    "description": "A Bank Account Contract Cancel Request is a request from the account holder party to the bank to cancel a current account contract or a savings account contract immediately or at a future time."
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/$batch": {
+            "post": {
+                "summary": "Send a group of requests",
+                "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).\n\n*Please note that \"Try it out\" is not supported for this request.*",
+                "tags": [
+                    "Batch Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Batch request",
+                    "content": {
+                        "multipart/mixed;boundary=request-separator": {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET BankAccountContractCancelRequests HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Batch response",
+                        "content": {
+                            "multipart/mixed": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "basicAuthentication": {
+                "type": "http",
+                "scheme": "basic"
+            }
+        },
+        "schemas": {
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BankAccountSettlementSummary": {
+                "type": "object",
+                "properties": {
+                    "FinancialConditionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "105110",
+                        "title": "A coded representation of the type of a financial condition for bank contracts.",
+                        "description": "GDT: BankContractFinancialConditionTypeCode"
+                    },
+                    "FinancialConditionTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Credit Interest",
+                        "title": "Name of a FinancialConditionTypeCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "BkAccountCurrencyPostedAmount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "A BankAccountCurrencyPostedAmount is the amount  that is posted for the settlement item in bank account currency.",
+                        "description": "GDT: Amount"
+                    }
+                },
+                "title": "Bank Account Settlement Summary",
+                "description": "Summary of the results for the settlement performed during completion of the cancel request. Integrity Condition: BankAccountSettlementSummary is only returned, if LifeCycleStatusCode equals \"3 - Active\" or \"5 - Completed\". The settlement summary is simulated for a BankAccountContractCancelRequest with LifeCycleStatusCode \"3 - Active\". For a BankAccountContractCancelRequest with LifeCycleStatusCode \"5 - Executed\", the settlement summary is read from the data base. "
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BankAccountSettlementSummary-create": {
+                "type": "object",
+                "title": "Bank Account Settlement Summary (for create)",
+                "description": "Summary of the results for the settlement performed during completion of the cancel request. Integrity Condition: BankAccountSettlementSummary is only returned, if LifeCycleStatusCode equals \"3 - Active\" or \"5 - Completed\". The settlement summary is simulated for a BankAccountContractCancelRequest with LifeCycleStatusCode \"3 - Active\". For a BankAccountContractCancelRequest with LifeCycleStatusCode \"5 - Executed\", the settlement summary is read from the data base. "
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BankAccountSettlementSummary-update": {
+                "type": "object",
+                "title": "Bank Account Settlement Summary (for update)",
+                "description": "Summary of the results for the settlement performed during completion of the cancel request. Integrity Condition: BankAccountSettlementSummary is only returned, if LifeCycleStatusCode equals \"3 - Active\" or \"5 - Completed\". The settlement summary is simulated for a BankAccountContractCancelRequest with LifeCycleStatusCode \"3 - Active\". For a BankAccountContractCancelRequest with LifeCycleStatusCode \"5 - Executed\", the settlement summary is read from the data base. "
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BankAccountContractCancelRequest": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is an universal unique identifier of a bank account contract cancel request.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "761",
+                        "title": "ID is an identifier of the Bank Account Contract Cancel Request.",
+                        "description": "BDT: BankAccountContractCancelRequestID"
+                    },
+                    "BankAccountContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A BankAccountContractUUID is an universal unique identifier of a bank account contract.",
+                        "description": "Bank Account Contract is a contract between a credit institute and customer, which is based on the customer's request for opening a bank account and consists among others, the bank account type, account holder, general terms and conditions.\nGDT: NOSC_UUID"
+                    },
+                    "ChangeStateID": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "2019-06-04T08:29:04Z",
+                        "title": "A ChangeStateID is a unique identifier for a change state.",
+                        "description": "Bank Account Contract is a contract between a credit institute and customer, which is based on the customer's request for opening a bank account and consists among others, the bank account type, account holder, general terms and conditions.\nGDT: ChangeStateID"
+                    },
+                    "LifeCycleStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "3",
+                        "title": "A LifeCycleStatusCode is the coded representation of the life cycle status of a BankAccountContractCancelRequest.",
+                        "description": "BDT: BankAccountContractCancelRequestLifeCycleStatusCode"
+                    },
+                    "LifeCycleStatusName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Active",
+                        "title": "A LifeCycleStatusName is the name of a LifeCycleStatusCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "107",
+                        "title": "A coded representation of the reason for the BankAccountContractCancelRequest.",
+                        "description": "GDT: BankAccountContractCancelRequestReasonCode"
+                    },
+                    "ReasonName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Other",
+                        "title": "ReasonName is the name of a ReasonCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "ImmediateCompletionRequiredIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether immediate completion of the bank account contract cancel request is required or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "ReceiptDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "A ReceiptDate is the date on which the request for canceling the bank account contract is received.",
+                        "description": "GDT: Date"
+                    },
+                    "PlannedCompletionDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "A PlannedCompletionDate is the date for which the completion of the bank account contract cancel request is planned.",
+                        "description": "GDT: Date"
+                    },
+                    "CompletionDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "A CompletionDate is the date on which the request for canceling the bank account contract is completed.",
+                        "description": "Integrity Condition: CompletionDate is only specified if LifeCycleStatusCode is \"6 - Completed\".\nGDT: Date"
+                    },
+                    "BankAccountSettlementRequiredIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether a bank account settlement is required for a bank account contract cancel request or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "BankAccountSettlementRequestedValueDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Is the value date requested for settlement of the bank account associated with the cancelled bank account contract.",
+                        "description": "\\nGDT: Date"
+                    },
+                    "CancellationReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 6,
+                        "example": "000003",
+                        "title": "A coded representation of the reason for the cancelation of a CurrentAccountContractCancelRequest.",
+                        "description": "Integrity Condition: CancellationReasonCode is only specified if LifeCycleStatusCode is \"4 - Deactivated\" or \"6 - Canceled\".\nNote: Corresponds either to Deactivation Reason or to Reactivation Reason\nGDT: BankAccountContractCancelRequestCancellationReasonCode  "
+                    },
+                    "CancellationReasonName": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 40,
+                        "example": "Customer Request",
+                        "title": "A BankAccountContractCancelRequestCancellationReasonName is the name of a BankAccountContractCancelRequestCancellationReasonCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "BankAccountSettlementCancellationRequiredIndicator": {
+                        "type": "boolean",
+                        "nullable": true,
+                        "title": "Indicates whether or not a cancelation of a bank account settlement is required for the cancelation of a bank account contract cancel request.",
+                        "description": "Integrity Condition: BankAccountSettlementCancellationRequiredIndicator is only specified if LifeCycleStatusCode is \"6 - Canceled\".\nGDT: Indicator"
+                    },
+                    "CancellationDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "A CancellationDate is the date on which the request for canceling the current account contract is cancelled.",
+                        "description": "Integrity Condition: CancellationDate is only specified if LifeCycleStatusCode is \"4 - Deactivated\" or \"6 - Canceled\".\nGDT: Date"
+                    },
+                    "ResidualBankAccountBalanceAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "The residual balance of the bank account, before it is balanced by cash or by payment to payment transaction instruction.",
+                        "description": "Integrity Condition: ResidualBankAccountBalanceAmount is only returned, if LifeCycleStatusCode equals \"3 - Active\" or \"5 - Completed\". The amount is simulated for a BankAccountContractCancelRequest with LifeCycleStatusCode \"3 - Active\". For a BankAccountContractCancelRequest with LifeCycleStatusCode \"5 - Executed\", the amount is read from the data base. \nGDT: Amount"
+                    },
+                    "CancellationChargeAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "The charge amount for cancelation of the bank account contract.",
+                        "description": "Remark: The charge amount that is levied if the bank account contract cancel request is completed. The completion of the cancel request cancels the bank account contract. Integrity Condition: CancellationChargeAmount is only returned, if LifeCycleStatusCode equals \"3 - Active\" or \"5 - Completed\". The amount is simulated for a BankAccountContractCancelRequest with LifeCycleStatusCode \"3 - Active\". For a BankAccountContractCancelRequest with LifeCycleStatusCode \"5 - Executed\", the amount is read from the data base. \nGDT: Amount"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BusinessProcessChainAssignment"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "Defaults: If BankingBusinessTransactionTypeCode is not specfiied, code value \"100002 - Current Account Contract Termination\" or \"400002 - Deposit Account Contract Termination\" will be used by default.\nBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "BalancingByCashIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether amount resulting from balancing the bank account associated with bank account contract cancellation is requested as payment by cash or not.",
+                        "description": "Integrity Condition: Either BalancingPaymentByCashRequestedIndicator or BalancingPaymentTransactionInstruction must be specified.\nGDT: Indicator"
+                    },
+                    "BalancingPaymentTransactionInstruction": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BalancingPaymentTransactionInstruction"
+                            }
+                        ],
+                        "title": "BalancingPaymentTransactionInstruction specifies the payment transaction instruction for balancing the residual balance of the bank account associated with the bank account contract.",
+                        "description": "Integrity Condition: Either BalancingPaymentByCashRequestedIndicator or BalancingPaymentTransactionInstruction must be specified.\nBkContrPaytTransacInstrnFSElmnts"
+                    },
+                    "BankAccountSettlementSummaries": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BankAccountSettlementSummary"
+                        }
+                    }
+                },
+                "title": "Bank Account Contract Cancel Request",
+                "description": "A Bank Account Contract Cancel Request is a request from the account holder party to the bank to cancel a current account contract or a savings account contract immediately or at a future time."
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BankAccountContractCancelRequest-create": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is an universal unique identifier of a bank account contract cancel request.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "BankAccountContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A BankAccountContractUUID is an universal unique identifier of a bank account contract.",
+                        "description": "Bank Account Contract is a contract between a credit institute and customer, which is based on the customer's request for opening a bank account and consists among others, the bank account type, account holder, general terms and conditions.\nGDT: NOSC_UUID"
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "107",
+                        "title": "A coded representation of the reason for the BankAccountContractCancelRequest.",
+                        "description": "GDT: BankAccountContractCancelRequestReasonCode"
+                    },
+                    "ImmediateCompletionRequiredIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether immediate completion of the bank account contract cancel request is required or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "ReceiptDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "A ReceiptDate is the date on which the request for canceling the bank account contract is received.",
+                        "description": "GDT: Date"
+                    },
+                    "PlannedCompletionDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "A PlannedCompletionDate is the date for which the completion of the bank account contract cancel request is planned.",
+                        "description": "GDT: Date"
+                    },
+                    "BankAccountSettlementRequiredIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether a bank account settlement is required for a bank account contract cancel request or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "BankAccountSettlementRequestedValueDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Is the value date requested for settlement of the bank account associated with the cancelled bank account contract.",
+                        "description": "\\nGDT: Date"
+                    },
+                    "CancellationReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 6,
+                        "example": "000003",
+                        "title": "A coded representation of the reason for the cancelation of a CurrentAccountContractCancelRequest.",
+                        "description": "Integrity Condition: CancellationReasonCode is only specified if LifeCycleStatusCode is \"4 - Deactivated\" or \"6 - Canceled\".\nNote: Corresponds either to Deactivation Reason or to Reactivation Reason\nGDT: BankAccountContractCancelRequestCancellationReasonCode  "
+                    },
+                    "BankAccountSettlementCancellationRequiredIndicator": {
+                        "type": "boolean",
+                        "nullable": true,
+                        "title": "Indicates whether or not a cancelation of a bank account settlement is required for the cancelation of a bank account contract cancel request.",
+                        "description": "Integrity Condition: BankAccountSettlementCancellationRequiredIndicator is only specified if LifeCycleStatusCode is \"6 - Canceled\".\nGDT: Indicator"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BusinessProcessChainAssignment-create"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "Defaults: If BankingBusinessTransactionTypeCode is not specfiied, code value \"100002 - Current Account Contract Termination\" or \"400002 - Deposit Account Contract Termination\" will be used by default.\nBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "BalancingByCashIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether amount resulting from balancing the bank account associated with bank account contract cancellation is requested as payment by cash or not.",
+                        "description": "Integrity Condition: Either BalancingPaymentByCashRequestedIndicator or BalancingPaymentTransactionInstruction must be specified.\nGDT: Indicator"
+                    },
+                    "BalancingPaymentTransactionInstruction": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BalancingPaymentTransactionInstruction-create"
+                            }
+                        ],
+                        "title": "BalancingPaymentTransactionInstruction specifies the payment transaction instruction for balancing the residual balance of the bank account associated with the bank account contract.",
+                        "description": "Integrity Condition: Either BalancingPaymentByCashRequestedIndicator or BalancingPaymentTransactionInstruction must be specified.\nBkContrPaytTransacInstrnFSElmnts"
+                    },
+                    "BankAccountSettlementSummaries": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BankAccountSettlementSummary-create"
+                        }
+                    }
+                },
+                "required": [
+                    "UUID"
+                ],
+                "title": "Bank Account Contract Cancel Request (for create)",
+                "description": "A Bank Account Contract Cancel Request is a request from the account holder party to the bank to cancel a current account contract or a savings account contract immediately or at a future time."
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BankAccountContractCancelRequest-update": {
+                "type": "object",
+                "properties": {
+                    "BankAccountContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A BankAccountContractUUID is an universal unique identifier of a bank account contract.",
+                        "description": "Bank Account Contract is a contract between a credit institute and customer, which is based on the customer's request for opening a bank account and consists among others, the bank account type, account holder, general terms and conditions.\nGDT: NOSC_UUID"
+                    },
+                    "ReasonCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "107",
+                        "title": "A coded representation of the reason for the BankAccountContractCancelRequest.",
+                        "description": "GDT: BankAccountContractCancelRequestReasonCode"
+                    },
+                    "ImmediateCompletionRequiredIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether immediate completion of the bank account contract cancel request is required or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "ReceiptDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "A ReceiptDate is the date on which the request for canceling the bank account contract is received.",
+                        "description": "GDT: Date"
+                    },
+                    "PlannedCompletionDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "A PlannedCompletionDate is the date for which the completion of the bank account contract cancel request is planned.",
+                        "description": "GDT: Date"
+                    },
+                    "BankAccountSettlementRequiredIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether a bank account settlement is required for a bank account contract cancel request or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "BankAccountSettlementRequestedValueDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Is the value date requested for settlement of the bank account associated with the cancelled bank account contract.",
+                        "description": "\\nGDT: Date"
+                    },
+                    "CancellationReasonCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 6,
+                        "example": "000003",
+                        "title": "A coded representation of the reason for the cancelation of a CurrentAccountContractCancelRequest.",
+                        "description": "Integrity Condition: CancellationReasonCode is only specified if LifeCycleStatusCode is \"4 - Deactivated\" or \"6 - Canceled\".\nNote: Corresponds either to Deactivation Reason or to Reactivation Reason\nGDT: BankAccountContractCancelRequestCancellationReasonCode  "
+                    },
+                    "BankAccountSettlementCancellationRequiredIndicator": {
+                        "type": "boolean",
+                        "nullable": true,
+                        "title": "Indicates whether or not a cancelation of a bank account settlement is required for the cancelation of a bank account contract cancel request.",
+                        "description": "Integrity Condition: BankAccountSettlementCancellationRequiredIndicator is only specified if LifeCycleStatusCode is \"6 - Canceled\".\nGDT: Indicator"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BusinessProcessChainAssignment-update"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "Defaults: If BankingBusinessTransactionTypeCode is not specfiied, code value \"100002 - Current Account Contract Termination\" or \"400002 - Deposit Account Contract Termination\" will be used by default.\nBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "BalancingByCashIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether amount resulting from balancing the bank account associated with bank account contract cancellation is requested as payment by cash or not.",
+                        "description": "Integrity Condition: Either BalancingPaymentByCashRequestedIndicator or BalancingPaymentTransactionInstruction must be specified.\nGDT: Indicator"
+                    },
+                    "BalancingPaymentTransactionInstruction": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BalancingPaymentTransactionInstruction-update"
+                            }
+                        ],
+                        "title": "BalancingPaymentTransactionInstruction specifies the payment transaction instruction for balancing the residual balance of the bank account associated with the bank account contract.",
+                        "description": "Integrity Condition: Either BalancingPaymentByCashRequestedIndicator or BalancingPaymentTransactionInstruction must be specified.\nBkContrPaytTransacInstrnFSElmnts"
+                    }
+                },
+                "title": "Bank Account Contract Cancel Request (for update)",
+                "description": "A Bank Account Contract Cancel Request is a request from the account holder party to the bank to cancel a current account contract or a savings account contract immediately or at a future time."
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.Amount": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.Amount-create": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount (for create)",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.Amount-update": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount (for update)",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BalancingPaymentTransactionInstruction": {
+                "type": "object",
+                "properties": {
+                    "ClassCode": {
+                        "type": "string",
+                        "maxLength": 3,
+                        "example": "2",
+                        "title": "A coded representation of a class of a bank contract payment transaction instruction.",
+                        "description": "Code Values are: 1 (Internal Payment), 2 (Domestic Payment), 3 (SEPA Payment).\nIntegrity Condition: I case of 1 (Internal Payment) BankAccountID, BankRoutingID and CountryCode of CounterpartyBankAccount have to be filled.\nIn case of 2 (Domestic Payment) HolderName, BankAccountID, BankRoutingID, and CountryCode of CounterpartyBankAccount have to be filled.\nIn case of 3 (SEPA Payment) HolderName, BankAccountStandardID and BankStandardID of CounterpartyBankAccount and DirectDebitMandateID and CreditorID of DirectDebitMandate have to be filled.\nBDT: BankContractPaymentTransactionInstructionClassCode"
+                    },
+                    "ClassName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Domestic Payment",
+                        "title": "Name of PaymentTransactionInstructionClassCode",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "CounterpartyBankAccount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BankAccount"
+                            }
+                        ],
+                        "title": "Contains the bank account for which residual account balance has to be credited or cancellation charge amount to be debited."
+                    },
+                    "DirectDebitMandate": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.DirectDebitMandate"
+                            }
+                        ],
+                        "title": "The direct debit mandate used in a payment transaction instruction."
+                    }
+                },
+                "title": "Balancing Payment Transaction Instruction"
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BalancingPaymentTransactionInstruction-create": {
+                "type": "object",
+                "properties": {
+                    "ClassCode": {
+                        "type": "string",
+                        "maxLength": 3,
+                        "example": "2",
+                        "title": "A coded representation of a class of a bank contract payment transaction instruction.",
+                        "description": "Code Values are: 1 (Internal Payment), 2 (Domestic Payment), 3 (SEPA Payment).\nIntegrity Condition: I case of 1 (Internal Payment) BankAccountID, BankRoutingID and CountryCode of CounterpartyBankAccount have to be filled.\nIn case of 2 (Domestic Payment) HolderName, BankAccountID, BankRoutingID, and CountryCode of CounterpartyBankAccount have to be filled.\nIn case of 3 (SEPA Payment) HolderName, BankAccountStandardID and BankStandardID of CounterpartyBankAccount and DirectDebitMandateID and CreditorID of DirectDebitMandate have to be filled.\nBDT: BankContractPaymentTransactionInstructionClassCode"
+                    },
+                    "CounterpartyBankAccount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BankAccount-create"
+                            }
+                        ],
+                        "title": "Contains the bank account for which residual account balance has to be credited or cancellation charge amount to be debited."
+                    },
+                    "DirectDebitMandate": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.DirectDebitMandate-create"
+                            }
+                        ],
+                        "title": "The direct debit mandate used in a payment transaction instruction."
+                    }
+                },
+                "title": "Balancing Payment Transaction Instruction (for create)"
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BalancingPaymentTransactionInstruction-update": {
+                "type": "object",
+                "properties": {
+                    "ClassCode": {
+                        "type": "string",
+                        "maxLength": 3,
+                        "example": "2",
+                        "title": "A coded representation of a class of a bank contract payment transaction instruction.",
+                        "description": "Code Values are: 1 (Internal Payment), 2 (Domestic Payment), 3 (SEPA Payment).\nIntegrity Condition: I case of 1 (Internal Payment) BankAccountID, BankRoutingID and CountryCode of CounterpartyBankAccount have to be filled.\nIn case of 2 (Domestic Payment) HolderName, BankAccountID, BankRoutingID, and CountryCode of CounterpartyBankAccount have to be filled.\nIn case of 3 (SEPA Payment) HolderName, BankAccountStandardID and BankStandardID of CounterpartyBankAccount and DirectDebitMandateID and CreditorID of DirectDebitMandate have to be filled.\nBDT: BankContractPaymentTransactionInstructionClassCode"
+                    },
+                    "CounterpartyBankAccount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BankAccount-update"
+                            }
+                        ],
+                        "title": "Contains the bank account for which residual account balance has to be credited or cancellation charge amount to be debited."
+                    },
+                    "DirectDebitMandate": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.DirectDebitMandate-update"
+                            }
+                        ],
+                        "title": "The direct debit mandate used in a payment transaction instruction."
+                    }
+                },
+                "title": "Balancing Payment Transaction Instruction (for update)"
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.Bank": {
+                "type": "object",
+                "properties": {
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 11,
+                        "example": "TOLLDEWDXXX",
+                        "title": "Bank Identification Code (BIC) of the Society for Worldwide Interbank Financial Telecommunications (S.W.I.F.T.), see GDT BankStandardID.",
+                        "description": "GDT: BankStandardID"
+                    },
+                    "RoutingID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "90000001",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    },
+                    "CountryCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "DE",
+                        "title": "Country in which the bank identified earlier goes about its business. If the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here. Constraint: Only listID 3166-1 of listAgencyID 5 will be supported.",
+                        "description": "GDT: CountryCode"
+                    }
+                },
+                "title": "Bank",
+                "description": "A bank is a business entity that performs financial investment services and payment transactions. "
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.Bank-create": {
+                "type": "object",
+                "properties": {
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 11,
+                        "example": "TOLLDEWDXXX",
+                        "title": "Bank Identification Code (BIC) of the Society for Worldwide Interbank Financial Telecommunications (S.W.I.F.T.), see GDT BankStandardID.",
+                        "description": "GDT: BankStandardID"
+                    },
+                    "RoutingID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "90000001",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    },
+                    "CountryCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "DE",
+                        "title": "Country in which the bank identified earlier goes about its business. If the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here. Constraint: Only listID 3166-1 of listAgencyID 5 will be supported.",
+                        "description": "GDT: CountryCode"
+                    }
+                },
+                "title": "Bank (for create)",
+                "description": "A bank is a business entity that performs financial investment services and payment transactions. "
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.Bank-update": {
+                "type": "object",
+                "properties": {
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 11,
+                        "example": "TOLLDEWDXXX",
+                        "title": "Bank Identification Code (BIC) of the Society for Worldwide Interbank Financial Telecommunications (S.W.I.F.T.), see GDT BankStandardID.",
+                        "description": "GDT: BankStandardID"
+                    },
+                    "RoutingID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "90000001",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    },
+                    "CountryCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "DE",
+                        "title": "Country in which the bank identified earlier goes about its business. If the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here. Constraint: Only listID 3166-1 of listAgencyID 5 will be supported.",
+                        "description": "GDT: CountryCode"
+                    }
+                },
+                "title": "Bank (for update)",
+                "description": "A bank is a business entity that performs financial investment services and payment transactions. "
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BankAccount": {
+                "type": "object",
+                "properties": {
+                    "HolderName": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "John Doe",
+                        "title": "A name of the account holder of a bank account.",
+                        "description": "GDT: BankAccountHolderName_V1"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "4711",
+                        "title": "Bank account number (Basic Bank Account Number, BBAN). An account number that is assigned by the account managing bank. It uniquely identifies a bank account in most countries only together with the bank",
+                        "description": "GDT: BankAccountID"
+                    },
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 34,
+                        "example": "DE58200505500000004711",
+                        "title": "International bank account number (International Bank Account Number, IBAN)",
+                        "description": "GDT: BankAccountStandardID"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "CurrencyCode is a coded representation of the currency of the bank account.",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "Bank": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.Bank"
+                            }
+                        ],
+                        "title": "Bank where the account is held."
+                    }
+                },
+                "title": "Bank Account",
+                "description": "An account that holds funds in a bank and is subject to deposits and withdrawals."
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BankAccount-create": {
+                "type": "object",
+                "properties": {
+                    "HolderName": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "John Doe",
+                        "title": "A name of the account holder of a bank account.",
+                        "description": "GDT: BankAccountHolderName_V1"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "4711",
+                        "title": "Bank account number (Basic Bank Account Number, BBAN). An account number that is assigned by the account managing bank. It uniquely identifies a bank account in most countries only together with the bank",
+                        "description": "GDT: BankAccountID"
+                    },
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 34,
+                        "example": "DE58200505500000004711",
+                        "title": "International bank account number (International Bank Account Number, IBAN)",
+                        "description": "GDT: BankAccountStandardID"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "CurrencyCode is a coded representation of the currency of the bank account.",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "Bank": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.Bank-create"
+                            }
+                        ],
+                        "title": "Bank where the account is held."
+                    }
+                },
+                "title": "Bank Account (for create)",
+                "description": "An account that holds funds in a bank and is subject to deposits and withdrawals."
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BankAccount-update": {
+                "type": "object",
+                "properties": {
+                    "HolderName": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "John Doe",
+                        "title": "A name of the account holder of a bank account.",
+                        "description": "GDT: BankAccountHolderName_V1"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "example": "4711",
+                        "title": "Bank account number (Basic Bank Account Number, BBAN). An account number that is assigned by the account managing bank. It uniquely identifies a bank account in most countries only together with the bank",
+                        "description": "GDT: BankAccountID"
+                    },
+                    "StandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 34,
+                        "example": "DE58200505500000004711",
+                        "title": "International bank account number (International Bank Account Number, IBAN)",
+                        "description": "GDT: BankAccountStandardID"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "CurrencyCode is a coded representation of the currency of the bank account.",
+                        "description": "GDT: CurrencyCode"
+                    },
+                    "Bank": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.Bank-update"
+                            }
+                        ],
+                        "title": "Bank where the account is held."
+                    }
+                },
+                "title": "Bank Account (for update)",
+                "description": "An account that holds funds in a bank and is subject to deposits and withdrawals."
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BusinessProcessChainAssignment": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "100002",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BDT: BankingBusinessTransactionTypeCode"
+                    },
+                    "BankingBusinessTransactionTypeName": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Current Account Contract Termination",
+                        "title": "Name of BankingBusinessTransactionTypeCode",
+                        "description": "GDT: EXTENDED_Name"
+                    }
+                },
+                "title": "Business Process Chain Assignment",
+                "description": "Is the assignment of a business object node to a business process chain.  /nDefault: If BankingBusinessTransactionTypeCode is not specified, code value \"100002 - Current Account Contract Termination\" will be used by default. "
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BusinessProcessChainAssignment-create": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "100002",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for create)",
+                "description": "Is the assignment of a business object node to a business process chain.  /nDefault: If BankingBusinessTransactionTypeCode is not specified, code value \"100002 - Current Account Contract Termination\" will be used by default. "
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.BusinessProcessChainAssignment-update": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "100002",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for update)",
+                "description": "Is the assignment of a business object node to a business process chain.  /nDefault: If BankingBusinessTransactionTypeCode is not specified, code value \"100002 - Current Account Contract Termination\" will be used by default. "
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.DirectDebitMandate": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "4711",
+                        "title": "A identifier of Direct Debit Mandate",
+                        "description": "GDT: DirectDebitMandateID"
+                    },
+                    "CreditorPartyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "DE82ZZZ00000001015",
+                        "title": "A unique identifier of a creditor party of direct debit mandate.",
+                        "description": "GDT: PartyID"
+                    }
+                },
+                "title": "Direct Debit Mandate"
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.DirectDebitMandate-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "4711",
+                        "title": "A identifier of Direct Debit Mandate",
+                        "description": "GDT: DirectDebitMandateID"
+                    },
+                    "CreditorPartyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "DE82ZZZ00000001015",
+                        "title": "A unique identifier of a creditor party of direct debit mandate.",
+                        "description": "GDT: PartyID"
+                    }
+                },
+                "title": "Direct Debit Mandate (for create)"
+            },
+            "com.sap.gateway.default.bankaccountcontractcancelrequest.v0001.DirectDebitMandate-update": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "4711",
+                        "title": "A identifier of Direct Debit Mandate",
+                        "description": "GDT: DirectDebitMandateID"
+                    },
+                    "CreditorPartyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "DE82ZZZ00000001015",
+                        "title": "A unique identifier of a creditor party of direct debit mandate.",
+                        "description": "GDT: PartyID"
+                    }
+                },
+                "title": "Direct Debit Mandate (for update)"
+            },
+            "count": {
+                "anyOf": [
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ],
+                "description": "The number of entities in the collection. Available when using the [$count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount) query option."
+            },
+            "error": {
+                "type": "object",
+                "required": [
+                    "error"
+                ],
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "required": [
+                            "code",
+                            "message"
+                        ],
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                            "target": {
+                                "type": "string"
+                            },
+                            "details": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "target": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "innererror": {
+                                "type": "object",
+                                "description": "The structure of this object is service-specific"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "top": {
+                "name": "$top",
+                "in": "query",
+                "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "example": 50
+            },
+            "skip": {
+                "name": "$skip",
+                "in": "query",
+                "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "count": {
+                "name": "$count",
+                "in": "query",
+                "description": "Include count of items, see [Count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount)",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "search": {
+                "name": "$search",
+                "in": "query",
+                "description": "Search items by search phrases, see [Searching](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionsearch)",
+                "schema": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses": {
+            "error": {
+                "description": "Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

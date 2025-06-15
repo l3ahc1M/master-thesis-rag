@@ -1,0 +1,1351 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Bank Customer Lock Request",
+        "version": "1.0.0",
+        "description": "\r\n\r\nA bank customer lock request is based on an event type which can be maintained in customizing. This event type defines which objects can be locked and some default values.\r\n \r\nNote:\r\nA Bank Customer is a business partner that is a customer of a bank. Business Partner is a person, organization or group of persons in which a company has a business interest. Bank Account Contract is a contract between a credit institute and customer, which is based on the customer’s request for opening a bank account and consists among others, the bank account type, account holder, general terms and conditions. Current Account Contract, Deposit Account Contract, and Loan Contract are types of Bank Account Contract. A Bank Customer Lock Request can be used for business events like death of account holder. A prerequisite of the API is that business partner data is available in same system as the bank account contracts.\r\n\r\nRemark:\r\nThe service Bank Customer Lock Request is assigned to service group Transactional Banking."
+    },
+    "externalDocs": {
+        "description": "Business Documentation",
+        "url": "https://help.sap.com/docs/TRBK_S4HANA/d2151b51aacc4d82ad2861e007337fa2/a6b2154a02534be398cc0c263d82de71.html"
+    },
+    "x-sap-api-type": "ODATAV4",
+    "x-sap-shortText": "Maintain locks on product features and transactions for all bank account contracts, where the bank customer acts as the account holder using this synchronous inbound service.",
+    "x-sap-software-min-version": "1.0",
+    "x-sap-ext-overview": [
+        {
+            "name": "Authentication Methods",
+            "values": [
+                {
+                    "text": "x509",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Service Group Name",
+            "values": [
+                {
+                    "text": "TRANSACTIONALBANKING",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Business Object",
+            "values": [
+                {
+                    "text": "BankCustomerLockRequest",
+                    "format": "plain"
+                }
+            ]
+        }
+    ],
+    "security": [
+        {
+            "basicAuthentication": []
+        }
+    ],
+    "servers": [
+        {
+            "url": "https://{host}:{port}/sap/opu/odata4/sap/transactionalbanking/default/sap/bankcustomerlockrequest/0001",
+            "variables": {
+                "host": {
+                    "default": ""
+                },
+                "port": {
+                    "default": ""
+                }
+            }
+        }
+    ],
+    "x-sap-extensible": {
+        "supported": "no"
+    },
+    "tags": [
+        {
+            "name": "Bank Customer Lock Requests"
+        },
+        {
+            "name": "Bank Customer Lock Request Event Specifications"
+        }
+    ],
+    "paths": {
+        "/BankCustomerLockRequests": {
+            "get": {
+                "summary": "Query Bank Customer Lock Request",
+                "description": "Is a request to query bank customer lock requests",
+                "tags": [
+                    "Bank Customer Lock Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)\n\nRequired filter properties:\n- PartyIdentifyingElements",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "ID",
+                                    "PartyIdentifyingElements",
+                                    "ChangeStateID",
+                                    "EventCode",
+                                    "EventName",
+                                    "UserStatusCode",
+                                    "UserStatusName",
+                                    "ValidityStartDate",
+                                    "ValidityEndDate",
+                                    "BusinessProcessChainAssignment",
+                                    "Note"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "BankAccountEntryLockInstructions",
+                                    "BankAccountContracts",
+                                    "ProductionControlFeatureLockInstructions"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of BankCustomerLockRequest",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.BankCustomerLockRequest"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create Bank Customer Lock Request",
+                "description": "Is a request to create a bank customer lock request",
+                "tags": [
+                    "Bank Customer Lock Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Bank Customer Lock Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.BankCustomerLockRequest-create"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.BankCustomerLockRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankCustomerLockRequests/{ID}": {
+            "parameters": [
+                {
+                    "name": "ID",
+                    "in": "path",
+                    "required": true,
+                    "description": "Is an identifier of a bank customer lock request.  \nSpecial characters like \"-\", \"_\", \"*\", \"/\" are not allowed.",
+                    "schema": {
+                        "type": "string",
+                        "maxLength": 12,
+                        "example": "105"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Read Bank Customer Lock Request by ID",
+                "description": "Is a request to read a bank customer lock request",
+                "tags": [
+                    "Bank Customer Lock Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "ID",
+                                    "PartyIdentifyingElements",
+                                    "ChangeStateID",
+                                    "EventCode",
+                                    "EventName",
+                                    "UserStatusCode",
+                                    "UserStatusName",
+                                    "ValidityStartDate",
+                                    "ValidityEndDate",
+                                    "BusinessProcessChainAssignment",
+                                    "Note"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "BankAccountEntryLockInstructions",
+                                    "BankAccountContracts",
+                                    "ProductionControlFeatureLockInstructions"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.BankCustomerLockRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update Bank Customer Lock Request",
+                "description": "Is a request to update a bank customer lock request",
+                "tags": [
+                    "Bank Customer Lock Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Bank Customer Lock Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.BankCustomerLockRequest-update"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankCustomerLockRequestEventSpecifications": {
+            "get": {
+                "summary": "Query Bank Customer Lock Request Event Specification",
+                "description": "Is a request to query bank customer lock request event specification",
+                "tags": [
+                    "Bank Customer Lock Request Event Specifications"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "EventCode",
+                                    "EventName"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of BankCustomerLockRequestEventSpecification",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.BankCustomerLockRequestEventSpecification"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/$batch": {
+            "post": {
+                "summary": "Send a group of requests",
+                "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).\n\n*Please note that \"Try it out\" is not supported for this request.*",
+                "tags": [
+                    "Batch Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Batch request",
+                    "content": {
+                        "multipart/mixed;boundary=request-separator": {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET BankAccountContracts HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Batch response",
+                        "content": {
+                            "multipart/mixed": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "basicAuthentication": {
+                "type": "http",
+                "scheme": "basic"
+            }
+        },
+        "schemas": {
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.BankAccountContract": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is an universal unique identifier of a bank account contract.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "ID": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.BankAccountContractID"
+                            }
+                        ],
+                        "title": "An identifier of a bank account contract.",
+                        "description": "GDT: BankAccountContractID"
+                    },
+                    "TypeCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "874",
+                        "title": "A coded representation of the type of a bank account contract.",
+                        "description": "Only listID 11502 for listAgencyID 310 will be supported.  \nGDT: BankAccountContractTypeCode"
+                    },
+                    "TypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Current Account Contract",
+                        "title": "Name of TypeCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "SubTypeCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "A coded representation of the sub type of a bank account contract.",
+                        "description": "GDT: BankAccountContractSubTypeCode"
+                    },
+                    "SubTypeName": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Current Account Contract",
+                        "title": "Name of SubTypeCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    }
+                },
+                "title": "Bank Account Contract",
+                "description": "Bank Account Contract is a contract between a credit institute and customer, which is based on the customer's request for opening a bank account and consists among others, the bank account type, account holder, general terms and conditions."
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.BankAccountContract-create": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is an universal unique identifier of a bank account contract.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "ID": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.BankAccountContractID-create"
+                            }
+                        ],
+                        "title": "An identifier of a bank account contract.",
+                        "description": "GDT: BankAccountContractID"
+                    },
+                    "TypeCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "874",
+                        "title": "A coded representation of the type of a bank account contract.",
+                        "description": "Only listID 11502 for listAgencyID 310 will be supported.  \nGDT: BankAccountContractTypeCode"
+                    },
+                    "SubTypeCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "A coded representation of the sub type of a bank account contract.",
+                        "description": "GDT: BankAccountContractSubTypeCode"
+                    }
+                },
+                "required": [
+                    "UUID"
+                ],
+                "title": "Bank Account Contract (for create)",
+                "description": "Bank Account Contract is a contract between a credit institute and customer, which is based on the customer's request for opening a bank account and consists among others, the bank account type, account holder, general terms and conditions."
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.BankAccountContract-update": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.BankAccountContractID-update"
+                            }
+                        ],
+                        "title": "An identifier of a bank account contract.",
+                        "description": "GDT: BankAccountContractID"
+                    },
+                    "TypeCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "874",
+                        "title": "A coded representation of the type of a bank account contract.",
+                        "description": "Only listID 11502 for listAgencyID 310 will be supported.  \nGDT: BankAccountContractTypeCode"
+                    },
+                    "SubTypeCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "A coded representation of the sub type of a bank account contract.",
+                        "description": "GDT: BankAccountContractSubTypeCode"
+                    }
+                },
+                "title": "Bank Account Contract (for update)",
+                "description": "Bank Account Contract is a contract between a credit institute and customer, which is based on the customer's request for opening a bank account and consists among others, the bank account type, account holder, general terms and conditions."
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.BankCustomerLockRequest": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 12,
+                        "example": "105",
+                        "title": "Is an identifier of a bank customer lock request.",
+                        "description": "Special characters like \"-\", \"_\", \"*\", \"/\" are not allowed."
+                    },
+                    "PartyIdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.PartyIdfgElmnts"
+                            }
+                        ],
+                        "title": "The party identifying elements of the bank customer."
+                    },
+                    "ChangeStateID": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "2019-07-13T13:34:46Z",
+                        "title": "An unique identifier of a bank customer lock request for a change state.",
+                        "description": "Remark: Property is required for subsequent usage of update service. GDT: ChangeStateID"
+                    },
+                    "EventCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "103000",
+                        "title": "A coded representation of the event of a bank contract lock request.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. BDT: BankContractLockRequestEventCode"
+                    },
+                    "EventName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Negative Credit Rating",
+                        "title": "Name of EventCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "UserStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "2",
+                        "title": "A coded representation of the user status of a bank contract lock request.",
+                        "description": "A user status is a user defined processing status of a bank contract lock request. Filter: Only 'Eq' is supported as logical operator.\nBDT: BankContractLockRequestUserStatusCode"
+                    },
+                    "UserStatusName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Active",
+                        "title": "Name of UserStatusCode.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_MEDIUM_Name"
+                    },
+                    "ValidityStartDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The validity start date for a bank contract lock request.",
+                        "description": "GDT: Date"
+                    },
+                    "ValidityEndDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The validity end date for a bank contract lock request.",
+                        "description": "GDT: Date"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.BusinessProcessChainAssignment"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "\nBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "Note": {
+                        "type": "string",
+                        "example": "Customer deceased April 01, 2019",
+                        "title": "A note on bank contract lock request about the lock.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    },
+                    "BankAccountEntryLockInstructions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.BankAccountEntryLockInstruction"
+                        }
+                    },
+                    "BankAccountContracts": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.BankAccountContract"
+                        }
+                    },
+                    "ProductionControlFeatureLockInstructions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.ProductionControlFeatureLockInstruction"
+                        }
+                    }
+                },
+                "title": "Bank Customer Lock Request",
+                "description": "A bank customer lock request is a request to maintain locks on product features and transactions of all bank account contract of a bank customer."
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.BankCustomerLockRequest-create": {
+                "type": "object",
+                "properties": {
+                    "PartyIdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.PartyIdfgElmnts-create"
+                            }
+                        ],
+                        "title": "The party identifying elements of the bank customer."
+                    },
+                    "EventCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "103000",
+                        "title": "A coded representation of the event of a bank contract lock request.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. BDT: BankContractLockRequestEventCode"
+                    },
+                    "UserStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "2",
+                        "title": "A coded representation of the user status of a bank contract lock request.",
+                        "description": "A user status is a user defined processing status of a bank contract lock request. Filter: Only 'Eq' is supported as logical operator.\nBDT: BankContractLockRequestUserStatusCode"
+                    },
+                    "ValidityStartDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The validity start date for a bank contract lock request.",
+                        "description": "GDT: Date"
+                    },
+                    "ValidityEndDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The validity end date for a bank contract lock request.",
+                        "description": "GDT: Date"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.BusinessProcessChainAssignment-create"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "\nBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "Note": {
+                        "type": "string",
+                        "example": "Customer deceased April 01, 2019",
+                        "title": "A note on bank contract lock request about the lock.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    },
+                    "BankAccountEntryLockInstructions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.BankAccountEntryLockInstruction-create"
+                        }
+                    },
+                    "BankAccountContracts": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.BankAccountContract-create"
+                        }
+                    },
+                    "ProductionControlFeatureLockInstructions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.ProductionControlFeatureLockInstruction-create"
+                        }
+                    }
+                },
+                "title": "Bank Customer Lock Request (for create)",
+                "description": "A bank customer lock request is a request to maintain locks on product features and transactions of all bank account contract of a bank customer."
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.BankCustomerLockRequest-update": {
+                "type": "object",
+                "properties": {
+                    "UserStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "2",
+                        "title": "A coded representation of the user status of a bank contract lock request.",
+                        "description": "A user status is a user defined processing status of a bank contract lock request. Filter: Only 'Eq' is supported as logical operator.\nBDT: BankContractLockRequestUserStatusCode"
+                    },
+                    "ValidityEndDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The validity end date for a bank contract lock request.",
+                        "description": "GDT: Date"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.BusinessProcessChainAssignment-update"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "\nBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "Note": {
+                        "type": "string",
+                        "example": "Customer deceased April 01, 2019",
+                        "title": "A note on bank contract lock request about the lock.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    }
+                },
+                "title": "Bank Customer Lock Request (for update)",
+                "description": "A bank customer lock request is a request to maintain locks on product features and transactions of all bank account contract of a bank customer."
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.BankAccountContractProductionControlFeature": {
+                "type": "object",
+                "properties": {
+                    "Code": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "5",
+                        "title": "A coded representation of a feature of the bank account contract production control.",
+                        "description": "GDT: BankAccountContractProductionControlFeatureCode"
+                    },
+                    "Name": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Standing Payment Instruction",
+                        "title": "Name of Code.",
+                        "description": "GDT: MEDIUM_Name"
+                    }
+                },
+                "title": "Bank Account Contract Production Control Feature",
+                "description": "A bank account contract production control feature is the feature of a bank account contract production control."
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.BankAccountContractProductionControlFeature-create": {
+                "type": "object",
+                "properties": {
+                    "Code": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "5",
+                        "title": "A coded representation of a feature of the bank account contract production control.",
+                        "description": "GDT: BankAccountContractProductionControlFeatureCode"
+                    }
+                },
+                "required": [
+                    "Code"
+                ],
+                "title": "Bank Account Contract Production Control Feature (for create)",
+                "description": "A bank account contract production control feature is the feature of a bank account contract production control."
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.BankAccountContractProductionControlFeature-update": {
+                "type": "object",
+                "title": "Bank Account Contract Production Control Feature (for update)",
+                "description": "A bank account contract production control feature is the feature of a bank account contract production control."
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.BankAccountEntryLockInstruction": {
+                "type": "object",
+                "properties": {
+                    "BankPaymentTransactionLockInstructionCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "0005",
+                        "title": "A coded representation for the instruction to lock the creation of bank payment transactions.",
+                        "description": "GDT: BankPaymentTransactionLockInstructionCode"
+                    },
+                    "BankPaymentTransactionLockInstructionName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Debit Posting Lock (PT)",
+                        "title": "Name of BankPaymentTransactionLockInstructionCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "LowerBoundaryAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "Is the lower boundary amount for a bank account entry lock instruction.",
+                        "description": "GDT: Amount"
+                    },
+                    "UpperBoundaryAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.Amount"
+                            }
+                        ],
+                        "title": "Is the upper boundary amount for a bank account entry lock instruction.",
+                        "description": "GDT: Amount"
+                    }
+                },
+                "title": "Bank Account Entry Lock Instruction",
+                "description": "A bank account entry lock instruction is an instruction to lock the creation of bank account entries on the bank account associated with the bank account contract.Use: A bank account entry lock instruction can be used to lock a bank payment transaction for a bank account. Remark: a) If LowerBoundaryAmount and UpperBoundaryAmount are not specified, the BankAccountEntryLockInstruction is applicable for all bank account entries regardless of their amount. b) If only LowerBounderyAmount is specified, the BankAccountEntryLockInstruction is applicable for all bank account entries with a higher amount than the LowerBounderyAmount. c) If only UpperBounderyAmount is specified, the BankAccountEntryLockInstruction is applicable for all bank account entries with a lower amount than the UpperBounderyAmount. d) If LowerBounderyAmount and UpperBoundaryAmount are specified, the BankAccountEntryLockInstruction is applicable for all bank account entries, where the amount is higher amount than the LowerBounderyAmount and lower than the UpperBounderyAmount."
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.BankAccountEntryLockInstruction-create": {
+                "type": "object",
+                "properties": {
+                    "BankPaymentTransactionLockInstructionCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "0005",
+                        "title": "A coded representation for the instruction to lock the creation of bank payment transactions.",
+                        "description": "GDT: BankPaymentTransactionLockInstructionCode"
+                    },
+                    "LowerBoundaryAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "Is the lower boundary amount for a bank account entry lock instruction.",
+                        "description": "GDT: Amount"
+                    },
+                    "UpperBoundaryAmount": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.Amount-create"
+                            }
+                        ],
+                        "title": "Is the upper boundary amount for a bank account entry lock instruction.",
+                        "description": "GDT: Amount"
+                    }
+                },
+                "required": [
+                    "BankPaymentTransactionLockInstructionCode"
+                ],
+                "title": "Bank Account Entry Lock Instruction (for create)",
+                "description": "A bank account entry lock instruction is an instruction to lock the creation of bank account entries on the bank account associated with the bank account contract.Use: A bank account entry lock instruction can be used to lock a bank payment transaction for a bank account. Remark: a) If LowerBoundaryAmount and UpperBoundaryAmount are not specified, the BankAccountEntryLockInstruction is applicable for all bank account entries regardless of their amount. b) If only LowerBounderyAmount is specified, the BankAccountEntryLockInstruction is applicable for all bank account entries with a higher amount than the LowerBounderyAmount. c) If only UpperBounderyAmount is specified, the BankAccountEntryLockInstruction is applicable for all bank account entries with a lower amount than the UpperBounderyAmount. d) If LowerBounderyAmount and UpperBoundaryAmount are specified, the BankAccountEntryLockInstruction is applicable for all bank account entries, where the amount is higher amount than the LowerBounderyAmount and lower than the UpperBounderyAmount."
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.BankAccountEntryLockInstruction-update": {
+                "type": "object",
+                "title": "Bank Account Entry Lock Instruction (for update)",
+                "description": "A bank account entry lock instruction is an instruction to lock the creation of bank account entries on the bank account associated with the bank account contract.Use: A bank account entry lock instruction can be used to lock a bank payment transaction for a bank account. Remark: a) If LowerBoundaryAmount and UpperBoundaryAmount are not specified, the BankAccountEntryLockInstruction is applicable for all bank account entries regardless of their amount. b) If only LowerBounderyAmount is specified, the BankAccountEntryLockInstruction is applicable for all bank account entries with a higher amount than the LowerBounderyAmount. c) If only UpperBounderyAmount is specified, the BankAccountEntryLockInstruction is applicable for all bank account entries with a lower amount than the UpperBounderyAmount. d) If LowerBounderyAmount and UpperBoundaryAmount are specified, the BankAccountEntryLockInstruction is applicable for all bank account entries, where the amount is higher amount than the LowerBounderyAmount and lower than the UpperBounderyAmount."
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.BankCustomerLockRequestEventSpecification": {
+                "type": "object",
+                "properties": {
+                    "EventCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "206000",
+                        "title": "A coded representation of the event of a customer lock request."
+                    },
+                    "EventName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "New Customer Lock",
+                        "title": "Name of EventCode."
+                    }
+                },
+                "title": "Bank Customer Lock Request Event Specification",
+                "description": "A Bank customer lock request event specification is a specification of the possible events of a bank customer lock request."
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.BankCustomerLockRequestEventSpecification-create": {
+                "type": "object",
+                "title": "Bank Customer Lock Request Event Specification (for create)",
+                "description": "A Bank customer lock request event specification is a specification of the possible events of a bank customer lock request."
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.BankCustomerLockRequestEventSpecification-update": {
+                "type": "object",
+                "title": "Bank Customer Lock Request Event Specification (for update)",
+                "description": "A Bank customer lock request event specification is a specification of the possible events of a bank customer lock request."
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.ProductionControlFeatureLockInstruction": {
+                "type": "object",
+                "properties": {
+                    "Code": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "A coded representation for the instruction to lock one or more production control features of a bank account contract.",
+                        "description": "GDT: BankAccountContractProductionControlFeatureLockInstructionCode_V1"
+                    },
+                    "Name": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Lock all features",
+                        "title": "Name of Code.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "BankAccountContractProductionControlFeatures": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.BankAccountContractProductionControlFeature"
+                        }
+                    }
+                },
+                "title": "Production Control Feature Lock Instruction",
+                "description": "A production control feature lock instruction is an instruction to lock the feature of a bank account contract that is defined at the assigned production control."
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.ProductionControlFeatureLockInstruction-create": {
+                "type": "object",
+                "properties": {
+                    "Code": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "1",
+                        "title": "A coded representation for the instruction to lock one or more production control features of a bank account contract.",
+                        "description": "GDT: BankAccountContractProductionControlFeatureLockInstructionCode_V1"
+                    },
+                    "BankAccountContractProductionControlFeatures": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankcustomerlockrequest.v0001.BankAccountContractProductionControlFeature-create"
+                        }
+                    }
+                },
+                "required": [
+                    "Code"
+                ],
+                "title": "Production Control Feature Lock Instruction (for create)",
+                "description": "A production control feature lock instruction is an instruction to lock the feature of a bank account contract that is defined at the assigned production control."
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.ProductionControlFeatureLockInstruction-update": {
+                "type": "object",
+                "title": "Production Control Feature Lock Instruction (for update)",
+                "description": "A production control feature lock instruction is an instruction to lock the feature of a bank account contract that is defined at the assigned production control."
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.Amount": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.Amount-create": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount (for create)",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.Amount-update": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "format": "decimal",
+                        "x-sap-precision": 23,
+                        "example": "100",
+                        "title": "Value of an amount."
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "Currency unit in accordance with the ISO 4217 three-character code.",
+                        "description": "A currency must always be specified.\nGDT: CurrencyCode"
+                    }
+                },
+                "title": "Amount (for update)",
+                "description": "Is an amount with the corresponding currency unit."
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.BankAccountContractID": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "DE32904200380010000707",
+                        "title": "Content of BankAccountContractID."
+                    },
+                    "schemeID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "BAC.001",
+                        "title": "SchemeID of the BankAccountContractID.",
+                        "description": "Default: If filter value is not provided, BAC.001 will be used as default value for filter."
+                    },
+                    "schemeAgencyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "310",
+                        "title": "SchemeAgencyID of the BankAccountContractID.",
+                        "description": "Default: If filter value is not provided, 310 will be used as default value for filter."
+                    }
+                },
+                "title": "BankAccountContractID",
+                "description": "An identifier of a bank account contract.\nGDT: BankAccountContractID"
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.BankAccountContractID-create": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "DE32904200380010000707",
+                        "title": "Content of BankAccountContractID."
+                    },
+                    "schemeID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "BAC.001",
+                        "title": "SchemeID of the BankAccountContractID.",
+                        "description": "Default: If filter value is not provided, BAC.001 will be used as default value for filter."
+                    },
+                    "schemeAgencyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "310",
+                        "title": "SchemeAgencyID of the BankAccountContractID.",
+                        "description": "Default: If filter value is not provided, 310 will be used as default value for filter."
+                    }
+                },
+                "title": "BankAccountContractID (for create)",
+                "description": "An identifier of a bank account contract.\nGDT: BankAccountContractID"
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.BankAccountContractID-update": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "DE32904200380010000707",
+                        "title": "Content of BankAccountContractID."
+                    },
+                    "schemeID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "BAC.001",
+                        "title": "SchemeID of the BankAccountContractID.",
+                        "description": "Default: If filter value is not provided, BAC.001 will be used as default value for filter."
+                    }
+                },
+                "title": "BankAccountContractID (for update)",
+                "description": "An identifier of a bank account contract.\nGDT: BankAccountContractID"
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.BusinessProcessChainAssignment": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "110001",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BDT: BankingBusinessTransactionTypeCode"
+                    },
+                    "BankingBusinessTransactionTypeName": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Bank Customer Lock Request Maintenance",
+                        "title": "Name of BankingBusinessTransactionTypeCode",
+                        "description": "GDT: EXTENDED_Name"
+                    }
+                },
+                "title": "Business Process Chain Assignment",
+                "description": "Is the assignment of a business object node to a business process chain.  /nDefault: If BankingBusinessTransactionTypeCode is not specified, code value \"110001 - Bank Customer Lock Request Maintenance\" will be used by default. "
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.BusinessProcessChainAssignment-create": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "110001",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for create)",
+                "description": "Is the assignment of a business object node to a business process chain.  /nDefault: If BankingBusinessTransactionTypeCode is not specified, code value \"110001 - Bank Customer Lock Request Maintenance\" will be used by default. "
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.BusinessProcessChainAssignment-update": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "110001",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "BDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for update)",
+                "description": "Is the assignment of a business object node to a business process chain.  /nDefault: If BankingBusinessTransactionTypeCode is not specified, code value \"110001 - Bank Customer Lock Request Maintenance\" will be used by default. "
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.PartyIdfgElmnts": {
+                "type": "object",
+                "properties": {
+                    "PartyUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "The UUID of a party (business partner).",
+                        "description": "\nGDT: UUID"
+                    },
+                    "PartyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "310867",
+                        "title": "The ID of a party (business partner).",
+                        "description": "\nGDT: PartyID"
+                    }
+                },
+                "title": "Party Identifying Elements",
+                "description": "PartyIdentifyingElements does contain all identifying elements of a party (business partner).  \nRemark:  PartyTypeCode is value 147 (Business Partner). "
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.PartyIdfgElmnts-create": {
+                "type": "object",
+                "properties": {
+                    "PartyUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "The UUID of a party (business partner).",
+                        "description": "\nGDT: UUID"
+                    },
+                    "PartyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "310867",
+                        "title": "The ID of a party (business partner).",
+                        "description": "\nGDT: PartyID"
+                    }
+                },
+                "title": "Party Identifying Elements (for create)",
+                "description": "PartyIdentifyingElements does contain all identifying elements of a party (business partner).  \nRemark:  PartyTypeCode is value 147 (Business Partner). "
+            },
+            "com.sap.gateway.default.bankcustomerlockrequest.v0001.PartyIdfgElmnts-update": {
+                "type": "object",
+                "title": "Party Identifying Elements (for update)",
+                "description": "PartyIdentifyingElements does contain all identifying elements of a party (business partner).  \nRemark:  PartyTypeCode is value 147 (Business Partner). "
+            },
+            "count": {
+                "anyOf": [
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ],
+                "description": "The number of entities in the collection. Available when using the [$count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount) query option."
+            },
+            "error": {
+                "type": "object",
+                "required": [
+                    "error"
+                ],
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "required": [
+                            "code",
+                            "message"
+                        ],
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                            "target": {
+                                "type": "string"
+                            },
+                            "details": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "target": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "innererror": {
+                                "type": "object",
+                                "description": "The structure of this object is service-specific"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "top": {
+                "name": "$top",
+                "in": "query",
+                "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "example": 50
+            },
+            "skip": {
+                "name": "$skip",
+                "in": "query",
+                "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "count": {
+                "name": "$count",
+                "in": "query",
+                "description": "Include count of items, see [Count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount)",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "search": {
+                "name": "$search",
+                "in": "query",
+                "description": "Search items by search phrases, see [Searching](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionsearch)",
+                "schema": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses": {
+            "error": {
+                "description": "Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

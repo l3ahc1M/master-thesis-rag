@@ -1,0 +1,1628 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Direct Debit Mandate",
+        "version": "1.0.0",
+        "description": "\r\n\r\nAn authorization given by a debtor to a creditor to initiate instructions to debit funds owed to the creditor from a specified account, and the authorization to the debtor bank to comply with the instructions issued by the creditor.\r\nYou can use this API to create new direct debit mandates or to query existing direct debit mandates.\r\n\r\nRemark:\r\nThe service Direct Debit Mandate is assigned to service group Transactional Banking.\r\n\r\nGeneral:\r\nThe properties of the EDM that are based on a code GDT do not contain supplementary components (e.g. listID) that are known from the GDTs of the enterprise services."
+    },
+    "externalDocs": {
+        "description": "Business Documentation",
+        "url": "https://help.sap.com/docs/TRBK_S4HANA/d2151b51aacc4d82ad2861e007337fa2/fe862eca58bc4fc48ae7d10eae9ddeee.html"
+    },
+    "x-sap-api-type": "ODATAV4",
+    "x-sap-shortText": "Create new direct debit mandates or query existing direct debit mandates using this synchronous inbound service",
+    "x-sap-software-min-version": "1.0",
+    "x-sap-ext-overview": [
+        {
+            "name": "Authentication Methods",
+            "values": [
+                {
+                    "text": "x509",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Service Group Name",
+            "values": [
+                {
+                    "text": "TRANSACTIONALBANKING",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Business Object",
+            "values": [
+                {
+                    "text": "Direct Debit Mandate",
+                    "format": "plain"
+                }
+            ]
+        }
+    ],
+    "security": [
+        {
+            "basicAuthentication": []
+        }
+    ],
+    "servers": [
+        {
+            "url": "https://{host}:{port}/sap/opu/odata4/sap/transactionalbanking/default/sap/directdebitmandate/0001",
+            "variables": {
+                "host": {
+                    "default": ""
+                },
+                "port": {
+                    "default": ""
+                }
+            }
+        }
+    ],
+    "x-sap-extensible": {
+        "supported": "no"
+    },
+    "tags": [
+        {
+            "name": "Direct Debit Mandates"
+        }
+    ],
+    "paths": {
+        "/DirectDebitMandates": {
+            "get": {
+                "summary": "Query Direct Debit Mandates",
+                "description": "Is a request to query direct debit mandates",
+                "tags": [
+                    "Direct Debit Mandates"
+                ],
+                "parameters": [
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "UUID",
+                                    "ID",
+                                    "CreditorPartyID",
+                                    "ChangeStateID",
+                                    "UserStatusCode",
+                                    "UserStatusName",
+                                    "SignatureDate",
+                                    "SignatureCityName",
+                                    "ValidityPeriod",
+                                    "DirectDebitSchemeCode",
+                                    "DirectDebitSchemeName",
+                                    "DirectDebitCollectionSEPASequenceTypeCode",
+                                    "DirectDebitCollectionSEPASequenceTypeName",
+                                    "BusinessProcessChainAssignment",
+                                    "RelatedCreditorParty",
+                                    "CreditorParty",
+                                    "OriginalCreditorParty",
+                                    "RelatedDebtorPartyID",
+                                    "DebtorParty",
+                                    "FinalDebtorParty",
+                                    "DebtorBankAccount",
+                                    "CreditorReferenceID",
+                                    "CreditorReferenceDescription"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "AmendmentHistoryItems",
+                                    "UtilisationEntries"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of DirectDebitMandate",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.DirectDebitMandate"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create Direct Debit Mandate",
+                "description": "Is a request to create a direct debit mandate",
+                "tags": [
+                    "Direct Debit Mandates"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Direct Debit Mandate",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.DirectDebitMandate-create"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.DirectDebitMandate"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/DirectDebitMandates/{UUID}": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "Is a universal unique identifier of a direct debit mandate.  \nGDT: UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Read Direct Debit Mandate by UUID",
+                "description": "Is a request to read a direct debit mandate",
+                "tags": [
+                    "Direct Debit Mandates"
+                ],
+                "parameters": [
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "UUID",
+                                    "ID",
+                                    "CreditorPartyID",
+                                    "ChangeStateID",
+                                    "UserStatusCode",
+                                    "UserStatusName",
+                                    "SignatureDate",
+                                    "SignatureCityName",
+                                    "ValidityPeriod",
+                                    "DirectDebitSchemeCode",
+                                    "DirectDebitSchemeName",
+                                    "DirectDebitCollectionSEPASequenceTypeCode",
+                                    "DirectDebitCollectionSEPASequenceTypeName",
+                                    "BusinessProcessChainAssignment",
+                                    "RelatedCreditorParty",
+                                    "CreditorParty",
+                                    "OriginalCreditorParty",
+                                    "RelatedDebtorPartyID",
+                                    "DebtorParty",
+                                    "FinalDebtorParty",
+                                    "DebtorBankAccount",
+                                    "CreditorReferenceID",
+                                    "CreditorReferenceDescription"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "AmendmentHistoryItems",
+                                    "UtilisationEntries"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.DirectDebitMandate"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/$batch": {
+            "post": {
+                "summary": "Send a group of requests",
+                "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).\n\n*Please note that \"Try it out\" is not supported for this request.*",
+                "tags": [
+                    "Batch Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Batch request",
+                    "content": {
+                        "multipart/mixed;boundary=request-separator": {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET DirectDebitMandates HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Batch response",
+                        "content": {
+                            "multipart/mixed": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "basicAuthentication": {
+                "type": "http",
+                "scheme": "basic"
+            }
+        },
+        "schemas": {
+            "com.sap.gateway.default.directdebitmandate.v0001.AmendmentHistoryItem": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "0002",
+                        "title": "An identifier for an item of a Direct Debit Mandate Amendment History.",
+                        "description": "Remark: The ID is only unique in context of the direct debit mandate.  \nGDT: DirectDebitMandateAmendmentHistoryItemID"
+                    },
+                    "AmendedDirectDebitMandate": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.DirectDebitMandate"
+                            }
+                        ]
+                    }
+                },
+                "title": "Amendment History Item",
+                "description": "An item that captures the history of amendments for a direct debit mandate. A Direct Debit Mandate can be revised any number of times. If a revision is amendment relevant, the previous values of the Direct Debit Mandate is captured as Direct Debit Mandate Amendment History Item. The SEPA Rulebook by the European Payment Council defines what revisions are amendment relevant. In course of time, direct debit mandates are amended for various reasons."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.AmendmentHistoryItem-create": {
+                "type": "object",
+                "properties": {
+                    "AmendedDirectDebitMandate": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.DirectDebitMandate-create"
+                            }
+                        ]
+                    }
+                },
+                "title": "Amendment History Item (for create)",
+                "description": "An item that captures the history of amendments for a direct debit mandate. A Direct Debit Mandate can be revised any number of times. If a revision is amendment relevant, the previous values of the Direct Debit Mandate is captured as Direct Debit Mandate Amendment History Item. The SEPA Rulebook by the European Payment Council defines what revisions are amendment relevant. In course of time, direct debit mandates are amended for various reasons."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.AmendmentHistoryItem-update": {
+                "type": "object",
+                "title": "Amendment History Item (for update)",
+                "description": "An item that captures the history of amendments for a direct debit mandate. A Direct Debit Mandate can be revised any number of times. If a revision is amendment relevant, the previous values of the Direct Debit Mandate is captured as Direct Debit Mandate Amendment History Item. The SEPA Rulebook by the European Payment Council defines what revisions are amendment relevant. In course of time, direct debit mandates are amended for various reasons."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.DirectDebitMandate": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "Is a universal unique identifier of a direct debit mandate.",
+                        "description": "GDT: UUID"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "TEST1234",
+                        "title": "A identifier of Direct Debit Mandate.",
+                        "description": "Remark: The CreditorPartyID (according AT-02 of the SEPA rulebooks) and the DirectDebitMandateID are the semantic key of a direct debit mandate. A DirectDebitMandateID is only unique in context of a CreditorPartyID.\nGDT: DirectDebitMandateID"
+                    },
+                    "CreditorPartyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "DE123452345678901",
+                        "title": "A unique identifier of a creditor party of direct debit mandate.",
+                        "description": "Remark: Contains the Creditor Identification according AT-02 of the SEPA rulebooks. \nIntegrity Conditions: - The CreditorPartyID has to be equal to the CreditorParty-->ID. \nConstraint: Only 35 characters maximum are allowed. \nFilter: Only 'Eq' is supported as logical operator. \nGDT: PartyID"
+                    },
+                    "ChangeStateID": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "2019-06-04T08:29:04Z",
+                        "title": "Identifies a change state.",
+                        "description": "Remark:  1) Property is required for subsequent usage of corresponding SOAP update service. 2) Property is used as ETag. \nGDT: ChangeStateID"
+                    },
+                    "UserStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "2",
+                        "title": "A coded representation of the user status of a direct debit mandate.",
+                        "description": "Constraint: Only the code values 2 - Active, 3 - To be confirmed, 4 - Locked 5 - Canceled, 6 - Discarded are allowed. \nFilter: Only 'Eq' is supported as logical operator. \nBDT: DirectDebitMandateUserStatusCode"
+                    },
+                    "UserStatusName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Mandate - Active",
+                        "title": "Name of UserStatusCode.",
+                        "description": "\nGDT: MEDIUM_Name"
+                    },
+                    "SignatureDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Time Point at which a signature for direct debit mandate is given.",
+                        "description": "\nGDT: Date"
+                    },
+                    "SignatureCityName": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Berlin",
+                        "title": "Name of the city where the signature for a direct debit mandate is given.",
+                        "description": "\nGDT: LANGUAGEINDEPENDENT_MEDIUM_Name"
+                    },
+                    "ValidityPeriod": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.ValidityPeriod"
+                            }
+                        ],
+                        "title": "Period for which the direct debit mandate is valid.",
+                        "description": "\nGDT: CLOSED_UNBOUNDED_DatePeriod"
+                    },
+                    "DirectDebitSchemeCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "A coded representation of a direct debit scheme. A direct debit scheme is a set of rules and obligations regarding the collection of direct debit payments.",
+                        "description": "Example: SEPA Core or a SEPA B2B are examples for a scheme. \nGDT: DirectDebitSchemeCode"
+                    },
+                    "DirectDebitSchemeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "SEPA Core",
+                        "title": "Name of DirectDebitSchemeCode. ",
+                        "description": "\nGDT: MEDIUM_Name"
+                    },
+                    "DirectDebitCollectionSEPASequenceTypeCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "RCUR",
+                        "title": "A coded representation of a SEPA sequence type of a direct debit collection. A SEPA sequence type specifies a type of direct debit collection for which the direct debit mandate is issued. ",
+                        "description": "The SEPA sequence type for a direct debit collection is defined in the European Payments Council's \"SEPA CORE DIRECT DEBIT SCHEME CUSTOMER-TO-BANK IMPLEMENTATION GUIDELINES\" and follows the ISO 20022 standard for \"Universal financial industry message schemes\".\nConstraint: Only the code values 'OOFF' - One-Off and 'RCUR' - Recurring are allowed. \nGDT: DirectDebitCollectionSEPASequenceTypeCode"
+                    },
+                    "DirectDebitCollectionSEPASequenceTypeName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Recurring",
+                        "title": "Name of DirectDebitCollectionSEPASequenceTypeCode. ",
+                        "description": "\nGDT: MEDIUM_Name"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.BusinessProcessChainAssignment"
+                            }
+                        ],
+                        "title": "The assignment of a direct debit mandate to a business process chain. ",
+                        "description": "BusinessProcessChain is a chain of business processes carried out in a business scenario. BOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "RelatedCreditorParty": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.RelatedCreditorParty"
+                            }
+                        ],
+                        "title": "A party that is related with the creditor party. ",
+                        "description": "Remark: The creditor party of a direct debit mandate in S/4 TRBK can either be related to an operational bank contract management unit that represents the bank or can be related to a business partner (account holder) of the bank. If the creditor party is related to a business partner the bank manages direct debits mandates for the business partner (for example for a club). When a direct debit mandate is created data from related creditor party can be copied to the creditor party of the direct debit mandate."
+                    },
+                    "CreditorParty": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.CreditorParty"
+                            }
+                        ],
+                        "title": "Creditor party of the direct debit mandate. ",
+                        "description": "Integrity Condition: Name and ID (CI) have to be specified. \nConstraints: - for CreditorParty-->ID: Only 35 characters maximum are allowed. "
+                    },
+                    "OriginalCreditorParty": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.OnBehalfParty"
+                            }
+                        ],
+                        "title": "Creditor party for whom the direct debit mandate is originally given.The CreditorParty acts on behalf of OriginalCreditorParty. ",
+                        "description": "Constraint: OriginalCreditorParty-->ID: Only 35 characters maximum are allowed. \nRemark: The CI will be transmitted in OriginalCreditorParty-->ID."
+                    },
+                    "RelatedDebtorPartyID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 60,
+                        "title": "A party that is related with the debtor party. ",
+                        "description": "Remark: When a direct debit mandate is created data from related debtor party can be copied to the debtor party of the direct debit mandate. \nUse: Direct debit mandates can be searched by the ID of the RelatedDebtorParty. \nIntegrity Constraint: RelatedDebtorPartyID can only be specified, if RelatedCreditorParty is an operational bank contract management unit that represents the bank. \nFilter: Only 'Eq' is supported as logical operator."
+                    },
+                    "DebtorParty": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.DebtorParty"
+                            }
+                        ],
+                        "title": "Debtor party of the direct debit mandate. "
+                    },
+                    "FinalDebtorParty": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.OnBehalfParty"
+                            }
+                        ],
+                        "title": "Debtor party of the direct debit mandate that is finally debited. ",
+                        "description": "Remark: The DebtorParty acts on behalf of FinalDebtorParty."
+                    },
+                    "DebtorBankAccount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.BkAcctIdfgElmnts"
+                            }
+                        ],
+                        "title": "Bank account of the debtor. "
+                    },
+                    "CreditorReferenceID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "title": "An identifier for a direct debit mandate creditor reference ",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. \nGDT: DirectDebitMandateCreditorReferenceID"
+                    },
+                    "CreditorReferenceDescription": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "title": "A description for a direct debit mandate creditor reference. ",
+                        "description": "\nGDT: LANGUAGEINDEPENDENT_MEDIUM_Description"
+                    },
+                    "AmendmentHistoryItems": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.AmendmentHistoryItem"
+                        }
+                    },
+                    "UtilisationEntries": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.UtilisationEntry"
+                        }
+                    }
+                },
+                "title": "Direct Debit Mandate",
+                "description": "A Direct Debit Mandate is the authorisation given by a debtor to a creditor to initiate instructions to debit funds owed to the creditor from a specified account, and the authorisation to the debtor bank to comply with the instructions issued by the creditor."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.DirectDebitMandate-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "TEST1234",
+                        "title": "A identifier of Direct Debit Mandate.",
+                        "description": "Remark: The CreditorPartyID (according AT-02 of the SEPA rulebooks) and the DirectDebitMandateID are the semantic key of a direct debit mandate. A DirectDebitMandateID is only unique in context of a CreditorPartyID.\nGDT: DirectDebitMandateID"
+                    },
+                    "CreditorPartyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "DE123452345678901",
+                        "title": "A unique identifier of a creditor party of direct debit mandate.",
+                        "description": "Remark: Contains the Creditor Identification according AT-02 of the SEPA rulebooks. \nIntegrity Conditions: - The CreditorPartyID has to be equal to the CreditorParty-->ID. \nConstraint: Only 35 characters maximum are allowed. \nFilter: Only 'Eq' is supported as logical operator. \nGDT: PartyID"
+                    },
+                    "UserStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "2",
+                        "title": "A coded representation of the user status of a direct debit mandate.",
+                        "description": "Constraint: Only the code values 2 - Active, 3 - To be confirmed, 4 - Locked 5 - Canceled, 6 - Discarded are allowed. \nFilter: Only 'Eq' is supported as logical operator. \nBDT: DirectDebitMandateUserStatusCode"
+                    },
+                    "SignatureDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Time Point at which a signature for direct debit mandate is given.",
+                        "description": "\nGDT: Date"
+                    },
+                    "SignatureCityName": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Berlin",
+                        "title": "Name of the city where the signature for a direct debit mandate is given.",
+                        "description": "\nGDT: LANGUAGEINDEPENDENT_MEDIUM_Name"
+                    },
+                    "ValidityPeriod": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.ValidityPeriod-create"
+                            }
+                        ],
+                        "title": "Period for which the direct debit mandate is valid.",
+                        "description": "\nGDT: CLOSED_UNBOUNDED_DatePeriod"
+                    },
+                    "DirectDebitSchemeCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "A coded representation of a direct debit scheme. A direct debit scheme is a set of rules and obligations regarding the collection of direct debit payments.",
+                        "description": "Example: SEPA Core or a SEPA B2B are examples for a scheme. \nGDT: DirectDebitSchemeCode"
+                    },
+                    "DirectDebitCollectionSEPASequenceTypeCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "RCUR",
+                        "title": "A coded representation of a SEPA sequence type of a direct debit collection. A SEPA sequence type specifies a type of direct debit collection for which the direct debit mandate is issued. ",
+                        "description": "The SEPA sequence type for a direct debit collection is defined in the European Payments Council's \"SEPA CORE DIRECT DEBIT SCHEME CUSTOMER-TO-BANK IMPLEMENTATION GUIDELINES\" and follows the ISO 20022 standard for \"Universal financial industry message schemes\".\nConstraint: Only the code values 'OOFF' - One-Off and 'RCUR' - Recurring are allowed. \nGDT: DirectDebitCollectionSEPASequenceTypeCode"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.BusinessProcessChainAssignment-create"
+                            }
+                        ],
+                        "title": "The assignment of a direct debit mandate to a business process chain. ",
+                        "description": "BusinessProcessChain is a chain of business processes carried out in a business scenario. BOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "RelatedCreditorParty": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.RelatedCreditorParty-create"
+                            }
+                        ],
+                        "title": "A party that is related with the creditor party. ",
+                        "description": "Remark: The creditor party of a direct debit mandate in S/4 TRBK can either be related to an operational bank contract management unit that represents the bank or can be related to a business partner (account holder) of the bank. If the creditor party is related to a business partner the bank manages direct debits mandates for the business partner (for example for a club). When a direct debit mandate is created data from related creditor party can be copied to the creditor party of the direct debit mandate."
+                    },
+                    "CreditorParty": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.CreditorParty-create"
+                            }
+                        ],
+                        "title": "Creditor party of the direct debit mandate. ",
+                        "description": "Integrity Condition: Name and ID (CI) have to be specified. \nConstraints: - for CreditorParty-->ID: Only 35 characters maximum are allowed. "
+                    },
+                    "OriginalCreditorParty": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.OnBehalfParty-create"
+                            }
+                        ],
+                        "title": "Creditor party for whom the direct debit mandate is originally given.The CreditorParty acts on behalf of OriginalCreditorParty. ",
+                        "description": "Constraint: OriginalCreditorParty-->ID: Only 35 characters maximum are allowed. \nRemark: The CI will be transmitted in OriginalCreditorParty-->ID."
+                    },
+                    "RelatedDebtorPartyID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 60,
+                        "title": "A party that is related with the debtor party. ",
+                        "description": "Remark: When a direct debit mandate is created data from related debtor party can be copied to the debtor party of the direct debit mandate. \nUse: Direct debit mandates can be searched by the ID of the RelatedDebtorParty. \nIntegrity Constraint: RelatedDebtorPartyID can only be specified, if RelatedCreditorParty is an operational bank contract management unit that represents the bank. \nFilter: Only 'Eq' is supported as logical operator."
+                    },
+                    "DebtorParty": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.DebtorParty-create"
+                            }
+                        ],
+                        "title": "Debtor party of the direct debit mandate. "
+                    },
+                    "FinalDebtorParty": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.OnBehalfParty-create"
+                            }
+                        ],
+                        "title": "Debtor party of the direct debit mandate that is finally debited. ",
+                        "description": "Remark: The DebtorParty acts on behalf of FinalDebtorParty."
+                    },
+                    "DebtorBankAccount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.BkAcctIdfgElmnts-create"
+                            }
+                        ],
+                        "title": "Bank account of the debtor. "
+                    },
+                    "CreditorReferenceID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "title": "An identifier for a direct debit mandate creditor reference ",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. \nGDT: DirectDebitMandateCreditorReferenceID"
+                    },
+                    "CreditorReferenceDescription": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "title": "A description for a direct debit mandate creditor reference. ",
+                        "description": "\nGDT: LANGUAGEINDEPENDENT_MEDIUM_Description"
+                    },
+                    "AmendmentHistoryItems": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.AmendmentHistoryItem-create"
+                        }
+                    },
+                    "UtilisationEntries": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.UtilisationEntry-create"
+                        }
+                    }
+                },
+                "title": "Direct Debit Mandate (for create)",
+                "description": "A Direct Debit Mandate is the authorisation given by a debtor to a creditor to initiate instructions to debit funds owed to the creditor from a specified account, and the authorisation to the debtor bank to comply with the instructions issued by the creditor."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.DirectDebitMandate-update": {
+                "type": "object",
+                "properties": {
+                    "UserStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "2",
+                        "title": "A coded representation of the user status of a direct debit mandate.",
+                        "description": "Constraint: Only the code values 2 - Active, 3 - To be confirmed, 4 - Locked 5 - Canceled, 6 - Discarded are allowed. \nFilter: Only 'Eq' is supported as logical operator. \nBDT: DirectDebitMandateUserStatusCode"
+                    },
+                    "SignatureDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Time Point at which a signature for direct debit mandate is given.",
+                        "description": "\nGDT: Date"
+                    },
+                    "SignatureCityName": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "Berlin",
+                        "title": "Name of the city where the signature for a direct debit mandate is given.",
+                        "description": "\nGDT: LANGUAGEINDEPENDENT_MEDIUM_Name"
+                    },
+                    "ValidityPeriod": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.ValidityPeriod-update"
+                            }
+                        ],
+                        "title": "Period for which the direct debit mandate is valid.",
+                        "description": "\nGDT: CLOSED_UNBOUNDED_DatePeriod"
+                    },
+                    "DirectDebitSchemeCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "1",
+                        "title": "A coded representation of a direct debit scheme. A direct debit scheme is a set of rules and obligations regarding the collection of direct debit payments.",
+                        "description": "Example: SEPA Core or a SEPA B2B are examples for a scheme. \nGDT: DirectDebitSchemeCode"
+                    },
+                    "DirectDebitCollectionSEPASequenceTypeCode": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "RCUR",
+                        "title": "A coded representation of a SEPA sequence type of a direct debit collection. A SEPA sequence type specifies a type of direct debit collection for which the direct debit mandate is issued. ",
+                        "description": "The SEPA sequence type for a direct debit collection is defined in the European Payments Council's \"SEPA CORE DIRECT DEBIT SCHEME CUSTOMER-TO-BANK IMPLEMENTATION GUIDELINES\" and follows the ISO 20022 standard for \"Universal financial industry message schemes\".\nConstraint: Only the code values 'OOFF' - One-Off and 'RCUR' - Recurring are allowed. \nGDT: DirectDebitCollectionSEPASequenceTypeCode"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.BusinessProcessChainAssignment-update"
+                            }
+                        ],
+                        "title": "The assignment of a direct debit mandate to a business process chain. ",
+                        "description": "BusinessProcessChain is a chain of business processes carried out in a business scenario. BOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "CreditorParty": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.CreditorParty-update"
+                            }
+                        ],
+                        "title": "Creditor party of the direct debit mandate. ",
+                        "description": "Integrity Condition: Name and ID (CI) have to be specified. \nConstraints: - for CreditorParty-->ID: Only 35 characters maximum are allowed. "
+                    },
+                    "OriginalCreditorParty": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.OnBehalfParty-update"
+                            }
+                        ],
+                        "title": "Creditor party for whom the direct debit mandate is originally given.The CreditorParty acts on behalf of OriginalCreditorParty. ",
+                        "description": "Constraint: OriginalCreditorParty-->ID: Only 35 characters maximum are allowed. \nRemark: The CI will be transmitted in OriginalCreditorParty-->ID."
+                    },
+                    "RelatedDebtorPartyID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 60,
+                        "title": "A party that is related with the debtor party. ",
+                        "description": "Remark: When a direct debit mandate is created data from related debtor party can be copied to the debtor party of the direct debit mandate. \nUse: Direct debit mandates can be searched by the ID of the RelatedDebtorParty. \nIntegrity Constraint: RelatedDebtorPartyID can only be specified, if RelatedCreditorParty is an operational bank contract management unit that represents the bank. \nFilter: Only 'Eq' is supported as logical operator."
+                    },
+                    "DebtorParty": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.DebtorParty-update"
+                            }
+                        ],
+                        "title": "Debtor party of the direct debit mandate. "
+                    },
+                    "FinalDebtorParty": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.OnBehalfParty-update"
+                            }
+                        ],
+                        "title": "Debtor party of the direct debit mandate that is finally debited. ",
+                        "description": "Remark: The DebtorParty acts on behalf of FinalDebtorParty."
+                    },
+                    "DebtorBankAccount": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.BkAcctIdfgElmnts-update"
+                            }
+                        ],
+                        "title": "Bank account of the debtor. "
+                    },
+                    "CreditorReferenceID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 35,
+                        "title": "An identifier for a direct debit mandate creditor reference ",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. \nGDT: DirectDebitMandateCreditorReferenceID"
+                    },
+                    "CreditorReferenceDescription": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "title": "A description for a direct debit mandate creditor reference. ",
+                        "description": "\nGDT: LANGUAGEINDEPENDENT_MEDIUM_Description"
+                    }
+                },
+                "title": "Direct Debit Mandate (for update)",
+                "description": "A Direct Debit Mandate is the authorisation given by a debtor to a creditor to initiate instructions to debit funds owed to the creditor from a specified account, and the authorisation to the debtor bank to comply with the instructions issued by the creditor."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.UtilisationEntry": {
+                "type": "object",
+                "properties": {
+                    "BusinessTransactionDocumentReferenceID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "0001 000000111122",
+                        "title": "Unique identifier for the referenced business document. ",
+                        "description": "Remark: Contains the ID of the Payment Transaction Order (which is a concatenation of value for payment transaction area and payment order ID). \nGDT: BusinessTransactionDocumentID"
+                    },
+                    "BusinessTransactionDocumentReferenceTypeCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "1182",
+                        "title": "Coded representation of the type of business document that is referenced. ",
+                        "description": "Remark: TypeCode has always value 1182 (Bank Account Contract Payment Transaction Order Request). \nGDT: BusinessTransactionDocumentTypeCode"
+                    },
+                    "UtilisationDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "Date when a direct debit mandate is utilized. ",
+                        "description": "\nGDT: Date"
+                    }
+                },
+                "title": "Utilisation Entry",
+                "description": "A Utilisation Entry is a record for utilization of a direct debit mandate. "
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.UtilisationEntry-create": {
+                "type": "object",
+                "title": "Utilisation Entry (for create)",
+                "description": "A Utilisation Entry is a record for utilization of a direct debit mandate. "
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.UtilisationEntry-update": {
+                "type": "object",
+                "title": "Utilisation Entry (for update)",
+                "description": "A Utilisation Entry is a record for utilization of a direct debit mandate. "
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.BkAcctIdfgElmnts": {
+                "type": "object",
+                "properties": {
+                    "BankStandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 11,
+                        "example": "TOLLDEWDXXX",
+                        "title": "Bank Identification Code (BIC) of the Society for Worldwide Interbank Financial Telecommunications (S.W.I.F.T.), see GDT BankStandardID.",
+                        "description": "Note: Bank > StandardID is optional in so-called IBAN-only countries.GDT: BankStandardID"
+                    },
+                    "StandardID": {
+                        "type": "string",
+                        "maxLength": 34,
+                        "example": "DE84900000010000000976",
+                        "title": "International bank account number (International Bank Account Number, IBAN).",
+                        "description": "GDT: BankAccountStandardID"
+                    }
+                },
+                "title": "Bank Account Identifying Elements",
+                "description": "The identifying elements of a bank account supported by bank account management in Financial Services (Banking)."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.BkAcctIdfgElmnts-create": {
+                "type": "object",
+                "properties": {
+                    "BankStandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 11,
+                        "example": "TOLLDEWDXXX",
+                        "title": "Bank Identification Code (BIC) of the Society for Worldwide Interbank Financial Telecommunications (S.W.I.F.T.), see GDT BankStandardID.",
+                        "description": "Note: Bank > StandardID is optional in so-called IBAN-only countries.GDT: BankStandardID"
+                    },
+                    "StandardID": {
+                        "type": "string",
+                        "maxLength": 34,
+                        "example": "DE84900000010000000976",
+                        "title": "International bank account number (International Bank Account Number, IBAN).",
+                        "description": "GDT: BankAccountStandardID"
+                    }
+                },
+                "title": "Bank Account Identifying Elements (for create)",
+                "description": "The identifying elements of a bank account supported by bank account management in Financial Services (Banking)."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.BkAcctIdfgElmnts-update": {
+                "type": "object",
+                "properties": {
+                    "BankStandardID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 11,
+                        "example": "TOLLDEWDXXX",
+                        "title": "Bank Identification Code (BIC) of the Society for Worldwide Interbank Financial Telecommunications (S.W.I.F.T.), see GDT BankStandardID.",
+                        "description": "Note: Bank > StandardID is optional in so-called IBAN-only countries.GDT: BankStandardID"
+                    },
+                    "StandardID": {
+                        "type": "string",
+                        "maxLength": 34,
+                        "example": "DE84900000010000000976",
+                        "title": "International bank account number (International Bank Account Number, IBAN).",
+                        "description": "GDT: BankAccountStandardID"
+                    }
+                },
+                "title": "Bank Account Identifying Elements (for update)",
+                "description": "The identifying elements of a bank account supported by bank account management in Financial Services (Banking)."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.BusinessProcessChainAssignment": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "BusinessProcessChainUUID is the UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "500010",
+                        "title": "BankingBusinessTransactionTypeCode is the coded representation of the banking business transaction which is associated with the business process chain to which the hosting buisiness object is assigned to.",
+                        "description": "Default: If BankingBusinessTransactionTypeCode is not provided the code \"500010 Maintaining a direct debit mandate\" is set. GDT: BankingBusinessTransactionTypeCode"
+                    },
+                    "BankingBusinessTransactionTypeName": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "SEPA MANDATE (CREDITOR)",
+                        "title": "Name of BankingBusinessTransactionTypeCode ",
+                        "description": "GDT: EXTENDED_Name"
+                    }
+                },
+                "title": "Business Process Chain Assignment",
+                "description": "BusinessProcessChain is a chain of business processes carried out in a business scenario. "
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.BusinessProcessChainAssignment-create": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "BusinessProcessChainUUID is the UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "500010",
+                        "title": "BankingBusinessTransactionTypeCode is the coded representation of the banking business transaction which is associated with the business process chain to which the hosting buisiness object is assigned to.",
+                        "description": "Default: If BankingBusinessTransactionTypeCode is not provided the code \"500010 Maintaining a direct debit mandate\" is set. GDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for create)",
+                "description": "BusinessProcessChain is a chain of business processes carried out in a business scenario. "
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.BusinessProcessChainAssignment-update": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "BusinessProcessChainUUID is the UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "500010",
+                        "title": "BankingBusinessTransactionTypeCode is the coded representation of the banking business transaction which is associated with the business process chain to which the hosting buisiness object is assigned to.",
+                        "description": "Default: If BankingBusinessTransactionTypeCode is not provided the code \"500010 Maintaining a direct debit mandate\" is set. GDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for update)",
+                "description": "BusinessProcessChain is a chain of business processes carried out in a business scenario. "
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.CreditorParty": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "DE121222345678901",
+                        "title": "An identifier for a party.",
+                        "description": "Remark: PartyTypeCode is value 147 \"Business Partner\". Corresponds to PersonIdentificationPartyID in ISO20022.\nGDT: PartyID"
+                    },
+                    "Name": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Andreas",
+                        "title": "Name of a party.",
+                        "description": "\nGDT: EXTENDED_Name"
+                    },
+                    "PhysicalAddress": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.PhysicalAddress"
+                            }
+                        ],
+                        "title": "Is the postal address of a physical location of the party."
+                    }
+                },
+                "title": "Creditor Party",
+                "description": "Creditor party of the direct debit mandate."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.CreditorParty-create": {
+                "type": "object",
+                "properties": {
+                    "Name": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Andreas",
+                        "title": "Name of a party.",
+                        "description": "\nGDT: EXTENDED_Name"
+                    },
+                    "PhysicalAddress": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.PhysicalAddress-create"
+                            }
+                        ],
+                        "title": "Is the postal address of a physical location of the party."
+                    }
+                },
+                "title": "Creditor Party (for create)",
+                "description": "Creditor party of the direct debit mandate."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.CreditorParty-update": {
+                "type": "object",
+                "properties": {
+                    "Name": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Andreas",
+                        "title": "Name of a party.",
+                        "description": "\nGDT: EXTENDED_Name"
+                    },
+                    "PhysicalAddress": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.PhysicalAddress-update"
+                            }
+                        ],
+                        "title": "Is the postal address of a physical location of the party."
+                    }
+                },
+                "title": "Creditor Party (for update)",
+                "description": "Creditor party of the direct debit mandate."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.DebtorParty": {
+                "type": "object",
+                "properties": {
+                    "Name": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Andreas",
+                        "title": "Name of a party.",
+                        "description": "\nGDT: EXTENDED_Name"
+                    },
+                    "PhysicalAddress": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.PhysicalAddress"
+                            }
+                        ],
+                        "title": "Is the postal address of a physical location of the party."
+                    }
+                },
+                "title": "Debtor Party",
+                "description": "Debtor party of the direct debit mandate."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.DebtorParty-create": {
+                "type": "object",
+                "properties": {
+                    "Name": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Andreas",
+                        "title": "Name of a party.",
+                        "description": "\nGDT: EXTENDED_Name"
+                    },
+                    "PhysicalAddress": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.PhysicalAddress-create"
+                            }
+                        ],
+                        "title": "Is the postal address of a physical location of the party."
+                    }
+                },
+                "title": "Debtor Party (for create)",
+                "description": "Debtor party of the direct debit mandate."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.DebtorParty-update": {
+                "type": "object",
+                "properties": {
+                    "Name": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Andreas",
+                        "title": "Name of a party.",
+                        "description": "\nGDT: EXTENDED_Name"
+                    },
+                    "PhysicalAddress": {
+                        "nullable": true,
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.directdebitmandate.v0001.PhysicalAddress-update"
+                            }
+                        ],
+                        "title": "Is the postal address of a physical location of the party."
+                    }
+                },
+                "title": "Debtor Party (for update)",
+                "description": "Debtor party of the direct debit mandate."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.OnBehalfParty": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 60,
+                        "example": "50000111",
+                        "title": "An identifier for a party.",
+                        "description": "Corresponds to PersonIdentificationPartyID in ISO20022.\nGDT: PartyID"
+                    },
+                    "Name": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Andreas",
+                        "title": "Name of a party.",
+                        "description": "\nGDT: EXTENDED_Name"
+                    }
+                },
+                "title": "OnBehalf Party",
+                "description": "Name and identifier for a party."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.OnBehalfParty-create": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 60,
+                        "example": "50000111",
+                        "title": "An identifier for a party.",
+                        "description": "Corresponds to PersonIdentificationPartyID in ISO20022.\nGDT: PartyID"
+                    },
+                    "Name": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Andreas",
+                        "title": "Name of a party.",
+                        "description": "\nGDT: EXTENDED_Name"
+                    }
+                },
+                "title": "OnBehalf Party (for create)",
+                "description": "Name and identifier for a party."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.OnBehalfParty-update": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 60,
+                        "example": "50000111",
+                        "title": "An identifier for a party.",
+                        "description": "Corresponds to PersonIdentificationPartyID in ISO20022.\nGDT: PartyID"
+                    },
+                    "Name": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Andreas",
+                        "title": "Name of a party.",
+                        "description": "\nGDT: EXTENDED_Name"
+                    }
+                },
+                "title": "OnBehalf Party (for update)",
+                "description": "Name and identifier for a party."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.PhysicalAddress": {
+                "type": "object",
+                "properties": {
+                    "CityName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Berlin",
+                        "title": "The name of the city in the address.",
+                        "description": "Remark: Only 35 characters are allowed in context of SEPA.GDT: MEDIUM_Name"
+                    },
+                    "CountryCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "Germany",
+                        "title": "The coded representation of the country in the address.",
+                        "description": "\nGDT: CountryCode"
+                    },
+                    "StreetName": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "church st",
+                        "title": "The name of the street in the address.",
+                        "description": "\nGDT: StreetName"
+                    },
+                    "HouseID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 10,
+                        "example": "2234",
+                        "title": "The identifier of a building or building section within a street, by means of a house number.",
+                        "description": "\nGDT: HouseID"
+                    },
+                    "StreetPostalCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 10,
+                        "example": "988777",
+                        "title": "The postal code of the street address.",
+                        "description": "\nGDT: PostalCode"
+                    }
+                },
+                "title": "Physical Address",
+                "description": "Is the postal address of a physical location of the party.Integrity Condition: At least one property has to be specified."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.PhysicalAddress-create": {
+                "type": "object",
+                "properties": {
+                    "CityName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Berlin",
+                        "title": "The name of the city in the address.",
+                        "description": "Remark: Only 35 characters are allowed in context of SEPA.GDT: MEDIUM_Name"
+                    },
+                    "CountryCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "Germany",
+                        "title": "The coded representation of the country in the address.",
+                        "description": "\nGDT: CountryCode"
+                    },
+                    "StreetName": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "church st",
+                        "title": "The name of the street in the address.",
+                        "description": "\nGDT: StreetName"
+                    },
+                    "HouseID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 10,
+                        "example": "2234",
+                        "title": "The identifier of a building or building section within a street, by means of a house number.",
+                        "description": "\nGDT: HouseID"
+                    },
+                    "StreetPostalCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 10,
+                        "example": "988777",
+                        "title": "The postal code of the street address.",
+                        "description": "\nGDT: PostalCode"
+                    }
+                },
+                "title": "Physical Address (for create)",
+                "description": "Is the postal address of a physical location of the party.Integrity Condition: At least one property has to be specified."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.PhysicalAddress-update": {
+                "type": "object",
+                "properties": {
+                    "CityName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Berlin",
+                        "title": "The name of the city in the address.",
+                        "description": "Remark: Only 35 characters are allowed in context of SEPA.GDT: MEDIUM_Name"
+                    },
+                    "CountryCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 3,
+                        "example": "Germany",
+                        "title": "The coded representation of the country in the address.",
+                        "description": "\nGDT: CountryCode"
+                    },
+                    "StreetName": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "church st",
+                        "title": "The name of the street in the address.",
+                        "description": "\nGDT: StreetName"
+                    },
+                    "HouseID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 10,
+                        "example": "2234",
+                        "title": "The identifier of a building or building section within a street, by means of a house number.",
+                        "description": "\nGDT: HouseID"
+                    },
+                    "StreetPostalCode": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 10,
+                        "example": "988777",
+                        "title": "The postal code of the street address.",
+                        "description": "\nGDT: PostalCode"
+                    }
+                },
+                "title": "Physical Address (for update)",
+                "description": "Is the postal address of a physical location of the party.Integrity Condition: At least one property has to be specified."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.RelatedCreditorParty": {
+                "type": "object",
+                "properties": {
+                    "BankRelatedCreditorPartyIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether the related creditor party of the direct debit mandate is the bank itself.",
+                        "description": "Integrity Condition: If BankRelatedCreditorPartyIndicator is true OperationalBankContractManagementUnitID has to to be specified. If BankRelatedCreditorPartyIndicator is false ID has to to be specified. \nRemark: If BankRelatedCreditorPartyIndicator is true, OperationalBankContractManagementUnit is derived from the CreditorPartyID by the system. If BankRelatedCreditorPartyIndicator is false ID has to be specified. \nGDT: Indicator"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 60,
+                        "example": "BP11111",
+                        "title": "An identifier for a party.",
+                        "description": "Remark: PartyTypeCode is value 147 \"Business Partner\". Corresponds to PersonIdentificationPartyID in ISO20022. \nFilter: Only 'Eq' is supported as logical operator. \nGDT: PartyID"
+                    },
+                    "OperationalBankContractManagementUnitID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 20,
+                        "example": "50001208",
+                        "title": "An OperationalBankContractManagementID is a unique identifier of an organizational unit that is responsible for managing operational bank contracts and executing the related banking processes.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. \nGDT: OrganisationalCentreID"
+                    }
+                },
+                "title": "Related Creditor Party",
+                "description": "A party that is related with the creditor party."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.RelatedCreditorParty-create": {
+                "type": "object",
+                "properties": {
+                    "BankRelatedCreditorPartyIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether the related creditor party of the direct debit mandate is the bank itself.",
+                        "description": "Integrity Condition: If BankRelatedCreditorPartyIndicator is true OperationalBankContractManagementUnitID has to to be specified. If BankRelatedCreditorPartyIndicator is false ID has to to be specified. \nRemark: If BankRelatedCreditorPartyIndicator is true, OperationalBankContractManagementUnit is derived from the CreditorPartyID by the system. If BankRelatedCreditorPartyIndicator is false ID has to be specified. \nGDT: Indicator"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 60,
+                        "example": "BP11111",
+                        "title": "An identifier for a party.",
+                        "description": "Remark: PartyTypeCode is value 147 \"Business Partner\". Corresponds to PersonIdentificationPartyID in ISO20022. \nFilter: Only 'Eq' is supported as logical operator. \nGDT: PartyID"
+                    }
+                },
+                "title": "Related Creditor Party (for create)",
+                "description": "A party that is related with the creditor party."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.RelatedCreditorParty-update": {
+                "type": "object",
+                "title": "Related Creditor Party (for update)",
+                "description": "A party that is related with the creditor party."
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.ValidityPeriod": {
+                "type": "object",
+                "properties": {
+                    "StartDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The start date of the validity period.",
+                        "description": "GDT: Dte"
+                    },
+                    "EndDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The end date of the validity period. ",
+                        "description": "GDT: Date"
+                    }
+                },
+                "title": "Validity Period",
+                "description": "CLOSED_UNBOUNDED_DatePeriod is a period that is defined by two points in time. These points in time are expressed in calendar days. CLOSED_UNBOUNDED_DatePeriod includes the start and the end time-point. The start/end time-point may be unbounded (infinite).Integrity Condition: EndDate must be greater than or equal to the StartDate. \nRemark: In Case the EndDate and the StartDate are equal, the duration of the period is 1 Day, due to the fact that the end time-point is included. An unbounded (infinite) time-point is expressed by omitting the element. "
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.ValidityPeriod-create": {
+                "type": "object",
+                "properties": {
+                    "StartDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The start date of the validity period.",
+                        "description": "GDT: Dte"
+                    },
+                    "EndDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The end date of the validity period. ",
+                        "description": "GDT: Date"
+                    }
+                },
+                "title": "Validity Period (for create)",
+                "description": "CLOSED_UNBOUNDED_DatePeriod is a period that is defined by two points in time. These points in time are expressed in calendar days. CLOSED_UNBOUNDED_DatePeriod includes the start and the end time-point. The start/end time-point may be unbounded (infinite).Integrity Condition: EndDate must be greater than or equal to the StartDate. \nRemark: In Case the EndDate and the StartDate are equal, the duration of the period is 1 Day, due to the fact that the end time-point is included. An unbounded (infinite) time-point is expressed by omitting the element. "
+            },
+            "com.sap.gateway.default.directdebitmandate.v0001.ValidityPeriod-update": {
+                "type": "object",
+                "properties": {
+                    "StartDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The start date of the validity period.",
+                        "description": "GDT: Dte"
+                    },
+                    "EndDate": {
+                        "type": "string",
+                        "nullable": true,
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The end date of the validity period. ",
+                        "description": "GDT: Date"
+                    }
+                },
+                "title": "Validity Period (for update)",
+                "description": "CLOSED_UNBOUNDED_DatePeriod is a period that is defined by two points in time. These points in time are expressed in calendar days. CLOSED_UNBOUNDED_DatePeriod includes the start and the end time-point. The start/end time-point may be unbounded (infinite).Integrity Condition: EndDate must be greater than or equal to the StartDate. \nRemark: In Case the EndDate and the StartDate are equal, the duration of the period is 1 Day, due to the fact that the end time-point is included. An unbounded (infinite) time-point is expressed by omitting the element. "
+            },
+            "count": {
+                "anyOf": [
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ],
+                "description": "The number of entities in the collection. Available when using the [$count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount) query option."
+            },
+            "error": {
+                "type": "object",
+                "required": [
+                    "error"
+                ],
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "required": [
+                            "code",
+                            "message"
+                        ],
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                            "target": {
+                                "type": "string"
+                            },
+                            "details": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "target": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "innererror": {
+                                "type": "object",
+                                "description": "The structure of this object is service-specific"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "top": {
+                "name": "$top",
+                "in": "query",
+                "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "example": 50
+            },
+            "skip": {
+                "name": "$skip",
+                "in": "query",
+                "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "count": {
+                "name": "$count",
+                "in": "query",
+                "description": "Include count of items, see [Count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount)",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "search": {
+                "name": "$search",
+                "in": "query",
+                "description": "Search items by search phrases, see [Searching](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionsearch)",
+                "schema": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses": {
+            "error": {
+                "description": "Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

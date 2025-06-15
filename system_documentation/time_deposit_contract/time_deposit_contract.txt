@@ -1,0 +1,4 @@
+A contract between a credit institute and customer, which is based on the customer's request for opening a bank account of type time deposit and consists among others, account holder, general terms and conditions.
+You can use this API to read and update time deposit contracts.Note:
+The entity data model for time deposit contract represents the subtype Time Deposit Contract of a bank account contract. The model contains a subset of the attributes of the business object of time deposit Contract.EDM Time Deposit Contract represents a bank account contract of BankAccountContractSubType 4 - Time Deposit Contract. The assumption is that many attributes are given by the production control (product) and are not display or changed in the assisted or unassisted channel for which this domain API is designed.Remark:
+The service Time Deposit Contract is assigned to service group Transactional Banking.

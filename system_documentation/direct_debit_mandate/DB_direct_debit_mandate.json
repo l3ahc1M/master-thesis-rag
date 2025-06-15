@@ -1,0 +1,135 @@
+{
+    "tables": [
+        {
+            "name": "DirectDebitMandate",
+            "description": "A Direct Debit Mandate is the authorisation given by a debtor to a creditor to initiate instructions to debit funds owed to the creditor from a specified account, and the authorisation to the debtor bank to comply with the instructions issued by the creditor.",
+            "columns": [
+                {
+                    "name": "UUID",
+                    "description": "Is a universal unique identifier of a direct debit mandate. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "ID",
+                    "description": "A identifier of Direct Debit Mandate. Example: TEST1234",
+                    "format": "string"
+                },
+                {
+                    "name": "CreditorPartyID",
+                    "description": "A unique identifier of a creditor party of direct debit mandate. Example: DE123452345678901",
+                    "format": "string"
+                },
+                {
+                    "name": "ChangeStateID",
+                    "description": "Identifies a change state. Example: 2019-06-04T08:29:04Z",
+                    "format": "string"
+                },
+                {
+                    "name": "UserStatusCode",
+                    "description": "A coded representation of the user status of a direct debit mandate. Example: 2",
+                    "format": "string"
+                },
+                {
+                    "name": "UserStatusName",
+                    "description": "Name of UserStatusCode. Example: Mandate - Active",
+                    "format": "string"
+                },
+                {
+                    "name": "SignatureDate",
+                    "description": "Time Point at which a signature for direct debit mandate is given. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "SignatureCityName",
+                    "description": "Name of the city where the signature for a direct debit mandate is given. Example: Berlin",
+                    "format": "string"
+                },
+                {
+                    "name": "ValidityPeriod",
+                    "description": "Period for which the direct debit mandate is valid.",
+                    "format": "string"
+                },
+                {
+                    "name": "DirectDebitSchemeCode",
+                    "description": "A coded representation of a direct debit scheme. A direct debit scheme is a set of rules and obligations regarding the collection of direct debit payments. Example: 1",
+                    "format": "string"
+                },
+                {
+                    "name": "DirectDebitSchemeName",
+                    "description": "Name of DirectDebitSchemeCode. Example: SEPA Core",
+                    "format": "string"
+                },
+                {
+                    "name": "DirectDebitCollectionSEPASequenceTypeCode",
+                    "description": "A coded representation of a SEPA sequence type of a direct debit collection. A SEPA sequence type specifies a type of direct debit collection for which the direct debit mandate is issued. Example: RCUR",
+                    "format": "string"
+                },
+                {
+                    "name": "DirectDebitCollectionSEPASequenceTypeName",
+                    "description": "Name of DirectDebitCollectionSEPASequenceTypeCode. Example: Recurring",
+                    "format": "string"
+                },
+                {
+                    "name": "BusinessProcessChainAssignment",
+                    "description": "The assignment of a direct debit mandate to a business process chain.",
+                    "format": "string"
+                },
+                {
+                    "name": "RelatedCreditorParty",
+                    "description": "A party that is related with the creditor party.",
+                    "format": "string"
+                },
+                {
+                    "name": "CreditorParty",
+                    "description": "Creditor party of the direct debit mandate.",
+                    "format": "string"
+                },
+                {
+                    "name": "OriginalCreditorParty",
+                    "description": "Creditor party for whom the direct debit mandate is originally given.The CreditorParty acts on behalf of OriginalCreditorParty.",
+                    "format": "string"
+                },
+                {
+                    "name": "RelatedDebtorPartyID",
+                    "description": "A party that is related with the debtor party.",
+                    "format": "string"
+                },
+                {
+                    "name": "DebtorParty",
+                    "description": "Debtor party of the direct debit mandate.",
+                    "format": "string"
+                },
+                {
+                    "name": "FinalDebtorParty",
+                    "description": "Debtor party of the direct debit mandate that is finally debited.",
+                    "format": "string"
+                },
+                {
+                    "name": "DebtorBankAccount",
+                    "description": "Bank account of the debtor.",
+                    "format": "string"
+                },
+                {
+                    "name": "CreditorReferenceID",
+                    "description": "An identifier for a direct debit mandate creditor reference",
+                    "format": "string"
+                },
+                {
+                    "name": "CreditorReferenceDescription",
+                    "description": "A description for a direct debit mandate creditor reference.",
+                    "format": "string"
+                },
+                {
+                    "name": "AmendmentHistoryItems",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "UtilisationEntries",
+                    "description": "",
+                    "format": "array"
+                }
+            ]
+        }
+    ]
+}

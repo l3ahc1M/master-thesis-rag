@@ -1,0 +1,2 @@
+A Bank Card Contract is a contract between a financial institution and customer that is based on the customer’s request to have a bank card issued and consists, amongst other things, of the bank card type, the cardholder, and the general terms and conditions. Remark:
+The service Bank Card Contract is assigned to service group Transactional Banking.

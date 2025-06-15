@@ -1,0 +1,1275 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Bank Card Contract Lock Request",
+        "version": "1.0.0",
+        "description": "\r\n\r\nA request to maintain locks on product features and transactions of a bank card contract. A Bank Card Contract is based on an event type which can be maintained in customizing. This event type defines which objects can be locked and some default values. You can use this API to create, query, read or update locks.\r\n\r\nNote:\r\nA Bank Card Contract is a contract between a credit institute and customer, which is based on the request of a customer to have a bank card for their bank account and consists among others, the bank card type, card holder, general terms and conditions. A Bank Card Contract Lock Request can be used for business events like locking renewal of the card. A prerequisite of the API is that business partner data is available in same system as the bank card contracts.\r\n\r\nRemark:\r\nThe service Bank Card Contract Lock Request is assigned to service group Transactional Banking."
+    },
+    "externalDocs": {
+        "description": "Business Documentation",
+        "url": "https://help.sap.com/docs/TRBK_S4HANA/d2151b51aacc4d82ad2861e007337fa2/c16ab45f3212497a9ae77a5c9dcb77ea.html?version=2.00"
+    },
+    "x-sap-api-type": "ODATAV4",
+    "x-sap-shortText": "Manage requests of the card holder to lock a bank card contract immediately or in the future",
+    "x-sap-software-min-version": "1.0",
+    "x-sap-ext-overview": [
+        {
+            "name": "Authentication Methods",
+            "values": [
+                {
+                    "text": "x509",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Service Group Name",
+            "values": [
+                {
+                    "text": "TRANSACTIONALBANKING",
+                    "format": "plain"
+                }
+            ]
+        }
+    ],
+    "servers": [
+        {
+            "url": "https://{host}:{port}/sap/opu/odata4/sap/transactionalbanking/default/sap/bankcardcontractlockrequest/0001",
+            "variables": {
+                "host": {
+                    "default": ""
+                },
+                "port": {
+                    "default": ""
+                }
+            }
+        }
+    ],
+    "x-sap-extensible": {
+        "supported": "no"
+    },
+    "tags": [
+        {
+            "name": "Bank Card Contract Lock Request Event Specifications",
+            "description": "A set of Bank Card Contract Lock Request Event Specification."
+        },
+        {
+            "name": "Bank Card Contract Lock Requests"
+        }
+    ],
+    "paths": {
+        "/BankCardContractLockRequestEventSpecifications": {
+            "get": {
+                "summary": "Query Bank Card Contract Lock Request Event Specifications",
+                "description": "A request to query bank card contract lock request event specifications",
+                "tags": [
+                    "Bank Card Contract Lock Request Event Specifications"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "EventCode",
+                                    "EventName"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of BankCardContractLockRequestEventSpecification",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractLockRequestEventSpecification"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankCardContractLockRequestEventSpecifications/{EventCode}": {
+            "parameters": [
+                {
+                    "name": "EventCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "A coded representation of the event of a bank card contract lock request.  \nGDT: BankContractLockRequestEventCode",
+                    "schema": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "301000"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Read Bank Card Contract Lock Request Event Specification",
+                "description": "A request to read a bank card contract lock request event specification",
+                "tags": [
+                    "Bank Card Contract Lock Request Event Specifications"
+                ],
+                "parameters": [
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "EventCode",
+                                    "EventName"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractLockRequestEventSpecification"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankCardContractLockRequests": {
+            "get": {
+                "summary": "Query Bank Card Contract Lock Request",
+                "description": "A request to query bank card contract lock requests",
+                "tags": [
+                    "Bank Card Contract Lock Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)\n\nRequired filter properties:\n- PartyIdentifyingElements",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "ID",
+                                    "PartyIdentifyingElements",
+                                    "ChangeStateID",
+                                    "EventCode",
+                                    "EventName",
+                                    "UserStatusCode",
+                                    "UserStatusName",
+                                    "ValidityStartDate",
+                                    "ValidityEndDate",
+                                    "BusinessProcessChainAssignment",
+                                    "Note"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "BankCardContractSelections"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of BankCardContractLockRequest",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractLockRequest"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create Bank Card Contract Lock Request",
+                "description": "A request to create a bank card contract lock request",
+                "tags": [
+                    "Bank Card Contract Lock Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Bank Card Contract Lock Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractLockRequest-create"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractLockRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankCardContractLockRequests/{ID}": {
+            "parameters": [
+                {
+                    "name": "ID",
+                    "in": "path",
+                    "required": true,
+                    "description": "Is an identifier of a bank card contract lock request.  \nSpecial characters like \"-\", \"_\", \"*\", \"/\" are not allowed.",
+                    "schema": {
+                        "type": "string",
+                        "maxLength": 12,
+                        "example": "105"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Read Bank Card Contract Lock Request by ID",
+                "description": "A request to read a bank card contract lock request by ID",
+                "tags": [
+                    "Bank Card Contract Lock Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "ID",
+                                    "PartyIdentifyingElements",
+                                    "ChangeStateID",
+                                    "EventCode",
+                                    "EventName",
+                                    "UserStatusCode",
+                                    "UserStatusName",
+                                    "ValidityStartDate",
+                                    "ValidityEndDate",
+                                    "BusinessProcessChainAssignment",
+                                    "Note"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "BankCardContractSelections"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractLockRequest"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update Bank Card Contract Lock Request",
+                "description": "A request to update a bank card contract lock request",
+                "tags": [
+                    "Bank Card Contract Lock Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Bank Card Contract Lock Request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractLockRequest-update"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankCardContractLockRequests/{ID}/BankCardContractSelections": {
+            "parameters": [
+                {
+                    "name": "ID",
+                    "in": "path",
+                    "required": true,
+                    "description": "Is an identifier of a bank card contract lock request.  \nSpecial characters like \"-\", \"_\", \"*\", \"/\" are not allowed.",
+                    "schema": {
+                        "type": "string",
+                        "maxLength": 12,
+                        "example": "105"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Query Bank Card Contract",
+                "description": "A request to query bank card contracts",
+                "tags": [
+                    "Bank Card Contract Lock Requests"
+                ],
+                "parameters": [
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "BankCardContractUUID",
+                                    "BankCardContractID",
+                                    "CardLockRequestedIndicator"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand related entities, see [Expand](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionexpand)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "*",
+                                    "ProductionControlFeatureLockInstructions"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of BankCardContractSelection",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractSelection"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankCardContractLockRequests/{ID}/BankCardContractSelections/{BankCardContractUUID-1}/ProductionControlFeatureLockInstructions": {
+            "parameters": [
+                {
+                    "name": "ID",
+                    "in": "path",
+                    "required": true,
+                    "description": "Is an identifier of a bank card contract lock request.  \nSpecial characters like \"-\", \"_\", \"*\", \"/\" are not allowed.",
+                    "schema": {
+                        "type": "string",
+                        "maxLength": 12,
+                        "example": "105"
+                    }
+                },
+                {
+                    "name": "BankCardContractUUID-1",
+                    "in": "path",
+                    "required": true,
+                    "description": "A BankCardContractUUID is a universal unique identifier of a bank card contract.  \nGDT: NOSC_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Query Production Control Feature Lock Instructions",
+                "description": "A request to query production control feature lock instructions",
+                "tags": [
+                    "Bank Card Contract Lock Requests"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/count"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "Code",
+                                    "Name"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of ProductionControlFeatureLockInstruction",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontractlockrequest.v0001.ProductionControlFeatureLockInstruction"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/$batch": {
+            "post": {
+                "summary": "Send a group of requests",
+                "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).\n\n*Please note that \"Try it out\" is not supported for this request.*",
+                "tags": [
+                    "Batch Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Batch request",
+                    "content": {
+                        "multipart/mixed;boundary=request-separator": {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET BankCardContractLockRequestEventSpecifications HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Batch response",
+                        "content": {
+                            "multipart/mixed": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractLockRequest": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 12,
+                        "example": "105",
+                        "title": "Is an identifier of a bank card contract lock request.",
+                        "description": "Special characters like \"-\", \"_\", \"*\", \"/\" are not allowed."
+                    },
+                    "PartyIdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontractlockrequest.v0001.PartyIdfgElmnts"
+                            }
+                        ],
+                        "title": "PartyIdentifyingElements contains all the identifying elements of a bank customer."
+                    },
+                    "ChangeStateID": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "2019-07-13T13:34:46Z",
+                        "title": "An unique identifier of a bank card contract lock request for a change state.",
+                        "description": "Remark: Property is required for subsequent usage of update service. GDT: ChangeStateID"
+                    },
+                    "EventCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "103000",
+                        "title": "A coded representation of the event of a bank card contract lock request.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. BDT: BankContractLockRequestEventCode"
+                    },
+                    "EventName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Card Dispatch Lock",
+                        "title": "Name of EventCode.",
+                        "description": "GDT: MEDIUM_Name"
+                    },
+                    "UserStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "2",
+                        "title": "A coded representation of the user status of a bank contract lock request.",
+                        "description": "A user status is a user defined processing status of a bank contract lock request. Filter: Only 'Eq' is supported as logical operator.\n\nBDT: BankContractLockRequestUserStatusCode"
+                    },
+                    "UserStatusName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Active",
+                        "title": "Name of UserStatusCode.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_MEDIUM_Name"
+                    },
+                    "ValidityStartDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The validity start date for a bank contract lock request.",
+                        "description": "GDT: Date"
+                    },
+                    "ValidityEndDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The validity end date for a bank contract lock request.",
+                        "description": "GDT: Date"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontractlockrequest.v0001.BusinessProcessChainAssignment"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "\n\nBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "Note": {
+                        "type": "string",
+                        "example": "Customer permanently moved to another country",
+                        "title": "A note on bank contract lock request about the lock.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    },
+                    "BankCardContractSelections": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractSelection"
+                        }
+                    }
+                },
+                "title": "Bank Card Contract Lock Request",
+                "description": "A Bank Card Contract Lock Request is a request from the card holder party to the bank to lock a card contract immediately or at a future time."
+            },
+            "com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractLockRequest-create": {
+                "type": "object",
+                "properties": {
+                    "PartyIdentifyingElements": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontractlockrequest.v0001.PartyIdfgElmnts-create"
+                            }
+                        ],
+                        "title": "PartyIdentifyingElements contains all the identifying elements of a bank customer."
+                    },
+                    "EventCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "103000",
+                        "title": "A coded representation of the event of a bank card contract lock request.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator. BDT: BankContractLockRequestEventCode"
+                    },
+                    "UserStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "2",
+                        "title": "A coded representation of the user status of a bank contract lock request.",
+                        "description": "A user status is a user defined processing status of a bank contract lock request. Filter: Only 'Eq' is supported as logical operator.\n\nBDT: BankContractLockRequestUserStatusCode"
+                    },
+                    "ValidityStartDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The validity start date for a bank contract lock request.",
+                        "description": "GDT: Date"
+                    },
+                    "ValidityEndDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The validity end date for a bank contract lock request.",
+                        "description": "GDT: Date"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontractlockrequest.v0001.BusinessProcessChainAssignment-create"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "\n\nBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "Note": {
+                        "type": "string",
+                        "example": "Customer permanently moved to another country",
+                        "title": "A note on bank contract lock request about the lock.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    },
+                    "BankCardContractSelections": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractSelection-create"
+                        }
+                    }
+                },
+                "title": "Bank Card Contract Lock Request (for create)",
+                "description": "A Bank Card Contract Lock Request is a request from the card holder party to the bank to lock a card contract immediately or at a future time."
+            },
+            "com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractLockRequest-update": {
+                "type": "object",
+                "properties": {
+                    "UserStatusCode": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "2",
+                        "title": "A coded representation of the user status of a bank contract lock request.",
+                        "description": "A user status is a user defined processing status of a bank contract lock request. Filter: Only 'Eq' is supported as logical operator.\n\nBDT: BankContractLockRequestUserStatusCode"
+                    },
+                    "ValidityEndDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2017-04-13",
+                        "title": "The validity end date for a bank contract lock request.",
+                        "description": "GDT: Date"
+                    },
+                    "BusinessProcessChainAssignment": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontractlockrequest.v0001.BusinessProcessChainAssignment-update"
+                            }
+                        ],
+                        "title": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                        "description": "\n\nBOCT: BusProcChnAssgmtFSElmnts"
+                    },
+                    "Note": {
+                        "type": "string",
+                        "example": "Customer permanently moved to another country",
+                        "title": "A note on bank contract lock request about the lock.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_MEDIUM_Note"
+                    }
+                },
+                "title": "Bank Card Contract Lock Request (for update)",
+                "description": "A Bank Card Contract Lock Request is a request from the card holder party to the bank to lock a card contract immediately or at a future time."
+            },
+            "com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractSelection": {
+                "type": "object",
+                "properties": {
+                    "BankCardContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A BankCardContractUUID is a universal unique identifier of a bank card contract.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "BankCardContractID": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractID"
+                            }
+                        ],
+                        "title": "An identifier of a bank card contract.",
+                        "description": "GDT: BankCardContractID"
+                    },
+                    "CardLockRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether card associated to selected bank card contract should be locked or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "ProductionControlFeatureLockInstructions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontractlockrequest.v0001.ProductionControlFeatureLockInstruction"
+                        }
+                    }
+                },
+                "title": "Bank Card Contract Selection",
+                "description": "BankCardContractSelection is the selection of bank card contracts on which locks are maintained."
+            },
+            "com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractSelection-create": {
+                "type": "object",
+                "properties": {
+                    "BankCardContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A BankCardContractUUID is a universal unique identifier of a bank card contract.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "CardLockRequestedIndicator": {
+                        "type": "boolean",
+                        "title": "Indicates whether card associated to selected bank card contract should be locked or not.",
+                        "description": "GDT: Indicator"
+                    },
+                    "ProductionControlFeatureLockInstructions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankcardcontractlockrequest.v0001.ProductionControlFeatureLockInstruction-create"
+                        }
+                    }
+                },
+                "required": [
+                    "BankCardContractUUID"
+                ],
+                "title": "Bank Card Contract Selection (for create)",
+                "description": "BankCardContractSelection is the selection of bank card contracts on which locks are maintained."
+            },
+            "com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractSelection-update": {
+                "type": "object",
+                "title": "Bank Card Contract Selection (for update)",
+                "description": "BankCardContractSelection is the selection of bank card contracts on which locks are maintained."
+            },
+            "com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractLockRequestEventSpecification": {
+                "type": "object",
+                "properties": {
+                    "EventCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "301000",
+                        "title": "A coded representation of the event of a bank card contract lock request.",
+                        "description": "GDT: BankContractLockRequestEventCode"
+                    },
+                    "EventName": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Debit Card Lock",
+                        "title": "Name of EventCode.",
+                        "description": "GDT: LANGUAGEINDEPENDENT_MEDIUM_Name"
+                    }
+                },
+                "title": "Bank Card Contract Lock Request Event Specification",
+                "description": "A Bank card contract lock request event specification is a specification of the possible events of a bank card contract lock request."
+            },
+            "com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractLockRequestEventSpecification-create": {
+                "type": "object",
+                "title": "Bank Card Contract Lock Request Event Specification (for create)",
+                "description": "A Bank card contract lock request event specification is a specification of the possible events of a bank card contract lock request."
+            },
+            "com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractLockRequestEventSpecification-update": {
+                "type": "object",
+                "title": "Bank Card Contract Lock Request Event Specification (for update)",
+                "description": "A Bank card contract lock request event specification is a specification of the possible events of a bank card contract lock request."
+            },
+            "com.sap.gateway.default.bankcardcontractlockrequest.v0001.ProductionControlFeatureLockInstruction": {
+                "type": "object",
+                "properties": {
+                    "Code": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "2",
+                        "title": "A coded representation for the instruction to lock one or more production control features of a bank card contract.",
+                        "description": "BDT: BankCardContractProductionControlFeatureLockInstructionCode"
+                    },
+                    "Name": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "example": "Renewal Lock",
+                        "title": "Name of Code.",
+                        "description": "GDT: MEDIUM_Name"
+                    }
+                },
+                "title": "Production Control Feature Lock Instruction",
+                "description": "A production control feature lock instruction is an instruction to lock the feature of a bank card contract that is defined at the assigned production control."
+            },
+            "com.sap.gateway.default.bankcardcontractlockrequest.v0001.ProductionControlFeatureLockInstruction-create": {
+                "type": "object",
+                "properties": {
+                    "Code": {
+                        "type": "string",
+                        "maxLength": 4,
+                        "example": "2",
+                        "title": "A coded representation for the instruction to lock one or more production control features of a bank card contract.",
+                        "description": "BDT: BankCardContractProductionControlFeatureLockInstructionCode"
+                    }
+                },
+                "required": [
+                    "Code"
+                ],
+                "title": "Production Control Feature Lock Instruction (for create)",
+                "description": "A production control feature lock instruction is an instruction to lock the feature of a bank card contract that is defined at the assigned production control."
+            },
+            "com.sap.gateway.default.bankcardcontractlockrequest.v0001.ProductionControlFeatureLockInstruction-update": {
+                "type": "object",
+                "title": "Production Control Feature Lock Instruction (for update)",
+                "description": "A production control feature lock instruction is an instruction to lock the feature of a bank card contract that is defined at the assigned production control."
+            },
+            "com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractID": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "type": "string",
+                        "maxLength": 137,
+                        "example": "0030 4567892432147890 2023-05-31",
+                        "title": "Content of BankCardContractID."
+                    },
+                    "schemeID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "BCC.001",
+                        "title": "SchemeID of the BankCardContractID.",
+                        "description": "Default: If filter value is not provided, BCC.001 will be used as default value for filter."
+                    },
+                    "schemeAgencyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "310",
+                        "title": "SchemeAgencyID of the BankCardContractID.",
+                        "description": "Default: If filter value is not provided, 310 will be used as default value for filter."
+                    }
+                },
+                "title": "BankCardContractID",
+                "description": "An identifier of a bank card contract.\n\nGDT: BankCardContractID"
+            },
+            "com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractID-create": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "type": "string",
+                        "maxLength": 137,
+                        "example": "0030 4567892432147890 2023-05-31",
+                        "title": "Content of BankCardContractID."
+                    },
+                    "schemeID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "BCC.001",
+                        "title": "SchemeID of the BankCardContractID.",
+                        "description": "Default: If filter value is not provided, BCC.001 will be used as default value for filter."
+                    },
+                    "schemeAgencyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "310",
+                        "title": "SchemeAgencyID of the BankCardContractID.",
+                        "description": "Default: If filter value is not provided, 310 will be used as default value for filter."
+                    }
+                },
+                "title": "BankCardContractID (for create)",
+                "description": "An identifier of a bank card contract.\n\nGDT: BankCardContractID"
+            },
+            "com.sap.gateway.default.bankcardcontractlockrequest.v0001.BankCardContractID-update": {
+                "type": "object",
+                "title": "BankCardContractID (for update)",
+                "description": "An identifier of a bank card contract.\n\nGDT: BankCardContractID"
+            },
+            "com.sap.gateway.default.bankcardcontractlockrequest.v0001.BusinessProcessChainAssignment": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "110001",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "GDT: BankingBusinessTransactionTypeCode"
+                    },
+                    "BankingBusinessTransactionTypeName": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Bank Contract Lock Request Maintenance",
+                        "title": "Name of BankingBusinessTransactionTypeCode",
+                        "description": "GDT: EXTENDED_Name"
+                    }
+                },
+                "title": "Business Process Chain Assignment",
+                "description": "Is the assignment of a business object node to a business process chain.\n\nDefault: If BankingBusinessTransactionTypeCode is not specified, code value \"110001 - Bank Contract Lock Request Maintenance\" will be used by default."
+            },
+            "com.sap.gateway.default.bankcardcontractlockrequest.v0001.BusinessProcessChainAssignment-create": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "110001",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "GDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for create)",
+                "description": "Is the assignment of a business object node to a business process chain.\n\nDefault: If BankingBusinessTransactionTypeCode is not specified, code value \"110001 - Bank Contract Lock Request Maintenance\" will be used by default."
+            },
+            "com.sap.gateway.default.bankcardcontractlockrequest.v0001.BusinessProcessChainAssignment-update": {
+                "type": "object",
+                "properties": {
+                    "BusinessProcessChainUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "UUID of the business process chain to which the hosting business object is assigned to.",
+                        "description": "GDT: NOSC_UUID"
+                    },
+                    "BankingBusinessTransactionTypeCode": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "example": "110001",
+                        "title": "BankingBusinessTransactionTypeCode",
+                        "description": "GDT: BankingBusinessTransactionTypeCode"
+                    }
+                },
+                "title": "Business Process Chain Assignment (for update)",
+                "description": "Is the assignment of a business object node to a business process chain.\n\nDefault: If BankingBusinessTransactionTypeCode is not specified, code value \"110001 - Bank Contract Lock Request Maintenance\" will be used by default."
+            },
+            "com.sap.gateway.default.bankcardcontractlockrequest.v0001.PartyIdfgElmnts": {
+                "type": "object",
+                "properties": {
+                    "PartyUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "The UUID of a party (business partner).",
+                        "description": "\nGDT: UUID"
+                    },
+                    "PartyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "310867",
+                        "title": "The ID of a party (business partner).",
+                        "description": "\nGDT: PartyID"
+                    }
+                },
+                "title": "Party Identifying Elements",
+                "description": "PartyIdentifyingElements does contain all identifying elements of a party (business partner).  \nRemark:  PartyTypeCode is value 147 (Business Partner). "
+            },
+            "com.sap.gateway.default.bankcardcontractlockrequest.v0001.PartyIdfgElmnts-create": {
+                "type": "object",
+                "properties": {
+                    "PartyUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "The UUID of a party (business partner).",
+                        "description": "\nGDT: UUID"
+                    },
+                    "PartyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "310867",
+                        "title": "The ID of a party (business partner).",
+                        "description": "\nGDT: PartyID"
+                    }
+                },
+                "title": "Party Identifying Elements (for create)",
+                "description": "PartyIdentifyingElements does contain all identifying elements of a party (business partner).  \nRemark:  PartyTypeCode is value 147 (Business Partner). "
+            },
+            "com.sap.gateway.default.bankcardcontractlockrequest.v0001.PartyIdfgElmnts-update": {
+                "type": "object",
+                "title": "Party Identifying Elements (for update)",
+                "description": "PartyIdentifyingElements does contain all identifying elements of a party (business partner).  \nRemark:  PartyTypeCode is value 147 (Business Partner). "
+            },
+            "count": {
+                "anyOf": [
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ],
+                "description": "The number of entities in the collection. Available when using the [$count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount) query option."
+            },
+            "error": {
+                "type": "object",
+                "required": [
+                    "error"
+                ],
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "required": [
+                            "code",
+                            "message"
+                        ],
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                            "target": {
+                                "type": "string"
+                            },
+                            "details": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "target": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "innererror": {
+                                "type": "object",
+                                "description": "The structure of this object is service-specific"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "top": {
+                "name": "$top",
+                "in": "query",
+                "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "example": 50
+            },
+            "skip": {
+                "name": "$skip",
+                "in": "query",
+                "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "count": {
+                "name": "$count",
+                "in": "query",
+                "description": "Include count of items, see [Count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount)",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "search": {
+                "name": "$search",
+                "in": "query",
+                "description": "Search items by search phrases, see [Searching](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionsearch)",
+                "schema": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses": {
+            "error": {
+                "description": "Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error"
+                        }
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "OAuth2Auth": {
+                "type": "oauth2",
+                "flows": {
+                    "authorizationCode": {
+                        "scopes": {},
+                        "refreshUrl": "https://{host}:{port}",
+                        "authorizationUrl": "https://{host}:{port}",
+                        "tokenUrl": "https://{host}:{port}"
+                    }
+                }
+            },
+            "BasicAuth": {
+                "type": "http",
+                "scheme": "basic"
+            }
+        }
+    },
+    "security": [
+        {
+            "OAuth2Auth": []
+        },
+        {
+            "BasicAuth": []
+        }
+    ]
+}

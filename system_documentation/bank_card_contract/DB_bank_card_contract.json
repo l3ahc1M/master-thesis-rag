@@ -1,0 +1,140 @@
+{
+    "tables": [
+        {
+            "name": "BankCardContract",
+            "description": "A Bank Card Contract is a contract between a financial institution and customer that is based on the customer\u2019s request to have a bank card issued.",
+            "columns": [
+                {
+                    "name": "BankCardContractUUID",
+                    "description": "A BankCardContractUUID is an universal unique identifier of a bank card contract. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "ID",
+                    "description": "An identifier of a bank card contract.",
+                    "format": "string"
+                },
+                {
+                    "name": "CurrencyCode",
+                    "description": "A CurrencyCode specifies the currency of the bank card contract. Example: EUR",
+                    "format": "string"
+                },
+                {
+                    "name": "PaymentCardTypeCode",
+                    "description": "A coded representation of the type of payment card associated to a bank card contract. Example: 0010",
+                    "format": "string"
+                },
+                {
+                    "name": "PaymentCardTypeName",
+                    "description": "Name of PaymentCardTypeCode Example: Debit Card",
+                    "format": "string"
+                },
+                {
+                    "name": "PaymentCardID",
+                    "description": "PaymentCardID is a unique identifier of a payment card that is assigned by the issuer of the payment card. Example: 4111555533336666",
+                    "format": "string"
+                },
+                {
+                    "name": "PaymentCardSequenceID",
+                    "description": "An identifier for the sequence number of a payment card. Example: 0001",
+                    "format": "string"
+                },
+                {
+                    "name": "PaymentCardValidFrom",
+                    "description": "The valid-from date of the payment card. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "PaymentCardValidTo",
+                    "description": "The valid-to date of the payment card. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "PaymentCardCharacterCode",
+                    "description": "A coded representation for the character of a payment card associated to a bank card contract. Example: 1",
+                    "format": "string"
+                },
+                {
+                    "name": "PaymentCardCharacterName",
+                    "description": "Name of PaymentCardCharacterCode Example: First Payment Card",
+                    "format": "string"
+                },
+                {
+                    "name": "FirstPaymentCardUUID",
+                    "description": "The UUID of the payment card, which has PaymentCardOriginCode = First Card Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "AdditionalPaymentCardIndicator",
+                    "description": "Indicates that the payment card is an additional payment card to the main payment card.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "PaymentCardLifeCycleStatusCode",
+                    "description": "A coded representation of the life cycle status of a bank card contract payment card. Example: 1",
+                    "format": "string"
+                },
+                {
+                    "name": "PaymentCardLifeCycleStatusName",
+                    "description": "Name of PaymentCardLifeCycleStatusCode Example: Active",
+                    "format": "string"
+                },
+                {
+                    "name": "PaymentCardRenewalStatusCode",
+                    "description": "A coded representation for the renewal status of a payment card associated to a bank card contract. Example: 4",
+                    "format": "string"
+                },
+                {
+                    "name": "PaymentCardRenewalStatusName",
+                    "description": "Name of PaymentCardRenewalStatusCode Example: Renewed",
+                    "format": "string"
+                },
+                {
+                    "name": "CancellationDate",
+                    "description": "Date when a bank card contract is canceled. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "BankAccount",
+                    "description": "BankAccount is the main bank account to which payments and charges in context with using the payment card are settled.",
+                    "format": "string"
+                },
+                {
+                    "name": "UsageNote",
+                    "description": "A comment on the usage of the bank card contract. Example: Sample Usage Note",
+                    "format": "string"
+                },
+                {
+                    "name": "SystemAdministrativeData",
+                    "description": "SystemAdministrativeData is administrative data that is stored in a system. This data includes change dates and change times.",
+                    "format": "string"
+                },
+                {
+                    "name": "CardHolderPartyIdentifyingElements",
+                    "description": "A party which legally holds a card associated with the bank card contract.",
+                    "format": "string"
+                },
+                {
+                    "name": "ProductControl",
+                    "description": "A BankCardContractProductionControl defines the parameters that control the processing and handling in the production of a bank card contract.",
+                    "format": "string"
+                },
+                {
+                    "name": "OperationalBankContractManagement",
+                    "description": "An OperationalBankContractManagement is responsible for managing operational bank contracts and executing the related banking processes.",
+                    "format": "string"
+                },
+                {
+                    "name": "BusinessProcessChainAssignment",
+                    "description": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                    "format": "string"
+                },
+                {
+                    "name": "ChangeStateID",
+                    "description": "A ChangeStateID is a unique identifier for a change state. Example: 20191122135035.7818490",
+                    "format": "string"
+                }
+            ]
+        }
+    ]
+}

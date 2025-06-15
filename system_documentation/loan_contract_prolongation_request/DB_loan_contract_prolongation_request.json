@@ -1,0 +1,115 @@
+{
+    "tables": [
+        {
+            "name": "LoanContractProlongationRequest",
+            "description": "A Loan Contract Prolongation Request is a request to extend one or multiple time-limited parts of the contractual relationship between the lender party and the borrower party.",
+            "columns": [
+                {
+                    "name": "UUID",
+                    "description": "A UUID is a  universal unique identifier of a LoanContractProlongationRequest. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "ID",
+                    "description": "ID is an identifier of the LoanContractProlongationRequest. Example: 71",
+                    "format": "string"
+                },
+                {
+                    "name": "LoanContract",
+                    "description": "The loan contract for which a loan contract prolongation request is made.",
+                    "format": "string"
+                },
+                {
+                    "name": "BusinessProcessChainAssignment",
+                    "description": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                    "format": "string"
+                },
+                {
+                    "name": "ChangeStateID",
+                    "description": "Identifies a change state of a Loan Contract Prolongation Request. Example: 2019-06-03T06:16:41Z",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusCode",
+                    "description": "A LifeCycleStatusCode is the coded representation of the life cycle status of a LoanContractProlongationRequest. Example: 5",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusName",
+                    "description": "Name of a LifeCycleStatusCode. Example: Completed",
+                    "format": "string"
+                },
+                {
+                    "name": "CancellationReasonCode",
+                    "description": "A CancellationReasonCode is the coded representation of the reason for the cancellation of a Loan Contract Prolongation Request. Example: 10",
+                    "format": "string"
+                },
+                {
+                    "name": "CancellationReasonName",
+                    "description": "Name of a CancellationReasonCode. Example: Bank Request",
+                    "format": "string"
+                },
+                {
+                    "name": "PenaltyRelevanceIndicator",
+                    "description": "Indicates whether the penalty for the Loan Contract Prolongation Request is relevant or not.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "ActivationChargeWaiverRequestedIndicator",
+                    "description": "Indicates whether a charge for activation of Loan Contract Prolongation Request is requested to be waived or not.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "LoanContractProlongationTermValidityEndDate",
+                    "description": "Is the end date of validity of term after prolongation of the loan contract. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "ActivationChargeAmount",
+                    "description": "Is the activation charge amount.",
+                    "format": "string"
+                },
+                {
+                    "name": "EarlyRepaymentCompensationAmount",
+                    "description": "Is the amount of early repayment compensation.",
+                    "format": "string"
+                },
+                {
+                    "name": "ReimbursementAmount",
+                    "description": "Is the amount of reimbursement.",
+                    "format": "string"
+                },
+                {
+                    "name": "LoanContractPaymentPlanPlannedBalanceAmount",
+                    "description": "Is the planned balance of payments remaining in the payment plan of the  loan contract at the time of the LoanContractProlongationRequest.",
+                    "format": "string"
+                },
+                {
+                    "name": "LoanContractPaymentPlanActualBalanceAmount",
+                    "description": "Is the actual balance of payments remaining in the payment plan of the  loan contract at the time of the LoanContractProlongationRequest.",
+                    "format": "string"
+                },
+                {
+                    "name": "FinalPaymentAmount",
+                    "description": "Is the final installment amount(Balloon)  for a loan contract after this loan contract prolongation request.",
+                    "format": "string"
+                },
+                {
+                    "name": "FinalPaymentDate",
+                    "description": "Is the due date for FinalPaymentAmount after this loan contract prolongation request. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "IncomingPaymentAgreements",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "TermAgreements",
+                    "description": "",
+                    "format": "array"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,4 @@
+A request from a borrower to a lender (credit institute) to skip one or more payments of the loan contract. The skipped payments will be paid: With Planned Final Payment, as additional installments at the end of the payment plan, increasing the term, as increased installment amount within current term. A Skip is non-payment by borrower of one or more payment of a loan contract. If an payment is skipped, interest calculation capital is not reduced on the original due date. Interest continues to be charged on the higher principal balance.
+You can use this API to query and read skip requests.Note:
+The entity data model for loan payment skip request contains a subset of the attributes of the business object Loan Payment Plan Change Request.Remark:
+The service Loan Payment Skip Request is assigned to service group Transactional Banking. Use: Loan Payment Skip Request can be used to read skip requests.

@@ -1,0 +1,80 @@
+{
+    "tables": [
+        {
+            "name": "BankCustomerLockRequest",
+            "description": "A bank customer lock request is a request to maintain locks on product features and transactions of all bank account contract of a bank customer.",
+            "columns": [
+                {
+                    "name": "ID",
+                    "description": "Is an identifier of a bank customer lock request. Example: 105",
+                    "format": "string"
+                },
+                {
+                    "name": "PartyIdentifyingElements",
+                    "description": "The party identifying elements of the bank customer.",
+                    "format": "string"
+                },
+                {
+                    "name": "ChangeStateID",
+                    "description": "An unique identifier of a bank customer lock request for a change state. Example: 2019-07-13T13:34:46Z",
+                    "format": "string"
+                },
+                {
+                    "name": "EventCode",
+                    "description": "A coded representation of the event of a bank contract lock request. Example: 103000",
+                    "format": "string"
+                },
+                {
+                    "name": "EventName",
+                    "description": "Name of EventCode. Example: Negative Credit Rating",
+                    "format": "string"
+                },
+                {
+                    "name": "UserStatusCode",
+                    "description": "A coded representation of the user status of a bank contract lock request. Example: 2",
+                    "format": "string"
+                },
+                {
+                    "name": "UserStatusName",
+                    "description": "Name of UserStatusCode. Example: Active",
+                    "format": "string"
+                },
+                {
+                    "name": "ValidityStartDate",
+                    "description": "The validity start date for a bank contract lock request. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "ValidityEndDate",
+                    "description": "The validity end date for a bank contract lock request. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "BusinessProcessChainAssignment",
+                    "description": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                    "format": "string"
+                },
+                {
+                    "name": "Note",
+                    "description": "A note on bank contract lock request about the lock. Example: Customer deceased April 01, 2019",
+                    "format": "string"
+                },
+                {
+                    "name": "BankAccountEntryLockInstructions",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "BankAccountContracts",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "ProductionControlFeatureLockInstructions",
+                    "description": "",
+                    "format": "array"
+                }
+            ]
+        }
+    ]
+}

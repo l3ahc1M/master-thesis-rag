@@ -1,0 +1,130 @@
+{
+    "tables": [
+        {
+            "name": "BankAccountContractCancelRequest",
+            "description": "A Bank Account Contract Cancel Request is a request from the account holder party to the bank to cancel a current account contract or a savings account contract immediately or at a future time.",
+            "columns": [
+                {
+                    "name": "UUID",
+                    "description": "A UUID is an universal unique identifier of a bank account contract cancel request. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "ID",
+                    "description": "ID is an identifier of the Bank Account Contract Cancel Request. Example: 761",
+                    "format": "string"
+                },
+                {
+                    "name": "BankAccountContractUUID",
+                    "description": "A BankAccountContractUUID is an universal unique identifier of a bank account contract. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "ChangeStateID",
+                    "description": "A ChangeStateID is a unique identifier for a change state. Example: 2019-06-04T08:29:04Z",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusCode",
+                    "description": "A LifeCycleStatusCode is the coded representation of the life cycle status of a BankAccountContractCancelRequest. Example: 3",
+                    "format": "string"
+                },
+                {
+                    "name": "LifeCycleStatusName",
+                    "description": "A LifeCycleStatusName is the name of a LifeCycleStatusCode. Example: Active",
+                    "format": "string"
+                },
+                {
+                    "name": "ReasonCode",
+                    "description": "A coded representation of the reason for the BankAccountContractCancelRequest. Example: 107",
+                    "format": "string"
+                },
+                {
+                    "name": "ReasonName",
+                    "description": "ReasonName is the name of a ReasonCode. Example: Other",
+                    "format": "string"
+                },
+                {
+                    "name": "ImmediateCompletionRequiredIndicator",
+                    "description": "Indicates whether immediate completion of the bank account contract cancel request is required or not.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "ReceiptDate",
+                    "description": "A ReceiptDate is the date on which the request for canceling the bank account contract is received. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "PlannedCompletionDate",
+                    "description": "A PlannedCompletionDate is the date for which the completion of the bank account contract cancel request is planned. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "CompletionDate",
+                    "description": "A CompletionDate is the date on which the request for canceling the bank account contract is completed. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "BankAccountSettlementRequiredIndicator",
+                    "description": "Indicates whether a bank account settlement is required for a bank account contract cancel request or not.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "BankAccountSettlementRequestedValueDate",
+                    "description": "Is the value date requested for settlement of the bank account associated with the cancelled bank account contract. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "CancellationReasonCode",
+                    "description": "A coded representation of the reason for the cancelation of a CurrentAccountContractCancelRequest. Example: 000003",
+                    "format": "string"
+                },
+                {
+                    "name": "CancellationReasonName",
+                    "description": "A BankAccountContractCancelRequestCancellationReasonName is the name of a BankAccountContractCancelRequestCancellationReasonCode. Example: Customer Request",
+                    "format": "string"
+                },
+                {
+                    "name": "BankAccountSettlementCancellationRequiredIndicator",
+                    "description": "Indicates whether or not a cancelation of a bank account settlement is required for the cancelation of a bank account contract cancel request.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "CancellationDate",
+                    "description": "A CancellationDate is the date on which the request for canceling the current account contract is cancelled. Example: 2017-04-13",
+                    "format": "date"
+                },
+                {
+                    "name": "ResidualBankAccountBalanceAmount",
+                    "description": "The residual balance of the bank account, before it is balanced by cash or by payment to payment transaction instruction.",
+                    "format": "string"
+                },
+                {
+                    "name": "CancellationChargeAmount",
+                    "description": "The charge amount for cancelation of the bank account contract.",
+                    "format": "string"
+                },
+                {
+                    "name": "BusinessProcessChainAssignment",
+                    "description": "Business Process Chain Assignment is the assignment of a business object node to a business process chain.",
+                    "format": "string"
+                },
+                {
+                    "name": "BalancingByCashIndicator",
+                    "description": "Indicates whether amount resulting from balancing the bank account associated with bank account contract cancellation is requested as payment by cash or not.",
+                    "format": "boolean"
+                },
+                {
+                    "name": "BalancingPaymentTransactionInstruction",
+                    "description": "BalancingPaymentTransactionInstruction specifies the payment transaction instruction for balancing the residual balance of the bank account associated with the bank account contract.",
+                    "format": "string"
+                },
+                {
+                    "name": "BankAccountSettlementSummaries",
+                    "description": "",
+                    "format": "array"
+                }
+            ]
+        }
+    ]
+}
