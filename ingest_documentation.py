@@ -7,7 +7,7 @@ It performs the following steps:
 - Expands abbreviations and normalizes text
 - Stores raw chunks for traceability
 - Computes and stores metadata (hashes, timestamps, synonyms)
-- Embeds and upserts data into ChromaDB with robust retry logic
+- Embeds and add data into ChromaDB with robust retry logic
 
 """
 # Import necessary libraries for the script
@@ -17,6 +17,8 @@ import logging
 import os
 import re
 import uuid
+import openai
+import numpy as np
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Tuple, Iterator
@@ -28,12 +30,12 @@ import chromadb.utils.embedding_functions as embedding_functions
 from tiktoken import encoding_for_model
 
 # retry/backoff for handling errors and retrying operations
-from tenacity import retry, wait_exponential, stop_after_attempt, RetryError
 
 # ─────────────────────────────────── CONFIG ──────────────────────────────────────────
 # Load environment variables
 load_dotenv()
 OPENAI_API_KEY = os.getenv("openai_api_key")
+
 
 # Set up important paths and constants
 DOC_ROOT        = Path("system_documentation")  # Root directory for documentation
@@ -42,7 +44,7 @@ RAW_STORE       = PERSIST_DIR / "raw_chunks"    # Directory for storing raw text
 COLLECTION_NAME = "system_documentation"        # ChromaDB collection name
 OPENAI_MODEL    = "text-embedding-3-small"      # OpenAI embedding model
 MAX_TOKENS      = 300                           # Max tokens per chunk
-BATCH_SIZE      = 64                            # Batch size for upserts
+BATCH_SIZE      = 1                             # Batch size for adding
 RAW_STORE.mkdir(parents=True, exist_ok=True)
 
 # ─────────────────────────────────── LOGGING ─────────────────────────────────────────
@@ -54,6 +56,35 @@ logging.basicConfig(
     format="%(asctime)s %(levelname)s %(message)s"
 )
 logger = logging.getLogger(__name__)
+
+# chromadb logger for detailed debug output
+chromadb_logger = logging.getLogger("chromadb")
+chromadb_logger.setLevel(logging.DEBUG)
+chromadb_logger.addHandler(logging.StreamHandler())
+
+import sys
+
+# Configure root logger
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s [%(levelname)s] %(name)s - %(message)s",
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+        logging.FileHandler(str(PERSIST_DIR / "ingest.log"))
+    ]
+)
+
+# Explicitly set ChromaDB submodules to DEBUG
+for name in [
+    "chromadb",
+    "chromadb.api",
+    "chromadb.segment",
+    "chromadb.ingest",
+    "chromadb.db",
+    "chromadb.utils",
+    "chromadb.telemetry"
+]:
+    logging.getLogger(name).setLevel(logging.INFO)
 
 # ───────────────────────────────── TOKENIZER & HELPERS ────────────────────────────────
 # Set up the tokenizer for the OpenAI model
@@ -211,39 +242,82 @@ def _db_chunks(schema: Dict[str, Any], bo: str, fname: str) -> Iterator[Dict[str
                 'meta': {**base, 'table_name': table['name'], 'column_name': col['name']}
             }
 
-# ─────────────────────────────────── RETRYING UPSERT ─────────────────────────────────
-@retry(
-    wait=wait_exponential(multiplier=1, min=4, max=60),
-    stop=stop_after_attempt(5),
-    reraise=True
-)
-def safe_upsert(collection: Any, batch: List[Tuple[str,str,Dict[str,Any]]]) -> None:
+from typing import List
+
+def get_embedding(text, model=OPENAI_MODEL): # type: ignore
+    response = openai.embeddings.create(input=text, model=model) # type: ignore
+    return response.data[0].embedding # type: ignore
+
+# ─────────────────────────────────── ingest documentation ─────────────────────────────────
+
+def safe_add(collection: Any, batch: List[Tuple[str,str,Dict[str,Any]]]) -> None:
     """
-    Upsert a batch of documents into the ChromaDB collection with retry and exponential backoff.
+    Add a batch of documents into the ChromaDB collection with retry and exponential backoff.
     Logs success or failure for each batch.
     """
+    
+    (print(f"Adding batch of {len(batch)} docs..."))
     ids, docs, metas = zip(*batch)
-    collection.upsert(ids=list(ids), documents=list(docs), metadatas=list(metas))
-    logger.debug(f"Successfully upserted batch of {len(batch)} docs.")
+
+    # Validation: ids is sequence of non-null strings, docs is sequence of non-null strings, metas is sequence of non-null dicts
+    if not all(isinstance(i, str) for i in ids):
+        raise ValueError("ids must be a sequence of non-null strings")
+    if not all(isinstance(d, str) for d in docs):
+        raise ValueError("docs must be a sequence of non-null strings")
+    if not all(m is not None and isinstance(m, dict) for m in metas):
+        raise ValueError("metas must be a sequence of non-null dicts")
+
+
+    embeddings: List[Any] = []
+    for doc in docs:
+        embedding = get_embedding(doc) # debugging line
+        embeddings.append(embedding)
+    embeddings = [np.array(e, dtype=np.float32).tolist() for e in embeddings]
+
+# add the batch into the collection
+    print("len(ids): " + str(len(ids))) # debugging line
+    print("len(docs): " + str(len(docs)))   # debugging line
+    print("len(metas): " + str(len(metas))) # debugging line    
+    print("len(embeddings): " + str(len(embeddings))) # debugging line
+    print(type(embeddings[0]), len(embeddings[0]), type(embeddings[0][0])) # debugging line # type: ignore
+    try:
+        collection.add(
+            ids=list(ids), 
+            documents=list(docs), 
+            metadatas=list(metas),
+            embeddings=embeddings 
+        )
+    except Exception as e:
+        logger.error(f"Failed to add batch: {e}")
+        raise
+    print (f"Added batch of {len(batch)} docs.")
+    logger.debug(f"Successfully added batch of {len(batch)} docs.")
+
 
 # ────────────────────────────────────── INGEST ────────────────────────────────────────
 def ingest() -> None:
     """
     Main function to ingest all documentation and schema files into ChromaDB.
-    Handles chunking, metadata enrichment, raw storage, and robust upsert.
+    Handles chunking, metadata enrichment, raw storage, and robust adding.
     """
     logger.info("Starting ingestion workflow.")
     # Connect to the ChromaDB database
     client = chromadb.PersistentClient(path=str(PERSIST_DIR))
     # Set up the OpenAI embedding function for ChromaDB
-    embedder = embedding_functions.OpenAIEmbeddingFunction(
+    openai_ef = embedding_functions.OpenAIEmbeddingFunction(
         api_key=OPENAI_API_KEY,
         model_name=OPENAI_MODEL
     )
-    collection = client.get_or_create_collection(
-        name=COLLECTION_NAME,
-        embedding_function=embedder # type: ignore
-    )
+    try: 
+        print("initializing collection")
+        collection = client.get_or_create_collection(
+            name=COLLECTION_NAME,
+            embedding_function=openai_ef # type: ignore
+        )
+        print("collection initialized")
+    except Exception as e:
+        print(f"Failed to initialize collection: {e}")    
+        
     docs: List[Tuple[str,str,Dict[str,Any]]] = []
 
     def process_chunk(text: str, meta: Dict[str,Any]) -> None:
@@ -252,7 +326,7 @@ def ingest() -> None:
         - Expand abbreviations
         - Add metadata (hash, timestamp, synonym)
         - Store raw chunk to disk
-        - Append to docs list for upsert
+        - Append to docs list for adding
         """
         expanded = expand_abbrev(text)
         if 'column_name' in meta:
@@ -315,16 +389,19 @@ def ingest() -> None:
                         'file_name':f.name
                     })
 
-    # --- upsert in batches with retry ---
+    # --- add in batches with retry ---
     total = len(docs)
     num_batches = (total + BATCH_SIZE - 1) // BATCH_SIZE
-    logger.info(f"Upserting {total} chunks in {num_batches} batches (size={BATCH_SIZE})")
+    logger.info(f"Adding {total} chunks in {num_batches} batches (size={BATCH_SIZE})")
+
+    print(f"=> Adding {total} chunks in {num_batches} batches (size={BATCH_SIZE})")
 
     for i in range(num_batches):
         batch = docs[i*BATCH_SIZE : (i+1)*BATCH_SIZE]
         try:
-            safe_upsert(collection, batch)
-        except RetryError as e:
+            print("1") # debugging line
+            safe_add(collection, batch)
+        except Exception as e:
             logger.critical(f"Batch {i+1} failed after retries: {e}")
             raise
 
