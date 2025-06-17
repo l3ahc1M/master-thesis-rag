@@ -316,7 +316,9 @@ def ingest() -> None:
         )
         print("collection initialized")
     except Exception as e:
-        print(f"Failed to initialize collection: {e}")    
+        print(f"Failed to initialize collection: {e}")
+        logger.critical(f"Failed to initialize collection: {e}")
+        return  # Exit the function early if collection is not initialized
         
     docs: List[Tuple[str,str,Dict[str,Any]]] = []
 

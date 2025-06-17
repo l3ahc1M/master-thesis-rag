@@ -73,19 +73,6 @@ def retrieve_context(collection: Any, query: str, top_k: int = RAG_TOP_K) -> str
     context = "\n---\n".join(docs)
     return context
 
- #   try:
- #       results = collection.query(
- #           query_embeddings=[get_embedding(query)],  
- #           n_results=top_k
- #       )
- #       logger.debug('Query results: %s', results)
- #       docs = results['documents'][0]
- #       context = "\n---\n".join(docs)
- #       logger.debug('Retrieved %d document chunks', len(docs))
- #       return context
- #   except Exception as e:
- #       logger.error('Error in retrieve_context: %s', e, exc_info=True)
- #       raise
 
 def safe_chat_completion(messages: List[ChatCompletionMessageParam], retries: int = 3, delay: int = 2):
     """
@@ -134,7 +121,23 @@ def process_test_file(collection: Any, in_path: Path, out_path: Path):
         system_msg: ChatCompletionSystemMessageParam = {
             "role": "system",
             "content": (
-                "You are a banking system assistant. "
+                "You are an AI assistant specialized on the interaction with a core banking system by generating SQL queries or API calls."
+                "You will receive natural language user input and relevant documentation excerpts. Your task is to generate a precise and correct response based on the provided context."
+                "If you need to trigger an action in the core banking system, you need to use API calls. Do not use UPDATE, DELETE or INDERT statements."
+                "IF you want to retrieve data from the core banking system, you need to use SQL SELECT statements. Do not use API calls for data retrieval."
+                """Here is an example of the desired response format for API calls:\n
+{
+    "method": "PATCH",
+    "endpoint": "/BankCardContractLockRequests/105",
+    "body": {
+        "ValidityEndDate": "2024-12-31"
+    }
+}"""
+                """Here is an example of the desired response format for SQL queries:\n
+SELECT UUID FROM BankAccountContract WHERE TypeName = 'Loan Contract' AND BorrowerPartyIdentifyingElements = 'specific_borrower_id'
+                """
+                "It is very important that you only answer with a single SQL statement or a single API call, without any additional text."
+                "In every response consider May 1st 2025 as the current date."
                 "Use the following documentation excerpts to answer the user precisely."
                 f"\n\nDocumentation excerpts:\n{context}"
             ),
@@ -146,6 +149,7 @@ def process_test_file(collection: Any, in_path: Path, out_path: Path):
 
         logger.info(f"Calling safe_chat_completion for file: {in_path}")
         response = safe_chat_completion([system_msg, user_msg])
+        print(response)
         content = ''
         if response is not None and hasattr(response, 'choices') and response.choices:
             content = response.choices[0].message.content
