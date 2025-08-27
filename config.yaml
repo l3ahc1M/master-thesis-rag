@@ -1,0 +1,16 @@
+embedding:
+    chroma_persist_dir: chroma_db
+    openAI_embedding_model: text-embedding-3-small # allowed values: "text-embedding-3-small", "text-embedding-3-large" , ...(further openAI modesl)
+    max_chunk_size: 5000 # max tokens per chunk
+    chunk_overlap: 100 # overlap tokens between chunks
+    top_n_entries: 3
+system_documentation:
+    source_folder: system_documentation # possible values: "system_documentation_copy", "system_documentation"
+test_cases:
+    source_folder: test_cases_copy # possible values: "test_cases_copy", "test_cases"
+
+
+process_orchestration:
+    update_chroma_db: True # True/False
+    rag_framework: RAG  # allowed values: "RAG", "Self-RAG", "CoRAG"
+    knowledge_basis: all # allowed values: "all", "DB", "API"

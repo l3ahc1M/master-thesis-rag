@@ -1,0 +1,4 @@
+An account that holds funds within a bank and is subject to additional deposits and withdrawals.
+You can use this API to retrieve the UUID of a bank account by combinations of identifying elements of a bank account, like account number, bank key and country.Comments:
+The Bank Account Contract Processing service provider manages the various contracts that a bank has with its customers in connection with their bank accounts. Current Account Contract, Deposit Account Contract, and Loan Contract are types of Bank Account Contracts.Remark:
+The service Bank Account is assigned to service group Transactional Banking.

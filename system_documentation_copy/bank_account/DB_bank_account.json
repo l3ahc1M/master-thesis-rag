@@ -1,0 +1,75 @@
+{
+    "tables": [
+        {
+            "name": "BankAccount",
+            "description": "A Bank Account is an account that holds funds in a bank and is subject to deposits and withdrawals.Remark: \n Filter: Only 'Eq' is supported as logical operator. \n Integrity Conditions: \n The following combinations of properties for filtering are allowed: \n a.) by Bank Account ID \n - ID (mandatory) \n - CurrencyCode (optional) \n - BankRoutingID (optional) \n - BankCountryCode (optional) \n No other filter attributes are allowed. \n b.) by Bank Account Standard ID \n - StandardID (mandatory) \n - CurrencyCode (optional) \n c.) by BankAccountContractUUID \n - BankAccountContractUUID (mandatory) \n d.) by Bank Account Contract ID \n - BankAccountContractID (mandatory)",
+            "columns": [
+                {
+                    "name": "UUID",
+                    "description": "A UUID is a universal unique identifier of a bank account. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "InternalID",
+                    "description": "InternalID is a bank internal identifier for the bank account. Example: D4E088A52D5B1ED8BEE3FA163E6B7DE1",
+                    "format": "string"
+                },
+                {
+                    "name": "ID",
+                    "description": "Bank account number (Basic Bank Account Number, BBAN). An account number that is assigned by the account managing bank. \nIt uniquely identifies a bank account in most countries only together with BankRoutingID and BankCountryCode. Example: 0010000707",
+                    "format": "string"
+                },
+                {
+                    "name": "StandardID",
+                    "description": "International bank account number (International Bank Account Number, IBAN). Example: DE65904199170010000707",
+                    "format": "string"
+                },
+                {
+                    "name": "CurrencyCode",
+                    "description": "A coded representation of the currency of the bank account. Example: EUR",
+                    "format": "string"
+                },
+                {
+                    "name": "BankRoutingID",
+                    "description": "Number of the bank in a clearing system (see GDT BankRoutingID). Example: 90419917",
+                    "format": "string"
+                },
+                {
+                    "name": "BankCountryCode",
+                    "description": "Country in which the bank identified earlier goes about its business. \nIf the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here. Example: DE",
+                    "format": "string"
+                },
+                {
+                    "name": "BankAccountContractUUID",
+                    "description": "A bank internal identifier for the bank account contract. Example: 01234567-89ab-cdef-0123-456789abcdef",
+                    "format": "uuid"
+                },
+                {
+                    "name": "BankAccountContractID",
+                    "description": "An identifier for a BankAccountContract.",
+                    "format": "string"
+                },
+                {
+                    "name": "BankAccountContractPaymentTransactionOrderRequests",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "BankAccountEntries",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "BankAccountPrenoteEntries",
+                    "description": "",
+                    "format": "array"
+                },
+                {
+                    "name": "StandingPaymentInstructions",
+                    "description": "",
+                    "format": "array"
+                }
+            ]
+        }
+    ]
+}

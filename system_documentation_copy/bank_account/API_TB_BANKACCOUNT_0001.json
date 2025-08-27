@@ -1,0 +1,962 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Bank Account",
+        "version": "1.0.0",
+        "description": "\r\n\r\nAn account that holds funds within a bank and is subject to additional deposits and withdrawals.\r\nYou can use this API to retrieve the UUID of a bank account by combinations of identifying elements of a bank account, like account number, bank key and country.\r\n\r\nComments:\r\nThe Bank Account Contract Processing service provider manages the various contracts that a bank has with its customers in connection with their bank accounts. Current Account Contract, Deposit Account Contract, and Loan Contract are types of Bank Account Contracts.\r\n\r\nRemark:\r\nThe service Bank Account is assigned to service group Transactional Banking.\r\n"
+    },
+    "externalDocs": {
+        "description": "Business Documentation",
+        "url": "https://help.sap.com/docs/TRBK_S4HANA/d2151b51aacc4d82ad2861e007337fa2/746d48362c0d433a86385301085f5308.html"
+    },
+    "x-sap-api-type": "ODATAV4",
+    "x-sap-shortText": "Query the internal ID of a bank account by combinations of identifying elements of a bank account using this synchronous inbound service",
+    "x-sap-software-min-version": "1.0",
+    "x-sap-ext-overview": [
+        {
+            "name": "Authentication Methods",
+            "values": [
+                {
+                    "text": "x509",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Service Group Name",
+            "values": [
+                {
+                    "text": "TRANSACTIONALBANKING",
+                    "format": "plain"
+                }
+            ]
+        },
+        {
+            "name": "Business Object",
+            "values": [
+                {
+                    "text": "Bank Account",
+                    "format": "plain"
+                }
+            ]
+        }
+    ],
+    "security": [
+        {
+            "basicAuthentication": []
+        }
+    ],
+    "servers": [
+        {
+            "url": "https://{host}:{port}/sap/opu/odata4/sap/transactionalbanking/default/sap/bankaccount/0001",
+            "variables": {
+                "host": {
+                    "default": ""
+                },
+                "port": {
+                    "default": ""
+                }
+            }
+        }
+    ],
+    "x-sap-extensible": {
+        "supported": "no"
+    },
+    "tags": [
+        {
+            "name": "Bank Accounts"
+        }
+    ],
+    "paths": {
+        "/BankAccounts": {
+            "get": {
+                "summary": "Query Bank Accounts",
+                "description": "Is a request to query bank accounts",
+                "tags": [
+                    "Bank Accounts"
+                ],
+                "parameters": [
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "UUID",
+                                    "InternalID",
+                                    "ID",
+                                    "StandardID",
+                                    "CurrencyCode",
+                                    "BankRoutingID",
+                                    "BankCountryCode",
+                                    "BankAccountContractUUID",
+                                    "BankAccountContractID"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of BankAccount",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccount.v0001.BankAccount"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankAccounts/{UUID}": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "A UUID is a universal unique identifier of a bank account. \nRemark: The BankAccountUUID is required for the performant read of a bank account related entity because BankAccountUUID corresponds to CONTRACT_INT which is part of the primary index of the database table. GDT: NOSC_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Read Bank Account by UUID",
+                "description": "Is a request to read a bank account",
+                "tags": [
+                    "Bank Accounts"
+                ],
+                "parameters": [
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+                        "explode": false,
+                        "schema": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "UUID",
+                                    "InternalID",
+                                    "ID",
+                                    "StandardID",
+                                    "CurrencyCode",
+                                    "BankRoutingID",
+                                    "BankCountryCode",
+                                    "BankAccountContractUUID",
+                                    "BankAccountContractID"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/com.sap.gateway.default.bankaccount.v0001.BankAccount"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankAccounts/{UUID}/BankAccountContractPaymentTransactionOrderRequests": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "A UUID is a universal unique identifier of a bank account. \nRemark: The BankAccountUUID is required for the performant read of a bank account related entity because BankAccountUUID corresponds to CONTRACT_INT which is part of the primary index of the database table. GDT: NOSC_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Query Bank Account Contract Payment Transaction Order Requests",
+                "description": "Refer to API Bank Account Contract Payment Transaction Order Request for supported query options like $top, etc",
+                "tags": [
+                    "Bank Accounts"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/count"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of BankAccountContractPaymentTransactionOrderRequest",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BankAccountContractPaymentTransactionOrderRequest"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankAccounts/{UUID}/BankAccountEntries": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "A UUID is a universal unique identifier of a bank account. \nRemark: The BankAccountUUID is required for the performant read of a bank account related entity because BankAccountUUID corresponds to CONTRACT_INT which is part of the primary index of the database table. GDT: NOSC_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Query Bank Account Entries",
+                "description": "Refer to API Bank Account Entry for supported query options like $top, etc",
+                "tags": [
+                    "Bank Accounts"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/count"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of BankAccountEntry",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BankAccountEntry"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankAccounts/{UUID}/BankAccountPrenoteEntries": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "A UUID is a universal unique identifier of a bank account. \nRemark: The BankAccountUUID is required for the performant read of a bank account related entity because BankAccountUUID corresponds to CONTRACT_INT which is part of the primary index of the database table. GDT: NOSC_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Query Bank Account Prenote Entries",
+                "description": "Refer to API Bank Account Prenote Entry for supported query options like $top, etc",
+                "tags": [
+                    "Bank Accounts"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/count"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of BankAccountPrenoteEntry",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.BankAccountPrenoteEntry"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/BankAccounts/{UUID}/StandingPaymentInstructions": {
+            "parameters": [
+                {
+                    "name": "UUID",
+                    "in": "path",
+                    "required": true,
+                    "description": "A UUID is a universal unique identifier of a bank account. \nRemark: The BankAccountUUID is required for the performant read of a bank account related entity because BankAccountUUID corresponds to CONTRACT_INT which is part of the primary index of the database table. GDT: NOSC_UUID",
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Query Standing Payment Instructions",
+                "description": "Refer to API Standing Payment Instruction for supported query options like $top, etc",
+                "tags": [
+                    "Bank Accounts"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/count"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Collection of StandingPaymentInstruction",
+                                    "type": "object",
+                                    "properties": {
+                                        "@odata.count": {
+                                            "$ref": "#/components/schemas/count"
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/com.sap.gateway.default.standingpaymentinstruction.v0001.StandingPaymentInstruction"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        },
+        "/$batch": {
+            "post": {
+                "summary": "Send a group of requests",
+                "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).\n\n*Please note that \"Try it out\" is not supported for this request.*",
+                "tags": [
+                    "Batch Requests"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Batch request",
+                    "content": {
+                        "multipart/mixed;boundary=request-separator": {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET BankAccounts HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Batch response",
+                        "content": {
+                            "multipart/mixed": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "$ref": "#/components/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "basicAuthentication": {
+                "type": "http",
+                "scheme": "basic"
+            }
+        },
+        "schemas": {
+            "com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BankAccountContractPaymentTransactionOrderRequest": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "Universally unique identifier for a bank account contract payment transaction order request.",
+                        "description": "GDT: ATTRIBUTEINDEPENDENT_UUID"
+                    }
+                },
+                "title": "Bank Account Contract Payment Transaction Order Request",
+                "description": "Request for a payment transaction for a order bank account contract."
+            },
+            "com.sap.gateway.default.bankaccountentry.v0001.BankAccountEntry": {
+                "type": "object",
+                "properties": {
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "FA163E6B7DE11ED9A1BA0CC160B478EC001",
+                        "title": "An identifier for a bank account entry.",
+                        "description": "GDT: BankAccountEntryID"
+                    }
+                },
+                "title": "Bank Account Entry",
+                "description": "A Bank Account Entry is a balance-relevant entry for a Bank Account. A Bank Account is an account that holds funds in a bank and is subject to deposits and withdrawals. \n\nRemark: Only bank account entries of BankAccountEntryType 1 (Bank Account Payment Entry), 2 (Bank Account Revenue Expense Entry) and 4 (Bank Account Tax Entry) are selected. \n\nPaging shall be supported for BankAccountEntry."
+            },
+            "com.sap.gateway.default.bankaccountprenoteentry.v0001.BankAccountPrenoteEntry": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "Universally unique identifier for a bank account prenote entry.",
+                        "description": "GDT: UUID"
+                    }
+                },
+                "title": "Bank Account Prenote Entry",
+                "description": "A Bank Account Prenote Entry represents a reservation on a Bank Account for either a debit or a credit amount. A Bank Account is an account that holds funds in a bank and is subject to deposits and withdrawals."
+            },
+            "com.sap.gateway.default.standingpaymentinstruction.v0001.StandingPaymentInstruction": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is an universal unique identifier of a standing payment instruction.",
+                        "description": "GDT: NOSC_UUID"
+                    }
+                },
+                "title": "Standing Payment Instruction",
+                "description": "An instruction to a bank to pay a fixed or variable amount from a bank account to one or multiple bank accounts at regular intervals; this includes bank transfers and direct debits"
+            },
+            "com.sap.gateway.default.bankaccount.v0001.BankAccount": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is a universal unique identifier of a bank account.",
+                        "description": "Remark: The BankAccountUUID is required for the performant read of a bank account related entity because BankAccountUUID corresponds to CONTRACT_INT which is part of the primary index of the database table. GDT: NOSC_UUID"
+                    },
+                    "InternalID": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "D4E088A52D5B1ED8BEE3FA163E6B7DE1",
+                        "title": "InternalID is a bank internal identifier for the bank account.",
+                        "description": "Remark: The BankAccountInternalID is required for the performant read of a bank account related entity because BankAccountInternalID corresponds to CONTRACT_INT which is part of the primary index of the database table. GDT: BankAccountInternalID"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "0010000707",
+                        "title": "Bank account number (Basic Bank Account Number, BBAN). An account number that is assigned by the account managing bank. \nIt uniquely identifies a bank account in most countries only together with BankRoutingID and BankCountryCode.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator.\nGDT: BankAccountID"
+                    },
+                    "StandardID": {
+                        "type": "string",
+                        "maxLength": 34,
+                        "example": "DE65904199170010000707",
+                        "title": "International bank account number (International Bank Account Number, IBAN).",
+                        "description": "GDT: BankAccountStandardID"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "A coded representation of the currency of the bank account.",
+                        "description": "Remark: CurrencyCode is part of the identifiying elements of a bank account. \nCurrencyCode is only filled if the identification according the configuration contains CurrencyCode.\nGDT: CurrencyCode"
+                    },
+                    "BankRoutingID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "90419917",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    },
+                    "BankCountryCode": {
+                        "type": "string",
+                        "maxLength": 3,
+                        "example": "DE",
+                        "title": "Country in which the bank identified earlier goes about its business. \nIf the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here.",
+                        "description": "Constraint: Only listID 3166-1 of listAgencyID 5 is supported.\nGDT: CountryCode"
+                    },
+                    "BankAccountContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A bank internal identifier for the bank account contract.",
+                        "description": "Remark: The BankAccountContractUUID will contain the same value as BankAccountUUID. GDT: NOSC_UUID"
+                    },
+                    "BankAccountContractID": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccount.v0001.BankAccountContractID"
+                            }
+                        ],
+                        "title": "An identifier for a BankAccountContract.",
+                        "description": "GDT: BankAccountContractID"
+                    },
+                    "BankAccountContractPaymentTransactionOrderRequests": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BankAccountContractPaymentTransactionOrderRequest"
+                        }
+                    },
+                    "BankAccountEntries": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BankAccountEntry"
+                        }
+                    },
+                    "BankAccountPrenoteEntries": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.BankAccountPrenoteEntry"
+                        }
+                    },
+                    "StandingPaymentInstructions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.standingpaymentinstruction.v0001.StandingPaymentInstruction"
+                        }
+                    }
+                },
+                "title": "Bank Account",
+                "description": "A Bank Account is an account that holds funds in a bank and is subject to deposits and withdrawals.Remark: \n Filter: Only 'Eq' is supported as logical operator. \n Integrity Conditions: \n The following combinations of properties for filtering are allowed: \n a.) by Bank Account ID \n - ID (mandatory) \n - CurrencyCode (optional) \n - BankRoutingID (optional) \n - BankCountryCode (optional) \n No other filter attributes are allowed. \n b.) by Bank Account Standard ID \n - StandardID (mandatory) \n - CurrencyCode (optional) \n c.) by BankAccountContractUUID \n - BankAccountContractUUID (mandatory) \n d.) by Bank Account Contract ID \n - BankAccountContractID (mandatory) "
+            },
+            "com.sap.gateway.default.bankaccount.v0001.BankAccount-create": {
+                "type": "object",
+                "properties": {
+                    "UUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A UUID is a universal unique identifier of a bank account.",
+                        "description": "Remark: The BankAccountUUID is required for the performant read of a bank account related entity because BankAccountUUID corresponds to CONTRACT_INT which is part of the primary index of the database table. GDT: NOSC_UUID"
+                    },
+                    "InternalID": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "D4E088A52D5B1ED8BEE3FA163E6B7DE1",
+                        "title": "InternalID is a bank internal identifier for the bank account.",
+                        "description": "Remark: The BankAccountInternalID is required for the performant read of a bank account related entity because BankAccountInternalID corresponds to CONTRACT_INT which is part of the primary index of the database table. GDT: BankAccountInternalID"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "0010000707",
+                        "title": "Bank account number (Basic Bank Account Number, BBAN). An account number that is assigned by the account managing bank. \nIt uniquely identifies a bank account in most countries only together with BankRoutingID and BankCountryCode.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator.\nGDT: BankAccountID"
+                    },
+                    "StandardID": {
+                        "type": "string",
+                        "maxLength": 34,
+                        "example": "DE65904199170010000707",
+                        "title": "International bank account number (International Bank Account Number, IBAN).",
+                        "description": "GDT: BankAccountStandardID"
+                    },
+                    "CurrencyCode": {
+                        "type": "string",
+                        "maxLength": 5,
+                        "example": "EUR",
+                        "title": "A coded representation of the currency of the bank account.",
+                        "description": "Remark: CurrencyCode is part of the identifiying elements of a bank account. \nCurrencyCode is only filled if the identification according the configuration contains CurrencyCode.\nGDT: CurrencyCode"
+                    },
+                    "BankRoutingID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "90419917",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    },
+                    "BankCountryCode": {
+                        "type": "string",
+                        "maxLength": 3,
+                        "example": "DE",
+                        "title": "Country in which the bank identified earlier goes about its business. \nIf the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here.",
+                        "description": "Constraint: Only listID 3166-1 of listAgencyID 5 is supported.\nGDT: CountryCode"
+                    },
+                    "BankAccountContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A bank internal identifier for the bank account contract.",
+                        "description": "Remark: The BankAccountContractUUID will contain the same value as BankAccountUUID. GDT: NOSC_UUID"
+                    },
+                    "BankAccountContractID": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccount.v0001.BankAccountContractID-create"
+                            }
+                        ],
+                        "title": "An identifier for a BankAccountContract.",
+                        "description": "GDT: BankAccountContractID"
+                    },
+                    "BankAccountContractPaymentTransactionOrderRequests": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bacpaymenttransactionorderrequest.v0001.BankAccountContractPaymentTransactionOrderRequest"
+                        }
+                    },
+                    "BankAccountEntries": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountentry.v0001.BankAccountEntry"
+                        }
+                    },
+                    "BankAccountPrenoteEntries": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.bankaccountprenoteentry.v0001.BankAccountPrenoteEntry"
+                        }
+                    },
+                    "StandingPaymentInstructions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/com.sap.gateway.default.standingpaymentinstruction.v0001.StandingPaymentInstruction"
+                        }
+                    }
+                },
+                "required": [
+                    "UUID"
+                ],
+                "title": "Bank Account (for create)",
+                "description": "A Bank Account is an account that holds funds in a bank and is subject to deposits and withdrawals.Remark: \n Filter: Only 'Eq' is supported as logical operator. \n Integrity Conditions: \n The following combinations of properties for filtering are allowed: \n a.) by Bank Account ID \n - ID (mandatory) \n - CurrencyCode (optional) \n - BankRoutingID (optional) \n - BankCountryCode (optional) \n No other filter attributes are allowed. \n b.) by Bank Account Standard ID \n - StandardID (mandatory) \n - CurrencyCode (optional) \n c.) by BankAccountContractUUID \n - BankAccountContractUUID (mandatory) \n d.) by Bank Account Contract ID \n - BankAccountContractID (mandatory) "
+            },
+            "com.sap.gateway.default.bankaccount.v0001.BankAccount-update": {
+                "type": "object",
+                "properties": {
+                    "InternalID": {
+                        "type": "string",
+                        "maxLength": 32,
+                        "example": "D4E088A52D5B1ED8BEE3FA163E6B7DE1",
+                        "title": "InternalID is a bank internal identifier for the bank account.",
+                        "description": "Remark: The BankAccountInternalID is required for the performant read of a bank account related entity because BankAccountInternalID corresponds to CONTRACT_INT which is part of the primary index of the database table. GDT: BankAccountInternalID"
+                    },
+                    "ID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "0010000707",
+                        "title": "Bank account number (Basic Bank Account Number, BBAN). An account number that is assigned by the account managing bank. \nIt uniquely identifies a bank account in most countries only together with BankRoutingID and BankCountryCode.",
+                        "description": "Filter: Only 'Eq' is supported as logical operator.\nGDT: BankAccountID"
+                    },
+                    "StandardID": {
+                        "type": "string",
+                        "maxLength": 34,
+                        "example": "DE65904199170010000707",
+                        "title": "International bank account number (International Bank Account Number, IBAN).",
+                        "description": "GDT: BankAccountStandardID"
+                    },
+                    "BankRoutingID": {
+                        "type": "string",
+                        "maxLength": 35,
+                        "example": "90419917",
+                        "title": "Number of the bank in a clearing system (see GDT BankRoutingID).",
+                        "description": "GDT: BankRoutingID"
+                    },
+                    "BankCountryCode": {
+                        "type": "string",
+                        "maxLength": 3,
+                        "example": "DE",
+                        "title": "Country in which the bank identified earlier goes about its business. \nIf the bank is a member in a national clearing system, the country to which this clearing system belongs is entered here.",
+                        "description": "Constraint: Only listID 3166-1 of listAgencyID 5 is supported.\nGDT: CountryCode"
+                    },
+                    "BankAccountContractUUID": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "01234567-89ab-cdef-0123-456789abcdef",
+                        "title": "A bank internal identifier for the bank account contract.",
+                        "description": "Remark: The BankAccountContractUUID will contain the same value as BankAccountUUID. GDT: NOSC_UUID"
+                    },
+                    "BankAccountContractID": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/com.sap.gateway.default.bankaccount.v0001.BankAccountContractID-update"
+                            }
+                        ],
+                        "title": "An identifier for a BankAccountContract.",
+                        "description": "GDT: BankAccountContractID"
+                    }
+                },
+                "title": "Bank Account (for update)",
+                "description": "A Bank Account is an account that holds funds in a bank and is subject to deposits and withdrawals.Remark: \n Filter: Only 'Eq' is supported as logical operator. \n Integrity Conditions: \n The following combinations of properties for filtering are allowed: \n a.) by Bank Account ID \n - ID (mandatory) \n - CurrencyCode (optional) \n - BankRoutingID (optional) \n - BankCountryCode (optional) \n No other filter attributes are allowed. \n b.) by Bank Account Standard ID \n - StandardID (mandatory) \n - CurrencyCode (optional) \n c.) by BankAccountContractUUID \n - BankAccountContractUUID (mandatory) \n d.) by Bank Account Contract ID \n - BankAccountContractID (mandatory) "
+            },
+            "com.sap.gateway.default.bankaccount.v0001.BankAccountContractID": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "DE32904200380010000707",
+                        "title": "Content of BankAccountContractID."
+                    },
+                    "schemeID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "BAC.001",
+                        "title": "SchemeID of the BankAccountContractID.",
+                        "description": "Default: If filter value is not provided, BAC.001 will be used as default value for filter."
+                    },
+                    "schemeAgencyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "310",
+                        "title": "SchemeAgencyID of the BankAccountContractID.",
+                        "description": "Default: If filter value is not provided, 310 will be used as default value for filter."
+                    }
+                },
+                "title": "BankAccountContractID",
+                "description": "An identifier of a bank account contract.\nGDT: BankAccountContractID"
+            },
+            "com.sap.gateway.default.bankaccount.v0001.BankAccountContractID-create": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "DE32904200380010000707",
+                        "title": "Content of BankAccountContractID."
+                    },
+                    "schemeID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "BAC.001",
+                        "title": "SchemeID of the BankAccountContractID.",
+                        "description": "Default: If filter value is not provided, BAC.001 will be used as default value for filter."
+                    },
+                    "schemeAgencyID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "310",
+                        "title": "SchemeAgencyID of the BankAccountContractID.",
+                        "description": "Default: If filter value is not provided, 310 will be used as default value for filter."
+                    }
+                },
+                "title": "BankAccountContractID (for create)",
+                "description": "An identifier of a bank account contract.\nGDT: BankAccountContractID"
+            },
+            "com.sap.gateway.default.bankaccount.v0001.BankAccountContractID-update": {
+                "type": "object",
+                "properties": {
+                    "Content": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "example": "DE32904200380010000707",
+                        "title": "Content of BankAccountContractID."
+                    },
+                    "schemeID": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "BAC.001",
+                        "title": "SchemeID of the BankAccountContractID.",
+                        "description": "Default: If filter value is not provided, BAC.001 will be used as default value for filter."
+                    }
+                },
+                "title": "BankAccountContractID (for update)",
+                "description": "An identifier of a bank account contract.\nGDT: BankAccountContractID"
+            },
+            "count": {
+                "anyOf": [
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ],
+                "description": "The number of entities in the collection. Available when using the [$count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount) query option."
+            },
+            "error": {
+                "type": "object",
+                "required": [
+                    "error"
+                ],
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "required": [
+                            "code",
+                            "message"
+                        ],
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                            "target": {
+                                "type": "string"
+                            },
+                            "details": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "target": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "innererror": {
+                                "type": "object",
+                                "description": "The structure of this object is service-specific"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "top": {
+                "name": "$top",
+                "in": "query",
+                "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "example": 50
+            },
+            "skip": {
+                "name": "$skip",
+                "in": "query",
+                "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+                "schema": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "count": {
+                "name": "$count",
+                "in": "query",
+                "description": "Include count of items, see [Count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount)",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "search": {
+                "name": "$search",
+                "in": "query",
+                "description": "Search items by search phrases, see [Searching](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionsearch)",
+                "schema": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses": {
+            "error": {
+                "description": "Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/error"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
