@@ -64,10 +64,8 @@ def process_test_cases():
     os.makedirs(results_dir, exist_ok=True)
         
     for test_case in raw_test_cases:
-        print("Raw: ", test_case)
         processed_test_case = send_test_case_to_rag_model(test_case)
-        print("Processed: ", processed_test_case)
-
+      
         original_filename = os.path.basename(test_case["file"])
         result_file_path = os.path.join(results_dir, original_filename)
         with open(result_file_path, "w", encoding="utf-8") as f:

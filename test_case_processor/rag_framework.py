@@ -4,7 +4,17 @@ from llm_integration.handler import send_to_llm
 
 basic_system_prompt = """
 You are a coding assistant that is supposed to provide either SQL queries for data retrieval or API calls for action triggering.
-Only answer with the SQL query or the API call, nothing else.
+SQL answers must only contain the SQL query, no additional text or explanation.
+API answers must be provided in the following structure - only provide the body, if it is required, otherwise leave it out:
+{
+    "method": "PATCH",
+    "endpoint": "/BankAccountContractCancelRequests/01234567-89ab-cdef-0123-456789abcdef",
+    "body": {
+      "ReasonCode": "109",
+      "ReasonName": "Account Closure"
+    }
+
+Always consider May 1st, 2025 as the current date for all your answers.
 The system has the following specifications:
 """
 

@@ -10,11 +10,16 @@ with open('config.yaml', 'r') as f:
     cfg = yaml.safe_load(f)
 
     # Check specific values in cfg and prompt user if they DO match expected values
-    expected_values = {
-        'system_documentation': {'source_folder': 'system_documentation'},
-        'test_cases': {'source_folder': 'test_cases'}
-    }
-
+    
+    if cfg.get('process_orchestration', {}).get('update_chroma_db', True):
+        expected_values = {
+            'system_documentation': {'source_folder': 'system_documentation'},
+            'test_cases': {'source_folder': 'test_cases'}
+        }
+    else:
+        expected_values = {
+            'test_cases': {'source_folder': 'test_cases'}
+        }
 
     for section, keys in expected_values.items():
         warnings = []
