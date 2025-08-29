@@ -1,0 +1,8 @@
+numpy==1.26.4
+chromadb==0.5.0
+xai_sdk
+openai
+dotenv
+langchain_text_splitters
+onxruntime==1.14.1
+tiktoken

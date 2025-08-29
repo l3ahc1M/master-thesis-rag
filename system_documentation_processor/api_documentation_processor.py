@@ -252,15 +252,14 @@ def chunk_swagger_documentation(swagger_content: dict, include_get: bool = False
     return chunks
 
 def preprocess_api_documentation():
-
     api_json_files = get_api_json_files()
     for api_file in api_json_files:
         business_object = api_file['business_object_name']
         file_name = api_file['file_name']
         swagger_content = api_file['swagger_content']
-
+        print(f"Processing API file: {file_name} (Business Object: {business_object})")
         chunks = chunk_swagger_documentation(swagger_content)
-        #print(f"Anzahl chunks swagger: {len(chunks)}")
+        print(f"Created {len(chunks)} out of API file")
         for idx, chunk in enumerate(chunks):
             # Prepare text for embedding (can be customized as needed)
             source_type = "API"
@@ -273,8 +272,6 @@ def preprocess_api_documentation():
             #print(f"Method: {method}")
             #print(f"Path: {path}")
             
-
-
             store_text_embedding(
                 text=str(chunk),
                 file_name=file_name,

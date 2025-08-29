@@ -40,7 +40,7 @@ def count_total_embeddings(db_path=chroma_persist_dir):
     for collection in client.list_collections():
         coll = client.get_collection(collection.name)
         total_embeddings += coll.count()
-    print(f"Total embeddings in ChromaDB: {total_embeddings}")
+    (f"Total embeddings in ChromaDB: {total_embeddings}")
 
 
 

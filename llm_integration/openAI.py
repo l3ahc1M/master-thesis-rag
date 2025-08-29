@@ -30,7 +30,6 @@ def process_with_openAI(user_prompt, system_prompt):
                 "content": user_prompt
             }
         ],
-        temperature=0
     )
 
     return response.choices[0].message.content

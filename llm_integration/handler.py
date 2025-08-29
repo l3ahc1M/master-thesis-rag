@@ -1,7 +1,7 @@
 import yaml
 import os   
-from openAI import process_with_openAI
-from x_ai import process_with_xai
+from llm_integration.openAI import process_with_openAI
+from llm_integration.x_ai import process_with_xai
 
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 cfg_path = os.path.join(root_dir, 'config.yaml')

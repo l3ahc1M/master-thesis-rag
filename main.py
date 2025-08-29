@@ -1,6 +1,6 @@
-from system_documentation_processor import api_documentation_processor, business_object_description_processor, db_documentation_processor
-import os
 import yaml
+from system_documentation_processor import api_documentation_processor, business_object_description_processor, db_documentation_processor
+from test_case_processor.handler import process_test_cases
 
 
 ########################################################
@@ -27,8 +27,7 @@ with open('config.yaml', 'r') as f:
             print("WARNING:")
             for w in warnings:
                 print(w)
-            security_check = input("Continue anyway? (y" \
-            "y to continue): ")
+            security_check = input("Continue anyway?\n(y to continue):   ")
             if security_check.lower() != 'y':
                 print("Aborted by user.")
                 exit(1)
@@ -48,8 +47,9 @@ if cfg.get('process_orchestration', {}).get('update_chroma_db', True):
     api_documentation_processor.preprocess_api_documentation()
     db_documentation_processor.preprocess_db_documentation()
     business_object_description_processor.preprocess_business_object_description()
-
     print("ChromaDB update finished.")
+
+process_test_cases()
 print("Finished")
 
 

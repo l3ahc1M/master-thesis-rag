@@ -97,6 +97,5 @@ for folder_name in os.listdir(script_dir):
         try:
             with open(output_path, "w", encoding="utf-8") as f:
                 json.dump(result, f, indent=4)
-            print(f"Schema extracted and saved to {output_path}.")
         except Exception as e:
             print(f"Error writing file {output_path}: {e}")
