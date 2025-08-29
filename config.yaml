@@ -9,7 +9,7 @@ system_documentation:
 test_cases:
     source_folder: test_cases_copy # possible values: "test_cases_copy", "test_cases"
 llm:
-    provider: openAI # allowed values: "openAI", "xai"
+    provider: xai # allowed values: "openAI", "xai"
     openAI_model: gpt-5 # should not be changed
     xai_model: grok-4 # should not be changed
 

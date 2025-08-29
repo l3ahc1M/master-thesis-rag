@@ -1,4 +1,5 @@
 {
+    "difficulty": "Medium",
     "input": "Can you show me all the bank accounts that have the country code 'DE' and tell me what currency codes they use?",
     "output": {
         "sql": "SELECT ID, CurrencyCode FROM BankAccount WHERE BankCountryCode = 'DE';"

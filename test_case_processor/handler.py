@@ -60,9 +60,14 @@ def process_test_cases():
 
     raw_test_cases = load_test_cases()
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    results_dir = os.path.join("results", timestamp)
+    folder_name = f"{timestamp}_{cfg.get('process_orchestration', {}).get('rag_framework')}_{cfg.get('llm', {}).get('provider')}_{cfg.get('process_orchestration', {}).get('knowledge_basis')}"
+    results_dir = os.path.join("results", folder_name)
     os.makedirs(results_dir, exist_ok=True)
-        
+    
+    #store a copy of the config file in the results folder
+    with open(os.path.join(results_dir, "config.yaml"), "w", encoding="utf-8") as f:
+        yaml.dump(cfg, f)
+
     for test_case in raw_test_cases:
         processed_test_case = send_test_case_to_rag_model(test_case)
       
