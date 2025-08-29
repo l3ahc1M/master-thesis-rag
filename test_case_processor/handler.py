@@ -38,7 +38,7 @@ def load_test_cases():
     return test_cases
 
 def send_test_case_to_rag_model(test_case):
-    input_data = test_case[1]["input"]
+    input_data = test_case["input"]
 
     if cfg.get('process_orchestration', {}).get('rag_framework') == 'RAG':
         from test_case_processor import rag_framework 
@@ -52,9 +52,9 @@ def send_test_case_to_rag_model(test_case):
     else:
         raise ValueError("Invalid RAG framework specified in config.yaml")
     
-    test_case[1]["test_output"] = response
+    test_case["test_output"] = response
      
-    return test_case[1]
+    return test_case
 
 def process_test_cases():
 
@@ -64,8 +64,9 @@ def process_test_cases():
     os.makedirs(results_dir, exist_ok=True)
         
     for test_case in raw_test_cases:
-        processed_test_case = send_test_case_to_rag_model(raw_test_cases)
-        
+        print("Raw: ", test_case)
+        processed_test_case = send_test_case_to_rag_model(test_case)
+        print("Processed: ", processed_test_case)
 
         original_filename = os.path.basename(test_case["file"])
         result_file_path = os.path.join(results_dir, original_filename)
