@@ -1,5 +1,4 @@
 {
-  "difficulty": "Easy",
   "input": "I want to update the request to cancel a bank account contract. The cancel request ID is 01234567-89ab-cdef-0123-456789abcdef, and I want to change the reason for cancellation to \"Account Closure.\"",
   "output": {
     "method": "PATCH",
