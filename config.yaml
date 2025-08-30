@@ -22,3 +22,7 @@ process_orchestration:
 
 evaluation:
     test_case_folder: 20250830_173933_RAG_openAI_all
+    folders_for_summary_generation: [
+        20250830_173933_RAG_openAI_all,
+        20250830_173140_RAG_openAI_all
+    ]

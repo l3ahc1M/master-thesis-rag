@@ -18,7 +18,6 @@ def get_processed_test_cases_array():
         root_dir, 'test_output',
         cfg.get('evaluation', {}).get('test_case_folder', '')
     )
-    print("Test case dir:", test_case_dir)
 
     if not os.path.isdir(test_case_dir):
         raise FileNotFoundError(f"Test case folder not found: {test_case_dir}")
@@ -32,7 +31,6 @@ def get_processed_test_cases_array():
             with open(file_path, 'r', encoding='utf-8') as f:
                 json_content = json.load(f)
                 processed_test_cases_array.append(json_content)
-                print(f"Loaded: {entry}")
         except json.JSONDecodeError as e:
             print(f"Skipping {entry}: invalid JSON ({e})")
         except Exception as e:
@@ -58,17 +56,14 @@ def save_evaluated_test_case(test_case):
     # Save the evaluated test case as a JSON file
     with open(output_file_path, 'w', encoding='utf-8') as f:
         json.dump(test_case, f, ensure_ascii=False, indent=4)
-    print(f"Saved evaluated test case: {output_file_path}")
 
 def evaluate_test_cases():
-    print("I am here")
     processed_test_cases_array = get_processed_test_cases_array()
     test_cases_incl_evaluation_result = []
     for test_case in processed_test_cases_array:
         if test_case['type'] == 'API':
             test_case = evaluate_api_test_case(test_case)
         elif test_case['type'] == 'SQL':
-            print("Evaluating SQL test case...")
             test_case = evaluate_sql_test_case(test_case)
         else:
             raise ValueError(f"Unknown test case type: {test_case['type']}")
@@ -79,9 +74,8 @@ def evaluate_test_cases():
 
 def create_evaluation_overview():
 
-    evaluation_results_dir = os.path.join(root_dir, 'evaluation_results', cfg.get('evaluation', {}).get('test_case_folder', ''))
 
-    df = generate_summary_dataframe(evaluation_results_dir)
+    df = generate_summary_dataframe()
 
     csv_file_path = 'test_case_summary.csv'
     df.to_csv(csv_file_path, index=False)

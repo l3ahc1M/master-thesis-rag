@@ -1,6 +1,13 @@
 import os
 import json
+import yaml
 import pandas as pd
+
+root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+cfg_path = os.path.join(root_dir, 'config.yaml')
+with open(cfg_path, 'r') as f:
+    cfg = yaml.safe_load(f)
+
 
 def process_test_case(file_path):
     # Open and read the JSON file
@@ -46,20 +53,27 @@ def process_test_case(file_path):
     
     return summary
 
-def generate_summary_dataframe(directory_path):
-    # List to store all summaries
+def generate_summary_dataframe():
+
+    relevant_folders = cfg.get('evaluation', {}).get('folders_for_summary_generation')
     all_summaries = []
-    
-    # Iterate through all files in the folder
-    for subdir, _, files in os.walk(directory_path):
-        for file in files:
-            if file.endswith('.json'):  # Only process JSON files
-                file_path = os.path.join(subdir, file)
-                summary = process_test_case(file_path)
-                all_summaries.append(summary)
-    
+    for folder in relevant_folders:
+        print("Folder: ", folder)
+        directory_path = os.path.join(root_dir, 'evaluation_results', folder)
+
+        # List to store all summaries
+
+        
+        # Iterate through all files in the folder
+        for subdir, _, files in os.walk(directory_path):
+            for file in files:
+                if file.endswith('.json'):  # Only process JSON files
+                    file_path = os.path.join(subdir, file)
+                    summary = process_test_case(file_path)
+                    all_summaries.append(summary)
+            print("All summaries: ", all_summaries)
     # Convert the summaries into a DataFrame for easy analysis
-    df = pd.DataFrame(all_summaries)
+    df = pd.DataFrame(all_summaries) #type: ignore
     
     return df
 
