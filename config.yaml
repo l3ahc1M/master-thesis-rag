@@ -9,7 +9,7 @@ system_documentation:
 test_cases:
     source_folder: test_cases_copy # possible values: "test_cases_copy", "test_cases"
 llm:
-    provider: xai # allowed values: "openAI", "xai"
+    provider: openAI # allowed values: "openAI", "xai"
     openAI_model: gpt-5 # should not be changed
     xai_model: grok-4 # should not be changed
 
@@ -21,4 +21,4 @@ process_orchestration:
     knowledge_basis: all # allowed values: "all", "DB", "API"
 
 evaluation:
-    test_case_folder: 20250830_143950_RAG_xai_all
+    test_case_folder: 20250830_173933_RAG_openAI_all

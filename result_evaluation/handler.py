@@ -5,6 +5,7 @@ import hashlib
 
 from result_evaluation.API import evaluate_api_test_case
 from result_evaluation.SQL import evaluate_sql_test_case
+from result_evaluation.summary import generate_summary_dataframe
 
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 cfg_path = os.path.join(root_dir, 'config.yaml')
@@ -76,5 +77,12 @@ def evaluate_test_cases():
 
         save_evaluated_test_case(test_case)
 
+def create_evaluation_overview():
 
+    evaluation_results_dir = os.path.join(root_dir, 'evaluation_results', cfg.get('evaluation', {}).get('test_case_folder', ''))
+
+    df = generate_summary_dataframe(evaluation_results_dir)
+
+    csv_file_path = 'test_case_summary.csv'
+    df.to_csv(csv_file_path, index=False)
     

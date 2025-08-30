@@ -6,3 +6,5 @@ dotenv
 langchain_text_splitters
 onxruntime==1.14.1
 tiktoken
+hashlib
+pandas

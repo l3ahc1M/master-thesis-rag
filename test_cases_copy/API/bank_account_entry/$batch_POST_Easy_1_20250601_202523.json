@@ -1,0 +1,16 @@
+{
+    "difficulty": "Easy",
+    "input": "Can you get the bank account entries for the bank account with the ID 12345?",
+    "output": {
+        "method": "POST",
+        "endpoint": "/$batch",
+        "body": {
+            "requests": [
+                {
+                    "method": "GET",
+                    "url": "/BankAccountEntries?accountId=12345"
+                }
+            ]
+        }
+    }
+}

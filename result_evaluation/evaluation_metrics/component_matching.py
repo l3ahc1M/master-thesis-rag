@@ -34,8 +34,7 @@ def normalize_quotes_and_commas(value: str) -> str:
     3. Removing any leading colons (':').
     Iterates until no changes are made.
     """
-    print(f"Starting normalization for: {value}")
-    
+   
     previous_value = None
     while value != previous_value:
         previous_value = value  # Store the current value to detect changes
@@ -52,9 +51,7 @@ def normalize_quotes_and_commas(value: str) -> str:
         # Remove any extra spaces around colons (if any still exist)
         value = re.sub(r"\s*[:]\s*", ":", value)  # Normalize space around colons
 
-        print(f"Intermediate normalized value: {value}")
     
-    print(f"Final normalized value: {value}")
     return value
 
 

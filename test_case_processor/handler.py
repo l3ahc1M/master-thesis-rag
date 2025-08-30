@@ -58,6 +58,7 @@ def send_test_case_to_rag_model(test_case):
     test_case['framework'] = cfg.get('process_orchestration', {}).get('rag_framework')
     test_case['llm_provider'] = llm_provider
     test_case['model'] = cfg.get('llm', {} ).get(f'{llm_provider}_model') 
+    test_case['knowledge_basis'] = cfg.get('process_orchestration', {}).get('knowledge_basis')
     test_case["test_output"] = response
      
     return test_case
