@@ -31,6 +31,7 @@ def load_test_cases():
                             data = json.load(f)
                             test_cases.append({
                                 "type": category,
+                                "business_object_name": subfolder,
                                 "input": data.get("input"),
                                 "output": harmonize_output(data.get("output")),
                                 "file": file_path
