@@ -1,7 +1,0 @@
-{
-    "difficulty": "Medium",
-    "input": "Can you find out how many loan contract payoff requests there are, and break it down by the reasons for their cancellation?",
-    "output": {
-        "sql": "SELECT CancellationReasonName, COUNT(*) FROM LoanContractPayoffRequest GROUP BY CancellationReasonName;"
-    }
-}

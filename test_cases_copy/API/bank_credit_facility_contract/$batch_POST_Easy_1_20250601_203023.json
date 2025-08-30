@@ -1,9 +1,0 @@
-{
-    "difficulty": "Easy",
-    "input": "Can you show me the details of the bank credit facility contract with the ID 1234?",
-    "output": {
-        "method": "GET",
-        "endpoint": "/BankCreditFacilityContract/1234",
-        "body": {}
-    }
-}

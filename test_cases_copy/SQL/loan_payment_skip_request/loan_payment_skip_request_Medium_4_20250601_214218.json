@@ -1,7 +1,0 @@
-{
-    "difficulty": "Medium",
-    "input": "Can you tell me how many requests there are to skip loan payments that have a skip date period of one month?",
-    "output": {
-        "sql": "SELECT COUNT(*) FROM LoanPaymentSkipRequest WHERE SkipDatePeriod = 'P1M';"
-    }
-}

@@ -63,7 +63,7 @@ def process_test_cases():
     raw_test_cases = load_test_cases()
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     folder_name = f"{timestamp}_{cfg.get('process_orchestration', {}).get('rag_framework')}_{cfg.get('llm', {}).get('provider')}_{cfg.get('process_orchestration', {}).get('knowledge_basis')}"
-    results_dir = os.path.join("results", folder_name)
+    results_dir = os.path.join("test_output", folder_name)
     os.makedirs(results_dir, exist_ok=True)
     
     #store a copy of the config file in the results folder

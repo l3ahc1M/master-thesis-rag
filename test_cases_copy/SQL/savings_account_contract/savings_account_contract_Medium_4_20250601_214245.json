@@ -1,7 +1,0 @@
-{
-    "difficulty": "Medium",
-    "input": "Can you tell me how many savings account contracts have a withdrawal earnings availability duration of less than one month?",
-    "output": {
-        "sql": "SELECT COUNT(*) FROM SavingsAccountContract WHERE WithdrawalEarningsAvailabilityDuration < 'P1M';"
-    }
-}

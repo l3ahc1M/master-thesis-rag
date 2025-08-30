@@ -3,5 +3,7 @@ __pycache__/
 /chromadb_data
 /chroma_db
 .env
-/results
+/test_output
 /system_documentation_copy
+/evaluation_results
+/test_cases_copy copy

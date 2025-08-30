@@ -1,7 +1,0 @@
-{
-    "difficulty": "Medium",
-    "input": "Can you tell me how many loan contract extension requests have a life cycle status code of 5?",
-    "output": {
-        "sql": "SELECT COUNT(*) FROM LoanContractProlongationRequest WHERE LifeCycleStatusCode = '5';"
-    }
-}

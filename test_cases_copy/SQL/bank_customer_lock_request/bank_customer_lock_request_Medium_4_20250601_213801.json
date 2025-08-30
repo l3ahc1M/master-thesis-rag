@@ -1,7 +1,0 @@
-{
-    "difficulty": "Medium",
-    "input": "Can you provide me with the IDs of bank customer lock requests that are still valid until the end of this month?",
-    "output": {
-        "sql": "SELECT ID FROM BankCustomerLockRequest WHERE ValidityEndDate <= LAST_DAY(CURRENT_DATE);"
-    }
-}

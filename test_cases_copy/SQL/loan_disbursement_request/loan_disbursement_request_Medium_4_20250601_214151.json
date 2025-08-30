@@ -1,7 +1,0 @@
-{
-    "difficulty": "Medium",
-    "input": "Can you find out how many loan disbursement requests there are, and break it down by the reasons for those requests?",
-    "output": {
-        "sql": "SELECT ReasonName, COUNT(*) FROM LoanDisbursementRequest GROUP BY ReasonName;"
-    }
-}

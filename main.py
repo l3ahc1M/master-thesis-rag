@@ -60,7 +60,9 @@ if cfg.get('process_orchestration', {}).get('run_test_cases', True):
     process_test_cases()
 
 if cfg.get('process_orchestration', {}).get('run_evaluation', True): 
-    print("Hello")
+    from result_evaluation.handler import evaluate_test_cases
+    evaluate_test_cases()
+
 
 print("Finished")
 

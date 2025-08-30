@@ -1,7 +1,0 @@
-{
-    "difficulty": "Medium",
-    "input": "Can you tell me the total balance of all the bank account entries for the account that has the BankAccountContractID of 761?",
-    "output": {
-        "sql": "SELECT SUM(Amount) FROM BankAccountEntries AS T1 JOIN BankAccountContract AS T2 ON T1.BankAccountUUID = T2.UUID WHERE T2.BankAccountContractID = '761';"
-    }
-}
