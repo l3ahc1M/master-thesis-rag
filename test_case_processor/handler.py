@@ -54,6 +54,10 @@ def send_test_case_to_rag_model(test_case):
     else:
         raise ValueError("Invalid RAG framework specified in config.yaml")
     
+    llm_provider = cfg.get('llm', {}).get('provider')
+    test_case['framework'] = cfg.get('process_orchestration', {}).get('rag_framework')
+    test_case['llm_provider'] = llm_provider
+    test_case['model'] = cfg.get('llm', {} ).get(f'{llm_provider}_model') 
     test_case["test_output"] = response
      
     return test_case
@@ -72,7 +76,6 @@ def process_test_cases():
 
     for test_case in raw_test_cases:
         processed_test_case = send_test_case_to_rag_model(test_case)
-      
         original_filename = os.path.basename(test_case["file"])
         result_file_path = os.path.join(results_dir, original_filename)
         with open(result_file_path, "w", encoding="utf-8") as f:

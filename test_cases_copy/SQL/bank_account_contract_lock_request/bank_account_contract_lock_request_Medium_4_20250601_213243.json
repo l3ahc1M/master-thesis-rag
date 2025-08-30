@@ -1,7 +1,0 @@
-{
-    "difficulty": "Medium",
-    "input": "Can you help me find the IDs and event names of bank account contract lock requests that are valid until the end of this month?",
-    "output": {
-        "sql": "SELECT ID, EventName FROM BankAccountContractLockRequest WHERE ValidityEndDate <= LAST_DAY(CURRENT_DATE);"
-    }
-}
