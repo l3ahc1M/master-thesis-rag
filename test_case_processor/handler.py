@@ -30,6 +30,7 @@ def load_test_cases():
                         with open(file_path, "r", encoding="utf-8") as f:
                             data = json.load(f)
                             test_cases.append({
+                                "type": category,
                                 "input": data.get("input"),
                                 "output": harmonize_output(data.get("output")),
                                 "file": file_path

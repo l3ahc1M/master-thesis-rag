@@ -1,6 +1,4 @@
 import yaml
-from system_documentation_processor import api_documentation_processor, business_object_description_processor, db_documentation_processor
-from test_case_processor.handler import process_test_cases
 
 
 ########################################################
@@ -44,6 +42,8 @@ with open('config.yaml', 'r') as f:
 
 print("Started")
 if cfg.get('process_orchestration', {}).get('update_chroma_db', True):
+    from system_documentation_processor import api_documentation_processor, business_object_description_processor, db_documentation_processor
+
     chroma_check = input("Did you manually delete the any existing ChromaDB folder (chroma_db)? If not, please do so now. Otherwise, the new data will be appended to the existing data.\nType 'y' to continue: ")
     if chroma_check.lower() != 'y':
                 print("Aborted by user.")
@@ -54,7 +54,14 @@ if cfg.get('process_orchestration', {}).get('update_chroma_db', True):
     business_object_description_processor.preprocess_business_object_description()
     print("ChromaDB update finished.")
 
-process_test_cases()
+
+if cfg.get('process_orchestration', {}).get('run_test_cases', True):
+    from test_case_processor.handler import process_test_cases
+    process_test_cases()
+
+if cfg.get('process_orchestration', {}).get('run_evaluation', True): 
+    print("Hello")
+
 print("Finished")
 
 

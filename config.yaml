@@ -15,5 +15,10 @@ llm:
 
 process_orchestration:
     update_chroma_db: False # True/False
+    run_test_cases: True # True/False
+    run_evaluation: False # True/False
     rag_framework: RAG  # allowed values: "RAG", "Self-RAG", "CoRAG"
     knowledge_basis: all # allowed values: "all", "DB", "API"
+
+evaluation:
+    test_case_folder: 20250829_213605_RAG_xai_all
